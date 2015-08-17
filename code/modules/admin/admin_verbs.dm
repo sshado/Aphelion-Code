@@ -60,6 +60,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggle_hear_radio,		/*toggles whether we hear the radio*/
 	/client/proc/investigate_show,		/*various admintools for investigation. Such as a singulo grief-log*/
 	/client/proc/secrets,
+	/datum/admins/proc/toggledevsay,
 	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
 	/datum/admins/proc/togglelooc,		/*toggles looc on/off for everyone*/
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
@@ -162,6 +163,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/Debug2,
 	/client/proc/kill_air,
 	/client/proc/ZASSettings,
+	/client/proc/cmd_dev_say,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
 	/client/proc/debug_controller,
@@ -302,11 +304,18 @@ var/list/admin_verbs_mentor = list(
 	/datum/admins/proc/PlayerNotes,
 	/client/proc/freeze,
 	/client/proc/freezemecha,
+	/client/proc/player_panel_new,
 	/client/proc/admin_ghost,
+	/client/proc/cmd_dev_say,
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
-	/client/proc/cmd_admin_subtle_message
+	/client/proc/cmd_admin_subtle_message,
+	/client/proc/jumptokey,				/*allows us to jump to the location of a mob with a certain ckey*/
+	/client/proc/jumptomob,				/*allows us to jump to a specific mob*/
+	/client/proc/jumptoturf,
+	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
+	/client/proc/Jump
 )
 
 /client/proc/add_admin_verbs()
