@@ -259,6 +259,7 @@ var/list/global/slot_flags_enumeration = list(
 	"[slot_w_uniform]" = SLOT_ICLOTHING,
 	"[slot_wear_id]" = SLOT_ID,
 	"[slot_tie]" = SLOT_TIE,
+	"[slot_wear_pda]" = SLOT_PDA,
 	)
 
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
@@ -341,6 +342,14 @@ var/list/global/slot_flags_enumeration = list(
 					allow = 1
 			if(!allow)
 				return 0
+		if(slot_wear_pda)  //PDA Slot
+			if(!istype(src, /obj/item/device/pda))
+				return 0
+			if(!H.w_uniform && (slot_w_uniform in mob_equip))
+				if(!disable_warning)
+					H << "\red You need a jumpsuit before you can attach this [name]."
+				return 0
+			return 1
 		if(slot_tie)
 			if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
