@@ -343,13 +343,12 @@ var/list/global/slot_flags_enumeration = list(
 			if(!allow)
 				return 0
 		if(slot_wear_pda)  //PDA Slot
-			if(!istype(src, /obj/item/device/pda))
+			if(!(slot_flags & SLOT_PDA))
 				return 0
 			if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
 					H << "\red You need a jumpsuit before you can attach this [name]."
 				return 0
-			return 1
 		if(slot_tie)
 			if(!H.w_uniform && (slot_w_uniform in mob_equip))
 				if(!disable_warning)
