@@ -53,12 +53,14 @@
 	var/obj/item/l_ear = null
 	var/obj/item/r_ear = null
 	var/obj/item/wear_id = null
+	var/obj/item/wear_pda = null
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
 
 	var/used_skillpoints = 0
 	var/skill_specialization = null
+	//Whether or not the player can use machinery such as the hand teleporter
 	var/list/skills = list()
 
 	var/icon/stand_icon = null

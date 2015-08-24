@@ -22,7 +22,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/bartender(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/bar(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/bar(H), slot_wear_pda)
 		return 1
 
 
@@ -49,7 +49,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/chef(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/chefhat(H), slot_head)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/chef(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/chef(H), slot_wear_pda)
 		return 1
 
 
@@ -77,7 +77,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/botanic_leather(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/device/analyzer/plant_analyzer(H), slot_s_store)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/botanist(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/botanist(H), slot_wear_pda)
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/hydroponics(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_hyd(H), slot_back)
@@ -106,7 +106,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargo(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/quartermaster(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/quartermaster(H), slot_wear_pda)
 //		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(H), slot_glasses)
 		H.equip_to_slot_or_del(new /obj/item/weapon/clipboard(H), slot_l_hand)
@@ -133,7 +133,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargotech(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/cargo(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/cargo(H), slot_wear_pda)
 //		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		return 1
 
@@ -161,7 +161,7 @@
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_eng(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/miner(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/shaftminer(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/shaftminer(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 //		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		if(H.backbag == 1)
@@ -198,7 +198,7 @@
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/clown(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/clown(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/clown_shoes(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/clown(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/clown(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/clown_hat(H), slot_wear_mask)
 		H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/snacks/grown/banana(H), slot_in_backpack)
 		H.equip_to_slot_or_del(new /obj/item/weapon/bikehorn(H), slot_in_backpack)
@@ -230,7 +230,7 @@
 		if(H.backbag == 3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/mime(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/mime(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/mime(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/white(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/mime(H), slot_wear_mask)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/beret(H), slot_head)
@@ -269,7 +269,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_service(H), slot_l_ear)
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/janitor(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/janitor(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/janitor(H), slot_wear_pda)
 		return 1
 
 
@@ -293,7 +293,7 @@
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/red(H), slot_w_uniform)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/librarian(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/librarian(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/weapon/barcodescanner(H), slot_l_hand)
 		return 1
@@ -326,7 +326,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/toggle/internalaffairs(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/big(H), slot_glasses)
-		H.equip_to_slot_or_del(new /obj/item/device/pda/lawyer(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/lawyer(H), slot_wear_pda)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/briefcase(H), slot_l_hand)
 
 		H.implant_loyalty(H)

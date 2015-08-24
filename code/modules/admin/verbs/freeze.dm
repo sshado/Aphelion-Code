@@ -25,12 +25,10 @@
 			log_admin("\blue [key_name(usr)] has unfrozen [key_name(M)].")
 			message_admins("\blue [key_name_admin(usr)] has unfrozen [key_name_admin(M)].")
 			M.Paralyse(0)
-			M.AdjustParalysis(-5000000000)
+			M.SetParalysis(0)
 			M.blinded = 0
 			M.lying = 0
 			M.stat = 0
-			M.SetStunned(0) //should fix the issue with slowdown
-			M.SetWeakened(0) //should fix the issue with slowdown
 			return
 		return
 
