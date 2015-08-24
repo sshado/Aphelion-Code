@@ -8,6 +8,7 @@ var/global/list/gear_datums = list()
 		"[slot_wear_mask]"	= list(),
 		"[slot_w_uniform]"	= list(),
 		"[slot_tie]"		= list(),
+		"[slot_wear_pda]"		= list(),
 		"[slot_wear_suit]"	= list(),
 		"[slot_gloves]"		= list(),
 		"[slot_shoes]"		= list(),
