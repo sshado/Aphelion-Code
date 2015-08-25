@@ -221,6 +221,8 @@ datum/hud/New(mob/owner)
 						if(H.s_store) H.s_store.screen_loc = hud_data["loc"]
 					if(slot_wear_id)
 						if(H.wear_id) H.wear_id.screen_loc = hud_data["loc"]
+					if(slot_wear_pda)
+						if(H.wear_pda) H.wear_pda.screen_loc = hud_data["loc"]
 					if(slot_belt)
 						if(H.belt)    H.belt.screen_loc =    hud_data["loc"]
 					if(slot_back)
@@ -235,6 +237,8 @@ datum/hud/New(mob/owner)
 						if(H.s_store) H.s_store.screen_loc = null
 					if(slot_wear_id)
 						if(H.wear_id) H.wear_id.screen_loc = null
+					if(slot_wear_pda)
+						if(H.wear_pda) H.wear_pda.screen_loc = hud_data["loc"]
 					if(slot_belt)
 						if(H.belt)    H.belt.screen_loc =    null
 					if(slot_back)
