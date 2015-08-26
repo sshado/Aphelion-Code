@@ -72,7 +72,7 @@
 		if (get_dist(src, O) > src.range)
 			continue
 
-		if (istype(O, mob/living/silicon/AI))
+		if (istype(O, mob/living/silicon/AI)) //fixing issue #61 - DJ Pantheris
 			return
 
 		if (istype(O, /mob/living/carbon/human))
