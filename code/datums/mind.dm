@@ -39,6 +39,7 @@
 	var/memory
 
 	var/assigned_role
+	var/isSurgeon = 0 //Stored in Mind for convenience
 	var/special_role
 
 	var/role_alt_title
