@@ -39,6 +39,7 @@
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	flash_weak_pain()
+	failop()
 
 	//Being hit while using a cloaking device
 	var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
@@ -92,6 +93,7 @@
 		apply_effect(EYE_BLUR, agony_amount/10)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+	failop()
 	  return 0 //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
@@ -116,6 +118,7 @@
 			visible_message("\blue \The [O] misses [src] narrowly!")
 			return
 
+		failop()
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(null, "melee")
 
@@ -236,6 +239,7 @@
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
 /mob/living/fire_act()
+	failop()
 	adjust_fire_stacks(2)
 	IgniteMob()
 
