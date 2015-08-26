@@ -419,7 +419,9 @@
 		var/datum/species/chosen_species
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
-		if(chosen_species)
+			use_species_name = chosen_species.get_station_variant()
+
+		if(chosen_species && use_species_name)
 			// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 			if(is_species_whitelisted(chosen_species) || has_admin_rights())
 				new_character = new(loc, client.prefs.species)
