@@ -68,8 +68,12 @@
 	use_power(1500)
 
 	for (var/mob/O in viewers(src, null))
+
 		if (get_dist(src, O) > src.range)
 			continue
+
+		if (istype(O, mob/living/silicon/AI))
+			return
 
 		if (istype(O, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = O
@@ -101,6 +105,9 @@
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
 	if ((src.disable) || (src.last_flash && world.time < src.last_flash + 150))
+		return
+
+	if (istype(O, mob/living/silicon/AI))
 		return
 
 	if(istype(AM, /mob/living/carbon))
