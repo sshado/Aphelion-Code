@@ -96,15 +96,17 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, tool)
 				user.operating = 1//start on it
+				user.fail_next_op = 0
 				//We had proper tools! (or RNG smiled.) and user did not move or change hands.
-				if(prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)) && ((user.mind.isSurgeon) || (!user.mind.isSurgeon) && (prob(50)))) //if they aren't a surgeon, give them a 50% chance of succeeding
+				if(prob(S.tool_quality(tool)) &&  do_mob(user, M, rand(S.min_duration, S.max_duration)) && ((user.mind.isSurgeon) || (!user.mind.isSurgeon) && (prob(50))) && (!user.fail_next_op)) //if they aren't a surgeon, give them a 50% chance of succeeding
 					S.end_step(user, M, zone, tool)		//finish successfully
-				else if ((tool in user.contents) && user.Adjacent(M) || ((!user.mind.isSurgeon) && (prob(50))))			//otherwise, fail the step
+				else if ((tool in user.contents) && user.Adjacent(M) || ((!user.mind.isSurgeon) && (prob(50))) || (user.fail_next_op))			//otherwise, fail the step
 					S.fail_step(user, M, zone, tool)		//malpractice~
 				else // This failing silently was a pain.
 					user << "\red You must remain close to your patient to conduct surgery."
 				M.op_stage.in_progress -= zone 		
 				user.operating = 0
+				user.fail_next_op = 0
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					H.update_surgery()
