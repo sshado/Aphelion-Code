@@ -27,6 +27,7 @@
 		"head" =         list("loc" = ui_head,      "name" = "Hat",          "slot" = slot_head,      "state" = "hair",   "toggle" = 1),
 		"shoes" =        list("loc" = ui_shoes,     "name" = "Shoes",        "slot" = slot_shoes,     "state" = "shoes",  "toggle" = 1),
 		"suit storage" = list("loc" = ui_sstore1,   "name" = "Suit Storage", "slot" = slot_s_store,   "state" = "belt",   "dir" = 8),
+		"pda" =          list("loc" = ui_pda,       "name" = "PDA",  		 "slot" = slot_wear_pda,  "state" = "pda"),
 		"back" =         list("loc" = ui_back,      "name" = "Back",         "slot" = slot_back,      "state" = "back",   "dir" = NORTH),
 		"id" =           list("loc" = ui_id,        "name" = "ID",           "slot" = slot_wear_id,   "state" = "id",     "dir" = NORTH),
 		"storage1" =     list("loc" = ui_storage1,  "name" = "Left Pocket",  "slot" = slot_l_store,   "state" = "pocket"),
@@ -64,7 +65,8 @@
 		"id" =           list("loc" = ui_id,        "name" = "ID",           "slot" = slot_wear_id,   "state" = "id",     "dir" = NORTH),
 		"storage1" =     list("loc" = ui_storage1,  "name" = "Left Pocket",  "slot" = slot_l_store,   "state" = "pocket"),
 		"storage2" =     list("loc" = ui_storage2,  "name" = "Right Pocket", "slot" = slot_r_store,   "state" = "pocket"),
-		"belt" =         list("loc" = ui_belt,      "name" = "Belt",         "slot" = slot_belt,      "state" = "belt")
+		"belt" =         list("loc" = ui_belt,      "name" = "Belt",         "slot" = slot_belt,      "state" = "belt"),
+		"pda" =          list("loc" = ui_pda,       "name" = "PDA",  		 "slot" = slot_wear_pda,  "state" = "pda")
 		)
 
 /datum/hud_data/monkey

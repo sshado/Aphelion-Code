@@ -88,6 +88,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			return 1
 		if(slot_tie)
 			return 1
+		if(slot_wear_pda)
+			return 1
 
 /mob/living/carbon/human/u_equip(obj/W as obj)
 	if(!W)	return 0
@@ -104,6 +106,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			drop_from_inventory(l_store)
 		if (wear_id)
 			drop_from_inventory(wear_id)
+		if (wear_pda)
+			drop_from_inventory(wear_pda)
 		if (belt)
 			drop_from_inventory(belt)
 		w_uniform = null
@@ -155,6 +159,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 	else if (W == wear_id)
 		wear_id = null
 		update_inv_wear_id()
+	else if (W == wear_pda)
+		wear_pda = null
+		update_inv_wear_pda()
 	else if (W == r_store)
 		r_store = null
 		update_inv_pockets()
@@ -233,6 +240,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			src.wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
+		if(slot_wear_pda)
+			src.wear_pda = W
+			W.equipped(src, slot)
+			update_inv_wear_pda(redraw_mob)
 		if(slot_l_ear)
 			src.l_ear = W
 			if(l_ear.slot_flags & SLOT_TWOEARS)
@@ -349,6 +360,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(slot_l_hand)     return l_hand
 		if(slot_r_hand)     return r_hand
 		if(slot_wear_id)    return wear_id
+		if(slot_wear_pda)	return wear_pda
 		if(slot_glasses)    return glasses
 		if(slot_gloves)     return gloves
 		if(slot_head)       return head
