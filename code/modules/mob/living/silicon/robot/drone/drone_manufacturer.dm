@@ -15,7 +15,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 
-	var/fabricator_tag = "Exodus"
+	var/fabricator_tag = "Aphelion"
 	var/drone_progress = 0
 	var/produce_drones = 1
 	var/time_last_drone = 500
@@ -116,7 +116,7 @@
 	if(istype(src,/mob/dead/observer))
 		var/mob/dead/observer/G = src
 		if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
-			usr << "<span class='notice'>Upon using the antagHUD you forfeighted the ability to join the round.</span>"
+			usr << "<span class='notice'>Upon using the antagHUD you forfeited the ability to join the round.</span>"
 			return
 
 	var/deathtimeminutes = round(deathtime / 600)

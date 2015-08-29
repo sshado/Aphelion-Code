@@ -491,9 +491,10 @@
 //Some mob defines below
 #define AI_CAMERA_LUMINOSITY 6
 
-#define BORGMESON 1
-#define BORGTHERM 2
-#define BORGXRAY  4
+#define BORGMESON    1
+#define BORGTHERM    2
+#define BORGXRAY     4
+#define BORGMATERIAL 8
 
 // Some arbitrary defines to be used by self-pruning global lists. (see master_controller)
 #define PROCESS_KILL 26 // Used to trigger removal from a processing list.
@@ -938,7 +939,7 @@ var/list/be_special_flags = list(
 #define NETWORK_ENGINEERING "Engineering"
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
 #define NETWORK_ERT "ERT"
-#define NETWORK_EXODUS "Exodus"
+#define NETWORK_APHELION "Aphelion"
 #define NETWORK_MEDICAL "Medical"
 #define NETWORK_MINE "MINE"
 #define NETWORK_RESEARCH "Research"

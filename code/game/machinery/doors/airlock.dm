@@ -748,7 +748,7 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 75))
 				return
-	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
+	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/tapeproj))
 		return
 
 	src.add_fingerprint(user)
@@ -1032,6 +1032,9 @@ About the new airlock wires panel:
 			name = "[istext(assembly.glass) ? "[assembly.glass] airlock" : assembly.base_name]"
 
 	//wires
+	var/turf/T = get_turf(newloc)
+	if(T && (T.z in config.admin_levels))
+		secured_wires = 1
 	if (secured_wires)
 		wires = new/datum/wires/airlock/secure(src)
 	else

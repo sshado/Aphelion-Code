@@ -24,6 +24,9 @@
 	primitive_form = "Stok"
 	darksight = 3
 	gluttonous = 1
+	slowdown = 1
+	brute_mod = 0.8
+	burn_mod = 0.8
 
 	blurb = "A heavily reptillian species, Unathi (or 'Sinta as they call themselves) hail from the \
 	Uuosa-Eso system, which roughly translates to 'burning mother'.<br/><br/>Coming from a harsh, radioactive \
@@ -76,6 +79,7 @@
 	darksight = 8
 	slowdown = -1
 	brute_mod = 1.2
+	burn_mod = 1.2
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Ahdomai in the \
 	S'randarr system. They have been brought up into the space age by the Humans and Skrell, and have been \
@@ -249,6 +253,7 @@
 	brute_mod = 0.5
 	burn_mod = 1
 	show_ssd = "flashing a 'system offline' glyph on their monitor"
+	death_message = "seizes up and powers down, their monitor blank..."
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0

@@ -1,4 +1,24 @@
-/* General medicine */
+
+/datum/reagent/chloromydride
+	name = "Chloromydride"
+	id = "chloromydride"
+	description = "Chloromydride is a strong cardiac stimulant, usually used for cardiac arrest. Be warned, however - It has dangerous side effects."
+	reagent_state = LIQUID
+	color = "#F600FA"
+	overdose = 15
+	metabolism = REM * 0.5
+	scannable = 1
+
+/datum/reagent/chloromydride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		M.add_chemical_effect(CE_STABLE)
+		M.add_chemical_effect(CE_PAINKILLER, 40)
+		M.AdjustParalysis(-1)
+		M.AdjustWeakened(-1)
+		M.AdjustStunned(-1)
+		M.adjustToxLoss(removed * 5)
+		M.adjustOxyLoss(-30 * removed)
+
 
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
@@ -14,6 +34,7 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 25)
+
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -68,10 +89,37 @@
 		M.hallucination = max(0, M.hallucination - 9 * removed)
 		M.adjustToxLoss(-4 * removed)
 
+/datum/reagent/cytrazine
+	name = "Cytrazine"
+	id = "cytrazine"
+	description = "Cytrazine is a powerful antitoxin, and purges other chemicals from the system. However, it also multiplies damage of any other type."
+	reagent_state = LIQUID
+	color = "#00A000"
+	scannable = 1
+
+/datum/reagent/cytrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	var/mob/living/carbon/human/H = M
+	if(alien != IS_DIONA)
+		M.drowsyness = max(0, M.drowsyness - 12 * removed)
+		M.hallucination = max(0, M.hallucination - 12 * removed)
+		M.adjustToxLoss(-12 * removed)
+		for(var/datum/reagent/R in M.reagents.reagent_list)
+			if(R != src)
+				M.reagents.remove_reagent(R.id,2)
+		if(H.oxyloss)
+			H.oxyloss = (H.oxyloss*1.1)
+		if(H.brainloss)
+			H.brainloss = (H.brainloss*1.1)
+//		for(var/obj/item/organ/external/O in H.organs)
+//			if(O.brute_dam)
+//				O.brute_dam = (O.brute_dam*1.1)
+//			if(O.burn_dam)
+//				O.burn_dam = (O.burn_dam*1.1)
+
 /datum/reagent/dexalin
 	name = "Dexalin"
 	id = "dexalin"
-	description = "Dexalin is used in the treatment of oxygen deprivation."
+	description = "Dexalin is a cardiac stimulant used in the treatment of oxygen deprivation."
 	reagent_state = LIQUID
 	color = "#0080FF"
 	overdose = REAGENTS_OVERDOSE
@@ -206,7 +254,7 @@
 /datum/reagent/synaptizine
 	name = "Synaptizine"
 	id = "synaptizine"
-	description = "Synaptizine is used to treat various diseases."
+	description = "Synaptizine is used to treat various issues related to the mind."
 	reagent_state = LIQUID
 	color = "#99CCFF"
 	metabolism = REM * 0.05

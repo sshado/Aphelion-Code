@@ -92,7 +92,7 @@ var/blobevent   = 0
 
 var/diary          = null
 var/href_logfile   = null
-var/station_name   = "NSS Aphelion"
+var/station_name   = "NES Aphelion"
 var/game_version   = "Baystation12"
 var/changelog_hash = ""
 var/game_year      = (text2num(time2text(world.realtime, "YYYY")) + 544)
@@ -189,23 +189,23 @@ var/list/awaydestinations = list() // Away missions. A list of landmarks that th
 // MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport    = "3306"
-var/sqldb      = "tgstation"
-var/sqllogin   = "root"
-var/sqlpass    = ""
+var/sqldb      = "feedback"
+var/sqllogin   = "aphelion"
+var/sqlpass    = "shitinmymouth" // You can't have a [ in the password. It throws syntax errors.
 
 // Feedback gathering sql connection
-var/sqlfdbkdb    = "test"
-var/sqlfdbklogin = "root"
-var/sqlfdbkpass  = ""
-var/sqllogging   = 0 // Should we log deaths, population stats, etc.?
+var/sqlfdbkdb    = "feedback"
+var/sqlfdbklogin = "aphelion"
+var/sqlfdbkpass  = "shitinmymouth" // You can't have a [ in the password. It throws syntax errors.
+var/sqllogging   = 1 // Should we log deaths, population stats, etc.?
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
 var/forumsqladdress = "localhost"
 var/forumsqlport    = "3306"
 var/forumsqldb      = "tgstation"
-var/forumsqllogin   = "root"
-var/forumsqlpass    = ""
+var/forumsqllogin   = "aphelion"
+var/forumsqlpass    = "shitinmymouth"
 var/forum_activated_group     = "2"
 var/forum_authenticated_group = "10"
 
@@ -228,7 +228,7 @@ var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J
 // Chemistry lists.
 var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine") // Increase heart rate.
 var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")                 // Decrease heart rate.
-var/list/heartstopper  = list("potassium_phorochloride", "zombie_powder") // This stops the heart.
+var/list/heartstopper  = list("potassium_phorochloride", "dylamadon") // This stops the heart.
 var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
 
 // Used by robots and robot preferences.

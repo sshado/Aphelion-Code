@@ -113,7 +113,7 @@
 		new /obj/item/weapon/cartridge/hos(src)
 		new /obj/item/device/radio/headset/heads/hos(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
-		new /obj/item/taperoll/police(src)
+		new /obj/item/tapeproj/security(src)
 		new /obj/item/weapon/shield/riot(src)
 		new /obj/item/weapon/storage/box/flashbangs(src)
 		new /obj/item/weapon/storage/belt/security(src)
@@ -123,6 +123,7 @@
 		new /obj/item/clothing/accessory/holster/waist(src)
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/head/beret/sec/hos(src)
+		new /obj/item/clothing/mask/hailer/hos(src)
 		return
 
 
@@ -152,7 +153,7 @@
 		new /obj/item/weapon/cartridge/security(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
-		new /obj/item/taperoll/police(src)
+		new /obj/item/tapeproj/security(src)
 		new /obj/item/weapon/storage/box/flashbangs(src)
 		new /obj/item/weapon/storage/belt/security(src)
 		new /obj/item/weapon/reagent_containers/spray/pepper(src)
@@ -160,6 +161,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/weapon/storage/box/holobadge(src)
 		new /obj/item/clothing/head/beret/sec/warden(src)
+		new /obj/item/clothing/mask/hailer/warden(src)
 		return
 
 
@@ -190,13 +192,14 @@
 		new /obj/item/weapon/grenade/flashbang(src)
 		new /obj/item/weapon/melee/baton/loaded(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
-		new /obj/item/taperoll/police(src)
+		new /obj/item/tapeproj/security(src)
 		new /obj/item/device/hailer(src)
 		new /obj/item/clothing/accessory/storage/black_vest(src)
 		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/weapon/gun/energy/taser(src)
+		new /obj/item/clothing/mask/hailer(src)
 		return
 
 
@@ -262,7 +265,7 @@
 		new /obj/item/clothing/suit/storage/vest/detective(src)
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/ammo_magazine/c45m/rubber(src)
-		new /obj/item/taperoll/police(src)
+		new /obj/item/tapeproj/security(src)
 		new /obj/item/weapon/gun/projectile/colt/detective(src)
 		new /obj/item/clothing/accessory/holster/armpit(src)
 		return

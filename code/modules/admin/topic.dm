@@ -1190,7 +1190,7 @@
 		check_antagonists()
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!check_rights(R_ADMIN))	return
+		if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))	return
 
 		var/x = text2num(href_list["X"])
 		var/y = text2num(href_list["Y"])
@@ -1953,6 +1953,19 @@
 				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
 				log_admin("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
 
+			if("togglebomboff")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BCF")
+				if(max_explosion_range != 0)
+					max_explosion_range = 0
+				else
+					max_explosion_range = 14
+				var/range_dev = max_explosion_range *0.25
+				var/range_high = max_explosion_range *0.5
+				var/range_low = max_explosion_range
+				message_admins("\red <b> [key_name_admin(usr)] changed the bomb cap to [range_dev], [range_high], [range_low]</b>", 1)
+				log_admin("[key_name_admin(usr)] changed the bomb cap to [max_explosion_range]")
+
 			if("flicklights")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","FL")
@@ -2112,7 +2125,7 @@
 			if("friendai")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","FA")
-				for(var/mob/aiEye/aE in mob_list)
+				for(var/mob/eye/aiEye/aE in mob_list)
 					aE.icon_state = "ai_friend"
 				for(var/obj/machinery/M in machines)
 					if(istype(M, /obj/machinery/ai_status_display))

@@ -15,7 +15,8 @@ var/list/admin_verbs_default = list(
 	)
 var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
-	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
+	/client/proc/invisimin,		/*allows our mob to go invisible/visible*/
+	/client/proc/cmd_admin_dress, //Required for more than just "fun"
 //	/datum/admins/proc/show_traitor_panel,	/*interface which shows a mob's mind*/ -Removed due to rare practical use. Moved to debug verbs ~Errorage
 	/datum/admins/proc/show_game_mode,  /*Configuration window for the current game mode.*/
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
@@ -652,7 +653,7 @@ var/list/admin_verbs_mentor = list(
 	set name = "Make Sound"
 	set desc = "Display a message to everyone who can hear the target"
 	if(O)
-		var/message = sanitize(input("What do you want the message to be?", "Make Sound") as text|null)
+		var/message = input("What do you want the message to be?", "Make Sound") as text|null
 		if(!message)
 			return
 		for (var/mob/V in hearers(O))
@@ -710,7 +711,7 @@ var/list/admin_verbs_mentor = list(
 	set category = "Admin"
 
 	if(holder)
-		if(alert("Confirm self-deadmin for the round? You can't re-admin yourself without someont promoting you.",,"Yes","No") == "Yes")
+		if(alert("Confirm self-deadmin for the round? You can't re-admin yourself without someone promoting you.",,"Yes","No") == "Yes")
 			log_admin("[src] deadmined themself.")
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()

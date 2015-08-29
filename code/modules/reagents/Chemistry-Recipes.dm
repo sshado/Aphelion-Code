@@ -28,11 +28,26 @@
 	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/cordrazine
+	name = "Cordrazine"
+	id = "cordrazine"
+	result = "cordrazine"
+	required_reagents = list("lithium" = 1, "inaprovaline" = 1, "nitrogen" = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/dylovene
 	name = "Dylovene"
 	id = "anti_toxin"
 	result = "anti_toxin"
 	required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/cytrazine
+	name = "Cytrazine"
+	id = "cytrazine"
+	result = "cytrazine"
+	required_reagents = list("anti_toxin" = 3, "phoron" = 0.1, "fluorine" = 1)
+	catalysts = list("phoron" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/tramadol
@@ -289,6 +304,21 @@
 	required_reagents = list("ethanol" = 1, "chlorine" = 3, "water" = 1)
 	result_amount = 1
 
+/datum/chemical_reaction/melorazine
+	name = "Melorazine"
+	id = "melorazine"
+	result = "melorazine"
+	required_reagents = list("anti_toxin" = 1, "chloralhydrate" = 1, "water" = 3)
+	result_amount = 3
+
+/datum/chemical_reaction/chloromydride
+	name = "Chloromydride"
+	id = "chloromydride"
+	result = "chloromydride"
+	required_reagents = list("phoron" = 0.1, "inaprovaline" = 1, "cordrazine" = 1)
+	catalysts = list("phoron" = 1)
+	result_amount = 2
+
 /datum/chemical_reaction/potassium_chloride
 	name = "Potassium Chloride"
 	id = "potassium_chloride"
@@ -303,10 +333,10 @@
 	required_reagents = list("potassium_chloride" = 1, "phoron" = 1, "chloralhydrate" = 1)
 	result_amount = 4
 
-/datum/chemical_reaction/zombiepowder
-	name = "Zombie Powder"
-	id = "zombiepowder"
-	result = "zombiepowder"
+/datum/chemical_reaction/dylamadon
+	name = "Dylamadon"
+	id = "dylamadon"
+	result = "dylamadon"
 	required_reagents = list("carpotoxin" = 5, "stoxin" = 5, "copper" = 5)
 	result_amount = 2
 
@@ -1257,6 +1287,13 @@
 	result = "soysauce"
 	required_reagents = list("soymilk" = 4, "sacid" = 1)
 	result_amount = 5
+
+/datum/chemical_reaction/ketchup
+	name = "Ketchup"
+	id = "ketchup"
+	result = "ketchup"
+	required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
+	result_amount = 4
 
 /datum/chemical_reaction/cheesewheel
 	name = "Cheesewheel"
