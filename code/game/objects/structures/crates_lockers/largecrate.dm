@@ -74,3 +74,7 @@
 	name = "chicken crate"
 	held_count = 5
 	held_type = /mob/living/simple_animal/chick
+
+/obj/structure/largecrate/animal/proto
+	name = "proto-human crate"
+	held_type = /mob/living/carbon/human
