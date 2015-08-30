@@ -18,6 +18,12 @@
 		M.adjustToxLoss(removed * 5)
 		M.adjustOxyLoss(-30 * removed)
 
+/datum/reagent/chloromydride/overdose_process(var/mob/living/M as mob)
+	if(volume > 15)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
 
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
@@ -41,12 +47,19 @@
 	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
 	reagent_state = LIQUID
 	color = "#BF0000"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose_threshold = 30
 	scannable = 1
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(6 * removed, 0)
+
+/datum/reagent/bicaridine/overdose_process(var/mob/living/M as mob)
+	if(volume > 30)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -54,12 +67,19 @@
 	description = "Kelotane is a drug used to treat burns."
 	reagent_state = LIQUID
 	color = "#FFA800"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose_threshold = 30
 	scannable = 1
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 6 * removed)
+
+/datum/reagent/kelotane/overdose_process(var/mob/living/M as mob)
+	if(volume > 30)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
 
 /datum/reagent/dermaline
 	name = "Dermaline"
@@ -73,6 +93,13 @@
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 12 * removed)
+
+/datum/reagent/dermaline/overdose_process(var/mob/living/M as mob)
+	if(volume > 15)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
 
 /datum/reagent/dylovene
 	name = "Dylovene"
@@ -132,6 +159,13 @@
 
 	holder.remove_reagent("lexorin", 2 * removed)
 
+/datum/reagent/dexalin/overdose_process(var/mob/living/M as mob)
+	if(volume > 30)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
+
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
 	id = "dexalinp"
@@ -148,6 +182,13 @@
 		M.adjustOxyLoss(-300 * removed)
 
 	holder.remove_reagent("lexorin", 3 * removed)
+
+/datum/reagent/dexalinp/overdose_process(var/mob/living/M as mob)
+	if(volume > 15)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
@@ -213,6 +254,13 @@
 /datum/reagent/paracetamol/overdose_threshold(var/mob/living/carbon/M, var/alien)
 	..()
 	M.hallucination = max(M.hallucination, 2)
+
+/datum/reagent/paracetamol/overdose_process(var/mob/living/M as mob)
+	if(volume > 30)
+		if(prob(8))
+			M.adjustToxLoss(1)
+	..()
+	return
 
 /datum/reagent/tramadol
 	name = "Tramadol"
