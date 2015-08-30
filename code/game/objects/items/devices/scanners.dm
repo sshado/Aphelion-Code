@@ -93,6 +93,14 @@ REAGENT SCANNER
 		return
 	user.visible_message("<span class='notice'> [user] has analyzed [M]'s vitals.</span>","<span class='notice'> You have analyzed [M]'s vitals.</span>")
 
+	if(H.reagents.addiction_list)
+	var/list/datum/reagent/addiction_list = new/list()
+		user.show_message("<span class='danger'>Subject is addicted to the following reagents:</span>")
+		for(var/datum/reagent/R in H.reagents.addiction_list)
+			user.show_message("<span class='danger'>[R.name]</span>")
+	else
+		user.show_message("<span class='notice'>Subject is not addicted to any reagents.</span>")
+
 	if (!istype(M, /mob/living/carbon) || (ishuman(M) && (M:species.flags & IS_SYNTHETIC)))
 		//these sensors are designed for organic life
 		user.show_message("\blue Analyzing Results for ERROR:\n\t Overall Status: ERROR")
@@ -186,12 +194,6 @@ REAGENT SCANNER
 		user.show_message("\red Severe brain damage detected. Subject likely to have mental retardation.")
 	else if (M.getBrainLoss() >= 10)
 		user.show_message("\red Significant brain damage detected. Subject may have had a concussion.")
-	if(H.reagents.addiction_list.len)
-		user.show_message("<span class='danger'>Subject is addicted to the following reagents:</span>")
-		for(var/datum/reagent/R in H.reagents.addiction_list)
-			user.show_message("<span class='danger'>[R.name]</span>")
-	else
-		user.show_message("<span class='notice'>Subject is not addicted to any reagents.</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/name in H.organs_by_name)
