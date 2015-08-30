@@ -66,7 +66,7 @@
 	selection_color = "#dddddd"
 	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
 	minimal_access = list(access_hydroponics, access_morgue) // Removed tox and chem access because STOP PISSING OFF THE CHEMIST GUYS // //Removed medical access because WHAT THE FUCK YOU AREN'T A DOCTOR YOU GROW WHEAT //Given Morgue access because they have a viable means of cloning.
-	alt_titles = list("Hydroponicist")
+	alt_titles = list("Hydroponicist","Horticulturist")
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -99,7 +99,6 @@
 	selection_color = "#dddddd"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
-
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -263,6 +262,7 @@
 	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 
+	alt_titles = list("Custodial Technician","Sanitation Engineer","Custodian")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -314,6 +314,7 @@
 	access = list(access_lawyer, access_court, access_sec_doors, access_maint_tunnels, access_heads)
 	minimal_access = list(access_lawyer, access_court, access_sec_doors, access_heads)
 
+	alt_titles = list("Internal Affairs Consultant")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

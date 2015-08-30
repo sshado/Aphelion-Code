@@ -19,6 +19,9 @@
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
+
+	alt_titles = list("Security Commander","Chief of Security")
+
 	minimal_player_age = 14
 
 	equip(var/mob/living/carbon/human/H)

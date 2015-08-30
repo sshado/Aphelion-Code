@@ -11,7 +11,7 @@
 	selection_color = "#dddddd"
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium)
-	alt_titles = list("Counselor")
+	alt_titles = list("Counselor","Deacon","Rabbi")
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -24,7 +24,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(H), slot_shoes)
 		spawn(0)
 			var/religion_name = "Christianity"
-			var/new_religion = sanitize(input(H, "You are the crew services officer. Would you like to change your religion? Default is Christianity, in SPACE.", "Name change", religion_name), MAX_NAME_LEN)
+			var/new_religion = sanitize(input(H, "You are the crew counselor. Would you like to change your religion? Default is Christianity, in SPACE.", "Name change", religion_name), MAX_NAME_LEN)
 
 			if (!new_religion)
 				new_religion = religion_name

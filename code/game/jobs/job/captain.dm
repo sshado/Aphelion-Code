@@ -15,6 +15,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	req_admin_notify = 1
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
+	alt_titles = list("Station Administrator")
 	minimal_player_age = 14
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -73,6 +74,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
 			            access_clown, access_mime, access_hop, access_RC_announce, access_keycard_auth, access_gateway)
 
+	alt_titles = list("Crew Resources Officer","Human Resources Director")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
