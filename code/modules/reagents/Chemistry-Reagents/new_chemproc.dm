@@ -1,14 +1,14 @@
-datum/reagent
+/datum/reagent
 	var/overdose_threshold = 0
 	var/addiction_threshold = 0
 	var/addiction_stage = 0
 	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
 	var/current_cycle = 0
-datum/reagents
+/datum/reagents
 	var/addiction_tick = 1
 	var/list/datum/reagent/addiction_list = new/list()
 
-datum/reagents/proc/metabolism(var/mob/M)
+/datum/reagents/proc/metabolism(var/mob/M)
 	if(M)
 		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
 			return
@@ -59,42 +59,42 @@ datum/reagents/proc/metabolism(var/mob/M)
 	addiction_tick++
 	update_total()
 
-datum/reagents/proc/reagent_on_tick()
+/datum/reagents/proc/reagent_on_tick()
 	for(var/datum/reagent/R in reagent_list)
 		R.on_tick()
 	return
 
 // Called every time reagent containers process.
-datum/reagent/proc/on_tick(var/data)
+/datum/reagent/proc/on_tick(var/data)
 	return
 
 // Called when the reagent container is hit by an explosion
-datum/reagent/proc/on_ex_act(var/severity)
+/datum/reagent/proc/on_ex_act(var/severity)
 	return
 
 // Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
-datum/reagent/proc/overdose_process(var/mob/living/M as mob)
+/datum/reagent/proc/overdose_process(var/mob/living/M as mob)
 	return
 
-datum/reagent/proc/overdose_start(var/mob/living/M as mob)
+/datum/reagent/proc/overdose_start(var/mob/living/M as mob)
 	return
 
-datum/reagent/proc/addiction_act_stage1(var/mob/living/M as mob)
+/datum/reagent/proc/addiction_act_stage1(var/mob/living/M as mob)
 	if(prob(30))
 		M << "<span class = 'notice'>You feel like some [name] right about now.</span>"
 	return
 
-datum/reagent/proc/addiction_act_stage2(var/mob/living/M as mob)
+/datum/reagent/proc/addiction_act_stage2(var/mob/living/M as mob)
 	if(prob(30))
 		M << "<span class = 'notice'>You feel like you need [name]. You just can't get enough.</span>"
 	return
 
-datum/reagent/proc/addiction_act_stage3(var/mob/living/M as mob)
+/datum/reagent/proc/addiction_act_stage3(var/mob/living/M as mob)
 	if(prob(30))
 		M << "<span class = 'danger'>You have an intense craving for [name].</span>"
 	return
 
-datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
+/datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
 	if(prob(30))
 		M << "<span class = 'danger'>You're not feeling good at all! You really need some [name].</span>"
 	return
