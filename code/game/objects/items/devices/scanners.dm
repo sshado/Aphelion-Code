@@ -186,6 +186,12 @@ REAGENT SCANNER
 		user.show_message("\red Severe brain damage detected. Subject likely to have mental retardation.")
 	else if (M.getBrainLoss() >= 10)
 		user.show_message("\red Significant brain damage detected. Subject may have had a concussion.")
+	if(H.reagents.addiction_list.len)
+		user.show_message("<span class='danger'>Subject is addicted to the following reagents:</span>")
+		for(var/datum/reagent/R in H.reagents.addiction_list)
+			user.show_message("<span class='danger'>[R.name]</span>")
+	else
+		user.show_message("<span class='notice'>Subject is not addicted to any reagents.</span>")
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		for(var/name in H.organs_by_name)
