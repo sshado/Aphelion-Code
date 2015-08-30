@@ -5,11 +5,10 @@ datum/reagent
 	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
 	var/current_cycle = 0
 datum/reagents
-	var/chem_temp = 300
 	var/addiction_tick = 1
 	var/list/datum/reagent/addiction_list = new/list()
 
-datum/reagents/proc/metabol(var/mob/M)
+datum/reagents/proc/metabolism(var/mob/M)
 	if(M)
 		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
 			return
@@ -18,9 +17,7 @@ datum/reagents/proc/metabol(var/mob/M)
 		var/datum/reagent/R = A
 		if(!istype(R))
 			continue
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-				continue
+//		if(ishuman(M))
 		//If you got this far, that means we can process whatever reagent this iteration is for. Handle things normally from here.
 		if(M && R)
 			if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
