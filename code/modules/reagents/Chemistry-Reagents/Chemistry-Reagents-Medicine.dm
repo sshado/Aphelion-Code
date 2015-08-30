@@ -279,7 +279,7 @@
 /datum/reagent/surge/overdose_process(var/mob/living/M as mob)
 	//Hit them with the same effects as an electrode!
 	M.Weaken(5)
-	M.Jitter(20)
+	M.eye_blurry = max(M.eye_blurry, 10)
 	M.apply_effect(STUTTER, 5)
 	if(prob(10))
 		M.adjustToxLoss(rand(1,5)*REM)
