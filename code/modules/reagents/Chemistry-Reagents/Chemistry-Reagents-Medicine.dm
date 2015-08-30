@@ -268,8 +268,8 @@
 	description = "A simple, yet effective painkiller."
 	reagent_state = LIQUID
 	color = "#CB68FC"
-	overdose_threshold = 30
-	addiction_threshold = 5
+	overdose_threshold = 20
+	addiction_threshold = 1
 	scannable = 1
 	metabolism = 0.4
 
