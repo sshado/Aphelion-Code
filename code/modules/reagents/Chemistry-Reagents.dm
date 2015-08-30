@@ -186,8 +186,8 @@
 				if(R.addiction_stage > 40)
 					M << "<span class = 'notice'>You feel like you've gotten over your need for [R.name].</span>"
 					addiction_list.Remove(R)
-	addiction_tick++
-	update_total()
+		addiction_tick++
+		update_total()
 
 /datum/reagents/proc/reagent_on_tick()
 	for(var/datum/reagent/R in reagent_list)

@@ -108,7 +108,6 @@
 #define LIQUID 2
 #define GAS 3
 #define REAGENTS_OVERDOSE_THRESHOLD 30
-#define OVERDOSE_THRESHOLD 30
 
 #define MINIMUM_AIR_RATIO_TO_SUSPEND 0.05 // Minimum ratio of air that must move to/from a tile to suspend group processing
 #define MINIMUM_AIR_TO_SUSPEND       (MOLES_CELLSTANDARD * MINIMUM_AIR_RATIO_TO_SUSPEND) // Minimum amount of air that has to move before a group processing can be suspended

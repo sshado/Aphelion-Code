@@ -1526,7 +1526,6 @@
 			if(R.id in cheartstopper) //Conditional heart-stoppage
 				if(R.volume >= R.overdose_threshold)
 					temp = PULSE_NONE
-
 		return temp
 
 	proc/handle_heartbeat()

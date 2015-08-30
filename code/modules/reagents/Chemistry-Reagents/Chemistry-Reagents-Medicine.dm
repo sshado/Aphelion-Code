@@ -276,8 +276,7 @@
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 80)
 
-/datum/reagent/surge/overdose_process(var/mob/living/M as mob)
-	//Hit them with the same effects as an electrode!
+/datum/reagent/tramadol/overdose_process(var/mob/living/M as mob)
 	M.Weaken(5)
 	M.eye_blurry = max(M.eye_blurry, 10)
 	M.apply_effect(STUTTER, 5)
