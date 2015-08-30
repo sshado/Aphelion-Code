@@ -1,4 +1,5 @@
 
+
 /datum/reagent/chloromydride
 	name = "Chloromydride"
 	id = "chloromydride"
@@ -222,35 +223,35 @@
 	reagent_state = LIQUID
 	color = "#CB68FC"
 	overdose = 30
-	addiction_threshold = 25
+	addiction_threshold = 10
 	scannable = 1
-	metabolism = 0.02
+	metabolism = 0.25
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 80)
 
-datum/reagent/tramadol/addiction_act_stage1(var/mob/living/M as mob)
-	if(prob(33))
+/datum/reagent/tramadol/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(10))
 		M.adjustToxLoss(2*REM)
 		M.losebreath += 2
 	..()
 	return
-datum/reagent/tramadol/addiction_act_stage2(var/mob/living/M as mob)
-	if(prob(33))
+/datum/reagent/tramadol/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(15))
+		M.adjustToxLoss(2*REM)
+		M.losebreath += 2
+	..()
+	return
+/datum/reagent/tramadol/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(24))
 		M.adjustToxLoss(3*REM)
 		M.losebreath += 3
 	..()
 	return
-datum/reagent/tramadol/addiction_act_stage3(var/mob/living/M as mob)
+/datum/reagent/tramadol/addiction_act_stage4(var/mob/living/M as mob)
 	if(prob(33))
-		M.adjustToxLoss(4*REM)
-		M.losebreath += 4
-	..()
-	return
-datum/reagent/tramadol/addiction_act_stage4(var/mob/living/M as mob)
-	if(prob(33))
-		M.adjustToxLoss(5*REM)
-		M.losebreath += 5
+		M.adjustToxLoss(3*REM)
+		M.losebreath += 3
 	..()
 	return
 
