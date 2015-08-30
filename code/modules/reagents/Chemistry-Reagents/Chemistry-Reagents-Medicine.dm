@@ -1,5 +1,3 @@
-
-
 /datum/reagent/chloromydride
 	name = "Chloromydride"
 	id = "chloromydride"
@@ -223,9 +221,9 @@
 	reagent_state = LIQUID
 	color = "#CB68FC"
 	overdose = 30
-	addiction_threshold = 10
+	addiction_threshold = 5
 	scannable = 1
-	metabolism = 0.25
+	metabolism = 0.4
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 80)
