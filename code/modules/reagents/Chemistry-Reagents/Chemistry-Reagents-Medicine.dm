@@ -276,6 +276,16 @@
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 80)
 
+/datum/reagent/surge/overdose_process(var/mob/living/M as mob)
+	//Hit them with the same effects as an electrode!
+	M.Weaken(5)
+	M.Jitter(20)
+	M.apply_effect(STUTTER, 5)
+	if(prob(10))
+		M.adjustToxLoss(rand(1,5)*REM)
+	..()
+	return
+
 /datum/reagent/tramadol/addiction_act_stage1(var/mob/living/M as mob)
 	if(prob(10))
 		M.adjustToxLoss(2*REM)
@@ -300,10 +310,6 @@
 		M.losebreath += 3
 	..()
 	return
-
-/datum/reagent/tramadol/overdose_threshold(var/mob/living/carbon/M, var/alien)
-	..()
-	M.hallucination = max(M.hallucination, 2)
 
 /datum/reagent/oxycodone
 	name = "Oxycodone"
