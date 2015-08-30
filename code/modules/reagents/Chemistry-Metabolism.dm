@@ -20,16 +20,6 @@
 		current.on_mob_life(parent, metabolism_type, metabolism_class)
 	update_total()
 
-/datum/reagent
-	var/overdose_threshold = 0
-	var/addiction_threshold = 0
-	var/addiction_stage = 0
-	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
-	var/current_cycle = 0
-/datum/reagents
-	var/addiction_tick = 1
-	var/list/datum/reagent/addiction_list = new/list()
-
 /datum/reagents/proc/metabolism(var/mob/M)
 	if(M)
 		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
@@ -40,7 +30,6 @@
 		if(!istype(R))
 			continue
 //		if(ishuman(M))
-		//If you got this far, that means we can process whatever reagent this iteration is for. Handle things normally from here.
 		if(M && R)
 			if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
 				R.overdosed = 1
