@@ -20,11 +20,11 @@
 	var/color = "#000000"
 	var/color_weight = 1
 /datum/reagent
-	var/overdose_threshold = 0
 	var/addiction_threshold = 0
 	var/addiction_stage = 0
-	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
+	var/overdose_threshold = 0 // You fucked up and this is now triggering it's overdose_threshold effects, purge that shit quick.
 	var/current_cycle = 0
+	var/overdosed = 0
 /datum/reagents
 	var/addiction_tick = 1
 	var/list/datum/reagent/addiction_list = new/list()
@@ -47,8 +47,6 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
-		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
@@ -68,6 +66,29 @@
 	remove_self(removed)
 	return
 
+/datum/reagents/proc/overdose(var/mob/M)
+	if(M)
+		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
+			return
+		handle_reactions()
+	for(var/A in reagent_list)
+		var/datum/reagent/R = A
+		if(!istype(R))
+			continue
+//		if(ishuman(M))
+		if(M && R)
+			if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
+				R.overdosed = 1
+				M << "<span class = 'userdanger'>You feel like you took too much [R.name]!</span>"
+				R.overdose_start(M)
+
+// Called if the reagent has passed the overdose_threshold and is set to be triggering overdose effects
+/datum/reagent/proc/overdose_process(var/mob/living/M as mob)
+	return
+
+/datum/reagent/proc/overdose_start(var/mob/living/M as mob)
+	return
+
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
@@ -78,7 +99,7 @@
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
-/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
+/datum/reagent/proc/overdose_threshold(var/mob/living/carbon/M, var/alien) // overdose_threshold effect. Doesn't happen instantly.
 	M.adjustToxLoss(REM)
 	return
 

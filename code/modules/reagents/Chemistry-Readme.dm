@@ -105,10 +105,10 @@ About the Holder:
 			Calls each reagent's touch_obj(target).
 
 		trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
-			The general proc for applying reagents to things externally (as opposed to directly injected into the contents). 
+			The general proc for applying reagents to things externally (as opposed to directly injected into the contents).
 			It first calls touch, then the appropriate trans_to_*() or splash_mob().
 			If for some reason you want touch effects to be bypassed (e.g. injecting stuff directly into a reagent container or person), call the appropriate trans_to_*() proc.
-			
+
 			Calls touch() before checking the type of [target], calling splash_mob(target, amount), trans_to_turf(target, amount, multiplier, copy), or trans_to_obj(target, amount, multiplier, copy).
 
 		trans_id_to(var/atom/target, var/id, var/amount = 1)
@@ -173,8 +173,8 @@ About Reagents:
 		max_dose
 			Maximum amount of reagent that has ever been in a mob. Exists so dose won't grow infinitely when small amounts of reagent are added over time.
 
-		overdose
-			If [dose] is bigger than [overdose], overdose() proc is called every tick.
+		overdose_threshold
+			If [dose] is bigger than [overdose_threshold], overdose_threshold() proc is called every tick.
 
 		scannable
 			If set to 1, will show up on health analyzers by name.
@@ -226,8 +226,8 @@ About Reagents:
 		affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 			Ditto, touching.
 
-		overdose(var/mob/living/carbon/M, var/alien)
-			Called when dose is above overdose. Defaults to M.adjustToxLoss(REM).
+		overdose_threshold(var/mob/living/carbon/M, var/alien)
+			Called when dose is above overdose_threshold. Defaults to M.adjustToxLoss(REM).
 
 		initialize_data(var/newdata)
 			Called when reagent is created. Defaults to setting [data] to [newdata].

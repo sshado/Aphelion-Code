@@ -163,7 +163,7 @@
 	description = "A chemical compound that causes a powerful fat-burning reaction."
 	reagent_state = LIQUID
 	color = "#BBEDA4"
-	overdose = REAGENTS_OVERDOSE
+	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.nutrition = max(M.nutrition - 10 * removed, 0)
@@ -179,7 +179,7 @@
 	description = "A salt made of sodium chloride. Commonly used to season food."
 	reagent_state = SOLID
 	color = "#FFFFFF"
-	overdose = REAGENTS_OVERDOSE
+	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
 
 /datum/reagent/blackpepper
 	name = "Black Pepper"
@@ -194,7 +194,7 @@
 	description = "A universal enzyme used in the preperation of certain chemicals and foods."
 	reagent_state = LIQUID
 	color = "#365E30"
-	overdose = REAGENTS_OVERDOSE
+	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
 
 /datum/reagent/frostoil
 	name = "Frost Oil"

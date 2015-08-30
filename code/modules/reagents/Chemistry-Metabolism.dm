@@ -31,15 +31,6 @@
 			continue
 //		if(ishuman(M))
 		if(M && R)
-			if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
-				R.overdosed = 1
-				M << "<span class = 'userdanger'>You feel like you took too much [R.name]!</span>"
-				R.overdose_start(M)
-			if(R.volume >= R.addiction_threshold && !is_type_in_list(R, addiction_list) && R.addiction_threshold > 0)
-				var/datum/reagent/new_reagent = new R.type()
-				addiction_list.Add(new_reagent)
-			if(R.overdosed)
-				R.overdose_process(M)
 			if(is_type_in_list(R,addiction_list))
 				for(var/datum/reagent/addicted_reagent in addiction_list)
 					if(istype(R, addicted_reagent))
@@ -81,13 +72,6 @@
 
 // Called when the reagent container is hit by an explosion
 /datum/reagent/proc/on_ex_act(var/severity)
-	return
-
-// Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
-/datum/reagent/proc/overdose_process(var/mob/living/M as mob)
-	return
-
-/datum/reagent/proc/overdose_start(var/mob/living/M as mob)
 	return
 
 /datum/reagent/proc/addiction_act_stage1(var/mob/living/M as mob)
