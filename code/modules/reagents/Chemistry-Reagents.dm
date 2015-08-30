@@ -11,7 +11,6 @@
 	var/touch_met = 0
 	var/dose = 0
 	var/max_dose = 0
-	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
 	var/glass_icon_state = null
@@ -20,6 +19,15 @@
 	var/glass_center_of_mass = null
 	var/color = "#000000"
 	var/color_weight = 1
+/datum/reagent
+	var/overdose_threshold = 0
+	var/addiction_threshold = 0
+	var/addiction_stage = 0
+	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
+	var/current_cycle = 0
+/datum/reagents
+	var/addiction_tick = 1
+	var/list/datum/reagent/addiction_list = new/list()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(id, amount)
