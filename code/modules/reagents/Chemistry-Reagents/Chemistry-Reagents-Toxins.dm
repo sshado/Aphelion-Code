@@ -79,9 +79,9 @@
 	reagent_state = SOLID
 	color = "#FFFFFF"
 	strength = 0
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
-/datum/reagent/toxin/potassium_chloride/overdose_threshold(var/mob/living/carbon/M, var/alien)
+/datum/reagent/toxin/potassium_chloride/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -98,7 +98,7 @@
 	reagent_state = SOLID
 	color = "#FFFFFF"
 	strength = 10
-	overdose_threshold = 20
+	overdose = 20
 
 /datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -204,7 +204,7 @@
 	description = "Lexorin temporarily stops respiration. Causes tissue damage."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -263,7 +263,7 @@
 	reagent_state = LIQUID
 	color = "#009CA8"
 	metabolism = REM * 0.5
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -288,7 +288,7 @@
 	reagent_state = LIQUID
 	color = "#E0F8F7"
 	metabolism = REM * 0.5
-	overdose_threshold = 25
+	overdose = 25
 
 /datum/reagent/melorazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -311,7 +311,7 @@
 	reagent_state = SOLID
 	color = "#000067"
 	metabolism = REM * 0.5
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -349,7 +349,7 @@
 	reagent_state = LIQUID
 	color = "#60A584"
 	metabolism = REM * 0.5
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -367,7 +367,7 @@
 	reagent_state = LIQUID
 	color = "#202040"
 	metabolism = REM * 0.25
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/serotrotium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -383,7 +383,7 @@
 	reagent_state = LIQUID
 	color = "#000055"
 	metabolism = REM * 0.5
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/cryptobiolin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -397,7 +397,7 @@
 	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -417,7 +417,7 @@
 	reagent_state = LIQUID
 	color = "#B31008"
 	metabolism = REM * 0.25
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -429,7 +429,7 @@
 	id = "psilocybin"
 	description = "A strong psycotropic derived from certain species of mushroom."
 	color = "#E700E7"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
 
 /datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

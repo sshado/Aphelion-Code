@@ -1,10 +1,11 @@
+
 /datum/reagent/chloromydride
 	name = "Chloromydride"
 	id = "chloromydride"
 	description = "Chloromydride is a strong cardiac stimulant, usually used for cardiac arrest. Be warned, however - It has dangerous side effects."
 	reagent_state = LIQUID
 	color = "#F600FA"
-	overdose_threshold = 15
+	overdose = 15
 	metabolism = REM * 0.5
 	scannable = 1
 
@@ -18,12 +19,6 @@
 		M.adjustToxLoss(removed * 5)
 		M.adjustOxyLoss(-30 * removed)
 
-/datum/reagent/chloromydride/overdose_process(var/mob/living/M as mob)
-	if(volume > 15)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
 
 /datum/reagent/inaprovaline
 	name = "Inaprovaline"
@@ -31,7 +26,7 @@
 	description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 	reagent_state = LIQUID
 	color = "#00BFFF"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD * 2
+	overdose = REAGENTS_OVERDOSE * 2
 	metabolism = REM * 0.5
 	scannable = 1
 
@@ -47,19 +42,12 @@
 	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
 	reagent_state = LIQUID
 	color = "#BF0000"
-	overdose_threshold = 30
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(6 * removed, 0)
-
-/datum/reagent/bicaridine/overdose_process(var/mob/living/M as mob)
-	if(volume > 30)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -67,19 +55,12 @@
 	description = "Kelotane is a drug used to treat burns."
 	reagent_state = LIQUID
 	color = "#FFA800"
-	overdose_threshold = 30
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 6 * removed)
-
-/datum/reagent/kelotane/overdose_process(var/mob/living/M as mob)
-	if(volume > 30)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
 
 /datum/reagent/dermaline
 	name = "Dermaline"
@@ -87,19 +68,12 @@
 	description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
 	reagent_state = LIQUID
 	color = "#FF8000"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 12 * removed)
-
-/datum/reagent/dermaline/overdose_process(var/mob/living/M as mob)
-	if(volume > 15)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
 
 /datum/reagent/dylovene
 	name = "Dylovene"
@@ -148,7 +122,7 @@
 	description = "Dexalin is a cardiac stimulant used in the treatment of oxygen deprivation."
 	reagent_state = LIQUID
 	color = "#0080FF"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -159,20 +133,13 @@
 
 	holder.remove_reagent("lexorin", 2 * removed)
 
-/datum/reagent/dexalin/overdose_process(var/mob/living/M as mob)
-	if(volume > 30)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
-
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
 	id = "dexalinp"
 	description = "Dexalin Plus is used in the treatment of oxygen deprivation. It is highly effective."
 	reagent_state = LIQUID
 	color = "#0040FF"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
 	scannable = 1
 
 /datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -182,13 +149,6 @@
 		M.adjustOxyLoss(-300 * removed)
 
 	holder.remove_reagent("lexorin", 3 * removed)
-
-/datum/reagent/dexalinp/overdose_process(var/mob/living/M as mob)
-	if(volume > 15)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
 
 /datum/reagent/tricordrazine
 	name = "Tricordrazine"
@@ -244,23 +204,16 @@
 	description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 60
+	overdose = 60
 	scannable = 1
 	metabolism = 0.02
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 50)
 
-/datum/reagent/paracetamol/overdose_threshold(var/mob/living/carbon/M, var/alien)
+/datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.hallucination = max(M.hallucination, 2)
-
-/datum/reagent/paracetamol/overdose_process(var/mob/living/M as mob)
-	if(volume > 30)
-		if(prob(8))
-			M.adjustToxLoss(1)
-	..()
-	return
 
 /datum/reagent/tramadol
 	name = "Tramadol"
@@ -268,47 +221,16 @@
 	description = "A simple, yet effective painkiller."
 	reagent_state = LIQUID
 	color = "#CB68FC"
-	overdose_threshold = 20
-	addiction_threshold = 1
+	overdose = 30
 	scannable = 1
-	metabolism = 0.4
+	metabolism = 0.02
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 80)
 
-/datum/reagent/tramadol/overdose_process(var/mob/living/M as mob)
-	M.Weaken(5)
-	M.eye_blurry = max(M.eye_blurry, 10)
-	M.apply_effect(STUTTER, 5)
-	if(prob(10))
-		M.adjustToxLoss(rand(1,5)*REM)
+/datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
-	return
-
-/datum/reagent/tramadol/addiction_act_stage1(var/mob/living/M as mob)
-	if(prob(10))
-		M.adjustToxLoss(2*REM)
-		M.losebreath += 2
-	..()
-	return
-/datum/reagent/tramadol/addiction_act_stage2(var/mob/living/M as mob)
-	if(prob(15))
-		M.adjustToxLoss(2*REM)
-		M.losebreath += 2
-	..()
-	return
-/datum/reagent/tramadol/addiction_act_stage3(var/mob/living/M as mob)
-	if(prob(24))
-		M.adjustToxLoss(3*REM)
-		M.losebreath += 3
-	..()
-	return
-/datum/reagent/tramadol/addiction_act_stage4(var/mob/living/M as mob)
-	if(prob(33))
-		M.adjustToxLoss(3*REM)
-		M.losebreath += 3
-	..()
-	return
+	M.hallucination = max(M.hallucination, 2)
 
 /datum/reagent/oxycodone
 	name = "Oxycodone"
@@ -316,13 +238,13 @@
 	description = "An effective and very addictive painkiller."
 	reagent_state = LIQUID
 	color = "#800080"
-	overdose_threshold = 20
+	overdose = 20
 	metabolism = 0.02
 
 /datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_PAINKILLER, 200)
 
-/datum/reagent/oxycodone/overdose_threshold(var/mob/living/carbon/M, var/alien)
+/datum/reagent/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	M.druggy = max(M.druggy, 10)
 	M.hallucination = max(M.hallucination, 3)
@@ -336,7 +258,7 @@
 	reagent_state = LIQUID
 	color = "#99CCFF"
 	metabolism = REM * 0.05
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/synaptizine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -358,7 +280,7 @@
 	reagent_state = LIQUID
 	color = "#FFFF66"
 	metabolism = REM * 0.25
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/alkysine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -373,7 +295,7 @@
 	description = "Heals eye damage"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/imidazoline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -392,7 +314,7 @@
 	description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
 	reagent_state = LIQUID
 	color = "#561EC3"
-	overdose_threshold = 10
+	overdose = 10
 	scannable = 1
 
 /datum/reagent/peridaxon/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -409,7 +331,7 @@
 	description = "Ryetalyn can cure all genetic abnomalities via a catalytic process."
 	reagent_state = SOLID
 	color = "#004000"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
@@ -430,7 +352,7 @@
 	reagent_state = LIQUID
 	color = "#FF3300"
 	metabolism = REM * 0.15
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -445,7 +367,7 @@
 	description = "A powerful oxidizer that reacts with ethanol."
 	reagent_state = SOLID
 	color = "#605048"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 
 /datum/reagent/ethylredoxrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -466,7 +388,7 @@
 	reagent_state = LIQUID
 	color = "#408000"
 	metabolism = REM * 0.25
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/hyronalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -479,7 +401,7 @@
 	reagent_state = LIQUID
 	color = "#008000"
 	metabolism = REM * 0.25
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/arithrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -495,7 +417,7 @@
 	reagent_state = LIQUID
 	color = "#C1C1C1"
 	metabolism = REM * 0.05
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/sterilizine
@@ -521,7 +443,7 @@
 	description = "Leporazine can be use to stabilize an individuals body temperature."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/leporazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -604,7 +526,7 @@
 	description = "A powder with almost magical properties, this substance can effectively treat genetic damage in humanoids, though excessive consumption has side effects."
 	reagent_state = SOLID
 	color = "#669900"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD
+	overdose = REAGENTS_OVERDOSE
 	scannable = 1
 
 /datum/reagent/rezadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)

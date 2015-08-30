@@ -11,6 +11,7 @@
 	var/touch_met = 0
 	var/dose = 0
 	var/max_dose = 0
+	var/overdose = 0
 	var/scannable = 0 // Shows up on health analyzers.
 	var/affects_dead = 0
 	var/glass_icon_state = null
@@ -19,15 +20,6 @@
 	var/glass_center_of_mass = null
 	var/color = "#000000"
 	var/color_weight = 1
-/datum/reagent
-	var/addiction_threshold = 0
-	var/addiction_stage = 0
-	var/overdose_threshold = 0 // You fucked up and this is now triggering it's overdose_threshold effects, purge that shit quick.
-	var/current_cycle = 0
-	var/overdosed = 0
-/datum/reagents
-	var/addiction_tick = 1
-	var/list/datum/reagent/addiction_list = new/list()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(id, amount)
@@ -47,6 +39,8 @@
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
+	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
+		overdose(M, alien)
 	var/removed = metabolism
 	if(ingest_met && (location == CHEM_INGEST))
 		removed = ingest_met
@@ -66,29 +60,6 @@
 	remove_self(removed)
 	return
 
-/datum/reagents/proc/overdose(var/mob/M)
-	if(M)
-		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
-			return
-		handle_reactions()
-	for(var/A in reagent_list)
-		var/datum/reagent/R = A
-		if(!istype(R))
-			continue
-//		if(ishuman(M))
-		if(M && R)
-			if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
-				R.overdosed = 1
-				M << "<span class = 'userdanger'>You feel like you took too much [R.name]!</span>"
-				R.overdose_start(M)
-
-// Called if the reagent has passed the overdose_threshold and is set to be triggering overdose effects
-/datum/reagent/proc/overdose_process(var/mob/living/M as mob)
-	return
-
-/datum/reagent/proc/overdose_start(var/mob/living/M as mob)
-	return
-
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
@@ -99,7 +70,7 @@
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
-/datum/reagent/proc/overdose_threshold(var/mob/living/carbon/M, var/alien) // overdose_threshold effect. Doesn't happen instantly.
+/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
 	M.adjustToxLoss(REM)
 	return
 
@@ -117,6 +88,11 @@
 	else if(data)
 		return data
 	return null
+
+/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
+	..()
+	holder = null
+
 /* DEPRECATED - TODO: REMOVE EVERYWHERE */
 
 /datum/reagent/proc/reaction_turf(var/turf/target)
@@ -127,107 +103,6 @@
 
 /datum/reagent/proc/reaction_mob(var/mob/target)
 	touch_mob(target)
-/datum/reagents/metabolism
-	var/metabolism_class //CHEM_TOUCH, CHEM_INGEST, or CHEM_BLOOD
-	var/mob/living/carbon/parent
-
-/datum/reagents/metabolism/New(var/max = 100, mob/living/carbon/parent_mob, var/met_class)
-	..(max, parent_mob)
-
-	metabolism_class = met_class
-	if(istype(parent_mob))
-		parent = parent_mob
-
-/datum/reagents/metabolism/proc/metabolize()
-	var/metabolism_type = 0 //non-human mobs
-	if(ishuman(parent))
-		var/mob/living/carbon/human/H = parent
-		metabolism_type = H.species.reagent_tag
-
-	for(var/datum/reagent/current in reagent_list)
-		current.on_mob_life(parent, metabolism_type, metabolism_class)
-	update_total()
-
-/datum/reagents/proc/metabolism(var/mob/M)
-	if(M)
-		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
-			return
-		handle_reactions()
-	for(var/A in reagent_list)
-		var/datum/reagent/R = A
-		if(!istype(R))
-			continue
-//		if(ishuman(M))
-		if(M && R)
-			if(is_type_in_list(R,addiction_list))
-				for(var/datum/reagent/addicted_reagent in addiction_list)
-					if(istype(R, addicted_reagent))
-						addicted_reagent.addiction_stage = -15 // you're satisfied for a good while.
-			R.on_mob_life(M)
-	if(addiction_tick == 6)
-		addiction_tick = 1
-		for(var/A in addiction_list)
-			var/datum/reagent/R = A
-			if(M && R)
-				if(R.addiction_stage <= 0)
-					R.addiction_stage++
-				if(R.addiction_stage > 0 && R.addiction_stage <= 10)
-					R.addiction_act_stage1(M)
-					R.addiction_stage++
-				if(R.addiction_stage > 10 && R.addiction_stage <= 20)
-					R.addiction_act_stage2(M)
-					R.addiction_stage++
-				if(R.addiction_stage > 20 && R.addiction_stage <= 30)
-					R.addiction_act_stage3(M)
-					R.addiction_stage++
-				if(R.addiction_stage > 30 && R.addiction_stage <= 40)
-					R.addiction_act_stage4(M)
-					R.addiction_stage++
-				if(R.addiction_stage > 40)
-					M << "<span class = 'notice'>You feel like you've gotten over your need for [R.name].</span>"
-					addiction_list.Remove(R)
-		addiction_tick++
-		update_total()
-
-/datum/reagents/proc/reagent_on_tick()
-	for(var/datum/reagent/R in reagent_list)
-		R.on_tick()
-	return
-
-// Called every time reagent containers process.
-/datum/reagent/proc/on_tick(var/data)
-	return
-
-// Called when the reagent container is hit by an explosion
-/datum/reagent/proc/on_ex_act(var/severity)
-	return
-
-/datum/reagent/proc/addiction_act_stage1(var/mob/living/M as mob)
-	if(prob(30))
-		M << "<span class = 'notice'>You feel like some [name] right about now.</span>"
-	return
-
-/datum/reagent/proc/addiction_act_stage2(var/mob/living/M as mob)
-	if(prob(30))
-		M << "<span class = 'notice'>You feel like you need [name]. You just can't get enough.</span>"
-	return
-
-/datum/reagent/proc/addiction_act_stage3(var/mob/living/M as mob)
-	if(prob(30))
-		M << "<span class = 'danger'>You have an intense craving for [name].</span>"
-	return
-
-/datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
-	if(prob(30))
-		M << "<span class = 'danger'>You're not feeling good at all! You really need some [name].</span>"
-	return
-
-/datum/reagent/proc/reagent_deleted()
-	return
-
-/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
-	..()
-	holder = null
 
 /datum/reagent/woodpulp
 	name = "Wood Pulp"

@@ -6,7 +6,7 @@
 	description = "Intensely coloured powder obtained by grinding crayons."
 	reagent_state = LIQUID
 	color = "#888888"
-	overdose_threshold = 5
+	overdose = 5
 
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"
@@ -54,7 +54,7 @@
 	description = "This paint will stick to almost any object."
 	reagent_state = LIQUID
 	color = "#808080"
-	overdose_threshold = REAGENTS_OVERDOSE_THRESHOLD * 0.5
+	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 20
 
 /datum/reagent/paint/touch_turf(var/turf/T)
