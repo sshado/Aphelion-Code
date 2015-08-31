@@ -2456,52 +2456,6 @@ datum
 					if(H.species && (H.species.name == "Skrell" || H.species.name =="Neara"))	 //Skrell and Neara get very drunk very quickly.
 						d*=5
 
-				M.dizziness += dizzy_adj.
-				if(d >= slur_start && d < pass_out)
-					if (!M:slurring) M:slurring = 1
-					M:slurring += slurr_adj/sober_str
-				if(d >= brawl_start && ishuman(M))
-					var/mob/living/carbon/human/H = M
-					F.teach(H,1)
-					if(src.volume < 3)
-						if(H.martial_art == F)
-							F.remove(H)
-				if(d >= confused_start && prob(33))
-					if (!M:confused) M:confused = 1
-					M.confused = max(M:confused+(confused_adj/sober_str),0)
-				if(d >= blur_start)
-					M.eye_blurry = max(M.eye_blurry, 10/sober_str)
-					M:drowsyness  = max(M:drowsyness, 0)
-				if(d >= vomit_start)
-					if(prob(8))
-						M.fakevomit()
-				if(d >= pass_out)
-					M:paralysis = max(M:paralysis, 20/sober_str)
-					M:drowsyness  = max(M:drowsyness, 30/sober_str)
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						var/obj/item/organ/liver/L = H.internal_organs_by_name["liver"]
-						if (istype(L))
-							L.take_damage(0.1, 1)
-						H.adjustToxLoss(0.1)
-				holder.remove_reagent(src.id, 0.4)
-				..()
-				return
-
-			reaction_obj(var/obj/O, var/volume)
-				if(istype(O,/obj/item/weapon/paper))
-					var/obj/item/weapon/paper/paperaffected = O
-					paperaffected.clearpaper()
-					usr << "The solution melts away the ink on the paper."
-				if(istype(O,/obj/item/weapon/book))
-					if(volume >= 5)
-						var/obj/item/weapon/book/affectedbook = O
-						affectedbook.dat = null
-						usr << "The solution melts away the ink on the book."
-					else
-						usr << "It wasn't enough..."
-				return
-
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
 				if(!istype(M, /mob/living))
 					return
@@ -2531,7 +2485,6 @@ datum
 				id = "whiskey"
 				description = "A superb and well-aged single-malt whiskey. Damn."
 				color = "#664300" // rgb: 102, 67, 0
-				dizzy_adj = 4
 
 			specialwhiskey
 				name = "Special Blend Whiskey"
@@ -2546,7 +2499,6 @@ datum
 				id = "gin"
 				description = "It's gin. In space. I say, good sir."
 				color = "#664300" // rgb: 102, 67, 0
-				dizzy_adj = 3
 
 			absinthe
 				name = "Absinthe"
@@ -2554,7 +2506,6 @@ datum
 				description = "Watch out that the Green Fairy doesn't come for you!"
 				color = "#33EE00" // rgb: lots, ??, ??
 				overdose_threshold = 30
-				dizzy_adj = 5
 				slur_start = 25
 				brawl_start = 40
 				confused_start = 100
@@ -2619,7 +2570,6 @@ datum
 				id = "wine"
 				description = "An premium alchoholic beverage made from distilled grape juice."
 				color = "#7E4043" // rgb: 126, 64, 67
-				dizzy_adj = 2
 				slur_start = 65			//amount absorbed after which mob starts slurring
 				confused_start = 145	//amount absorbed after which mob starts confusing directions
 
@@ -2628,7 +2578,6 @@ datum
 				id = "cognac"
 				description = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 				color = "#664300" // rgb: 102, 67, 0
-				dizzy_adj = 4
 				confused_start = 115	//amount absorbed after which mob starts confusing directions
 
 			suicider //otherwise known as "I want to get so smashed my liver gives out and I die from alcohol poisoning".
@@ -2636,7 +2585,6 @@ datum
 				id = "suicider"
 				description = "An unbelievably strong and potent variety of Cider."
 				color = "#CF3811"
-				dizzy_adj = 20
 				slurr_adj = 20
 				confused_adj = 3
 				slur_start = 15
@@ -2917,7 +2865,6 @@ datum
 				description = "AHHHH!!!!"
 				reagent_state = LIQUID
 				color = "#664300" // rgb: 102, 67, 0
-				dizzy_adj = 10
 				slurr_adj = 10
 
 			vodkatonic
@@ -2926,7 +2873,6 @@ datum
 				description = "For when a gin and tonic isn't russian enough."
 				reagent_state = LIQUID
 				color = "#664300" // rgb: 102, 67, 0
-				dizzy_adj = 4
 				slurr_adj = 3
 
 			ginfizz
@@ -2935,7 +2881,6 @@ datum
 				description = "Refreshingly lemony, deliciously dry."
 				reagent_state = LIQUID
 				color = "#664300" // rgb: 102, 67, 0
-				dizzy_adj = 4
 				slurr_adj = 3
 
 			bahama_mama
@@ -2951,7 +2896,6 @@ datum
 				description = "A blue-space beverage!"
 				reagent_state = LIQUID
 				color = "#2E6671" // rgb: 46, 102, 113
-				dizzy_adj = 15
 				slurr_adj = 15
 
 			sbiten

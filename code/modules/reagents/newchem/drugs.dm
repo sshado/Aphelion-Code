@@ -176,7 +176,6 @@
 	M.AdjustStunned(-2.5)
 	M.AdjustWeakened(-2.5)
 	M.adjustStaminaLoss(-2)
-	M.status_flags |= GOTTAGOREALLYFAST
 	M.Jitter(3)
 	if(prob(50))
 		M.adjustBrainLoss(1.0)
@@ -403,7 +402,6 @@
 	color = "#A42964"
 	metabolization_rate = 0.2
 	overdose_threshold = 15
-	process_flags = ORGANIC | SYNTHETIC		//Flipping for everyone!
 
 /datum/chemical_reaction/fliptonium
 	name = "fliptonium"
@@ -563,7 +561,6 @@
 	reagent_state = LIQUID
 	color = "#6DD16D"
 
-	process_flags = SYNTHETIC
 	overdose_threshold = 20
 	addiction_threshold = 15
 
@@ -588,9 +585,7 @@
 	M.apply_effect(STUTTER, 5)
 	if(prob(10))
 		M << "<span class='danger'>You experience a violent electrical discharge!</span>"
-		playsound(get_turf(M), 'sound/effects/eleczap.ogg', 75, 1)
 		//Lightning effect for electrical discharge visualization
-		var/icon/I=new('icons/obj/zap.dmi',"lightningend")
 		I.Turn(-135)
 		var/obj/effect/overlay/beam/B = new(get_turf(M))
 		B.pixel_x = rand(-20, 0)
