@@ -105,14 +105,13 @@
 		..()
 		reagents.add_reagent("anti_toxin", 25)
 
-/obj/item/weapon/reagent_containers/pill/synaptezine
-	name = "Synaptezine pill"
-	desc = "Treats paralysis and weakness, along with other conditions associated with the mind."
+/obj/item/weapon/reagent_containers/pill/cordrazine
+	name = "Cordrazine pill"
+	desc = "Rapidly treats paralysis and weakness, while stimulating the mind and heart. Useful for waking people up."
 	icon_state = "pill8"
 	New()
 		..()
-		reagents.add_reagent("synaptezine", 2)
-		reagents.add_reagent("dylovene", 5)
+		reagents.add_reagent("cordrazine", 15)
 
 /obj/item/weapon/reagent_containers/pill/tox
 	name = "Toxins pill"
