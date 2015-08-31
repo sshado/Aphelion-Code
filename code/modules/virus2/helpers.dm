@@ -170,3 +170,4 @@ proc/airborne_can_reach(turf/source, turf/target)
 				if(V && V.spreadtype != vector) continue
 				if(!infection_spreading_check(victim, V.spreadtype)) continue
 				infect_virus2(src,V)
+
