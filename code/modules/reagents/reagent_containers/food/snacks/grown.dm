@@ -82,19 +82,6 @@
 	filling_color = "#E6E8DA"
 	plantname = "potato"
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-	..()
-	if(istype(W, /obj/item/stack/cable_coil))
-		if(W:amount >= 5)
-			W:amount -= 5
-			if(!W:amount) del(W)
-			user << "<span class='notice'>You add some cable to the potato and slide it inside the battery encasing.</span>"
-			var/obj/item/weapon/stock_parts/cell/potato/pocell = new /obj/item/weapon/stock_parts/cell/potato(user.loc)
-			pocell.maxcharge = src.potency * 10
-			pocell.charge = pocell.maxcharge
-			del(src)
-			return
-
 /obj/item/weapon/reagent_containers/food/snacks/grown/grapes
 	name = "bunch of grapes"
 	desc = "Nutritious!"
@@ -229,7 +216,7 @@
 	potency = 50
 	filling_color = "#4E0957"
 	plantname = "deathberries"
-
+/*
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
 	name = "ambrosia vulgaris branch"
 	desc = "This is a plant containing various healing chemicals."
@@ -252,7 +239,6 @@
 	else
 		..()
 
-
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
 	name = "ambrosia deus branch"
 	desc = "Eating this makes you feel immortal!"
@@ -274,6 +260,7 @@
 		del(src)
 	else
 		..()
+*/
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/apple
 	name = "apple"
@@ -562,7 +549,7 @@
 	icon_state = "plumphelmet"
 	filling_color = "#F714BE"
 	plantname = "plumphelmet"
-
+/*
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/walkingmushroom
 	name = "walking mushroom"
 	desc = "<I>Plumus Locomotus</I>: The beginning of the great walk."
@@ -623,6 +610,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom/dropped(mob/user)
 	user.set_light(round(user.luminosity - (potency/10),1))
 	set_light(round(potency/10,1))
+*/
 
 //Tobacco/varieties
 /obj/item/weapon/reagent_containers/food/snacks/grown/tobacco

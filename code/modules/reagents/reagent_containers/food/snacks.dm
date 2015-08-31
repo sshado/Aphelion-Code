@@ -2,7 +2,7 @@
 /obj/item/weapon/reagent_containers/food/snacks
 	name = "snack"
 	desc = "yummy"
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = null
 	var/bitesize = 1
 	var/bitecount = 0
@@ -247,7 +247,6 @@
 				M.visible_message("[M] [pick("burps from enjoyment", "yaps for more", "woofs twice", "looks at the area where \the [src] was")].","<span class=\"notice\">You swallow up the last part of \the [src].")
 				playsound(src.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 				var/mob/living/simple_animal/pet/corgi/C = M
-				C.health = min(C.health + 5, C.maxHealth)
 				qdel(src)
 			else
 				M.visible_message("[M] takes a bite of \the [src].","<span class=\"notice\">You take a bite of \the [src].")
@@ -2271,14 +2270,14 @@
 /obj/item/weapon/reagent_containers/food/snacks/dough_ball
 	name = "ball of raw dough"
 	desc = "A ball of raw dough, ready to be molded into new recipes."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "dough"
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
 		bitesize = 1
 	attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-		if(istype(W,/obj/item/weapon/kitchen/rollingpin))
+		if(istype(W,/obj/item/weapon/material/kitchen/rollingpin))
 			user.visible_message( \
 				"[user] flattens the dough with the rolling pin!", \
 				"\blue You flatten the dough with your rolling pin!" \
@@ -2294,7 +2293,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flattened dough"
 	desc = "Still raw. You resist the temptation to cover it in tomato sauce."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flatdough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	slices_num = 3
@@ -2306,7 +2305,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	name = "slice of dough"
 	desc = "an individual portion of raw dough, ready to be cooked."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
 	bitesize = 2
 
@@ -2823,7 +2822,7 @@
 /obj/item/pizzabox
 	name = "pizza box"
 	desc = "A box suited for pizzas."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = "pizzabox1"
 
 	var/open = 0 // Is the box open?
@@ -3197,7 +3196,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/cereal
 	name = "box of cereal"
 	desc = "A box of cereal."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = "cereal_box"
 	bitesize = 2
 	New()
@@ -3206,7 +3205,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/deepfryholder
 	name = "Deep Fried Foods Holder Obj"
 	desc = "If you can see this description the code for the deep fryer fucked up."
-	icon = 'icons/obj/food/food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = "deepfried_holder_icon"
 	bitesize = 2
 	New()
@@ -3232,16 +3231,16 @@
 /obj/item/weapon/reagent_containers/food/snacks/dough
 	name = "dough"
 	desc = "A piece of dough."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "dough"
 	bitesize = 2
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
 
-// Dough + rolling pin = flat dough
+ Dough + rolling pin = flat dough
 /obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/weapon/kitchen/rollingpin))
+	if(istype(I,/obj/item/weapon/material/kitchen/rollingpin))
 		if(isturf(loc))
 			new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(loc)
 			user << "<span class='notice'>You flatten [src].</span>"
@@ -3252,10 +3251,11 @@
 		..()
 
 // slicable into 3xdoughslices
+
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flat dough"
 	desc = "Some flattened dough."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	slices_num = 3
@@ -3266,7 +3266,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
 	desc = "The building block of an impressive dish."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
 	bitesize = 2
 	New()
@@ -3276,7 +3276,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/bun
 	name = "bun"
 	desc = "The base for any self-respecting burger."
-	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "bun"
 	bitesize = 2
 	New()
@@ -3296,7 +3295,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/rawcutlet
 	name = "raw cutlet"
 	desc = "A thin piece of raw meat."
-	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawcutlet"
 	bitesize = 1
 	New()
@@ -3306,7 +3304,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/cutlet
 	name = "cutlet"
 	desc = "A tasty meat slice."
-	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "cutlet"
 	bitesize = 2
 	New()
@@ -3316,7 +3313,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/rawmeatball
 	name = "raw meatball"
 	desc = "A raw meatball."
-	icon = 'icons/obj/food/food_ingredients.dmi'
 	icon_state = "rawmeatball"
 	bitesize = 2
 	New()
@@ -3335,7 +3331,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
 	desc = "Bland but filling."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flatbread"
 	bitesize = 2
 	New()
@@ -3354,7 +3350,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/rawsticks
 	name = "raw potato sticks"
 	desc = "Raw fries, not very tasty."
-	icon = 'icons/obj/food/food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawsticks"
 	bitesize = 2
 	New()

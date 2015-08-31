@@ -53,7 +53,7 @@
 		new /obj/item/weapon/reagent_containers/hypospray/autoinjector( src )
 		return
 
-/obj/item/weapon/storage/firstaid/toxin
+/*/obj/item/weapon/storage/firstaid/toxin
 	name = "toxin first aid"
 	desc = "Used to treat when you have a high amoutn of toxins in your body."
 	icon_state = "antitoxin"
@@ -303,3 +303,7 @@
 		new /obj/item/weapon/reagent_containers/pill/citalopram( src )
 		new /obj/item/weapon/reagent_containers/pill/citalopram( src )
 		new /obj/item/weapon/reagent_containers/pill/citalopram( src )
+
+
+*/
+
