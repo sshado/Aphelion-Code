@@ -229,7 +229,6 @@ datum/reagent/facid
 	description = "Fluorosulfuric acid is a an extremely corrosive super-acid."
 	reagent_state = LIQUID
 	color = "#4141D2"
-	process_flags = ORGANIC | SYNTHETIC
 
 datum/reagent/facid/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 	if(!istype(M, /mob/living))
@@ -274,15 +273,6 @@ datum/reagent/facid/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 					H.UpdateDamageIcon()
 					H.emote("scream")
 					H.status_flags |= DISFIGURED
-
-datum/reagent/facid/reaction_obj(var/obj/O, var/volume)
-	if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)))
-		if(!O.unacidable)
-			var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
-			I.desc = "Looks like this was \an [O] some time ago."
-			for(var/mob/M in viewers(5, O))
-				M << "\red \the [O] melts."
-			qdel(O)
 
 /datum/chemical_reaction/facid
 	name = "Fluorosulfuric Acid"
@@ -586,17 +576,6 @@ datum/reagent/atrazine/reaction_turf(var/turf/T, var/volume)
 			for(var/mob/O in viewers(W, null))
 				O.show_message(text("\blue The fungi are completely dissolved by the solution!"), 1)
 
-datum/reagent/atrazine/reaction_obj(var/obj/O, var/volume)
-	if(istype(O,/obj/structure/alien/weeds/))
-		var/obj/structure/alien/weeds/alien_weeds = O
-		alien_weeds.health -= rand(15,35) // Kills alien weeds pretty fast
-		alien_weeds.healthcheck()
-	else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
-		qdel(O)
-	else if(istype(O,/obj/effect/plant))
-		if(prob(50)) qdel(O) //Kills kudzu too.
-	// Damage that is done to growing plants is separately at code/game/machinery/hydroponics at obj/item/hydroponics
-
 datum/reagent/atrazine/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 	src = null
 	if(iscarbon(M))
@@ -610,11 +589,6 @@ datum/reagent/atrazine/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volu
 					H.adjustToxLoss(50)
 					..()
 					return
-		else if(istype(M,/mob/living/simple_animal/diona)) //plantmen monkeys (diona) take EVEN MORE damage
-			var/mob/living/simple_animal/diona/D = M
-			D.adjustToxLoss(100)
-			..()
-			return
 
 /datum/chemical_reaction/atrazine
 	name = "atrazine"
@@ -728,7 +702,6 @@ datum/reagent/ants
 	description = "A sample of a lost breed of Space Ants (formicidae bastardium tyrannus), they are well-known for ravaging the living shit out of pretty much anything."
 	reagent_state = SOLID
 	color = "#993333"
-	process_flags = ORGANIC | SYNTHETIC
 
 datum/reagent/ants/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume) //NOT THE ANTS
 	if(iscarbon(M))

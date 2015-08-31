@@ -18,7 +18,6 @@ datum
 			//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 			if(!chemical_reagents_list)
 				//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-				var/paths = subtypesof(/datum/reagent)
 				chemical_reagents_list = list()
 				for(var/path in paths)
 					var/datum/reagent/D = new path()
@@ -28,9 +27,6 @@ datum
 				// It is filtered into multiple lists within a list.
 				// For example:
 				// chemical_reaction_list["plasma"] is a list of all reactions relating to plasma
-
-				var/paths = subtypesof(/datum/chemical_reaction)
-				chemical_reactions_list = list()
 
 				for(var/path in paths)
 
@@ -387,22 +383,6 @@ datum
 				var/can_process = 0
 				if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
 					return can_process
-				if(ishuman(M))
-					var/mob/living/carbon/human/H = M
-					//Check if this mob's species is set and can process this type of reagent
-					if(H.species && H.species.reagent_tag)
-						if((R.process_flags & SYNTHETIC) && (H.species.reagent_tag & PROCESS_SYN))		//SYNTHETIC-oriented reagents require PROCESS_SYN
-							can_process = 1
-						if((R.process_flags & ORGANIC) && (H.species.reagent_tag & PROCESS_ORG))		//ORGANIC-oriented reagents require PROCESS_ORG
-							can_process = 1
-						//Species with PROCESS_DUO are only affected by reagents that affect both organics and synthetics, like acid and hellwater
-						if((R.process_flags & ORGANIC) && (R.process_flags & SYNTHETIC) && (H.species.reagent_tag & PROCESS_DUO))
-							can_process = 1
-				//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
-				else
-					if(R.process_flags != SYNTHETIC)
-						can_process = 1
-				return can_process
 
 			reaction(var/atom/A, var/method=TOUCH, var/volume_modifier=0)
 

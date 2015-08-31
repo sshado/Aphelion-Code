@@ -21,10 +21,6 @@ datum/reagents/proc/metabolize(var/mob/M)
 			continue
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			//If the mob can't process it, remove the reagent at it's normal rate without doing any addictions, overdoses, or on_mob_life() for the reagent
-			if(can_process == 0)
-				R.holder.remove_reagent(R.id, R.metabolization_rate)
-				continue
 		//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
 		//If you got this far, that means we can process whatever reagent this iteration is for. Handle things normally from here.
 		if(M && R)
@@ -71,27 +67,6 @@ datum/reagents/proc/reagent_on_tick()
 	for(var/datum/reagent/R in reagent_list)
 		R.on_tick()
 	return
-
-datum/reagents/proc/check_ignoreslow(var/mob/M)
-	if(istype(M, /mob))
-		if(M.reagents.has_reagent("morphine"))
-			return 1
-		else
-			M.status_flags &= ~IGNORESLOWDOWN
-
-datum/reagents/proc/check_gofast(var/mob/M)
-	if(istype(M, /mob))
-		if(M.reagents.has_reagent("unholywater")||M.reagents.has_reagent("nuka_cola"))
-			return 1
-		else
-			M.status_flags &= ~GOTTAGOFAST
-
-datum/reagents/proc/check_goreallyfast(var/mob/M)
-	if(istype(M, /mob))
-		if(M.reagents.has_reagent("methamphetamine"))
-			return 1
-		else
-			M.status_flags &= ~GOTTAGOREALLYFAST
 
 // Called every time reagent containers process.
 datum/reagent/proc/on_tick(var/data)

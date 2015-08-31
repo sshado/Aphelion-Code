@@ -448,7 +448,6 @@ datum/reagent/morphine
 
 datum/reagent/morphine/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
-	M.status_flags |= IGNORESLOWDOWN
 	switch(current_cycle)
 		if(0 to 15)
 			if(prob(5))
@@ -644,7 +643,6 @@ datum/reagent/strange_reagent/reaction_mob(var/mob/living/M as mob, var/method=T
 				var/mob/dead/observer/ghost = M.get_ghost()
 				if(ghost)
 					ghost << "<span class='ghostalert'>Your are attempting to be revived with Strange Reagent. Return to your body if you want to be revived!</span> (Verbs -> Ghost -> Re-enter corpse)"
-					ghost << sound('sound/effects/genetics.ogg')
 					M.visible_message("<span class='notice'>[M] doesn't appear to respond, perhaps try again later?</span>")
 				if(!M.suiciding && !ghost && !(NOCLONE in M.mutations))
 					M.visible_message("<span class='warning'>[M] seems to rise from the dead!</span>")
@@ -744,20 +742,6 @@ proc/chemical_mob_spawn(var/datum/reagents/holder, var/amount_to_spawn, var/reac
 /datum/reagent/mutadone/on_mob_life(var/mob/living/carbon/human/M as mob)
 	M.jitteriness = 0
 	var/needs_update = 1 //M.mutations.len > 0
-
-	for(var/block=1;block<=DNA_SE_LENGTH;block++)
-		M.dna.SetSEState(block,0)
-		genemutcheck(M,block,null,MUTCHK_FORCED)
-		M.update_mutations()
-
-	M.dna.struc_enzymes = M.dna.struc_enzymes_original
-
-	// Might need to update appearance for hulk etc.
-	if(needs_update && ishuman(M))
-		var/mob/living/carbon/human/H = M
-		H.update_mutations()
-	..()
-	return
 
 /datum/chemical_reaction/mutadone
 	name = "Mutadone"
@@ -956,7 +940,6 @@ datum/reagent/haloperidol/on_mob_life(var/mob/living/M as mob)
 	description = "An industrial degreaser which can be used to clean residual build-up from machinery and surfaces."
 	reagent_state = LIQUID
 	color = "#CC7A00"
-	process_flags = SYNTHETIC
 
 /datum/chemical_reaction/degreaser
 	name = "Degreaser"
@@ -996,7 +979,6 @@ datum/reagent/haloperidol/on_mob_life(var/mob/living/M as mob)
 	description = "A solution formulated to clean and repair damaged connections in posibrains while in use."
 	reagent_state = LIQUID
 	color = "#D7B395"
-	process_flags = SYNTHETIC
 
 /datum/reagent/liquid_solder/on_mob_life(mob/living/M as mob)
 	M.adjustBrainLoss(-3)

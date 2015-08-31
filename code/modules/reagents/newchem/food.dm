@@ -326,7 +326,7 @@ datum/reagent/vomit/reaction_turf(var/turf/T, var/volume)
 datum/reagent/greenvomit/reaction_turf(var/turf/T, var/volume)
 	src = null
 	if(volume >= 5)
-		new /obj/effect/decal/cleanable/vomit/green(T)
+//		new /obj/effect/decal/cleanable/vomit/green(T)
 		playsound(T, 'sound/effects/splat.ogg', 50, 1, -3)
 		return
 
@@ -337,7 +337,6 @@ datum/reagent/greenvomit/reaction_turf(var/turf/T, var/volume)
 	description = "A bizarre gelatinous substance supposedly derived from ghosts."
 	reagent_state = LIQUID
 	color = "#8EAE7B"
-	process_flags = ORGANIC | SYNTHETIC		//Because apparently ghosts in the shell
 
 datum/reagent/ectoplasm/reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 	if(!istype(M, /mob/living))

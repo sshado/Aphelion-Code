@@ -208,11 +208,6 @@ datum
 			result = null
 			required_reagents = list("facid" = 10, "plasticide" = 20)
 			result_amount = 1
-			on_reaction(var/datum/reagents/holder)
-				var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/mineral/plastic
-				M.amount = 10
-				M.loc = get_turf(holder.my_atom)
-				return
 
 		virus_food
 			name = "Virus Food"
@@ -472,13 +467,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/metal
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/metal
-				M.amount = 15
-				M.loc = get_turf(holder.my_atom)
-				var/obj/item/stack/sheet/plasteel/P = new /obj/item/stack/sheet/plasteel
-				P.amount = 5
-				P.loc = get_turf(holder.my_atom)
 
 //Gold
 		slimecrit
@@ -490,28 +478,6 @@ datum
 			required_container = /obj/item/slime_extract/gold
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
-
-				var/blocked = blocked_mobs //global variable of blocked mobs
-
-				var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
-
-				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-
-				for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-					if(M:eyecheck() <= 0)
-						flick("e_flash", M.flash)
-
-				for(var/i = 1, i <= 5, i++)
-					var/chosen = pick(critters)
-					var/mob/living/simple_animal/hostile/C = new chosen
-					C.faction |= "slimesummon"
-					C.loc = get_turf(holder.my_atom)
-					if(prob(50))
-						for(var/j = 1, j <= rand(1, 3), j++)
-							step(C, pick(NORTH,SOUTH,EAST,WEST))
-//				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-//					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
-
 
 		slimecritlesser
 			name = "Slime Crit Lesser"
@@ -555,23 +521,6 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 
-				var/list/borks = subtypesof(/obj/item/weapon/reagent_containers/food/snacks)
-				// BORK BORK BORK
-
-				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-
-				for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-					if(M:eyecheck() <= 0)
-						flick("e_flash", M.flash)
-
-				for(var/i = 1, i <= 4 + rand(1,2), i++)
-					var/chosen = pick(borks)
-					var/obj/B = new chosen
-					if(B)
-						B.loc = get_turf(holder.my_atom)
-						if(prob(50))
-							for(var/j = 1, j <= rand(1, 3), j++)
-								step(B, pick(NORTH,SOUTH,EAST,WEST))
 		slimedrinks
 			name = "Slime Drinks"
 			id = "m_tele3"
@@ -646,14 +595,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/orange
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				feedback_add_details("slime_cores_used","[replacetext(name," ","_")]")
-				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red The slime extract begins to vibrate violently !"), 1)
-				sleep(50)
-				var/turf/simulated/T = get_turf(holder.my_atom)
-				if(istype(T))
-					T.atmos_spawn_air(SPAWN_HEAT | SPAWN_TOXINS, 50)
 
 //Yellow
 		slimeoverload
@@ -676,9 +617,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/yellow
 			required_other = 1
-			on_reaction(var/datum/reagents/holder, var/created_volume)
-				var/obj/item/weapon/stock_parts/cell/slime/P = new /obj/item/weapon/stock_parts/cell/slime
-				P.loc = get_turf(holder.my_atom)
 
 		slimeglow
 			name = "Slime Glow"
@@ -729,10 +667,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/darkpurple
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				var/obj/item/stack/sheet/mineral/plasma/P = new /obj/item/stack/sheet/mineral/plasma
-				P.amount = 10
-				P.loc = get_turf(holder.my_atom)
 
 //Red
 		slimeglycerol
@@ -818,11 +752,7 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/adamantine
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				feedback_add_details("slime_cores_used","[replacetext(name," ","_")]")
-				var/obj/effect/goleRUNe/Z = new /obj/effect/goleRUNe
-				Z.loc = get_turf(holder.my_atom)
-				Z.announce_to_ghosts()
+
 //Bluespace
 		slimecrystal
 			name = "Slime Crystal"
@@ -886,14 +816,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/pyrite
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				feedback_add_details("slime_cores_used","[replacetext(name," ","_")]")
-				var/list/paints = subtypesof(/obj/item/weapon/reagent_containers/glass/paint)
-				var/chosen = pick(paints)
-				var/obj/P = new chosen
-				if(P)
-					P.loc = get_turf(holder.my_atom)
-
 
 //////////////////////////////////////////FOOD MIXTURES////////////////////////////////////
 
