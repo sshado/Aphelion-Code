@@ -296,25 +296,25 @@
 /obj/machinery/chem_dispenser/constructable/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/chem_dispenser(null)
+//	component_parts += new /obj/item/weapon/circuitboard/chem_dispenser(null)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor(null)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
-	component_parts += new /obj/item/weapon/stock_parts/cell/super(null)
+//	component_parts += new /obj/item/weapon/stock_parts/cell/super(null)
 	RefreshParts()
 
 /obj/machinery/chem_dispenser/constructable/upgraded/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/chem_dispenser(null)
+//	component_parts += new /obj/item/weapon/circuitboard/chem_dispenser(null)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin/super(null)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin/super(null)
 	component_parts += new /obj/item/weapon/stock_parts/manipulator/pico(null)
 	component_parts += new /obj/item/weapon/stock_parts/capacitor/super(null)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
-	component_parts += new /obj/item/weapon/stock_parts/cell/hyper(null)
+//	component_parts += new /obj/item/weapon/stock_parts/cell/hyper(null)
 	RefreshParts()
 
 /obj/machinery/chem_dispenser/constructable/RefreshParts()
@@ -327,9 +327,9 @@
 	max_energy = temp_energy * 5  //max energy = (bin1.rating + bin2.rating - 1) * 5, 5 on lowest 25 on highest
 	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
 		time += C.rating
-	for(var/obj/item/weapon/stock_parts/cell/P in component_parts)
-		time += round(P.maxcharge, 10000) / 10000
-	recharge_delay = 10 / (time/2)         //delay between recharges, double the usual time on lowest 33% less than usual on highest
+//	for(var/obj/item/weapon/stock_parts/cell/P in component_parts)
+//		time += round(P.maxcharge, 10000) / 10000
+//	recharge_delay = 10 / (time/2)         //delay between recharges, double the usual time on lowest 33% less than usual on highest
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		for(i=1, i<=M.rating, i++)
 			dispensable_reagents = sortList(dispensable_reagents | special_reagents[i])
@@ -344,9 +344,6 @@
 		..()
 
 	if(default_deconstruction_screwdriver(user, "minidispenser-o", "minidispenser", I))
-		return
-
-	if(exchange_parts(user, I))
 		return
 
 	if(istype(I, /obj/item/weapon/wrench))
@@ -744,14 +741,6 @@
 	//IMPORTANT NOTE! A negative number is a multiplier, a positive number is a flat amount to add. 0 means equal to the amount of the original reagent
 	var/list/blend_items = list (
 
-		//Sheets
-		/obj/item/stack/sheet/mineral/plasma = list("plasma" = 20),
-		/obj/item/stack/sheet/mineral/uranium = list("uranium" = 20),
-		/obj/item/stack/sheet/mineral/bananium = list("banana" = 20),
-		/obj/item/stack/sheet/mineral/silver = list("silver" = 20),
-		/obj/item/stack/sheet/mineral/gold = list("gold" = 20),
-		/obj/item/weapon/grown/novaflower = list("capsaicin" = 0),
-
 		//archaeology!
 		///obj/item/weapon/rocksliver = list("ground_rock" = 50),
 
@@ -1085,21 +1074,6 @@
 		if(O.reagents.reagent_list.len == 0)
 			remove_object(O)
 
-	//Sheets
-	for (var/obj/item/stack/sheet/O in holdingitems)
-		var/allowed = get_allowed_by_id(O)
-		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
-			break
-		for(var/i = 1; i <= round(O.amount, 1); i++)
-			for (var/r_id in allowed)
-				var/space = beaker.reagents.maximum_volume - beaker.reagents.total_volume
-				var/amount = allowed[r_id]
-				beaker.reagents.add_reagent(r_id,min(amount, space))
-				if (space < amount)
-					break
-			if (i == round(O.amount, 1))
-				remove_object(O)
-				break
 	//Plants
 	for (var/obj/item/weapon/grown/O in holdingitems)
 		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
