@@ -21,6 +21,8 @@
 			if (prob(50))
 				M.cardiac_arrest = 0
 		
+		holder.remove_reagent("melorazine", 2 * removed) //to make it better at countering Melorazine
+		holder.remove_reagent("stoxin", 2 * removed)
 
 /datum/reagent/chloromydride
 	name = "Chloromydride"
