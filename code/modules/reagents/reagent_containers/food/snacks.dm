@@ -85,7 +85,7 @@
 					user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
 					return 0
 
-				if(!do_mob(user, M,30)) return // 30 tick (3 second) delay to force-feeding
+				if(!do_mob(user, M)) return
 
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been fed [src.name] by [user.name] ([user.ckey]) Reagents: [reagentlist(src)]</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [src.name] by [M.name] ([M.ckey]) Reagents: [reagentlist(src)]</font>")
@@ -1617,11 +1617,11 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type = "neaera"
+	monkey_type = "Neaera"
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type = "neaera"
+	monkey_type = "Neaera"
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger
@@ -3022,3 +3022,4 @@
 		..()
 		reagents.add_reagent("nutriment", 10)
 		bitesize = 3
+

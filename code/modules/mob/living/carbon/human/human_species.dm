@@ -32,7 +32,8 @@
 	..(new_loc, "Farwa")
 
 /mob/living/carbon/human/neaera/New(var/new_loc)
-	..(new_loc, "neaera")
+	..(new_loc, "Neaera")
 
 /mob/living/carbon/human/stok/New(var/new_loc)
 	..(new_loc, "Stok")
+

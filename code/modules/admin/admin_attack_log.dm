@@ -42,3 +42,4 @@ proc/admin_inject_log(mob/attacker, mob/victim, obj/item/weapon, reagents, amoun
 	                 "used \the [weapon] to [violent]inject - [reagents] - [amount_transferred]u transferred",
 	                 "was [violent]injected with \the [weapon] - [reagents] - [amount_transferred]u transferred",
 	                 "used \the [weapon] to [violent]inject [reagents] ([amount_transferred]u transferred) into")
+

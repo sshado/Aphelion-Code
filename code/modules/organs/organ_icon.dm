@@ -122,3 +122,4 @@ var/global/list/limb_icon_cache = list()
 		damage_state = n_is
 		return 1
 	return 0
+

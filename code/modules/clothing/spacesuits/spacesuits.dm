@@ -15,7 +15,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	species_restricted = list("exclude","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+	species_restricted = list("exclude","Diona", "Xenomorph")
 
 	var/obj/machinery/camera/camera
 	var/list/camera_networks
@@ -46,7 +46,7 @@
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
-	desc = "A suit that protects against low pressure environments. \"NES Aphelion\" is written in large block letters on the back."
+	desc = "A suit that protects against low pressure environments. \"NSS EXODUS\" is written in large block letters on the back."
 	icon_state = "space"
 	item_state = "s_suit"
 	w_class = 4//bulky item
@@ -61,7 +61,7 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	species_restricted = list("exclude","Diona","Vox", "Xenomorph", "Xenomorph Drone", "Xenomorph Hunter", "Xenomorph Sentinel", "Xenomorph Queen")
+	species_restricted = list("exclude","Diona", "Xenomorph")
 
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
 
@@ -91,3 +91,4 @@
 		E.status &= ~ ORGAN_SPLINTED
 		user << "The suit stops supporting your [E.name]."
 	supporting_limbs = list()
+
