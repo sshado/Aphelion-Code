@@ -7,7 +7,7 @@
 	reagent_state = LIQUID
 	color = "#8A0808"
 	overdose = REAGENTS_OVERDOSE
-	metabolism = REM * 3
+	metabolism = REM * 5
 	scannable = 1
 
 /datum/reagent/cordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
