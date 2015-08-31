@@ -32,7 +32,7 @@
 	name = "Cordrazine"
 	id = "cordrazine"
 	result = "cordrazine"
-	required_reagents = list("lithium" = 1, "inaprovaline" = 1, "nitrogen" = 1)
+	required_reagents = list("lithium" = 1, "synaptizine" = 1, "nitrogen" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/dylovene
@@ -258,6 +258,13 @@
 	id = "cryoxadone"
 	result = "cryoxadone"
 	required_reagents = list("dexalin" = 1, "water" = 1, "oxygen" = 1)
+	result_amount = 3
+	
+/datum/chemical_reaction/pyroxadone
+	name = "Pyroxadone"
+	id = "pyroxadone"
+	result = "pyroxadone"
+	required_reagents = list("cryoxadone" = 1, "phosphorus" = 1, "sulfur" = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/clonexadone
