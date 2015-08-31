@@ -1,8 +1,31 @@
+//TODO: Stenophyl
+
+/datum/reagent/cordrazine
+	name = "Cordrazine"
+	id = "cordrazine"
+	description = "Cordrazine is a fast-acting cardiac and synaptic stimulant, useful for waking up comatose patients, and combating minor cardiac conditions."
+	reagent_state = LIQUID
+	color = "#8A0808"
+	overdose = REAGENTS_OVERDOSE
+	metabolism = REM * 3
+	scannable = 1
+
+/datum/reagent/cordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien != IS_DIONA)
+		M.AdjustParalysis(-2)
+		M.AdjustWeakened(-2)
+		M.AdjustStunned(-2)
+		M.drowsyness = max(M.drowsyness - 10, 0)
+		if(prob(50))
+			M.heart_attack = 0
+			if (prob(50))
+				M.cardiac_arrest = 0
+		
 
 /datum/reagent/chloromydride
 	name = "Chloromydride"
 	id = "chloromydride"
-	description = "Chloromydride is a strong cardiac stimulant, usually used for cardiac arrest. Be warned, however - It has dangerous side effects."
+	description = "Chloromydride is an incredibly strong cardiac stimulant, usually used for cardiac arrest. Be warned, however - It has dangerous side effects."
 	reagent_state = LIQUID
 	color = "#F600FA"
 	overdose = 15
@@ -12,12 +35,13 @@
 /datum/reagent/chloromydride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
-		M.add_chemical_effect(CE_PAINKILLER, 40)
+		M.add_chemical_effect(CE_PAINKILLER, 50)
 		M.AdjustParalysis(-1)
 		M.AdjustWeakened(-1)
-		M.AdjustStunned(-1)
 		M.adjustToxLoss(removed * 5)
-		M.adjustOxyLoss(-30 * removed)
+		M.adjustOxyLoss(-40 * removed)
+		M.heart_attack = 0
+		M.cardiac_arrest = 0
 
 
 /datum/reagent/inaprovaline
@@ -34,7 +58,6 @@
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
 		M.add_chemical_effect(CE_PAINKILLER, 25)
-
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
@@ -178,6 +201,22 @@
 		M.adjustCloneLoss(-10 * removed)
 		M.adjustOxyLoss(-10 * removed)
 		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.adjustToxLoss(-10 * removed)
+		
+/datum/reagent/pyroxadone
+	name = "Pyroxadone"
+	id = "pyroxadone"
+	description = "A powerful chemical substance that rapidly heals and the body, while at very high temperatures. Don't mix this up with Cryoxadone!"
+	reagent_state = LIQUID
+	color = "#8080FF"
+	metabolism = REM * 0.5
+	scannable = 1
+
+/datum/reagent/pyroxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature > 420)
+		M.adjustCloneLoss(-10 * removed)
+		M.adjustOxyLoss(-20 * removed)
+		M.heal_organ_damage(20 * removed, 20 * removed)
 		M.adjustToxLoss(-10 * removed)
 
 /datum/reagent/clonexadone
