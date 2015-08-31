@@ -7,7 +7,7 @@
 	reagent_state = LIQUID
 	color = "#8A0808"
 	overdose = REAGENTS_OVERDOSE
-	metabolism = REM * 5
+	metabolism = REM * 3
 	scannable = 1
 
 /datum/reagent/cordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -16,7 +16,7 @@
 		M.AdjustWeakened(-2)
 		M.AdjustStunned(-2)
 		M.drowsyness = max(M.drowsyness - 10, 0)
-		if(prob(50))
+		if(prob(50)) //Has a 50% chance of healing a minor heart attack, then another 50% chance of healing cardiac arrest
 			M.heart_attack = 0
 			if (prob(50))
 				M.cardiac_arrest = 0
@@ -40,7 +40,7 @@
 		M.add_chemical_effect(CE_PAINKILLER, 50)
 		M.AdjustParalysis(-1)
 		M.AdjustWeakened(-1)
-		M.adjustToxLoss(removed * 5)
+		M.adjustToxLoss(removed * 5) //all of this wonder needs a tradeoff, right?
 		M.adjustOxyLoss(-40 * removed)
 		M.heart_attack = 0
 		M.cardiac_arrest = 0
