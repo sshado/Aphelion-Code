@@ -21,8 +21,7 @@
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
 		/obj/item/weapon/circuitboard,
-		/obj/item/weapon/smes_coil,
-		/obj/item/weapon/tracker_electronics
+		/obj/item/weapon/smes_coil
 		)
 
 	var/obj/item/wrapped = null // Item currently being held.
@@ -37,8 +36,7 @@
 
 	can_hold = list(
 	/obj/item/weapon/cell,
-	/obj/item/weapon/stock_parts,
-	/obj/item/weapon/circuitboard/miningdrill
+	/obj/item/weapon/stock_parts
 	)
 
 /obj/item/weapon/gripper/paperwork
@@ -89,6 +87,9 @@
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
+/obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
+	return
+
 /obj/item/weapon/gripper/no_use/loader //This is used to disallow building with metal.
 	name = "sheet loader"
 	desc = "A specialized loading device, designed to pick up and insert sheets of materials inside machines."
@@ -102,9 +103,6 @@
 	if(wrapped)
 		return wrapped.attack_self(user)
 	return ..()
-
-/obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
-	return
 
 /obj/item/weapon/gripper/verb/drop_item()
 
@@ -132,6 +130,8 @@
 		force_holder = wrapped.force
 		wrapped.force = 0.0
 		wrapped.attack(M,user)
+		if(deleted(wrapped))
+			wrapped = null
 		return 1
 	return 0
 
@@ -407,3 +407,4 @@
 	dat += resources
 
 	src << browse(dat, "window=robotmod")
+

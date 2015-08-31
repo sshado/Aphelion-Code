@@ -635,7 +635,7 @@
 
 /mob/Stat()
 	..()
-	. = (client && client.inactivity < 1200)
+	. = (is_client_active(10 MINUTES))
 
 	if(.)
 		if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
@@ -1073,3 +1073,4 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+

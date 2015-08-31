@@ -98,4 +98,4 @@
 /obj/item/weapon/holder/monkey/neaera
 	name = "neaera"
 	desc = "It's a neaera."
-	icon_state = "neara"
+	icon_state = "neaera"
