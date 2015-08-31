@@ -213,7 +213,7 @@
 	scannable = 1
 
 /datum/reagent/pyroxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature > 400)
+	if(M.bodytemperature > 420)
 		M.adjustCloneLoss(-10 * removed)
 		M.adjustOxyLoss(-20 * removed)
 		M.heal_organ_damage(20 * removed, 20 * removed)
