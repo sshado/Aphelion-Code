@@ -40,7 +40,7 @@
 		M.add_chemical_effect(CE_PAINKILLER, 50)
 		M.AdjustParalysis(-1)
 		M.AdjustWeakened(-1)
-		M.adjustToxLoss(removed * 5) //all of this wonder needs a tradeoff, right?
+		M.adjustToxLoss(removed * 6) //all of this wonder needs a tradeoff, right?
 		M.adjustOxyLoss(-40 * removed)
 		M.heart_attack = 0
 		M.cardiac_arrest = 0
