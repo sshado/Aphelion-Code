@@ -157,13 +157,6 @@ datum/reagent/corgium
 	reagent_state = LIQUID
 	color = "#F9A635"
 
-/datum/chemical_reaction/corgium/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/location = get_turf(holder.my_atom)
-	new /mob/living/simple_animal/pet/corgi(location)
-	..()
-	return
-
-
 /datum/chemical_reaction/flaptonium
 	name = "Flaptonium"
 	id = "flaptonium"

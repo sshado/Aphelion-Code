@@ -92,13 +92,6 @@
 	mix_message = "The mixture violently reacts, leaving behind a few crystalline shards."
 	min_temp = 390
 
-/datum/chemical_reaction/crank/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/turf/T = get_turf(holder.my_atom)
-	for(var/turf/turf in range(1,T))
-		PoolOrNew(/obj/effect/hotspot, turf)
-	explosion(T,0,0,2)
-	return
-
 /datum/reagent/krokodil
 	name = "Krokodil"
 	id = "krokodil"

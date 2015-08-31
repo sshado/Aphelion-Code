@@ -48,17 +48,6 @@
 	required_reagents = list("sorium" = 1)
 	min_temp = 474
 
-/datum/chemical_reaction/sorium_vortex/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/turf/simulated/T = get_turf(holder.my_atom)
-	goonchem_vortex(T, 1, 5, 6)
-
-/datum/chemical_reaction/sorium/on_reaction(var/datum/reagents/holder, var/created_volume)
-	if(holder.has_reagent("stabilizing_agent"))
-		return
-	holder.remove_reagent("sorium", created_volume)
-	var/turf/simulated/T = get_turf(holder.my_atom)
-	goonchem_vortex(T, 1, 5, 6)
-
 /datum/reagent/liquid_dark_matter
 	name = "Liquid Dark Matter"
 	id = "liquid_dark_matter"
@@ -105,15 +94,6 @@
 	min_temp = 474
 	no_message = 1
 	mix_sound = null
-
-/datum/chemical_reaction/blackpowder_explosion/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/location = get_turf(holder.my_atom)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(2, 1, location)
-	s.start()
-	sleep(rand(20,30))
-	blackpowder_detonate(holder, created_volume)
-	return
 
 /*
 /datum/reagent/blackpowder/on_ex_act()

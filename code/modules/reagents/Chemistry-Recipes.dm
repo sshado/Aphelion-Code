@@ -207,7 +207,7 @@ datum
 			id = "solidplastic"
 			result = null
 			required_reagents = list("facid" = 10, "plasticide" = 20)
-			result_amount = 1
+			result_amount = 10
 
 		virus_food
 			name = "Virus Food"
@@ -487,28 +487,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/gold
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-				feedback_add_details("slime_cores_used","[replacetext(name," ","_")]")
-				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("<span class='danger'>The slime extract begins to vibrate violently!</span>"), 1)
-				spawn(50)
-
-				if(holder && holder.my_atom)
-
-					var/blocked = blocked_mobs
-
-					var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
-
-					playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-
-					for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-						if(M:eyecheck() <= 0)
-							flick("e_flash", M.flash)
-
-					var/chosen = pick(critters)
-					var/mob/living/simple_animal/hostile/C = new chosen
-					C.faction |= "neutral"
-					C.loc = get_turf(holder.my_atom)
 
 //Silver
 		slimebork
@@ -529,26 +507,6 @@ datum
 			result_amount = 1
 			required_container = /obj/item/slime_extract/silver
 			required_other = 1
-			on_reaction(var/datum/reagents/holder)
-
-				var/list/borks = subtypesof(/obj/item/weapon/reagent_containers/food/drinks)
-				// BORK BORK BORK
-
-				playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
-
-				for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
-					if(M:eyecheck() <= 0)
-						flick("e_flash", M.flash)
-
-				for(var/i = 1, i <= 4 + rand(1,2), i++)
-					var/chosen = pick(borks)
-					var/obj/B = new chosen
-					if(B)
-						B.loc = get_turf(holder.my_atom)
-						if(prob(50))
-							for(var/j = 1, j <= rand(1, 3), j++)
-								step(B, pick(NORTH,SOUTH,EAST,WEST))
-
 
 //Blue
 		slimefrost
