@@ -206,18 +206,18 @@
 /datum/reagent/pyroxadone
 	name = "Pyroxadone"
 	id = "pyroxadone"
-	description = "A powerful chemical substance that rapidly heals the body, while at very high temperatures. Perfect for fire-related patients."
+	description = "A powerful chemical substance that rapidly heals the body, while at very high temperatures. Rise from the flames, stronger than before.."
 	reagent_state = LIQUID
 	color = "#8080FF"
 	metabolism = REM * 0.5
 	scannable = 1
 
 /datum/reagent/pyroxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature > 420)
+	if(M.bodytemperature > 420) //The body starts taking damage from fever and such at 360. This should ensure that they only get the healing if they're actually on fire or were in a very hot environment.
 		M.adjustCloneLoss(-10 * removed)
 		M.adjustOxyLoss(-20 * removed)
-		M.heal_organ_damage(20 * removed, 20 * removed)
-		M.adjustToxLoss(-10 * removed)
+		M.heal_organ_damage(30 * removed, 30 * removed)
+		M.adjustToxLoss(-20 * removed)
 
 /datum/reagent/clonexadone
 	name = "Clonexadone"
