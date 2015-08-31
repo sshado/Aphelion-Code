@@ -206,14 +206,14 @@
 /datum/reagent/pyroxadone
 	name = "Pyroxadone"
 	id = "pyroxadone"
-	description = "A powerful chemical substance that rapidly heals and the body, while at very high temperatures. Don't mix this up with Cryoxadone!"
+	description = "A powerful chemical substance that rapidly heals the body, while at very high temperatures. Perfect for fire-related patients."
 	reagent_state = LIQUID
 	color = "#8080FF"
 	metabolism = REM * 0.5
 	scannable = 1
 
 /datum/reagent/pyroxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature > 420)
+	if(M.bodytemperature > 400)
 		M.adjustCloneLoss(-10 * removed)
 		M.adjustOxyLoss(-20 * removed)
 		M.heal_organ_damage(20 * removed, 20 * removed)
