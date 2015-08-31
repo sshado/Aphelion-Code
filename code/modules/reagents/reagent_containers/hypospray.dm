@@ -73,3 +73,17 @@
 		user << "<span class='notice'>It is currently loaded.</span>"
 	else
 		user << "<span class='notice'>It is spent.</span>"
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/cordrazine
+	name = "Cordrazine autoinjector"
+	desc = "This autoinjector contains a small amount of cordrazine, a chemical which rapidly combats paralysis and weakness in the patient. Use this to wake patients up after surgery."
+	icon_state = "autoinjectorc" //Sprite coming later today
+	item_state = "autoinjectorc" //s
+	amount_per_transfer_from_this = 5
+	volume = 5
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/cordrazine/New()
+	..()
+	reagents.add_reagent("cordrazine", 5)
+	update_icon()
+	return
