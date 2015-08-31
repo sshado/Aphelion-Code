@@ -478,7 +478,6 @@
 	reagent_state = LIQUID
 	color = "#1BB1FF"
 
-	process_flags = SYNTHETIC
 	overdose_threshold = 20
 	addiction_threshold = 10
 	metabolization_rate = 0.6
@@ -503,7 +502,6 @@
 	M.AdjustStunned(-2)
 	M.AdjustWeakened(-2)
 	M.adjustStaminaLoss(-2)
-	M.status_flags |= GOTTAGOREALLYFAST
 	M.Jitter(3)
 	M.adjustBrainLoss(0.5)
 	if(prob(5))

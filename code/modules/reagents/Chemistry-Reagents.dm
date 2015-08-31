@@ -224,83 +224,70 @@ datum
 					..()
 				return
 
+#define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
 			name = "Water"
 			id = "water"
 			description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 			reagent_state = LIQUID
-			color = "#0064C8" // rgb: 0, 100, 200
-			var/cooling_temperature = 2
-
-
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
-				if(!istype(M, /mob/living))
+			color = "#0064C877"
+			metabolization_rate = REAGENTS_METABOLISM * 10
+		touch_turf(var/turf/simulated/T)
+			if(!istype(T))
+				return
+			var/datum/gas_mixture/environment = T.return_air()
+			var/min_temperature = T0C + 100 // 100C, the boiling point of water
+			var/hotspot = (locate(/obj/fire) in T)
+			if(hotspot && !istype(T, /turf/space))
+				var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
+				lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
+				lowertemp.react()
+				T.assume_air(lowertemp)
+				qdel(hotspot)
+			if (environment && environment.temperature > min_temperature) // Abstracted as steam or something
+				var/removed_heat = between(0, volume * WATER_LATENT_HEAT, -environment.get_thermal_energy_change(min_temperature))
+				environment.add_thermal_energy(-removed_heat)
+				if (prob(5))
+					T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
+			else if(volume >= 10)
+				if(T.wet >= 1)
 					return
-
-			// Put out fire
-				if(method == TOUCH)
-					M.adjust_fire_stacks(-(volume / 10))
-					if(M.fire_stacks <= 0)
-						M.ExtinguishMob()
-					return
-
-			reaction_turf(var/turf/simulated/T, var/volume)
-				if (!istype(T)) return
-				src = null
-				if(volume >= 3)
-					if(T.wet >= 1) return
-					T.wet = 1
+				T.wet = 1
+				if(T.wet_overlay)
+					T.overlays -= T.wet_overlay
+					T.wet_overlay = null
+				T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
+				T.overlays += T.wet_overlay
+				spawn(800) // This is terrible and needs to be changed when possible.
+					if(!T || !istype(T))
+						return
+					if(T.wet >= 2)
+						return
+					T.wet = 0
 					if(T.wet_overlay)
 						T.overlays -= T.wet_overlay
 						T.wet_overlay = null
-					T.wet_overlay = image('icons/effects/water.dmi',T,"wet_floor")
-					T.overlays += T.wet_overlay
-
-					spawn(800)
-						if (!istype(T)) return
-						if(T.wet >= 2) return
-						T.wet = 0
-						if(T.wet_overlay)
-							T.overlays -= T.wet_overlay
-							T.wet_overlay = null
-
-				for(var/mob/living/carbon/slime/M in T)
-					M.apply_water()
-
-				var/hotspot = (locate(/obj/effect/hotspot) in T)
-				if(hotspot && !istype(T, /turf/space))
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
-					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
-					lowertemp.react()
-					T.assume_air(lowertemp)
-					qdel(hotspot)
-				return
-
-			reaction_obj(var/obj/O, var/volume)
-				src = null
-				var/turf/T = get_turf(O)
-				var/hotspot = (locate(/obj/effect/hotspot) in T)
-				if(hotspot && !istype(T, /turf/space))
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
-					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
-					lowertemp.react()
-					T.assume_air(lowertemp)
-					qdel(hotspot)
-				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/monkeycube))
-					var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
-					if(!cube.wrapped)
-						cube.Expand()
-				// Dehydrated carp
-				if(istype(O,/obj/item/toy/carpplushie/dehy_carp))
-					var/obj/item/toy/carpplushie/dehy_carp/dehy = O
-					dehy.Swell() // Makes a carp
-				return
+		touch_obj(var/obj/O)
+			if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
+				var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
+				if(!cube.wrapped)
+					cube.Expand()
+		touch_mob(var/mob/living/L, var/amount)
+			if(istype(L))
+				var/needed = L.fire_stacks * 10
+				if(amount > needed)
+					L.fire_stacks = 0
+					L.ExtinguishMob()
+					return
+				else
+					L.adjust_fire_stacks(-(amount / 10))
+					return
 
 		hellwater
 			name = "Hell Water"
 			id = "hell_water"
 			description = "YOUR FLESH! IT BURNS!"
-			process_flags = ORGANIC | SYNTHETIC		//Admin-bus has no brakes! KILL THEM ALL.
+//			process_flags = ORGANIC | SYNTHETIC		//Admin-bus has no brakes! KILL THEM ALL.
 
 			on_mob_life(var/mob/living/M as mob)
 				M.fire_stacks = min(5,M.fire_stacks + 3)
@@ -404,8 +391,6 @@ datum
 				..()
 				return
 
-
-
 		aslimetoxin
 			name = "Advanced Mutation Toxin"
 			id = "amutationtoxin"
@@ -460,67 +445,21 @@ datum
 				return
 
 		holywater
-			name = "Water"
+			name = "Holy Water"
 			id = "holywater"
-			description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
-			reagent_state = LIQUID
-			color = "#0064C8" // rgb: 0, 100, 200
+			description = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
+			color = "#E0E8EF"
 
-			on_mob_life(var/mob/living/M as mob)
-				if(ishuman(M))
-					if((M.mind in ticker.mode.cult) && prob(10))
-						M << "\blue A cooling sensation from inside you brings you an untold calmness."
-						ticker.mode.remove_cultist(M.mind)
-						ticker.mode.remove_all_cult_icons_from_client(M.client)  // fixes the deconverted's own client not removing their mob's cult icon
-						for(var/mob/O in viewers(M, null))
-							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
-					// Vampires who ingest holy water combust if it's in their system for long enough.
-					if(((M.mind in ticker.mode.vampires) || M.mind.vampire) && (!(VAMP_FULL in M.mind.vampire.powers)) && prob(80))
-						data++
-						switch(data)
-							if(1 to 3)
-								M << "<span class = 'warning'>Something sizzles in your veins!</span>"
-								M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
-							if(4 to 10)
-								M << "<span class = 'danger'>You feel an intense burning inside of you!</span>"
-								M.adjustFireLoss(1)
-								M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
-							if(11 to INFINITY)
-								M << "<span class = 'danger'>You suddenly ignite in a holy fire!</span>"
-								for(var/mob/O in viewers(M, null))
-									O.show_message(text("<span class = 'danger'>[] suddenly bursts into flames!<span>", M), 1)
-								M.fire_stacks = min(5,M.fire_stacks + 3)
-								M.IgniteMob()			//Only problem with igniting people is currently the commonly availible fire suits make you immune to being on fire
-								M.adjustFireLoss(3)		//Hence the other damages... ain't I a bastard?
-								M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
-				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
+		affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+			..()
+			if(ishuman(M)) // Any location
+				if(M.mind && cult.is_antagonist(M.mind) && prob(10))
+					cult.remove_antagonist(M.mind)
 
-
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
-				// Vampires have their powers weakened by holy water applied to the skin.
-				if(ishuman(M))
-					if((M.mind in ticker.mode.vampires) && !(VAMP_FULL in M.mind.vampire.powers))
-						var/mob/living/carbon/human/H=M
-						if(method == TOUCH)
-							if(H.wear_mask)
-								H << "\red Your mask protects you from the holy water!"
-								return
-							else if(H.head)
-								H << "\red Your helmet protects you from the holy water!"
-								return
-							else
-								M << "<span class='warning'>Something holy interferes with your powers!</span>"
-								M.mind.vampire.nullified = max(5, M.mind.vampire.nullified + 2)
-				return
-
-
-			reaction_turf(var/turf/simulated/T, var/volume)
-				..()
-				if(!istype(T)) return
-				if(volume>=10)
-					for(var/obj/effect/rune/R in T)
-						qdel(R)
-				T.Bless()
+		holywater/touch_turf(var/turf/T)
+			if(volume >= 5)
+				T.holy = 1
+			return
 
 		serotrotium
 			name = "Serotrotium"
@@ -673,7 +612,6 @@ datum
 			reagent_state = GAS
 			color = "#808080" // rgb: 128, 128, 128
 			penetrates_skin = 1
-			process_flags = ORGANIC | SYNTHETIC
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -688,7 +626,6 @@ datum
 			reagent_state = GAS
 			color = "#6A6054"
 			penetrates_skin = 1
-			process_flags = ORGANIC | SYNTHETIC
 
 
 			on_mob_life(var/mob/living/M as mob)
@@ -764,7 +701,6 @@ datum
 			description = "A strong mineral acid with the molecular formula H2SO4."
 			reagent_state = LIQUID
 			color = "#00D72B"
-			process_flags = ORGANIC | SYNTHETIC
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -824,14 +760,14 @@ datum
 								else
 									M.take_organ_damage(15,0)
 
-			reaction_obj(var/obj/O, var/volume)
-				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)) && prob(40))
-					if(!O.unacidable)
-						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
-						I.desc = "Looks like this was \an [O] some time ago."
-						for(var/mob/M in viewers(5, O))
-							M << "\red \the [O] melts."
-						qdel(O)
+//			reaction_obj(var/obj/O, var/volume)
+//				if((istype(O,/obj/item) || istype(O,game/obj/effect/glowshroom)) && prob(40))
+//					if(!O.unacidable)
+//						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
+//						I.desc = "Looks like this was \an [O] some time ago."
+//						for(var/mob/M in viewers(5, O))
+//							M << "\red \the [O] melts."
+//						qdel(O)
 
 		glycerol
 			name = "Glycerol"
@@ -887,7 +823,6 @@ datum
 			description = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
 			reagent_state = SOLID
 			color = "#673910" // rgb: 103, 57, 16
-			process_flags = ORGANIC | SYNTHETIC
 
 			reaction_turf(var/turf/T, var/volume)
 				src = null
@@ -1208,7 +1143,6 @@ datum
 			description = "It's magic. We don't have to explain it."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-			process_flags = ORGANIC | SYNTHETIC	//Adminbuse knows no bounds!
 
 			on_mob_life(var/mob/living/carbon/M as mob)
 				if(!M) M = holder.my_atom ///This can even heal dead people.
@@ -1582,19 +1516,6 @@ datum
 			nutriment_factor = 15 * REAGENTS_METABOLISM
 			color = "#664330" // rgb: 102, 67, 48
 
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(!(M.mind in ticker.mode.vampires))
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						if(H.species && H.species.dietflags && !(H.species.dietflags & DIET_HERB))	//Make sure the species has it's dietflag set, and that it is not a herbivore
-							H.nutrition += nutriment_factor	// For hunger and fatness
-							if(prob(50)) M.heal_organ_damage(1,0)
-					if(istype(M,/mob/living/simple_animal))		//Any nutrients can heal simple animals
-						if(prob(50)) M.heal_organ_damage(1,0)
-				..()
-				return
-
 		plantmatter		// Plant-based biomatter, digestable by herbivores and omnivores, worthless to carnivores
 			name = "Plant-matter"
 			id = "plantmatter"
@@ -1602,19 +1523,6 @@ datum
 			reagent_state = SOLID
 			nutriment_factor = 15 * REAGENTS_METABOLISM
 			color = "#664330" // rgb: 102, 67, 48
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(!(M.mind in ticker.mode.vampires))
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						if(H.species && H.species.dietflags && !(H.species.dietflags & DIET_CARN))	//Make sure the species has it's dietflag set, and that it is not a carnivore
-							H.nutrition += nutriment_factor	// For hunger and fatness
-							if(prob(50)) M.heal_organ_damage(1,0)
-					if(istype(M,/mob/living/simple_animal))		//Any nutrients can heal simple animals
-						if(prob(50)) M.heal_organ_damage(1,0)
-				..()
-				return
 
 		soysauce
 			name = "Soysauce"
@@ -1740,7 +1648,6 @@ datum
 			description = "A special oil that noticably chills the body. Extraced from Icepeppers."
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 139, 166, 233
-			process_flags = ORGANIC | SYNTHETIC
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1901,13 +1808,6 @@ datum
 						if(T.wet_overlay)
 							T.overlays -= T.wet_overlay
 							T.wet_overlay = null
-				var/hotspot = (locate(/obj/effect/hotspot) in T)
-				if(hotspot)
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
-					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
-					lowertemp.react()
-					T.assume_air(lowertemp)
-					qdel(hotspot)
 
 		enzyme
 			name = "Denatured Enzyme"
@@ -2397,7 +2297,6 @@ datum
 						M.druggy = max(M.druggy, 30)
 						M.dizziness +=5
 						M.drowsyness = 0
-						M.status_flags |= GOTTAGOFAST
 						..()
 						return
 
@@ -2532,8 +2431,6 @@ datum
 			reagent_state = LIQUID
 			nutriment_factor = 0 //So alcohol can fill you up! If they want to.
 			color = "#404030" // rgb: 64, 64, 48
-			var/datum/martial_art/drunk_brawling/F = new
-			var/dizzy_adj = 3
 			var/slurr_adj = 3
 			var/confused_adj = 2
 			var/slur_start = 65			//amount absorbed after which mob starts slurring
@@ -2544,10 +2441,6 @@ datum
 			var/pass_out = 325	//amount absorbed after which mob starts passing out
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
-				// Sobering multiplier.
-				// Sober block makes it more difficult to get drunk
-				var/sober_str=!(SOBER in M.mutations)?1:2
-				M:nutrition += nutriment_factor
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 				if(!src.data) data = 1
 				src.data++
@@ -2557,8 +2450,6 @@ datum
 				// make all the beverages work together
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
 					if(isnum(A.data)) d += A.data
-
-				d/=sober_str
 
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
