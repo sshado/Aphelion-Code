@@ -9,7 +9,7 @@
 //Subclass so we can pass on values
 /obj/item/weapon/reagent_containers/food/snacks/grown/
 	var/potency = -1
-	icon = null
+	icon = ''
 	New(newloc,newpotency)
 		if (!isnull(newpotency))
 			potency = newpotency
