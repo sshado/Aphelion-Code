@@ -484,3 +484,9 @@ emp_act
 
 	return perm
 
+/mob/living/carbon/human/proc/check_mouth_coverage()
+	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform)
+	for(var/obj/item/gear in protective_gear)
+		if(istype(gear) && (gear.body_parts_covered & FACE) && (gear.flags & (MASKCOVERSMOUTH|HEADCOVERSMOUTH)))
+			return gear
+	return

@@ -15,6 +15,7 @@
 	var/cooktype[0]
 
 
+
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
 	if(!usr)	return
@@ -48,7 +49,7 @@
 		if(M == user)								//If you're eating it yourself
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
+				if(!H.check_mouth_coverage())
 					user << "Where do you intend to put \the [src]? You don't have a mouth!"
 					return
 			if (fullness <= 50)
@@ -65,7 +66,7 @@
 		else
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
+				if(!H.check_mouth_coverage())
 					user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 					return
 
@@ -143,9 +144,9 @@
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby(, params)
 
-	if(istype(W,/obj/item/weapon/kitchen/utensil))
+	if(istype(W, /obj/item/weapon/material/kitchen/utensil))
 		//This will allow forks/spoons/plastic cutlery to pick up sliceables, but requires it to be unsliceable for the knife to pick it up
-		if((istype(W, /obj/item/weapon/kitchen/utensil/knife) && !slice_path) || !istype(W, /obj/item/weapon/kitchen/utensil/knife))
+		if((istype(W, /obj/item/weapon/material/kitchen/utensil/knife) && !slice_path) || !istype(W, /obj/item/weapon/material/kitchen/utensil/knife))
 
 			var/obj/item/weapon/kitchen/utensil/U = W
 
@@ -179,17 +180,16 @@
 
 	var/inaccurate = 0
 	if( \
-			istype(W, /obj/item/weapon/kitchenknife) || \
-			istype(W, /obj/item/weapon/butch) || \
+			istype(W, /obj/item/weapon/material/knife/butch) || \
 			istype(W, /obj/item/weapon/scalpel) || \
-			istype(W, /obj/item/weapon/kitchen/utensil/knife) \
+			istype(W, /obj/item/weapon/material/kitchen/utensil/knife) \
 		)
 	else if( \
 			istype(W, /obj/item/weapon/circular_saw) || \
 			istype(W, /obj/item/weapon/melee/energy/sword) && W:active || \
 			istype(W, /obj/item/weapon/melee/energy/blade) || \
 			istype(W, /obj/item/weapon/shovel) || \
-			istype(W, /obj/item/weapon/hatchet) \
+			istype(W, /obj/item/weapon/material/hatchet) \
 		)
 		inaccurate = 1
 	else if(W.w_class <= 2 && istype(src,/obj/item/weapon/reagent_containers/food/snacks/sliceable))
@@ -208,8 +208,7 @@
 	if ( \
 			!isturf(src.loc) || \
 			!(locate(/obj/structure/table) in src.loc) && \
-			!(locate(/obj/machinery/optable) in src.loc) && \
-			!(locate(/obj/item/weapon/storage/bag/tray) in src.loc) \
+			!(locate(/obj/machinery/optable) in src.loc) \
 		)
 		user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
 		return 1
@@ -544,33 +543,35 @@
 	desc = "An egg!"
 	icon_state = "egg"
 	filling_color = "#FDFFD1"
-
-	New()
+/obj/item/weapon/reagent_containers/food/snacks/egg/New()
+	..()
+	reagents.add_reagent("egg", 3)
+/obj/item/weapon/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
+	if(istype(O,/obj/machinery/microwave))
+		return ..()
+	if(!(proximity && O.is_open_container()))
+		return
+	user << "You crack \the [src] into \the [O]."
+	reagents.trans_to(O, reagents.total_volume)
+	user.drop_from_inventory(src)
+	qdel(src)
+/obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
+	..()
+	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
+	src.reagents.splash(hit_atom, reagents.total_volume)
+	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
+	qdel(src)
+/obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype( W, /obj/item/weapon/pen/crayon ))
+		var/obj/item/weapon/pen/crayon/C = W
+		var/clr = C.colourName
+		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
+			usr << "\blue The egg refuses to take on this color!"
+			return
+		usr << "\blue You color \the [src] [clr]"
+		icon_state = "egg-[clr]"
+	else
 		..()
-		reagents.add_reagent("protein", 1)
-		reagents.add_reagent("egg", 5)
-
-	throw_impact(atom/hit_atom)
-		..()
-		new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-		src.reagents.reaction(hit_atom, TOUCH)
-		src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
-		qdel(src)
-
-	attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-		if(istype( W, /obj/item/toy/crayon ))
-			var/obj/item/toy/crayon/C = W
-			var/clr = C.colourName
-
-			if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-				usr << "\blue The egg refuses to take on this color!"
-				return
-
-			usr << "\blue You color \the [src] [clr]"
-			icon_state = "egg-[clr]"
-			_color = clr
-		else
-			..()
 
 /obj/item/weapon/reagent_containers/food/snacks/friedegg
 	name = "Fried egg"

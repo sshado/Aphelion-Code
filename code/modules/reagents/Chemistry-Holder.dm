@@ -605,6 +605,56 @@ datum
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+/datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]).
+// Attempts to place a reagent on the mob's skin.
+// Reagents are not guaranteed to transfer to the target.
+// Do not call this directly, call trans_to() instead.
+/datum/reagents/proc/splash_mob(var/mob/target, var/amount = 1, var/copy = 0)
+	var/perm = 1
+	if(isliving(target)) //will we ever even need to tranfer reagents to non-living mobs?
+		var/mob/living/L = target
+		perm = L.reagent_permeability()
+	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
+
+/datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
+	if(!target || !istype(target))
+		return
+	if(iscarbon(target))
+		var/mob/living/carbon/C = target
+		if(type == CHEM_BLOOD)
+			var/datum/reagents/R = C.reagents
+			return trans_to_holder(R, amount, multiplier, copy)
+		if(type == CHEM_INGEST)
+			var/datum/reagents/R = C.ingested
+			return trans_to_holder(R, amount, multiplier, copy)
+		if(type == CHEM_TOUCH)
+			var/datum/reagents/R = C.touching
+			return trans_to_holder(R, amount, multiplier, copy)
+	else
+		var/datum/reagents/R = new /datum/reagents(amount)
+		. = trans_to_holder(R, amount, multiplier, copy)
+		R.touch_mob(target)
+
+/datum/reagents/proc/trans_to_turf(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Turfs don't have any reagents (at least, for now). Just touch it.
+	if(!target)
+		return
+
+	var/datum/reagents/R = new /datum/reagents(amount * multiplier)
+	. = trans_to_holder(R, amount, multiplier, copy)
+	R.touch_turf(target)
+	return
+
+/datum/reagents/proc/trans_to_obj(var/turf/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Objects may or may not; if they do, it's probably a beaker or something and we need to transfer properly; otherwise, just touch.
+	if(!target)
+		return
+
+	if(!target.reagents)
+		var/datum/reagents/R = new /datum/reagents(amount * multiplier)
+		. = trans_to_holder(R, amount, multiplier, copy)
+		R.touch_obj(target)
+		return
+
+	return trans_to_holder(target.reagents, amount, multiplier, copy)
 
 // Convenience proc to create a reagents holder for an atom
 // Max vol is maximum volume of holder

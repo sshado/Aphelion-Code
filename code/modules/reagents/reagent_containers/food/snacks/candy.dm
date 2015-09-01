@@ -234,7 +234,7 @@
 	name = "bubblegum"
 	desc = "Chewy!"
 	icon_state = "bubblegum"
-	trash = /obj/item/trash/gum
+//	trash = /obj/item/trash/gum
 	filling_color = "#FF7495"
 
 	New()

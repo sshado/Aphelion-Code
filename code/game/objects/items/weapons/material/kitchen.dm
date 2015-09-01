@@ -34,10 +34,6 @@
 		else
 			return ..()
 
-		var/obj/item/weapon/reagent_containers/container = tool
-
-		var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_INGEST)
-
 	if (reagents.total_volume > 0)
 		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		if(M == user)

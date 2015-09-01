@@ -30,7 +30,7 @@
 
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
+				if(!H.check_mouth_coverage())
 					user << "Where do you intend to put \the [src]? You don't have a mouth!"
 					return
 
@@ -45,7 +45,7 @@
 		else if( istype(M, /mob/living/carbon/human) )
 
 			var/mob/living/carbon/human/H = M
-			if(!H.check_has_mouth())
+			if(!H.check_mouth_coverage())
 				user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 				return
 
@@ -136,15 +136,6 @@
 					user << "Cyborg [src] refilled."
 
 		return
-
-	attackby(var/obj/item/I, mob/user as mob, params)
-		if(istype(I, /obj/item/clothing/mask/cigarette)) //ciggies are weird
-			return
-		if(is_hot(I))
-			if(src.reagents)
-				src.reagents.chem_temp += 15
-				user << "<span class='notice'>You heat [src] with [I].</span>"
-				src.reagents.handle_reactions()
 
 	examine()
 		set src in view()
@@ -380,26 +371,26 @@
 /obj/item/weapon/reagent_containers/food/drinks/flask/hand_made
 	name = "handmade flask"
 	desc = "A wooden flask with a silver lid and bottom. It has a matte, dark blue paint on it with the initials \"W.H.\" etched in black."
-	icon = 'icons/obj/custom_items.dmi'
+//	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "williamhackett"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/thermos
 	name = "vintage thermos"
 	desc = "An older thermos with a faint shine."
-	icon = 'icons/obj/custom_items.dmi'
+//	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "johann_erzatz_1"
 	volume = 50
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/shiny
 	name = "shiny flask"
 	desc = "A shiny metal flask. It appears to have a Greek symbol inscribed on it."
-	icon = 'icons/obj/custom_items.dmi'
+//	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "shinyflask"
 	volume = 50
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/lithium
 	name = "Lithium Flask"
 	desc = "A flask with a Lithium Atom symbol on it."
-	icon = 'icons/obj/custom_items.dmi'
+//	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lithiumflask"
 	volume = 50
