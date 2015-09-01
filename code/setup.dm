@@ -141,6 +141,15 @@
 #define   OPEN_HEAT_TRANSFER_COEFFICIENT 0.4
 #define WINDOW_HEAT_TRANSFER_COEFFICIENT 0.1 // A hack for now.
 
+//Click cooldowns, in tenths of a second
+#define CLICK_CD_MELEE 8
+#define CLICK_CD_RANGE 4
+#define CLICK_CD_BREAKOUT 100
+#define CLICK_CD_HANDCUFFED 10
+#define CLICK_CD_TKSTRANGLE 10
+#define CLICK_CD_POINT 10
+#define CLICK_CD_RESIST 20
+
 // Fire damage.
 #define CARBON_LIFEFORM_FIRE_RESISTANCE (T0C + 200)
 #define CARBON_LIFEFORM_FIRE_DAMAGE     4

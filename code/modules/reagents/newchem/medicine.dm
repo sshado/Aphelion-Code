@@ -694,7 +694,7 @@ datum/reagent/life
 
 proc/chemical_mob_spawn(var/datum/reagents/holder, var/amount_to_spawn, var/reaction_name, var/mob_faction = "chemicalsummon")
 	if(holder && holder.my_atom)
-		var/blocked =  blocked_mobs //global variable for blocked mobs
+//		var/blocked =  blocked_mobs //global variable for blocked mobs
 		var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
 		var/atom/A = holder.my_atom
 		var/turf/T = get_turf(A)

@@ -3238,7 +3238,7 @@
 		..()
 		reagents.add_reagent("nutriment", 3)
 
- Dough + rolling pin = flat dough
+// Dough + rolling pin = flat dough
 /obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/I, mob/user, params)
 	if(istype(I,/obj/item/weapon/material/kitchen/rollingpin))
 		if(isturf(loc))

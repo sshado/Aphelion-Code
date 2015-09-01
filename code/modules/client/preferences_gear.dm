@@ -1069,11 +1069,12 @@ var/global/list/gear_datums = list()
 	sort_category = "misc"
 	cost = 1
 
-/datum/gear/vacflask
-	display_name = "vacuum-flask"
-	path = /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
-	sort_category = "misc"
-	cost = 1
+//datum/gear/vacflask
+//	display_name = "vacuum-flask"
+//	path = /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
+//	sort_category = "misc"
+//	cost = 1
+
 /datum/gear/blipstick
 	display_name = "lipstick, black"
 	path = /obj/item/weapon/lipstick/black
