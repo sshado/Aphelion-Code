@@ -1524,7 +1524,7 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(R.volume >= R.overdosed)
 					temp = PULSE_NONE
 
 		return temp
