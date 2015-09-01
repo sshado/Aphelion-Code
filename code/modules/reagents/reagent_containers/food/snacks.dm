@@ -145,7 +145,7 @@
 
 	if(istype(W,/obj/item/weapon/kitchen/utensil))
 		//This will allow forks/spoons/plastic cutlery to pick up sliceables, but requires it to be unsliceable for the knife to pick it up
-		if((istype(W, /obj/item/weapon/kitchen/utensil/knife) && !slice_path) || !istype(W, /obj/item/weapon/kitchen/utensil/knife))
+		if((istype(W, /obj/item/weapon/kitchen/utensil/knife) && !slice_path) || !istype(W,/obj/item/weapon/material/kitchen/utensil/knife))
 
 			var/obj/item/weapon/kitchen/utensil/U = W
 
@@ -179,17 +179,17 @@
 
 	var/inaccurate = 0
 	if( \
-			istype(W, /obj/item/weapon/kitchenknife) || \
-			istype(W, /obj/item/weapon/butch) || \
+			istype(W,/obj/item/weapon/material/kitchen/utensil/knife) || \
+//			istype(W, /obj/item/weapon/butch) ||
 			istype(W, /obj/item/weapon/scalpel) || \
-			istype(W, /obj/item/weapon/kitchen/utensil/knife) \
+//			istype(W,/obj/item/weapon/material/kitchen/utensil/knife)
 		)
 	else if( \
 			istype(W, /obj/item/weapon/circular_saw) || \
 			istype(W, /obj/item/weapon/melee/energy/sword) && W:active || \
 			istype(W, /obj/item/weapon/melee/energy/blade) || \
 			istype(W, /obj/item/weapon/shovel) || \
-			istype(W, /obj/item/weapon/hatchet) \
+//			istype(W, /obj/item/weapon/hatchet)
 		)
 		inaccurate = 1
 	else if(W.w_class <= 2 && istype(src,/obj/item/weapon/reagent_containers/food/snacks/sliceable))
@@ -209,7 +209,6 @@
 			!isturf(src.loc) || \
 			!(locate(/obj/structure/table) in src.loc) && \
 			!(locate(/obj/machinery/optable) in src.loc) && \
-			!(locate(/obj/item/weapon/storage/bag/tray) in src.loc) \
 		)
 		user << "\red You cannot slice [src] here! You need a table or at least a tray to do it."
 		return 1
