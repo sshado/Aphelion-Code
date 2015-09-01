@@ -14,15 +14,15 @@
 /obj/machinery/chem_heater/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/chem_heater(null)
+//	component_parts += new /obj/item/weapon/circuitboard/chem_heater(null)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser(null)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
 	RefreshParts()
-	
+
 /obj/machinery/chem_heater/upgraded/New()
 	..()
 	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/chem_heater(null)
+//	component_parts += new /obj/item/weapon/circuitboard/chem_heater(null)
 	component_parts += new /obj/item/weapon/stock_parts/micro_laser/ultra(null)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
 	RefreshParts()
@@ -87,8 +87,8 @@
 	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", I))
 		return
 
-	if(exchange_parts(user, I))
-		return
+///	if(exchange_parts(user, I))
+///		return
 
 	if(panel_open)
 		if(istype(I, /obj/item/weapon/crowbar))
