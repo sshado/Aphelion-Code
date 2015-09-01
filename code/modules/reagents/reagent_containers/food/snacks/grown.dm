@@ -8,9 +8,8 @@
 //Grown foods
 //Subclass so we can pass on values
 /obj/item/weapon/reagent_containers/food/snacks/grown/
-	var/plantname
 	var/potency = -1
-	icon = 'icons/obj/harvest.dmi'
+	icon = ''
 	New(newloc,newpotency)
 		if (!isnull(newpotency))
 			potency = newpotency
@@ -26,6 +25,7 @@
 		// Fill the object up with the appropriate reagents.
 		if(!isnull(plantname))
 			var/datum/seed/S = seed_types[plantname]
+			potency = S.potency
 			if(!S || !S.chems)
 				return
 
@@ -140,16 +140,6 @@
 	icon_state = "mtear"
 	filling_color = "#70C470"
 	plantname = "mtear"
-
-/obj/item/weapon/reagent_containers/food/snacks/grown/mtear/attack_self(mob/user as mob)
-	if(istype(user.loc,/turf/space))
-		return
-	var/obj/item/stack/medical/ointment/tajaran/poultice = new /obj/item/stack/medical/ointment/tajaran(user.loc)
-
-	poultice.heal_burn = potency
-	del(src)
-
-	user << "<span class='notice'>You mash the petals into a poultice.</span>"
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/shand/attack_self(mob/user as mob)
 	if(istype(user.loc,/turf/space))
@@ -303,14 +293,6 @@
 	potency = 10
 	filling_color = "#FAB728"
 	plantname = "pumpkin"
-
-/obj/item/weapon/reagent_containers/food/snacks/grown/pumpkin/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-	..()
-	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || istype(W, /obj/item/weapon/twohanded/fireaxe) || istype(W, /obj/item/weapon/kitchen/utensil/knife) || istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/melee/energy))
-		user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
-		new /obj/item/clothing/head/hardhat/pumpkinhead (user.loc)
-		del(src)
-		return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/lime
 	name = "lime"

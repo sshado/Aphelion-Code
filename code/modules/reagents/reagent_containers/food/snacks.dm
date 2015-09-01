@@ -572,38 +572,6 @@
 		else
 			..()
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/blue
-	icon_state = "egg-blue"
-	_color = "blue"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/green
-	icon_state = "egg-green"
-	_color = "green"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/mime
-	icon_state = "egg-mime"
-	_color = "mime"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/orange
-	icon_state = "egg-orange"
-	_color = "orange"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/purple
-	icon_state = "egg-purple"
-	_color = "purple"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/rainbow
-	icon_state = "egg-rainbow"
-	_color = "rainbow"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/red
-	icon_state = "egg-red"
-	_color = "red"
-
-/obj/item/weapon/reagent_containers/food/snacks/egg/yellow
-	icon_state = "egg-yellow"
-	_color = "yellow"
-
 /obj/item/weapon/reagent_containers/food/snacks/friedegg
 	name = "Fried egg"
 	desc = "A fried egg, with a touch of salt and pepper."
@@ -3340,7 +3308,7 @@
 
 // potato + knife = raw sticks
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-	if(istype(W,/obj/item/weapon/kitchen/utensil/knife))
+	if(istype(W,/obj/item/weapon/material/kitchen/utensil/knife))
 		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(src)
 		user << "You cut the potato."
 		qdel(src)
