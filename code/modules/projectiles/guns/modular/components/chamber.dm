@@ -38,7 +38,7 @@ obj/item/weapon/modular_firearms/chamber/stunshell
 
 obj/item/weapon/modular_firearms/chamber/a762
 	name = ".762 chamber"
-	desc = "Compatible with .762 ammunition.""
+	desc = "Compatible with .762 ammunition."
 	allowed_projectiles = list(/obj/item/projectile/bullet/rifle/a762)
 
 obj/item/weapon/modular_firearms/chamber/a145
@@ -87,7 +87,7 @@ obj/item/weapon/modular_firearms/chamber/energy/ltagred
 	projectile_type = /obj/item/projectile/beam/lastertag/red
 
 obj/item/weapon/modular_firearms/chamber/energy/stun
-	name = "stun beam emitter
+	name = "stun beam emitter"
 	allowed_projectiles = list()
 	projectile_type = /obj/item/projectile/beam/stun
 
