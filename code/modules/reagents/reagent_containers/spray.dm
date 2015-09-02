@@ -18,11 +18,8 @@
 
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob)
-	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/rack) || istype(A, /obj/structure/closet) \
+	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/table/rack) || istype(A, /obj/structure/closet) \
 	|| istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart) || istype(A, /obj/machinery/portable_atmospherics/hydroponics))
-		return
-
-	if(istype(A, /obj/effect/proc_holder/spell))
 		return
 
 	if(istype(A, /obj/structure/reagent_dispensers) && get_dist(src,A) <= 1) //this block copypasted from reagent_containers/glass, for lack of a better solution
@@ -60,7 +57,7 @@
 
 
 /obj/item/weapon/reagent_containers/spray/proc/spray(var/atom/A)
-	var/obj/effect/decal/chempuff/D = new /obj/effect/decal/chempuff(get_turf(src))
+	var/obj/effect/effect/water/chempuff/D = new /obj/effect/effect/water/chempuff(get_turf(src))
 	D.create_reagents(amount_per_transfer_from_this)
 	reagents.trans_to(D, amount_per_transfer_from_this)
 	D.icon += mix_color_from_reagents(D.reagents.reagent_list)
@@ -138,7 +135,7 @@
 /obj/item/weapon/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'icons/obj/harvest.dmi'
+	icon = 'icons/obj/device.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
@@ -154,54 +151,33 @@
 //chemsprayer
 /obj/item/weapon/reagent_containers/spray/chemsprayer
 	name = "chem sprayer"
-	desc = "A utility used to spray large amounts of reagents in a given area."
+	desc = "A utility used to spray large amounts of reagent in a given area."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
-	throwforce = 0
+	throwforce = 3
 	w_class = 3.0
-	spray_maxrange = 7
-	spray_currentrange = 7
-	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = "combat=3;materials=3;engineering=3"
-
-
-/obj/item/weapon/reagent_containers/spray/chemsprayer/spray(var/atom/A)
-	var/Sprays[3]
-	for(var/i=1, i<=3, i++) // intialize sprays
-		if(src.reagents.total_volume < 1) break
-		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
-		D.create_reagents(amount_per_transfer_from_this)
-		src.reagents.trans_to(D, amount_per_transfer_from_this)
-
-		D.icon += mix_color_from_reagents(D.reagents.reagent_list)
-
-		Sprays[i] = D
-
+/obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/direction = get_dir(src, A)
 	var/turf/T = get_turf(A)
 	var/turf/T1 = get_step(T,turn(direction, 90))
 	var/turf/T2 = get_step(T,turn(direction, -90))
-	var/list/the_targets = list(T,T1,T2)
-
-	for(var/i=1, i<=Sprays.len, i++)
-		spawn()
-			var/obj/effect/decal/chempuff/D = Sprays[i]
-			if(!D) continue
-
-			// Spreads the sprays a little bit
-			var/turf/my_target = pick(the_targets)
-			the_targets -= my_target
-
-			for(var/j=0, j<=spray_currentrange, j++)
-				step_towards(D, my_target)
-				D.reagents.reaction(get_turf(D))
-				for(var/atom/t in get_turf(D))
-					D.reagents.reaction(t)
-				sleep(2)
-			qdel(D)
-
+	var/list/the_targets = list(T, T1, T2)
+	for(var/a = 1 to 3)
+		spawn(0)
+			if(reagents.total_volume < 1) break
+			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+			var/turf/my_target = the_targets[a]
+			D.create_reagents(amount_per_transfer_from_this)
+			if(!src)
+				return
+			reagents.trans_to_obj(D, amount_per_transfer_from_this)
+			D.set_color()
+			D.set_up(my_target, rand(6, 8), 2)
+	return
 
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/attack_self(var/mob/user)
@@ -214,7 +190,7 @@
 /obj/item/weapon/reagent_containers/spray/plantbgone // -- Skie
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
-	icon = 'icons/obj/hydroponics.dmi'
+	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbgone"
 	item_state = "plantbgone"
 	volume = 100

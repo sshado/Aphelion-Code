@@ -451,17 +451,6 @@ datum
 			description = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
 			color = "#E0E8EF"
 
-		affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-			..()
-			if(ishuman(M)) // Any location
-				if(M.mind && cult.is_antagonist(M.mind) && prob(10))
-					cult.remove_antagonist(M.mind)
-
-		holywater/touch_turf(var/turf/T)
-			if(volume >= 5)
-				T.holy = 1
-			return
-
 		serotrotium
 			name = "Serotrotium"
 			id = "serotrotium"
@@ -1282,8 +1271,6 @@ datum
 						M.status_flags &= ~DISFIGURED
 					if(35 to INFINITY)
 						M.adjustToxLoss(1)
-						M.Dizzy(5)
-						M.Jitter(5)
 
 				..()
 				return
@@ -1319,11 +1306,6 @@ datum
 			reagent_state = LIQUID
 			color = "#6E2828"
 			data = 13
-
-			on_mob_life(var/mob/living/M)
-				M.adjustStaminaLoss(REM * data)
-				data = max(data - 1, 3)
-				..()
 
 		lsd
 			name = "Lysergic acid diethylamide"
@@ -1408,7 +1390,7 @@ datum
 				src = null
 				if( (prob(10) && method==TOUCH) || method==INGEST)
 					M.contract_disease(new /datum/disease/xeno_transformation(0),1)
-*/
+
 
 		spore
 			name = "Blob Spores"
@@ -1437,7 +1419,7 @@ datum
 									core.overmind.mind.name = C.name
 
 				return
-
+*/
 //foam
 
 		fluorosurfactant
@@ -1495,19 +1477,6 @@ datum
 			reagent_state = SOLID
 			nutriment_factor = 12 * REAGENTS_METABOLISM
 			color = "#664330" // rgb: 102, 67, 48
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(!(M.mind in ticker.mode.vampires))
-					if(ishuman(M))
-						var/mob/living/carbon/human/H = M
-						if(H.species && H.species.dietflags)	//Make sure the species has it's dietflag set, otherwise it can't digest any nutrients
-							H.nutrition += nutriment_factor	// For hunger and fatness
-							if(prob(50)) M.heal_organ_damage(1,0)
-					if(istype(M,/mob/living/simple_animal))		//Any nutrients can heal simple animals
-						if(prob(50)) M.heal_organ_damage(1,0)
-				..()
-				return
 
 		protein			// Meat-based protein, digestable by carnivores and omnivores, worthless to herbivores
 			name = "Protein"
@@ -1743,18 +1712,13 @@ datum
 				switch(data)
 					if(1 to 5)
 						if (!M.stuttering) M.stuttering = 1
-						M.Dizzy(5)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-						M.Jitter(10)
-						M.Dizzy(10)
 						M.druggy = max(M.druggy, 35)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
 						if (!M.stuttering) M.stuttering = 1
-						M.Jitter(20)
-						M.Dizzy(20)
 						M.druggy = max(M.druggy, 40)
 						if(prob(30)) M.emote(pick("twitch","giggle"))
 				data++
@@ -2173,8 +2137,6 @@ datum
 
 				overdose_process(var/mob/living/M as mob)
 					if(volume > 45)
-						M.Jitter(5)
-
 					..()
 					return
 
@@ -2244,10 +2206,8 @@ datum
 				adj_dizzy = -5
 				adj_drowsy = -3
 				adj_sleepy = -2
-
 				on_mob_life(var/mob/living/M as mob)
 					..()
-					M.Jitter(5)
 					return
 
 			cold
@@ -2294,7 +2254,6 @@ datum
 					adj_sleepy = -2
 
 					on_mob_life(var/mob/living/M as mob)
-						M.Jitter(20)
 						M.druggy = max(M.druggy, 30)
 						M.dizziness +=5
 						M.drowsyness = 0
@@ -2405,11 +2364,9 @@ datum
 				switch(data)
 					if(1 to 5)
 						if (!M.stuttering) M.stuttering = 1
-						M.Dizzy(10)
-						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-						M.Jitter(20)
+
 						M.Dizzy(20)
 						M.druggy = max(M.druggy, 45)
 						if(prob(20)) M.emote(pick("twitch","giggle"))

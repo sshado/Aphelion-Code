@@ -1849,7 +1849,7 @@ datum
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
 						if (!M.stuttering) M.stuttering = 1
-						M.Jitter(20)
+
 						M.Dizzy(20)
 						M.druggy = max(M.druggy, 40)
 						if(prob(30)) M.emote(pick("twitch","giggle"))
@@ -2273,11 +2273,11 @@ datum
 						M.AdjustWeakened(-1)
 					..()
 					return
-					
+
 				overdose_process(var/mob/living/M as mob)
 					if(volume > 45)
 						M.Jitter(5)
-						
+
 					..()
 					return
 
@@ -2397,7 +2397,7 @@ datum
 					adj_sleepy = -2
 
 					on_mob_life(var/mob/living/M as mob)
-						M.Jitter(20)
+
 						M.druggy = max(M.druggy, 30)
 						M.dizziness +=5
 						M.drowsyness = 0
@@ -2513,7 +2513,7 @@ datum
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-						M.Jitter(20)
+
 						M.Dizzy(20)
 						M.druggy = max(M.druggy, 45)
 						if(prob(20)) M.emote(pick("twitch","giggle"))

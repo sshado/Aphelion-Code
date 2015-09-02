@@ -515,31 +515,24 @@
 	return
 
 /datum/reagent/lube/ultra/addiction_act_stage1(var/mob/living/M as mob)
-	M.Jitter(5)
 	if(prob(20))
 		M.emote(pick("twitch","buzz","moan"))
 	..()
 	return
 
 /datum/reagent/lube/ultra/addiction_act_stage2(var/mob/living/M as mob)
-	M.Jitter(10)
-	M.Dizzy(10)
 	if(prob(30))
 		M.emote(pick("twitch","buzz","moan"))
 	..()
 	return
 
 /datum/reagent/lube/ultra/addiction_act_stage3(var/mob/living/M as mob)
-	M.Jitter(15)
-	M.Dizzy(15)
 	if(prob(40))
 		M.emote(pick("twitch","buzz","moan"))
 	..()
 	return
 
 /datum/reagent/lube/ultra/addiction_act_stage4(var/mob/living/carbon/human/M as mob)
-	M.Jitter(20)
-	M.Dizzy(20)
 	M.adjustToxLoss(5)
 	if(prob(50))
 		M.emote(pick("twitch","buzz","moan"))

@@ -216,16 +216,6 @@
 					src.reagents.reaction(target, INGEST)
 
 				if(isobj(target))
-					// /vg/: Logging transfers of bad things
-					if(target.reagents_to_log.len)
-						var/list/badshit=list()
-						for(var/bad_reagent in target.reagents_to_log)
-							if(reagents.has_reagent(bad_reagent))
-								badshit += reagents_to_log[bad_reagent]
-						if(badshit.len)
-							var/hl="\red <b>([english_list(badshit)])</b> \black"
-							message_admins("[key_name_admin(user)] added [reagents.get_reagent_ids(1)] to \a [target] with [src].[hl] ")
-							log_game("[key_name(user)] added [reagents.get_reagent_ids(1)] to \a [target] with [src].")
 
 				spawn(5)
 					var/datum/reagent/blood/B
@@ -237,12 +227,12 @@
 						W = r
 						break
 					var/trans
-					if(W && istype(target,/mob/living/carbon/human/slime))
-						var/mob/living/carbon/human/slime/S = target
+					if(W && istype(target,/mob/living/carbon/slime))
+						var/mob/living/carbon/slime/S = target
 						S.vessel.add_reagent("water", 5)
 						S.vessel.update_total()
 					if(B && istype(target,/mob/living/carbon))
-						if(istype(target,/mob/living/carbon/human/slime))
+						if(istype(target,/mob/living/carbon/slime))
 							var/mob/living/carbon/human/slime/S = target
 							S.reagents.add_reagent("blood", 5)
 							S.reagents.update_total()
