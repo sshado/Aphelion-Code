@@ -17,7 +17,7 @@
 	w_class = 1
 	sharp = 1
 	var/mode = SYRINGE_DRAW
-
+	var/image/filling //holds a reference to the current filling overlay
 	on_reagent_change()
 		update_icon()
 

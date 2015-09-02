@@ -273,7 +273,7 @@ datum
 				var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 				if(!cube.wrapped)
 					cube.Expand()
-		touch_mob(var/mob/living/L, var/amount)
+		trans_to_mob(var/mob/living/L, var/amount)
 			if(istype(L))
 				var/needed = L.fire_stacks * 10
 				if(amount > needed)
@@ -398,34 +398,6 @@ datum
 			description = "An advanced corruptive toxin produced by slimes."
 			reagent_state = LIQUID
 			color = "#13BC5E" // rgb: 19, 188, 94
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(istype(M, /mob/living/carbon) && M.stat != DEAD)
-					M << "\red Your flesh rapidly mutates!"
-					if(M.notransform)	return
-					M.notransform = 1
-					M.canmove = 0
-					M.icon = null
-					M.overlays.Cut()
-					M.invisibility = 101
-					for(var/obj/item/W in M)
-						if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
-							qdel(W)
-							continue
-						W.layer = initial(W.layer)
-						W.loc = M.loc
-						W.dropped(M)
-					var/mob/living/carbon/slime/new_mob = new /mob/living/carbon/slime(M.loc)
-					new_mob.a_intent = "harm"
-					new_mob.universal_speak = 1
-					if(M.mind)
-						M.mind.transfer_to(new_mob)
-					else
-						new_mob.key = M.key
-					qdel(M)
-				..()
-				return
 
 		space_drugs
 			name = "Space drugs"
@@ -2340,11 +2312,6 @@ datum
 					id = "rewriter"
 					color = "#485000" // rgb:72, 080, 0
 
-					on_mob_life(var/mob/living/M as mob)
-						..()
-						M.Jitter(5)
-						return
-
 		hippies_delight
 			name = "Hippie's Delight"
 			id = "hippiesdelight"
@@ -2367,8 +2334,6 @@ datum
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
 						if (!M.stuttering) M.stuttering = 1
-						M.Jitter(40)
-						M.Dizzy(40)
 						M.druggy = max(M.druggy, 60)
 						if(prob(30)) M.emote(pick("twitch","giggle"))
 				holder.remove_reagent(src.id, 0.2)
@@ -2568,7 +2533,6 @@ datum
 					//	M:sleeping = max(0,M.sleeping-2)
 					if (M.bodytemperature > 310)
 						M.bodytemperature = max(310, M.bodytemperature-5)
-					M.Jitter(1)
 					return
 
 
