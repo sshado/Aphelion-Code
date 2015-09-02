@@ -15,8 +15,6 @@
 	var/ammo_type = /obj/item/weapon/grenade
 	var/unloaded
 
-	m_amt = 2000
-
 	examine()
 		set src in view()
 		..()
@@ -69,6 +67,7 @@
 			spawn(15)
 				F.prime()
 
+/*
 /obj/item/weapon/gun/grenadelauncher/piecannon
 	name = "pie cannon"
 	icon = 'icons/obj/gun.dmi'
@@ -113,3 +112,6 @@
 	P.throw_at(target, 30, 2, user)
 	if(!grenades.len)
 		icon_state = "piecannon0"
+*/
+
+

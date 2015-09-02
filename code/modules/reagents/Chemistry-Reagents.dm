@@ -2135,11 +2135,6 @@ datum
 					..()
 					return
 
-				overdose_process(var/mob/living/M as mob)
-					if(volume > 45)
-					..()
-					return
-
 				icecoffee
 					name = "Iced Coffee"
 					id = "icecoffee"

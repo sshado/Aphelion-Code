@@ -23,6 +23,9 @@
 /obj/item/weapon/reagent_containers/borghypo/crisis
 	reagent_ids = list("salglu_solution", "epinephrine", "sal_acid")
 
+/obj/item/weapon/reagent_containers/borghypo/service
+	reagent_ids = list("beer")
+
 /obj/item/weapon/reagent_containers/borghypo/New()
 	..()
 	for(var/R in reagent_ids)
@@ -83,8 +86,8 @@
 			return
 		else if(affected.status & ORGAN_ROBOT)
 			user << "<span class='danger'>You cannot inject a robotic limb.</span>"
-			return	
-	
+			return
+
 	if (R.total_volume && M.can_inject(user,1))
 		user << "<span class='notice'>You inject [M] with the injector.</span>"
 		M << "<span class='notice'>You feel a tiny prick!</span>"
