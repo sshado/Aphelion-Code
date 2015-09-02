@@ -4,6 +4,7 @@
 
 obj/item/weapon/modular_firearms/chamber
 	var/caliber = null
+	var/projectile_type = null
 	icon = 'icons/placeholder.dmi'
 
 obj/item/weapon/modular_firearms/chamber/a357
@@ -68,7 +69,6 @@ obj/item/weapon/modular_firearms/chamber/a556
 	caliber = "a556"
 
 obj/item/weapon/modular_firearms/chamber/energy
-	var/projectile_type = null
 
 obj/item/weapon/modular_firearms/chamber/energy/laser
 	name = "laser emitter"
