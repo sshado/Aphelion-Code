@@ -1538,7 +1538,6 @@
 #include "code\modules\reagents\grenade_launcher.dm"
 #include "code\modules\reagents\reagent_containers.dm"
 #include "code\modules\reagents\reagent_dispenser.dm"
-#include "code\modules\reagents\syringe_gun.dm"
 #include "code\modules\reagents\newchem\Blob-Reagents.dm"
 #include "code\modules\reagents\newchem\chem_heater.dm"
 #include "code\modules\reagents\newchem\drinks.dm"

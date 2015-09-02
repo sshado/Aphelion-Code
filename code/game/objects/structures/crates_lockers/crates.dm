@@ -160,7 +160,7 @@
 
 /obj/structure/closet/crate/secure/proc/set_locked(var/newlocked, mob/user = null)
 	if(locked == newlocked) return
-	
+
 	locked = newlocked
 	if(user)
 		for(var/mob/O in viewers(user, 3))
@@ -347,10 +347,10 @@
 
 /obj/structure/closet/crate/freezer/rations/New()
 	..()
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/liquidfood(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"
