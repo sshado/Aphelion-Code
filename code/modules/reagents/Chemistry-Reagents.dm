@@ -219,9 +219,9 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(30))		// Nasty, you drank this stuff? 30% chance of the fakevomit (non-stunning version)
 					if(prob(50))	// 50/50 chance of green vomit vs normal vomit
-						M.fakevomit(1)
+						M.vomit(1)
 					else
-						M.fakevomit(0)
+						M.vomit(0)
 					..()
 				return
 
@@ -233,7 +233,7 @@ datum
 			reagent_state = LIQUID
 			color = "#0064C877"
 			metabolization_rate = REAGENTS_METABOLISM * 10
-		touch_turf(var/turf/simulated/T)
+		trans_to_turf(var/turf/simulated/T)
 			if(!istype(T))
 				return
 			var/datum/gas_mixture/environment = T.return_air()

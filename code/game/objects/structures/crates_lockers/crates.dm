@@ -350,7 +350,6 @@
 	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
 	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
 	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
-	new /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers(src)
 
 /obj/structure/closet/crate/bin
 	name = "large bin"

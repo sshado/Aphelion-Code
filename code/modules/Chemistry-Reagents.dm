@@ -221,9 +221,9 @@ datum
 				if(!M) M = holder.my_atom
 				if(prob(30))		// Nasty, you drank this stuff? 30% chance of the fakevomit (non-stunning version)
 					if(prob(50))	// 50/50 chance of green vomit vs normal vomit
-						M.fakevomit(1)
+						M.vomit(1)
 					else
-						M.fakevomit(0)
+						M.vomit(0)
 					..()
 				return
 
@@ -2587,7 +2587,7 @@ datum
 					M:drowsyness  = max(M:drowsyness, 0)
 				if(d >= vomit_start)
 					if(prob(8))
-						M.fakevomit()
+						M.vomit()
 				if(d >= pass_out)
 					M:paralysis = max(M:paralysis, 20/sober_str)
 					M:drowsyness  = max(M:drowsyness, 30/sober_str)

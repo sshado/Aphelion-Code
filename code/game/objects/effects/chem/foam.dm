@@ -38,9 +38,9 @@
 /obj/effect/effect/foam/proc/checkReagents() // transfer any reagents to the floor
 	if(!metal && reagents)
 		var/turf/T = get_turf(src)
-		reagents.touch_turf(T)
+		reagents.trans_to_turf(T)
 		for(var/obj/O in T)
-			reagents.touch_obj(O)
+			reagents.trans_to_obj(O)
 
 /obj/effect/effect/foam/process()
 	if(--amount < 0)

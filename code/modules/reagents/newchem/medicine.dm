@@ -202,7 +202,7 @@ datum/reagent/calomel/on_mob_life(var/mob/living/M as mob)
 	if(M.health > 20)
 		M.adjustToxLoss(5*REM)
 	if(prob(10))
-		M.fakevomit()
+		M.vomit()
 	..()
 	return
 
@@ -369,7 +369,6 @@ datum/reagent/ephedrine/on_mob_life(var/mob/living/M as mob)
 	M.AdjustParalysis(-1)
 	M.AdjustStunned(-1)
 	M.AdjustWeakened(-1)
-	M.adjustStaminaLoss(-1*REM)
 	..()
 	return
 
@@ -465,8 +464,6 @@ datum/reagent/morphine/overdose_process(var/mob/living/M as mob)
 		var/obj/item/I = M.get_active_hand()
 		if(I)
 			M.drop_item()
-		M.Dizzy(1)
-		M.Jitter(1)
 	..()
 	return
 
@@ -475,8 +472,6 @@ datum/reagent/morphine/addiction_act_stage1(var/mob/living/M as mob)
 		var/obj/item/I = M.get_active_hand()
 		if(I)
 			M.drop_item()
-		M.Dizzy(2)
-		M.Jitter(2)
 	..()
 	return
 datum/reagent/morphine/addiction_act_stage2(var/mob/living/M as mob)
@@ -485,8 +480,6 @@ datum/reagent/morphine/addiction_act_stage2(var/mob/living/M as mob)
 		if(I)
 			M.drop_item()
 		M.adjustToxLoss(1*REM)
-		M.Dizzy(3)
-		M.Jitter(3)
 	..()
 	return
 datum/reagent/morphine/addiction_act_stage3(var/mob/living/M as mob)
@@ -495,8 +488,6 @@ datum/reagent/morphine/addiction_act_stage3(var/mob/living/M as mob)
 		if(I)
 			M.drop_item()
 		M.adjustToxLoss(2*REM)
-		M.Dizzy(4)
-		M.Jitter(4)
 	..()
 	return
 datum/reagent/morphine/addiction_act_stage4(var/mob/living/M as mob)
@@ -505,8 +496,6 @@ datum/reagent/morphine/addiction_act_stage4(var/mob/living/M as mob)
 		if(I)
 			M.drop_item()
 		M.adjustToxLoss(3*REM)
-		M.Dizzy(5)
-		M.Jitter(5)
 	..()
 	return
 
@@ -568,8 +557,6 @@ datum/reagent/atropine/on_mob_life(var/mob/living/M as mob)
 datum/reagent/atropine/overdose_process(var/mob/living/M as mob)
 	if(prob(50))
 		M.adjustToxLoss(2*REM)
-		M.Dizzy(1)
-		M.Jitter(1)
 	..()
 	return
 
@@ -605,7 +592,6 @@ datum/reagent/epinephrine/on_mob_life(var/mob/living/M as mob)
 
 datum/reagent/epinephrine/overdose_process(var/mob/living/M as mob)
 	if(prob(33))
-		M.adjustStaminaLoss(5*REM)
 		M.adjustToxLoss(2*REM)
 		M.losebreath++
 	..()
@@ -626,44 +612,6 @@ datum/reagent/strange_reagent
 	reagent_state = LIQUID
 	color = "#A0E85E"
 	metabolization_rate = 0.2
-
-datum/reagent/strange_reagent/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume)
-	if(istype(M, /mob/living/simple_animal))
-		if(method == TOUCH)
-			if(M.stat == DEAD)
-				M.health = M.maxHealth
-				M.visible_message("<span class='warning'>[M] seems to rise from the dead!</span>")
-	if(istype(M, /mob/living/carbon))
-		if(method == INGEST)
-			if(M.stat == DEAD)
-				if(M.getBruteLoss()+M.getFireLoss() >= 150)
-					M.visible_message("<span class='warning'>[M]'s body starts convulsing!</span>")
-					M.gib()
-					return
-				var/mob/dead/observer/ghost = M.get_ghost()
-				if(ghost)
-					ghost << "<span class='ghostalert'>Your are attempting to be revived with Strange Reagent. Return to your body if you want to be revived!</span> (Verbs -> Ghost -> Re-enter corpse)"
-					M.visible_message("<span class='notice'>[M] doesn't appear to respond, perhaps try again later?</span>")
-				if(!M.suiciding && !ghost && !(NOCLONE in M.mutations))
-					M.visible_message("<span class='warning'>[M] seems to rise from the dead!</span>")
-					M.stat = 1
-					M.setOxyLoss(0)
-					M.adjustBruteLoss(rand(0,15))
-					M.adjustToxLoss(rand(0,15))
-					M.adjustFireLoss(rand(0,15))
-					dead_mob_list -= M
-					living_mob_list |= list(M)
-					add_logs(M, M, "revived", object="strange reagent")
-	..()
-	return
-
-datum/reagent/strange_reagent/on_mob_life(var/mob/living/M as mob)
-	if(!M) M = holder.my_atom
-	if(prob(10))
-		M.adjustBruteLoss(2*REM)
-		M.adjustToxLoss(2*REM)
-	..()
-	return
 
 /datum/chemical_reaction/strange_reagent
 	name = "Strange Reagent"
@@ -738,10 +686,6 @@ proc/chemical_mob_spawn(var/datum/reagents/holder, var/amount_to_spawn, var/reac
 	description = "Mannitol is a sugar alcohol that can help alleviate cranial swelling."
 	color = "#D1D1F1"
 
-/datum/reagent/mutadone/on_mob_life(var/mob/living/carbon/human/M as mob)
-	M.jitteriness = 0
-	var/needs_update = 1 //M.mutations.len > 0
-
 /datum/chemical_reaction/mutadone
 	name = "Mutadone"
 	id = "mutadone"
@@ -794,7 +738,6 @@ datum/reagent/stimulants/on_mob_life(var/mob/living/M as mob)
 	M.adjustToxLoss(-5*REM)
 	M.adjustBruteLoss(-10*REM)
 	M.adjustFireLoss(-10*REM)
-	M.setStaminaLoss(0)
 	var/status = CANSTUN | CANWEAKEN | CANPARALYSE
 	M.status_flags &= ~status
 	..()

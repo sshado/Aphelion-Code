@@ -202,7 +202,7 @@ datum/reagent/calomel/on_mob_life(var/mob/living/M as mob)
 	if(M.health > 20)
 		M.adjustToxLoss(5*REM)
 	if(prob(10))
-		M.fakevomit()
+		M.vomit()
 	..()
 	return
 
