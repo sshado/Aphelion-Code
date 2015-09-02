@@ -37,7 +37,6 @@ obj/item/weapon/modular_firearms/chamber/a12mm
 	desc = "Compatible with 12mm ammunition."
 	caliber = "12mm"
 
-12mm
 obj/item/weapon/modular_firearms/chamber/c45
 	name = ".45 chamber"
 	desc = "Compatible with .45 ammunition."
