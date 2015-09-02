@@ -2,6 +2,7 @@
 //Options are ballistic and energy, for the moment
 
 obj/item/weapon/modular_firearms/chassis
+	icon = 'icons/placeholder.dmi'
 	var/weight = 2
 
 obj/item/weapon/modular_firearms/chassis/energy

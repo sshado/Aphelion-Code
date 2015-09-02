@@ -2,3 +2,4 @@
 //Without this, the gun won't work. it's basically to stop people making guns and going on a rampage.
 
 obj/item/weapon/modular_firearms/lockpin
+	icon = 'icons/placeholder.dmi'

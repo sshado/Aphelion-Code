@@ -23,13 +23,13 @@ obj/item/weapon/modular_firearms/assembly
 	var/modLock = null
 	var/modSight = null
 	var/modMisc = list()
-	var/list/allowed_projectiles = list()
 	var/projectile_type = null
 	var/framelevel = 2
 	var/chargecost = null
 	var/weight = 1
 	var/isEnergy = null
 	var/isKinetic = null
+	var/caliber
 	var/silenced = null
 	var/accuracy_mod = null
 	var/compensated = null
@@ -48,7 +48,7 @@ obj/item/weapon/modular_firearms/assembly
 				isEnergy = 1
 			if(istype(I, /obj/item/weapon/modular_firearms/chassis/ballistic))
 				isKinetic = 1
-			user << "\blue You install the [I] onto the [src]."
+			user << "\blue You install the [I] onto the [src]. Now you should install a chamber."
 		//	weight = I.weight + weight
 			buildstage += 1
 		else
@@ -66,17 +66,16 @@ obj/item/weapon/modular_firearms/assembly
 					projectile_type = chamber.projectile_type
 				else
 					user << "\red A ballistic chamber won't work with an energy chassis!"
-			if(chamber.allowed_projectiles)
-				for(chamber.allowed_projectiles)
-					if(isKinetic)
-						allowed_projectiles += chamber.allowed_projectiles
-					else
-						user << "\red An energy chamber won't work with a ballistic chassis!"
-			user << "\blue You install the [I] onto the [src]."
+			if(chamber.caliber)
+				if(isKinetic)
+					caliber = chamber.caliber
+				else
+					user << "\red An energy chamber won't work with a ballistic chassis!"
+			user << "\blue You install the [I] onto the [src]. Now you should install the driver."
 		//	weight = I.weight + weight
 			buildstage += 1
 		else
-			user << "\red You must install a chassis first!"
+			user << "\red You must install a chamber first!"
 
 	else if(buildstage == 3)
 		if(istype(I, /obj/item/weapon/modular_firearms/driver))

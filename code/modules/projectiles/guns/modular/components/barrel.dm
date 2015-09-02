@@ -2,3 +2,4 @@
 //For energy weapons, this refers to focusing chambers.
 
 obj/item/weapon/modular_firearms/barrel
+	icon = 'icons/placeholder.dmi'
