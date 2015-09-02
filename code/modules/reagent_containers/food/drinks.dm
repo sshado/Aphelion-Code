@@ -138,7 +138,7 @@
 		return
 
 	attackby(var/obj/item/I, mob/user as mob, params)
-		if(istype(I, /obj/item/clothing/mask/cigarette)) //ciggies are weird
+		if(istype(I, /obj/item/clothing/mask/smokable/cigarette)) //ciggies are weird
 			return
 		if(is_hot(I))
 			if(src.reagents)

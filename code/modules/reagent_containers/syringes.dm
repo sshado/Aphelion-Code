@@ -157,18 +157,18 @@
 				if(istype(target, /obj/item/weapon/implantcase/chem))
 					return
 
-				if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
+				if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
 					user << "\red You cannot directly fill this object."
 					return
-				if(istype(target, /obj/item/clothing/mask/cigarette))
-					var/obj/item/clothing/mask/cigarette/C = target
+				if(istype(target, /obj/item/clothing/mask/smokable/cigarette))
+					var/obj/item/clothing/mask/smokable/cigarette/C = target
 					if(istype(C.loc, /obj/item/weapon/storage/fancy/cigarettes))
 						user << "\red You cannot inject a cigarette while it's still in the pack."
 						return
 				if(target.reagents.total_volume >= target.reagents.maximum_volume)
 					user << "\red [target] is full."
 					return
-					
+
 				var/mob/living/carbon/human/H = target
 				if(istype(H))
 					var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)

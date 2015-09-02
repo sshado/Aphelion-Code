@@ -219,7 +219,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris/attackby(var/obj/item/W as obj, var/mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/rollingpaper))
 		user.unEquip(W)
-		var/obj/item/clothing/mask/cigarette/joint/J = new /obj/item/clothing/mask/cigarette/joint(user.loc)
+		var/obj/item/clothing/mask/smokable/cigarette/joint/J = new /obj/item/clothing/mask/smokable/cigarette/joint(user.loc)
 		J.chem_volume = src.reagents.total_volume
 		src.reagents.trans_to(J, J.chem_volume)
 		del(W)
@@ -241,7 +241,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus/attackby(var/obj/item/W as obj, var/mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/rollingpaper))
 		user.unEquip(W)
-		var/obj/item/clothing/mask/cigarette/joint/deus/J = new /obj/item/clothing/mask/cigarette/joint/deus(user.loc)
+		var/obj/item/clothing/mask/smokable/cigarette/joint/deus/J = new /obj/item/clothing/mask/smokable/cigarette/joint/deus(user.loc)
 		J.chem_volume = src.reagents.total_volume
 		src.reagents.trans_to(J, J.chem_volume)
 		del(W)
