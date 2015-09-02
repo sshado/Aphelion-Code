@@ -605,6 +605,20 @@ datum
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+/datum/reagents/proc/get_free_space() // Returns free space.
+	return maximum_volume - total_volume
+
+/datum/reagents/proc/get_master_reagent() // Returns reference to the reagent with the biggest volume.
+	var/the_reagent = null
+	var/the_volume = 0
+
+	for(var/datum/reagent/A in reagent_list)
+		if(A.volume > the_volume)
+			the_volume = A.volume
+			the_reagent = A
+
+	return the_reagent
+
 /datum/reagents/proc/trans_to_holder(var/datum/reagents/target, var/amount = 1, var/multiplier = 1, var/copy = 0) // Transfers [amount] reagents from [src] to [target], multiplying them by [multiplier]. Returns actual amount removed from [src] (not amount transferred to [target]).
 // Attempts to place a reagent on the mob's skin.
 // Reagents are not guaranteed to transfer to the target.

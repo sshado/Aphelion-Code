@@ -48,7 +48,7 @@
 		if(M == user)								//If you're eating it yourself
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
+				if(!H.check_mouth_coverage())
 					user << "Where do you intend to put \the [src]? You don't have a mouth!"
 					return
 			if (fullness <= 50)
@@ -65,7 +65,7 @@
 		else
 			if(istype(M,/mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
-				if(!H.check_has_mouth())
+				if(!H.check_mouth_coverage())
 					user << "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!"
 					return
 

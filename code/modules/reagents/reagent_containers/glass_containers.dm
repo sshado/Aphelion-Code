@@ -27,7 +27,7 @@
 		/obj/machinery/atmospherics/unary/cryo_cell,
 		/obj/machinery/dna_scannernew,
 		/obj/item/weapon/grenade/chem_grenade,
-		/obj/machinery/bot/medbot,
+		/mob/living/bot/medbot,
 		/obj/item/weapon/storage/secure/safe,
 		/obj/machinery/iv_drip,
 		/obj/machinery/disease2/incubator,
@@ -121,17 +121,6 @@
 				user << "\red [target] is full."
 				return
 
-			// /vg/: Logging transfers of bad things
-			if(target.reagents_to_log.len)
-				var/list/badshit=list()
-				for(var/bad_reagent in target.reagents_to_log)
-					if(reagents.has_reagent(bad_reagent))
-						badshit += reagents_to_log[bad_reagent]
-				if(badshit.len)
-					var/hl="\red <b>([english_list(badshit)])</b> \black"
-					message_admins("[key_name_admin(user)] added [reagents.get_reagent_ids(1)] to \a [target] with [src].[hl]")
-					log_game("[key_name(user)] added [reagents.get_reagent_ids(1)] to \a [target] with [src].")
-
 			var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
 			user << "\blue You transfer [trans] units of the solution to [target]."
 
@@ -152,8 +141,6 @@
 
 
 	attackby(var/obj/item/I, mob/user as mob, params)
-		if(istype(I, /obj/item/clothing/mask/cigarette)) //ciggies are weird
-			return
 		if(is_hot(I))
 			if(src.reagents)
 				src.reagents.chem_temp += 15
@@ -274,7 +261,6 @@
 	name = "large beaker"
 	desc = "A large beaker. Can hold up to 100 units."
 	icon_state = "beakerlarge"
-	g_amt = 2500
 	volume = 100
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,50,100)
