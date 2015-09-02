@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/weapon/reagent_containers/glass
 	name = " "
-	var/base_name = " "
 	desc = " "
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
@@ -16,11 +15,9 @@
 	flags = OPENCONTAINER
 	unacidable = 1 //glass doesn't dissolve in acid
 
-	var/label_text = ""
-
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
-		/obj/machinery/chemical_dispenser,
+//		/obj/machinery/chemical_dispenser,
 		/obj/machinery/reagentgrinder,
 		/obj/structure/table,
 		/obj/structure/closet,
@@ -30,7 +27,7 @@
 		/obj/machinery/dna_scannernew,
 		/obj/item/weapon/grenade/chem_grenade,
 		/mob/living/bot/medbot,
-		/obj/machinery/computer/pandemic,
+//		/obj/machinery/computer/pandemic,
 		/obj/item/weapon/storage/secure/safe,
 		/obj/machinery/iv_drip,
 		/obj/machinery/disease2/incubator,
@@ -78,18 +75,6 @@
 		for(var/type in can_be_placed_into)
 			if(istype(target, type))
 				return
-
-		if(standard_splash_mob(user, target))
-			return
-		if(standard_dispenser_refill(user, target))
-			return
-		if(standard_pour_into(user, target))
-			return
-
-		if(reagents.total_volume)
-			user << "<span class='notice'>You splash the solution onto [target].</span>"
-			reagents.splash(target, reagents.total_volume)
-			return
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
@@ -150,7 +135,6 @@
 				if(80 to 90)	filling.icon_state = "[icon_state]80"
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
 
-			filling.color = reagents.get_color()
 			overlays += filling
 
 		if (!is_open_container())
