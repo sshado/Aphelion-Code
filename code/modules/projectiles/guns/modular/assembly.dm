@@ -21,6 +21,7 @@ obj/item/weapon/modular_firearms/assembly
 	var/modBarrel = null
 	var/modStock = null
 	var/modLock = null
+	var/firemode = /datum/firemode/modular
 	var/modSight = null
 	var/modMisc = list()
 	var/projectile_type = null
@@ -36,6 +37,12 @@ obj/item/weapon/modular_firearms/assembly
 	var/haspin = 0
 	var/buildstage = 1
 	var/list/components = new/list()
+	var/burst = 1
+	var/burst_delay = null
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(0)
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
 	if(buildstage == 1)
@@ -82,6 +89,15 @@ obj/item/weapon/modular_firearms/assembly
 			user.drop_item()
 			I.loc = src
 			components += I
+			modDriver = I
+			var/obj/item/weapon/modular_firearms/driver/D = I
+			burst = D.burst
+			burst_delay = D.burst_delay
+			fire_delay = D.fire_delay
+			move_delay = D.move_delay
+			accuracy = D.accuracy
+			dispersion = D.dispersion
+			user << "\blue You install the [I] into the [src]."
 			buildstage += 1
 
 	else if(buildstage == 4)
