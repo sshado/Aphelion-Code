@@ -19,8 +19,6 @@ datum/reagents/proc/metabolize(var/mob/M)
 		var/datum/reagent/R = A
 		if(!istype(R))
 			continue
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
 		//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
 		//If you got this far, that means we can process whatever reagent this iteration is for. Handle things normally from here.
 		if(M && R)
