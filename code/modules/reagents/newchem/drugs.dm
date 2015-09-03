@@ -404,8 +404,6 @@
 	M.AdjustParalysis(-2)
 	M.AdjustStunned(-2)
 	M.AdjustWeakened(-2)
-	M.adjustStaminaLoss(-2)
-	M.Jitter(3)
 	M.adjustBrainLoss(0.5)
 	if(prob(5))
 		M.emote(pick("twitch", "shiver"))

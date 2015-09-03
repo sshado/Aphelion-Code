@@ -201,8 +201,6 @@ datum/reagent/calomel/on_mob_life(var/mob/living/M as mob)
 			M.reagents.remove_reagent(R.id,5)
 	if(M.health > 20)
 		M.adjustToxLoss(5*REM)
-	if(prob(10))
-		M.vomit()
 	..()
 	return
 

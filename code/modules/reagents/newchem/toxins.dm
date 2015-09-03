@@ -527,8 +527,6 @@ datum/reagent/tabun/on_mob_life(var/mob/living/M as mob)
 		M.drop_r_hand()
 	if(prob(5))
 		M.confused = max(M.confused, 3)
-	if(prob(15))
-		M.vomit()
 	if(prob(2))
 		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>You have a seizure!</span>")
 		M.Paralyse(5)
@@ -564,17 +562,6 @@ datum/reagent/atrazine/on_mob_life(var/mob/living/M as mob)
 	return
 
 			// Clear off wallrot fungi
-datum/reagent/atrazine/reaction_turf(var/turf/T, var/volume)
-	if(istype(T, /turf/simulated/wall))
-		var/turf/simulated/wall/W = T
-		if(W.rotting)
-			W.rotting = 0
-			for(var/obj/effect/E in W)
-				if(E.name == "Wallrot")
-					qdel(E)
-
-			for(var/mob/O in viewers(W, null))
-				O.show_message(text("\blue The fungi are completely dissolved by the solution!"), 1)
 
 datum/reagent/atrazine/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 	src = null
@@ -655,12 +642,8 @@ datum/reagent/toxic_slurry/on_mob_life(var/mob/living/M as mob)
 	if(prob(10))
 		M.adjustToxLoss(rand(2,4))
 	if(prob(7))
-		switch(pick(1,2))
-			if(1)
-				M.vomit(1)
-			if(2)
-				M.Stun(rand(4,10))
-				M << "<span class='warning'>A horrible migraine overpowers you.</span>"
+		M.Stun(rand(4,10))
+		M << "<span class='warning'>A horrible migraine overpowers you.</span>"
 	..()
 	return
 

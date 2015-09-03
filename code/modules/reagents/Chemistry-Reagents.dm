@@ -215,16 +215,6 @@ datum
 				if(method == INGEST)
 					M << "Oh god, why did you drink that?"
 
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(prob(30))		// Nasty, you drank this stuff? 30% chance of the fakevomit (non-stunning version)
-					if(prob(50))	// 50/50 chance of green vomit vs normal vomit
-						M.vomit(1)
-					else
-						M.vomit(0)
-					..()
-				return
-
 #define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
 			name = "Water"
@@ -268,7 +258,7 @@ datum
 					if(T.wet_overlay)
 						T.overlays -= T.wet_overlay
 						T.wet_overlay = null
-		touch_obj(var/obj/O)
+		trans_to_mob(var/obj/O)
 			if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
 				var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 				if(!cube.wrapped)
@@ -2328,8 +2318,6 @@ datum
 						if (!M.stuttering) M.stuttering = 1
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-
-						M.Dizzy(20)
 						M.druggy = max(M.druggy, 45)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
