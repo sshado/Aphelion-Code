@@ -149,10 +149,8 @@
 		if((istype(W, /obj/item/weapon/material/kitchen/utensil/knife) && !slice_path) || !istype(W, /obj/item/weapon/material/kitchen/utensil/knife))
 
 			var/obj/item/weapon/kitchen/utensil/U = W
-
 			if(!U.reagents)
 				U.create_reagents(5)
-
 			if (U.reagents.total_volume > 0)
 				user << "\red You already have something on your [U]."
 				return
@@ -245,7 +243,6 @@
 			if(bitecount >= 4)
 				M.visible_message("[M] [pick("burps from enjoyment", "yaps for more", "woofs twice", "looks at the area where \the [src] was")].","<span class=\"notice\">You swallow up the last part of \the [src].")
 				playsound(src.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
-				var/mob/living/simple_animal/pet/corgi/C = M
 				qdel(src)
 			else
 				M.visible_message("[M] takes a bite of \the [src].","<span class=\"notice\">You take a bite of \the [src].")
