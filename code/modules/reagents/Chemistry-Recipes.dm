@@ -19,6 +19,8 @@ datum
 		var/mix_message = "The solution begins to bubble."
 		var/mix_sound = 'sound/effects/bubbles.ogg'
 		var/no_message = 0
+		
+		var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 
 
 		proc
@@ -34,6 +36,7 @@ datum
 			required_reagents = list("water" = 1, "potassium" = 1)
 			result_amount = 2
 			mix_message = "The mixture explodes!"
+			log_is_important = 1
 
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/datum/effect/effect/system/reagents_explosion/e = new()
@@ -169,6 +172,7 @@ datum
 			name = "Nitroglycerin"
 			id = "nitroglycerin"
 			result = "nitroglycerin"
+			log_is_important = 1
 			required_reagents = list("glycerol" = 1, "facid" = 1, "sacid" = 1)
 			result_amount = 2
 			on_reaction(var/datum/reagents/holder, var/created_volume)
