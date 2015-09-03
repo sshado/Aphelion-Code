@@ -91,15 +91,19 @@ obj/item/weapon/modular_firearms/assembly
 			components += I
 			modDriver = I
 			var/obj/item/weapon/modular_firearms/driver/D = I
-			burst = D.burst
-			burst_delay = D.burst_delay
-			fire_delay = D.fire_delay
-			move_delay = D.move_delay
-			accuracy = D.accuracy
-			dispersion = D.dispersion
+			if(D.burst)
+				burst = D.burst
+				burst_delay = D.burst_delay
+				fire_delay = D.fire_delay
+				move_delay = D.move_delay
+				accuracy = D.accuracy
+				dispersion = D.dispersion
+			else
+				user << "\red How did you manage this?"
 			user << "\blue You install the [I] into the [src]."
 			buildstage += 1
-
+		else
+			user << "\red You must install a driver first!"
 	else if(buildstage == 4)
 		if(istype(I, /obj/item/weapon/modular_firearms/loader))
 			user.drop_item()
