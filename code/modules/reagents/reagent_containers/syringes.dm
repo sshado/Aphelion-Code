@@ -440,7 +440,7 @@
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
 
-
+proc/syringe_broken(mob/living/carbon/target, mob/living/carbon/user)
 /obj/item/weapon/reagent_containers/syringe/antiviral
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."
