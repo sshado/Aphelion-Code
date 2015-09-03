@@ -46,7 +46,6 @@
 		..()
 		update_icon()
 
-
 	attackby(obj/item/I as obj, mob/user as mob, params)
 
 		return
@@ -64,12 +63,11 @@
 			user << "\red This syringe is broken!"
 			return
 
-/*		if (user.a_intent == "harm" && ismob(target))
+		if (user.a_intent == "harm" && ismob(target))
 			if((CLUMSY in user.mutations) && prob(50))
 				target = user
 			syringestab(target, user)
-			return */
-
+			return 
 
 		switch(mode)
 			if(SYRINGE_DRAW)
@@ -93,7 +91,6 @@
 						if(NOCLONE in T.mutations) //target done been et, no more blood in him
 							user << "\red You are unable to locate any blood."
 							return
-
 
 						var/time = 30 //Injecting through a hardsuit takes longer due to needing to find a port.
 						if(istype(target,/mob/living/carbon/human))
@@ -214,34 +211,15 @@
 				if(ismob(target) && target == user)
 					src.reagents.reaction(target, INGEST)
 
-				if(isobj(target))
-
-				spawn(5)
-					var/datum/reagent/blood/B
-					for(var/datum/reagent/blood/d in src.reagents.reagent_list)
-						B = d
-						break
-					var/datum/reagent/water/W
-					for(var/datum/reagent/water/r in src.reagents.reagent_list)
-						W = r
-						break
 					var/trans
-					if(W && istype(target,/mob/living/carbon/slime))
-						var/mob/living/carbon/slime/S = target
-						S.vessel.add_reagent("water", 5)
-						S.vessel.update_total()
-					if(B && istype(target,/mob/living/carbon))
-						if(istype(target,/mob/living/carbon/slime))
-							var/mob/living/carbon/human/slime/S = target
-							S.reagents.add_reagent("blood", 5)
-							S.reagents.update_total()
-						else
-							var/mob/living/carbon/C = target
-							C.inject_blood(src,5)
+					if(ismob(target))
+						var/contained = reagentlist()
+						trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
+						admin_inject_log(user, target, src, contained, trans)
 					else
-						trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
-					user << "\blue You inject [trans] units of the solution. The syringe now contains [src.reagents.total_volume] units."
-					if (reagents.total_volume <= 0 && mode==SYRINGE_INJECT)
+						trans = reagents.trans_to(target, amount_per_transfer_from_this)
+					user << "<span class='notice'>You inject [trans] units of the solution. The syringe now contains [src.reagents.total_volume] units.</span>"
+					if (reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 						mode = SYRINGE_DRAW
 						update_icon()
 
@@ -321,7 +299,6 @@
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		var/trans = reagents.trans_to(target, syringestab_amount_transferred, CHEM_BLOOD)
 		if(isnull(trans)) trans = 0
-		admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 		break_syringe(target, user)
 
 	proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
