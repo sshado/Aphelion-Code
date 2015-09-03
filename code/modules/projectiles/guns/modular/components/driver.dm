@@ -18,3 +18,53 @@ obj/item/weapon/modular_firearms/driver
 	var/move_delay = 1
 	var/list/accuracy = list(0)
 	var/list/dispersion = list(0)
+	
+obj/item/weapon/modular_firearms/driver/autoinacc
+	name = "rapid-automatic driver"
+	icon = 'icons/placeholder.dmi'
+	var/burst = 7
+	var/burst_delay = null
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(1.5)
+
+obj/item/weapon/modular_firearms/driver/semiauto
+	name = "semi-automatic driver"
+	icon = 'icons/placeholder.dmi'
+	var/burst = 1
+	var/burst_delay = null
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(0)
+	
+obj/item/weapon/modular_firearms/driver/burst3
+	name = "burst driver"
+	icon = 'icons/placeholder.dmi'
+	var/burst = 3
+	var/burst_delay = null
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(0.4)
+	
+obj/item/weapon/modular_firearms/driver/auto
+	name = "automatic driver"
+	icon = 'icons/placeholder.dmi'
+	var/burst = 5
+	var/burst_delay = null
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(0.5)
+	
+obj/item/weapon/modular_firearms/driver/preciseburst
+	name = "precision burst driver"
+	icon = 'icons/placeholder.dmi'
+	var/burst = 3
+	var/burst_delay = 1
+	var/fire_delay = null
+	var/move_delay = 1
+	var/list/accuracy = list(0)
+	var/list/dispersion = list(0.2)
