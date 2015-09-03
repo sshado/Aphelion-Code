@@ -11,18 +11,13 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
-	matter = list("glass" = 150)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null //list(5,10,15)
 	volume = 15
 	w_class = 1
-	slot_flags = SLOT_EARS
 	sharp = 1
-	unacidable = 1
 	var/mode = SYRINGE_DRAW
 	var/image/filling //holds a reference to the current filling overlay
-	var/visible_name = "a syringe"
-	
 	on_reagent_change()
 		update_icon()
 
@@ -323,15 +318,12 @@
 		src.reagents.reaction(target, INGEST)
 		var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
 		src.reagents.trans_to(target, syringestab_amount_transferred)
-		
-		proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
-		desc += " It is broken."
-		mode = SYRINGE_BROKEN
-		if(target)
-			add_blood(target)
-		if(user)
-			add_fingerprint(user)
-		update_icon()
+		src.desc += " It is broken."
+		src.mode = SYRINGE_BROKEN
+		src.add_blood(target)
+		src.add_fingerprint(usr)
+		src.update_icon()
+
 
 /obj/item/weapon/reagent_containers/ld50_syringe
 	name = "Lethal Injection Syringe"
@@ -376,7 +368,6 @@
 
 				if(reagents.total_volume >= reagents.maximum_volume)
 					user << "\red The syringe is full."
-					mode = SYRINGE_INJECT
 					return
 
 				if(ismob(target))
