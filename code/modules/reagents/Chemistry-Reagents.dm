@@ -1286,7 +1286,7 @@ datum
 		spores
 			name = "Spore Toxin"
 			id = "spores"
-			description = "A toxic spore cloud which blocks vision when trans_to_ingest."
+			description = "A toxic spore cloud which blocks vision when ingested."
 			color = "#9ACD32"
 
 			on_mob_life(var/mob/living/M as mob)

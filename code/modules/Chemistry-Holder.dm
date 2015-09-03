@@ -121,7 +121,7 @@ datum
 				src.handle_reactions()
 				return amount
 
-			trans_to_ingest(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items trans_to_ingest. A delay is added between ingestion and addition of the reagents
+			trans_to_ingest(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items ingested. A delay is added between ingestion and addition of the reagents
 				if (!target )
 					return
 				if (!target.reagents || src.total_volume<=0)

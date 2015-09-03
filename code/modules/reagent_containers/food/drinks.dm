@@ -184,7 +184,7 @@
 
 
 ///////////////////////////////////////////////Drinks
-//Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be trans_to_ingest directly
+//Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be ingested directly
 //	rather then having to add it to something else first. They should only contain liquids. They have a default container size of 50.
 //	Formatting is the same as food.
 

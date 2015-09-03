@@ -122,7 +122,7 @@ datum
 				src.handle_reactions()
 				return amount
 
-			trans_to_ingest(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items trans_to_ingest. A delay is added between ingestion and addition of the reagents
+			trans_to_ingest(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items ingested. A delay is added between ingestion and addition of the reagents
 				if (!target )
 					return
 				if (!target.reagents || src.total_volume<=0)
@@ -193,6 +193,7 @@ datum
 				R.handle_reactions()
 				//src.handle_reactions() Don't need to handle reactions on the source since you're (presumably isolating and) transferring a specific reagent.
 				return amount
+
 /*
 				if (!target) return
 				var/total_transfered = 0
@@ -224,6 +225,7 @@ datum
 
 				return total_transfered
 */
+
 
 			conditional_update_move(var/atom/A, var/Running = 0)
 				for(var/datum/reagent/R in reagent_list)
@@ -361,6 +363,7 @@ datum
 						my_atom.on_reagent_change()
 						return 0
 
+
 				return 1
 
 			update_total()
@@ -373,7 +376,7 @@ datum
 
 				return 0
 
-			del_reagent()
+			clear_reagents()
 				for(var/datum/reagent/R in reagent_list)
 					del_reagent(R.id)
 				return 0
@@ -636,7 +639,7 @@ datum
 			var/datum/reagents/R = C.reagents
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_INGEST)
-			var/datum/reagents/R = C.trans_to_ingest
+			var/datum/reagents/R = C.ingested
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_TOUCH)
 			var/datum/reagents/R = C.touching

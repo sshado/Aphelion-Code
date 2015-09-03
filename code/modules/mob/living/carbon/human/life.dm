@@ -863,7 +863,7 @@
 			analgesic = 0
 
 			if(touching) touching.metabolize()
-			if(trans_to_ingest) trans_to_ingest.metabolize()
+			if(ingested) ingested.metabolize()
 			if(bloodstr) bloodstr.metabolize()
 
 			if(CE_PAINKILLER in chem_effects)
