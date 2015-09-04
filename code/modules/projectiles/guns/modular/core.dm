@@ -1,4 +1,4 @@
-/datum/firemode/modular
+/*/datum/firemode/modular
 	name = "modular-default"
 	burst = 1
 	burst_delay = null
@@ -55,7 +55,7 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/tmp/lock_time = -100
 	*/
-
+/*
 /obj/item/weapon/gun/modular
 	name = "basic assembly"
 	desc = "The outer framework for a firearm of some kind. This one looks rather basic."
@@ -76,4 +76,4 @@
 	var/isEnergy = null
 	var/isKinetic = null
 
-
+*/
