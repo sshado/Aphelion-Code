@@ -63,14 +63,12 @@ obj/item/weapon/modular_firearms/assembly
 			if(chamber.projectile_type) //checking for energy weaponry
 				if(isEnergy)
 					continue
-	//				projectile_type = chamber.projectile_type //if it's an energy weapon, copy the beam type into the assembly
 				else
 					user << "\red A ballistic chamber won't work with an energy chassis!"
 					return
 			if(chamber.caliber) //checking for kinetic weaponry
 				if(isKinetic)
 					continue
-	//				caliber = chamber.caliber //if it's a kinetic weapon, copy the calibre into the assembly
 				else
 					user << "\red An energy chamber won't work with a ballistic chassis!"
 					return
@@ -103,14 +101,8 @@ obj/item/weapon/modular_firearms/assembly
 			components += I
 			modLoader = I
 			var/obj.item/weapon/modular_firearms/loader/L = I
-//			load_method = L.load_method //copy the firetype into the assembly
-//			handle_casings = L.handle_casings
 			if(!L.Eloader)
 				useBullet = 1
-		//		if(L.isbolt) //if it's a bolt weapon, set bolt to true
-		//			isbolt = 1
-		//		if(L.max_shells) //if it's a shotgun or a bolt action, set their max shell count
-		//			max_shells = L.max_shells
 			if(L.Eloader)
 				if(L.useCell)
 					useCell = 1
