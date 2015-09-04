@@ -62,13 +62,11 @@ obj/item/weapon/modular_firearms/assembly
 			var/obj/item/weapon/modular_firearms/chamber/chamber = I
 			if(chamber.projectile_type) //checking for energy weaponry
 				if(isEnergy)
-					continue
 				else
 					user << "\red A ballistic chamber won't work with an energy chassis!"
 					return
 			if(chamber.caliber) //checking for kinetic weaponry
 				if(isKinetic)
-					continue
 				else
 					user << "\red An energy chamber won't work with a ballistic chassis!"
 					return
@@ -86,7 +84,6 @@ obj/item/weapon/modular_firearms/assembly
 			modDriver = I
 			var/obj/item/weapon/modular_firearms/driver/D = I
 			if(D.firemodes)
-				continue
 			else
 				user << "\red How did you manage this?"
 				return
