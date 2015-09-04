@@ -223,7 +223,7 @@ datum
 			reagent_state = LIQUID
 			color = "#0064C877"
 			metabolization_rate = REAGENTS_METABOLISM * 10
-		datum/reagent/water/proc/touch_turf(var/turf/simulated/T)
+		trans_to_turf(var/turf/simulated/T)
 			if(!istype(T))
 				return
 			var/datum/gas_mixture/environment = T.return_air()
