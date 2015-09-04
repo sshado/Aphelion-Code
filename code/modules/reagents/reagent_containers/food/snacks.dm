@@ -104,15 +104,9 @@
 				reagents.reaction(M, INGEST)
 				spawn(0)
 					if(reagents.total_volume > bitesize)
-						/*
-						 * I totally cannot understand what this code supposed to do.
-						 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-						var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
-						reagents.trans_to(M, temp_bitesize)
-						*/
-						reagents.trans_to_ingest(M, bitesize)
+						reagents.trans_to_ingest(M, bitesize, CHEM_INGEST)
 					else
-						reagents.trans_to_ingest(M, reagents.total_volume)
+						reagents.trans_to_ingest(M, reagents.total_volume, CHEM_INGEST)
 					bitecount++
 					On_Consume(M)
 			return 1

@@ -44,7 +44,7 @@
 					if(safe_thing)
 						if(!safe_thing.reagents)
 							safe_thing.create_reagents(100)
-						trans = src.reagents.trans_to(safe_thing, amount_per_transfer_from_this)
+						trans = src.reagents.trans_to(safe_thing, amount_per_transfer_from_this, CHEM_INGEST)
 
 						for(var/mob/O in viewers(world.view, user))
 							O.show_message(text("\red <B>[] tries to squirt something into []'s eyes, but fails!</B>", user, target), 1)

@@ -32,7 +32,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, apply_type)
 				spawn(0)
-					reagents.trans_to_ingest(M, reagents.total_volume)
+					reagents.trans_to_ingest(M, reagents.total_volume, CHEM_INGEST)
 					qdel(src)
 			else
 				qdel(src)
@@ -66,7 +66,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, apply_type)
 				spawn(0)
-					reagents.trans_to_ingest(M, reagents.total_volume)
+					reagents.trans_to_ingest(M, reagents.total_volume, CHEM_INGEST)
 					qdel(src)
 			else
 				qdel(src)
