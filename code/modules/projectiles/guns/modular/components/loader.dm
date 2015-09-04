@@ -4,6 +4,9 @@ obj/item/weapon/modular_firearms/loader
 	icon = 'icons/placeholder.dmi'
 	var/load_method = null
 	var/isbolt = null
+	var/useCell = null
+	var/useSupply = null
+	var/Eloader = null
 	
 obj/item/weapon/modular_firearms/loader/magazine
 	name = "magazine loader"
@@ -31,3 +34,16 @@ obj/item/weapon/modular_firearms/loader/bolt
 	handle_casings = HOLD_CASINGS
 	max_shells = 1
 	isbolt = 1
+	
+obj/item/weapon/modular_firearms/loader/cellport
+	name = "cell port"
+	icon = 'icons/placeholder.dmi'
+	useCell = 1
+	Eloader = 1
+
+obj/item/weapon/modular_firearms/loader/powersupply
+	name = "internal power supply"
+	icon = 'icons/placeholder.dmi'
+	useSupply = 1
+	Eloader = 1
+
