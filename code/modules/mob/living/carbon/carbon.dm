@@ -1,11 +1,3 @@
-/mob/living/carbon/New()
-	//setup reagent holders
-	bloodstr = new/datum/reagents/proc/metabolize(1000, src, CHEM_BLOOD)
-	ingested = new/datum/reagents/proc/metabolize(1000, src, CHEM_INGEST)
-	touching = new/datum/reagents/proc/metabolize(1000, src, CHEM_TOUCH)
-	reagents = bloodstr
-
-	..()
 
 /mob/living/carbon/Life()
 	..()
@@ -17,9 +9,9 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
-	qdel(ingested)
-	qdel(touching)
-	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
+	qdel(INGEST)
+	qdel(TOUCH)
+	// We don't qdel(trans_to) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
 	for(var/food in stomach_contents)
@@ -27,9 +19,7 @@
 	return ..()
 
 /mob/living/carbon/rejuvenate()
-	bloodstr.clear_reagents()
-	ingested.clear_reagents()
-	touching.clear_reagents()
+	/datum/reagents/Destroy()
 	..()
 
 /mob/living/carbon/Move(NewLoc, direct)
