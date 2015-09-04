@@ -155,13 +155,6 @@
 				src.label_text = tmp_label
 				src.update_name_label()
 
-
-	proc/update_name_label()
-		if(src.label_text == "")
-			src.name = src.base_name
-		else
-			src.name = "[src.base_name] ([src.label_text])"
-
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
 	desc = "A beaker. Can hold up to 50 units."

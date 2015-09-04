@@ -13,7 +13,8 @@
 	var/wrapped = 0
 	var/dried_type = null
 	var/cooktype[0]
-
+	var/dry = 0
+	w_class = 2
 
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -144,34 +145,39 @@
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby(, params)
 
-	if(istype(W, /obj/item/weapon/material/kitchen/utensil))
-		//This will allow forks/spoons/plastic cutlery to pick up sliceables, but requires it to be unsliceable for the knife to pick it up
-		if((istype(W, /obj/item/weapon/material/kitchen/utensil/knife) && !slice_path) || !istype(W, /obj/item/weapon/material/kitchen/utensil/knife))
+/obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/storage))
+		..() // -> item/attackby()
+		return
 
-			var/obj/item/weapon/kitchen/utensil/U = W
-			if(!U.reagents)
-				U.create_reagents(5)
-			if (U.reagents.total_volume > 0)
-				user << "\red You already have something on your [U]."
-				return
+	// Eating with forks
+	if(istype(W,/obj/item/weapon/material/kitchen/utensil))
+		var/obj/item/weapon/material/kitchen/utensil/U = W
 
-			user.visible_message( \
-				"[user] scoops up some [src] with \the [U]!", \
-				"\blue You scoop up some [src] with \the [U]!" \
-			)
+		if(!U.reagents)
+			U.create_reagents(5)
 
-			src.bitecount++
-			U.overlays.Cut()
-			U.loaded = "[src]"
-			var/image/I = new(U.icon, "loadedfood")
-			I.color = src.filling_color
-			U.overlays += I
-
-			reagents.trans_to(U,min(reagents.total_volume,5))
-
-			if (reagents.total_volume <= 0)
-				qdel(src)
+		if (U.reagents.total_volume > 0)
+			user << "\red You already have something on your [U]."
 			return
+
+		user.visible_message( \
+			"[user] scoops up some [src] with \the [U]!", \
+			"\blue You scoop up some [src] with \the [U]!" \
+		)
+
+		src.bitecount++
+		U.overlays.Cut()
+		U.loaded = "[src]"
+		var/image/I = new(U.icon, "loadedfood")
+		I.color = src.filling_color
+		U.overlays += I
+
+		reagents.trans_to_obj(U, min(reagents.total_volume,5))
+
+		if (reagents.total_volume <= 0)
+			qdel(src)
+		return
 
 	if((slices_num <= 0 || !slices_num) || !slice_path)
 		return 0
@@ -221,7 +227,7 @@
 			"\blue [user] crudely slices \the [src] with [W]!", \
 			"\blue You crudely slice \the [src] with your [W]!" \
 		)
-		slices_lost = rand(1,min(1,round(slices_num/2)))
+		slices_lost = rand(1,min(1,round(slices_num/2)))	
 	var/reagents_per_slice = reagents.total_volume/slices_num
 	for(var/i=1 to (slices_num-slices_lost))
 		var/obj/slice = new slice_path (src.loc)
@@ -236,27 +242,18 @@
 			something.loc = get_turf(src)
 	return ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/attack_animal(mob/M)
-	if(isanimal(M))
-		M.changeNext_move(CLICK_CD_MELEE)
-		if(iscorgi(M))
-			if(bitecount >= 4)
-				M.visible_message("[M] [pick("burps from enjoyment", "yaps for more", "woofs twice", "looks at the area where \the [src] was")].","<span class=\"notice\">You swallow up the last part of \the [src].")
-				playsound(src.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
-				qdel(src)
-			else
-				M.visible_message("[M] takes a bite of \the [src].","<span class=\"notice\">You take a bite of \the [src].")
-				playsound(src.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
-				bitecount++
-		else if(ismouse(M))
-			var/mob/living/simple_animal/mouse/N = M
-			N << text("\blue You nibble away at [src].")
-			if(prob(50))
-				N.visible_message("[N] nibbles away at [src].", "")
-			//N.emote("nibbles away at the [src]")
-			N.health = min(N.health + 1, N.maxHealth)
-
-
+/obj/item/weapon/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
+	if(!isanimal(user) && !isalien(user))
+		return
+	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
+	bitecount++
+	if(reagents && user.reagents)
+		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
+	spawn(5)
+		if(!src && !user.client)
+			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
+			qdel(src)
+	On_Consume(user)
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
@@ -555,8 +552,11 @@
 /obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
-	src.reagents.splash(hit_atom, reagents.total_volume)
+	src.reagents.trans_to_turf(get_turf(hit_atom))
+	for(var/atom/A in get_turf(hit_atom))
+		src.reagents.add_to_turf(A)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
+	for(var/atom/A in get_turf(hit_atom))
 	qdel(src)
 /obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype( W, /obj/item/weapon/pen/crayon ))
@@ -775,17 +775,27 @@
 
 	New()
 		..()
-		reagents.add_reagent("nutriment", 4)
+		reagents.add_reagent("nutriment", 2)
+		reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/warmdonkpocket
-	name = "Warm Donk-pocket"
-	desc = "The food of choice for the seasoned traitor."
-	icon_state = "donkpocket"
-	filling_color = "#DEDEAB"
-	New()
-		..()
-		reagents.add_reagent("nutriment", 4)
-		reagents.add_reagent("omnizine", 4)
+	var/warm = 0
+	var/list/heated_reagents = list("omnizine" = 5)
+	proc/heat()
+		warm = 1
+		for(var/reagent in heated_reagents)
+			reagents.add_reagent(reagent, heated_reagents[reagent])
+		bitesize = 6
+		name = "Warm " + name
+		cooltime()
+
+	proc/cooltime()
+		if (src.warm)
+			spawn(4200)
+				src.warm = 0
+				for(var/reagent in heated_reagents)
+					src.reagents.del_reagent(reagent)
+				src.name = initial(name)
+		return
 
 /obj/item/weapon/reagent_containers/food/snacks/syndidonkpocket
 	name = "Donk-pocket"

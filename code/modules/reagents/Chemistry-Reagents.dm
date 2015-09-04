@@ -258,22 +258,6 @@ datum
 					if(T.wet_overlay)
 						T.overlays -= T.wet_overlay
 						T.wet_overlay = null
-		trans_to_mob(var/obj/O)
-			if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
-				var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
-				if(!cube.wrapped)
-					cube.Expand()
-		trans_to_mob(var/mob/living/L, var/amount)
-			if(istype(L))
-				var/needed = L.fire_stacks * 10
-				if(amount > needed)
-					L.fire_stacks = 0
-					L.ExtinguishMob()
-					return
-				else
-					L.adjust_fire_stacks(-(amount / 10))
-					return
-
 		hellwater
 			name = "Hell Water"
 			id = "hell_water"
