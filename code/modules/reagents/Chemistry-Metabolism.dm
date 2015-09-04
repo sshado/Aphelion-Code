@@ -305,6 +305,10 @@
 		perm = L.reagent_permeability()
 	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
 
+/datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
+	trans_to(target, amount, multiplier, copy)
+
+
 /datum/reagents/proc/trans_to_mob(var/mob/target, var/amount = 1, var/type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0) // Transfer after checking into which holder...
 	if(!target || !istype(target))
 		return

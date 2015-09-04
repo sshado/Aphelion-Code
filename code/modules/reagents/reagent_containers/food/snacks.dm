@@ -221,7 +221,7 @@
 			"\blue [user] crudely slices \the [src] with [W]!", \
 			"\blue You crudely slice \the [src] with your [W]!" \
 		)
-		slices_lost = rand(1,min(1,round(slices_num/2)))	
+		slices_lost = rand(1,min(1,round(slices_num/2)))
 	var/reagents_per_slice = reagents.total_volume/slices_num
 	for(var/i=1 to (slices_num-slices_lost))
 		var/obj/slice = new slice_path (src.loc)
@@ -548,7 +548,7 @@
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.trans_to_turf(get_turf(hit_atom))
 	for(var/atom/A in get_turf(hit_atom))
-		src.reagents.add_to_turf(A)
+		src.reagents.touch_turf(A)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 	for(var/atom/A in get_turf(hit_atom))
 	qdel(src)

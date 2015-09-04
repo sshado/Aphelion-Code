@@ -15,6 +15,7 @@
 
 	var/label_text = ""
 	// the fucking asshole who designed this can go die in a fire - Iamgoofball
+	/*
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
 		/obj/machinery/chem_heater/,
@@ -41,6 +42,7 @@
 		/obj/machinery/biogenerator,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/machinery/constructable_frame)
+*/
 
 	New()
 		..()

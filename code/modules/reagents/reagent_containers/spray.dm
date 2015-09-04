@@ -10,6 +10,7 @@
 	w_class = 2.0
 	throw_speed = 3
 	throw_range = 7
+	var/spray_size = 3
 	var/spray_maxrange = 3 //what the sprayer will set spray_currentrange to in the attack_self.
 	var/spray_currentrange = 3 //the range of tiles the sprayer will reach when in fixed mode.
 	amount_per_transfer_from_this = 5
@@ -55,6 +56,21 @@
 		log_game("[key_name(user)] fired Space lube from \a [src].")
 	return
 
+/obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
+	if (A.density && proximity)
+		A.visible_message("[usr] sprays [A] with [src].")
+		reagents.splash(A, amount_per_transfer_from_this)
+	else
+		spawn(0)
+			var/obj/effect/effect/water/chempuff/D = new/obj/effect/effect/water/chempuff(get_turf(src))
+			var/turf/my_target = get_turf(A)
+			D.create_reagents(amount_per_transfer_from_this)
+			if(!src)
+				return
+			reagents.trans_to_obj(D, amount_per_transfer_from_this)
+			D.set_color()
+			D.set_up(my_target, spray_size, 10)
+	return
 
 /obj/item/weapon/reagent_containers/spray/proc/spray(var/atom/A)
 	var/obj/effect/effect/water/chempuff/D = new /obj/effect/effect/water/chempuff(get_turf(src))
