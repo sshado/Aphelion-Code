@@ -1,4 +1,5 @@
 <!-- Change Title to 'NSS Phoenix' If Kaedwulf rules over Station -->
+![Travis Build Status](https://travis-ci.org/sshado/Aphelion-Code.svg)
 # Aphelion Project
 
 [Website](http://baystation12.net/) - [Code](http://github.com/Baystation12/Baystation12/) - [IRC](http://baystation12.net/forums/viewtopic.php?f=12&t=5088)
