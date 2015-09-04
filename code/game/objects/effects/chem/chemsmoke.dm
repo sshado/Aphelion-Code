@@ -98,9 +98,9 @@
 
 	if(chemholder.reagents.reagent_list.len) //reagent application - only run if there are extra reagents in the smoke
 		for(var/turf/T in wallList)
-			chemholder.reagents.touch_turf(T)
+			chemholder.reagents.trans_to_turf(T)
 		for(var/turf/T in targetTurfs)
-			chemholder.reagents.touch_turf(T)
+			chemholder.reagents.trans_to_turf(T)
 			for(var/atom/A in T.contents)
 				if(istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
 					continue

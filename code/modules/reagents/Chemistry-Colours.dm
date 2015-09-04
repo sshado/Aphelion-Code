@@ -1,3 +1,33 @@
+/*
+ * Returns:
+ * 	#RRGGBB(AA) on success, null on failure
+ */
+/proc/mix_color_from_reagents(const/list/reagent_list)
+	if(!istype(reagent_list))
+		return
+
+	var/color
+	var/reagent_color
+	var/vol_counter = 0
+	var/vol_temp
+	// see libs/IconProcs/IconProcs.dm
+	for(var/datum/reagent/reagent in reagent_list)
+		if(reagent.id == "blood" && reagent.data["blood_colour"])
+			reagent_color = reagent.data["blood_colour"]
+		else
+			reagent_color = reagent.color
+
+		vol_temp = reagent.volume
+		vol_counter += vol_temp
+
+		if(isnull(color))
+			color = reagent.color
+		else if(length(color) >= length(reagent_color))
+			color = BlendRGB(color, reagent_color, vol_temp/vol_counter)
+		else
+			color = BlendRGB(reagent_color, color, vol_temp/vol_counter)
+	return color
+
 /datum/reagents/proc/get_color()
 	if(!reagent_list || !reagent_list.len)
 		return "#ffffffff"
@@ -14,10 +44,4 @@
 		if(length(hex) != 9) // PANIC PANIC PANIC
 			warning("Reagent [R.id] has an incorrect color set ([R.color])")
 			hex = "#FFFFFFFF"
-		colors[1] += hex2num(copytext(hex, 2, 4)) * R.volume * R.color_weight
-		colors[2] += hex2num(copytext(hex, 4, 6)) * R.volume * R.color_weight
-		colors[3] += hex2num(copytext(hex, 6, 8)) * R.volume * R.color_weight
-		colors[4] += hex2num(copytext(hex, 8, 10)) * R.volume * R.color_weight
-		tot_w += R.volume * R.color_weight
-
 	return rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)

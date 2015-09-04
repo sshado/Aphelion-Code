@@ -287,11 +287,11 @@
 	req_access = list(access_captain)
 
 
-	New()
-		..()
-		new /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral(src)
-		new /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral(src)
-		return
+//	New()
+//		..()
+//		new /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral(src)
+//		new /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral(src)
+//		return
 
 
 

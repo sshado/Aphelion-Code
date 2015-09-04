@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/message_monitor
@@ -60,11 +60,11 @@
 /obj/item/weapon/circuitboard/stationalert_engineering
 	name = T_BOARD("station alert console (engineering)")
 	build_path = /obj/machinery/computer/station_alert
-	
+
 /obj/item/weapon/circuitboard/stationalert_security
 	name = T_BOARD("station alert console (security)")
 	build_path = /obj/machinery/computer/station_alert
-	
+
 /obj/item/weapon/circuitboard/stationalert_all
 	name = T_BOARD("station alert console (all)")
 	build_path = /obj/machinery/computer/station_alert/all
