@@ -37,7 +37,11 @@ obj/item/weapon/modular_firearms/assembly
 	var/haspin = 0
 	var/buildstage = 1
 	var/list/components = new/list()
-	var/list/firemodes = list()
+	var/load_method = null
+	var/handle_casings = null
+	var/isbolt = null
+	var/max_shells = null
+	var/list/firemodes = list() //dear lord that's a lot of variables. I'm sure there's a much better way of doing this.
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
 	if(buildstage == 1)
@@ -63,14 +67,14 @@ obj/item/weapon/modular_firearms/assembly
 			components += I
 			modChamber = I
 			var/obj/item/weapon/modular_firearms/chamber/chamber = I
-			if(chamber.projectile_type)
+			if(chamber.projectile_type) //checking for energy weaponry
 				if(isEnergy)
-					projectile_type = chamber.projectile_type
+					projectile_type = chamber.projectile_type //if it's an energy weapon, copy the beam type into the assembly
 				else
 					user << "\red A ballistic chamber won't work with an energy chassis!"
-			if(chamber.caliber)
+			if(chamber.caliber) //checking for kinetic weaponry
 				if(isKinetic)
-					caliber = chamber.caliber
+					caliber = chamber.caliber //if it's a kinetic weapon, copy the calibre into the assembly
 				else
 					user << "\red An energy chamber won't work with a ballistic chassis!"
 			user << "\blue You install the [I] onto the [src]. Now you should install the driver."
@@ -86,8 +90,8 @@ obj/item/weapon/modular_firearms/assembly
 			components += I
 			modDriver = I
 			var/obj/item/weapon/modular_firearms/driver/D = I
-			if(D.firemodes)
-				for(D.firemodes)
+			if(D.firemodes) //just to check that they didn't make it past the istype check using the base driver, although that shouldn't be obtainable
+				for(D.firemodes) //for each firemode the driver has, add it to our list
 					list/firemodes += D.firemodes
 			else
 				user << "\red How did you manage this?"
@@ -100,7 +104,18 @@ obj/item/weapon/modular_firearms/assembly
 			user.drop_item()
 			I.loc = src
 			components += I
+			modLoader = I
+			var/obj.item/weapon/modular_firearms/loader/L = I
+			load_method = L.load_method //copy the firetype into the assembly
+			handle_casings = L.handle_casings
+			if(L.isbolt) //if it's a bolt weapon, set bolt to true
+				isbolt = 1
+			if(L.max_shells) //if it's a shotgun or a bolt action, set their max shell count
+				max_shells = L.max_shells
+			user << "\blue You install the [I] into the [src]."
 			buildstage += 1
+		else
+			user << "\red You must install a loader first!"
 
 	else if(buildstage == 5)
 		if(istype(I, /obj/item/weapon/modular_firearms/barrel))
