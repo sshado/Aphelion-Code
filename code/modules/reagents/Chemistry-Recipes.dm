@@ -6,6 +6,8 @@ datum
 		var/result = null
 		var/list/required_reagents = list()
 		var/list/required_catalysts = list()
+		var/list/catalysts = list()
+		var/list/inhibitors = list()
 
 		// Both of these variables are mostly going to be used with slime cores - but if you want to, you can use them for other things
 		var/atom/required_container = null // the container required for the reaction to happen
@@ -19,7 +21,7 @@ datum
 		var/mix_message = "The solution begins to bubble."
 		var/mix_sound = 'sound/effects/bubbles.ogg'
 		var/no_message = 0
-		
+
 		var/log_is_important = 0 // If this reaction should be considered important for logging. Important recipes message admins when mixed, non-important ones just log to file.
 
 
@@ -27,7 +29,14 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				return
 
-		//I recommend you set the result amount to the total volume of all components.
+			send_data(var/datum/reagents/T)
+				return null
+//I recommend you set the result amount to the total volume of all components.
+
+			can_happen(var/datum/reagents/holder)
+				return 1
+
+
 
 		explosion_potassium
 			name = "Explosion"

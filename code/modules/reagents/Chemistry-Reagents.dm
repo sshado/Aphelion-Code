@@ -65,6 +65,10 @@ datum
 				src = null
 				return
 
+			touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
+				src = null
+				return
+
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(!istype(M, /mob/living)) // YOU'RE A FUCKING RETARD NEO WHY CAN'T YOU JUST FIX THE PROBLEM ON THE REAGENT - Iamgoofball
 					return //Noticed runtime errors from facid trying to damage ghosts, this should fix. --NEO
@@ -223,7 +227,7 @@ datum
 			reagent_state = LIQUID
 			color = "#0064C877"
 			metabolization_rate = REAGENTS_METABOLISM * 10
-		datum/reagent/water/proc/touch_turf(var/turf/simulated/T)
+		datum/reagent/water/proc/touch_turf_w(var/turf/simulated/T)
 			if(!istype(T))
 				return
 			var/datum/gas_mixture/environment = T.return_air()
