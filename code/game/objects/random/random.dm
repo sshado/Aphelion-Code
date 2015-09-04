@@ -93,7 +93,18 @@
 		return pick(prob(3);/obj/item/weapon/storage/toolbox/mechanical,\
 					prob(2);/obj/item/weapon/storage/toolbox/electrical,\
 					prob(1);/obj/item/weapon/storage/toolbox/emergency)
-
+					
+/obj/random/firstaid
+	name = "Random First Aid Kit"
+	desc = "This is a random first aid kit."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "firstaid"
+	item_to_spawn()
+		return pick(prob(3);/obj/item/weapon/storage/firstaid/regular,\
+					prob(2);/obj/item/weapon/storage/firstaid/toxin,\
+					prob(2);/obj/item/weapon/storage/firstaid/o2,\
+					prob(1);/obj/item/weapon/storage/firstaid/adv,\
+					prob(2);/obj/item/weapon/storage/firstaid/fire)
 
 /obj/random/tech_supply
 	name = "random tech supply"

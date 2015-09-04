@@ -22,7 +22,7 @@
 	var/mode = SYRINGE_DRAW
 	var/image/filling //holds a reference to the current filling overlay
 	var/visible_name = "a syringe"
-	
+
 	pickup(mob/user)
 		..()
 		update_icon()
@@ -67,7 +67,7 @@
 			if((CLUMSY in user.mutations) && prob(50))
 				target = user
 			syringestab(target, user)
-			return 
+			return
 
 		switch(mode)
 			if(SYRINGE_DRAW)
@@ -311,7 +311,7 @@
 		update_icon()
 
 
-/obj/item/weapon/reagent_containers/ld50_syringe
+/obj/item/weapon/reagent_containers/ld50
 	name = "Lethal Injection Syringe"
 	desc = "A syringe used for lethal injections."
 	icon = 'icons/obj/syringe.dmi'
@@ -437,14 +437,13 @@ proc/syringe_broken(mob/living/carbon/target, mob/living/carbon/user)
 		mode = SYRINGE_INJECT
 		update_icon()
 
-/obj/item/weapon/reagent_containers/ld50_syringe/lethal
+/obj/item/weapon/reagent_containers/ld50/lethal
 	New()
 		..()
-		reagents.add_reagent("cyanide", 10)
-		reagents.add_reagent("neurotoxin2", 40)
+		reagents.add_reagent("cyanide", 15)
+		reagents.add_reagent("neurotoxin", 40)
 		mode = SYRINGE_INJECT
 		update_icon()
-
 
 //Robot syringes
 //Not special in any way, code wise. They don't have added variables or procs.
@@ -500,5 +499,41 @@ proc/syringe_broken(mob/living/carbon/target, mob/living/carbon/user)
 	New()
 		..()
 		reagents.add_reagent("insulin", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+/obj/item/weapon/reagent_containers/syringe/inaprovaline
+	name = "Syringe (inaprovaline)"
+	desc = "Contains inaprovaline - used to stabilize patients."
+	New()
+		..()
+		reagents.add_reagent("inaprovaline", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+
+		/obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral
+	New()
+		..()
+		reagents.add_reagent("chloralhydrate", 50)
+		mode = SYRINGE_INJECT
+		update_icon()
+		
+/obj/item/weapon/reagent_containers/syringe/antitoxin
+	name = "Syringe (anti-toxin)"
+	desc = "Contains anti-toxins."
+	New()
+		..()
+		reagents.add_reagent("anti_toxin", 15)
+		mode = SYRINGE_INJECT
+		update_icon()
+		
+/obj/item/weapon/reagent_containers/syringe/drugs
+	name = "Syringe (drugs)"
+	desc = "Contains aggressive drugs meant for torture."
+	New()
+		..()
+		reagents.add_reagent("space_drugs",  5)
+		reagents.add_reagent("mindbreaker",  5)
+		reagents.add_reagent("cryptobiolin", 5)
 		mode = SYRINGE_INJECT
 		update_icon()

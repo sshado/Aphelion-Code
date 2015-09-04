@@ -32,9 +32,9 @@
 		new /obj/item/weapon/reagent_containers/hypospray/autoinjector( src )
 		new /obj/item/stack/medical/ointment( src )
 		new /obj/item/stack/medical/ointment( src )
-//		new /obj/item/weapon/reagent_containers/pill/kelotane( src )
-//		new /obj/item/weapon/reagent_containers/pill/kelotane( src )
-//		new /obj/item/weapon/reagent_containers/pill/kelotane( src ) //Replaced ointment with these since they actually work --Errorage
+		new /obj/item/weapon/reagent_containers/pill/kelotane( src )
+		new /obj/item/weapon/reagent_containers/pill/kelotane( src )
+		new /obj/item/weapon/reagent_containers/pill/kelotane( src ) 
 		return
 
 
@@ -53,9 +53,9 @@
 		new /obj/item/weapon/reagent_containers/hypospray/autoinjector( src )
 		return
 
-/*/obj/item/weapon/storage/firstaid/toxin
+/obj/item/weapon/storage/firstaid/toxin
 	name = "toxin first aid"
-	desc = "Used to treat when you have a high amoutn of toxins in your body."
+	desc = "Used to treat when you have a high amount of toxins in your body."
 	icon_state = "antitoxin"
 	item_state = "firstaid-toxin"
 
@@ -303,7 +303,3 @@
 		new /obj/item/weapon/reagent_containers/pill/citalopram( src )
 		new /obj/item/weapon/reagent_containers/pill/citalopram( src )
 		new /obj/item/weapon/reagent_containers/pill/citalopram( src )
-
-
-*/
-

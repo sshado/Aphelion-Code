@@ -77,6 +77,13 @@ datum
 			result_amount = 3
 */
 
+		inaprovaline
+			name = "Inaprovaline"
+			id = "inaprovaline"
+			result = "inaprovaline"
+			required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
+			result_amount = 3
+
 		ice
 			name = "Ice"
 			id = "ice"
