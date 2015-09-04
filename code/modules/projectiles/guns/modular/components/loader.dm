@@ -21,10 +21,8 @@ obj/item/weapon/modular_firearms/loader/shell
 	handle_casings = HOLD_CASINGS
 	var/max_shells = 4
 	
-obj/item/weapon/modular_firearms/loader/combat //lockbox
+obj/item/weapon/modular_firearms/loader/shell/combat //lockbox
 	name = "combat shell loader"
-	load_method = SINGLE_CASING
-	handle_casings = HOLD_CASINGS
 	var/max_shells = 7
 	
 obj/item/weapon/modular_firearms/loader/bolt
