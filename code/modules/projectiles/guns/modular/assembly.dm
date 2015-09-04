@@ -37,12 +37,7 @@ obj/item/weapon/modular_firearms/assembly
 	var/haspin = 0
 	var/buildstage = 1
 	var/list/components = new/list()
-	var/burst = 1
-	var/burst_delay = null
-	var/fire_delay = null
-	var/move_delay = 1
-	var/list/accuracy = list(0)
-	var/list/dispersion = list(0)
+	var/list/firemodes = list()
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
 	if(buildstage == 1)
@@ -91,13 +86,9 @@ obj/item/weapon/modular_firearms/assembly
 			components += I
 			modDriver = I
 			var/obj/item/weapon/modular_firearms/driver/D = I
-			if(D.burst)
-				burst = D.burst
-				burst_delay = D.burst_delay
-				fire_delay = D.fire_delay
-				move_delay = D.move_delay
-				accuracy = D.accuracy
-				dispersion = D.dispersion
+			if(D.firemodes)
+				for(D.firemodes)
+					list/firemodes += D.firemodes
 			else
 				user << "\red How did you manage this?"
 			user << "\blue You install the [I] into the [src]."
