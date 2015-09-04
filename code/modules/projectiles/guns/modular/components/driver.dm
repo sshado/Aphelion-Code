@@ -12,59 +12,35 @@
 
 obj/item/weapon/modular_firearms/driver
 	icon = 'icons/placeholder.dmi'
-	var/burst = 1
-	var/burst_delay = null
-	var/fire_delay = null
-	var/move_delay = 1
-	var/list/accuracy = list(0)
-	var/list/dispersion = list(0)
+	var/list/firemodes = list(
+		list(name="semiauto", burst=1, fire_delay=0)
+		)
 	
-obj/item/weapon/modular_firearms/driver/autoinacc
+obj/item/weapon/modular_firearms/driver/longburst
 	name = "rapid-automatic driver"
 	icon = 'icons/placeholder.dmi'
-	burst = 7
-	burst_delay = null
-	fire_delay = null
-	move_delay = 1
-	list/accuracy = list(0)
-	list/dispersion = list(1.5)
+	firemodes = list(
+		list(name="long bursts",	burst=8, move_delay=8, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
+		list(name="short bursts",	burst=5, move_delay=6, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2))
+		)
 
 obj/item/weapon/modular_firearms/driver/semiauto
 	name = "semi-automatic driver"
 	icon = 'icons/placeholder.dmi'
-	burst = 1
-	burst_delay = null
-	fire_delay = null
-	move_delay = 1
-	list/accuracy = list(0)
-	list/dispersion = list(0)
 	
 obj/item/weapon/modular_firearms/driver/burst3
 	name = "burst driver"
 	icon = 'icons/placeholder.dmi'
-	burst = 3
-	burst_delay = null
-	fire_delay = null
-	move_delay = 1
-	list/accuracy = list(0)
-	list/dispersion = list(0.4)
+	firemodes = list(
+		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1), dispersion = list(0.0, 0.6, 0.6)),
+		list(name="semiauto", burst=1, fire_delay=0)
+		)
 	
-obj/item/weapon/modular_firearms/driver/auto
-	name = "automatic driver"
+obj/item/weapon/modular_firearms/driver/burst5
+	name = "5-burst driver"
 	icon = 'icons/placeholder.dmi'
-	burst = 5
-	burst_delay = null
-	fire_delay = null
-	move_delay = 1
-	list/accuracy = list(0)
-	list/dispersion = list(0.5)
-	
-obj/item/weapon/modular_firearms/driver/preciseburst
-	name = "precision burst driver"
-	icon = 'icons/placeholder.dmi'
-	burst = 3
-	burst_delay = 1
-	fire_delay = null
-	move_delay = 1
-	list/accuracy = list(0)
-	list/dispersion = list(0.2)
+	firemodes = list(
+		list(name="short bursts",	burst=5, move_delay=6, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
+		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1), dispersion = list(0.0, 0.6, 0.6)),
+		list(name="semiauto", burst=1, fire_delay=0)
+		)
