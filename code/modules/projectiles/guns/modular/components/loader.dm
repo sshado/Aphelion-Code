@@ -7,6 +7,7 @@ obj/item/weapon/modular_firearms/loader
 	var/useCell = null
 	var/useSupply = null
 	var/Eloader = null
+	var/max_shells = null
 	
 obj/item/weapon/modular_firearms/loader/magazine
 	name = "magazine loader"
@@ -22,11 +23,11 @@ obj/item/weapon/modular_firearms/loader/shell
 	name = "shell loader"
 	load_method = SINGLE_CASING
 	handle_casings = HOLD_CASINGS
-	var/max_shells = 4
+	max_shells = 4
 	
 obj/item/weapon/modular_firearms/loader/shell/combat //lockbox
 	name = "combat shell loader"
-	var/max_shells = 7
+	max_shells = 7
 	
 obj/item/weapon/modular_firearms/loader/bolt
 	name = "bolt loader"
