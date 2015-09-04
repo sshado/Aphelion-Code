@@ -69,9 +69,9 @@ as these store your server configuration, player preferences and banlist.
 If you used the zip method, you'll need to download the zip file again and unzip it somewhere else, and then copy the /config and /data folders over.
 
 If you used the git method, you simply need to type this in to git bash:
-
+```bash
     $ git pull
-
+```
 When this completes, copy over your /data and /config folders again, just in case.
 
 When you have done this, you'll need to recompile the code, but then it should work fine.
