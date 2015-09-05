@@ -37,7 +37,15 @@
 		..()
 		return
 
+/datum/chemical_reaction/atp
+	name = "Adenosine Triphosphate"
+	id = "atp"
+	result = "ayp"
+	required_reagents = list("water" = 1, "phosphorus" = 3, "adp" = 1)
+	result_amount = 4
+
 //T1-1a: Solid, Effect//
+/datum/reagent/adp
 	name = "Adenosine Diphosphate"
 	id = "adp"
 	description = "A simple two phosphate sugar that the human body uses for energy.Its pure human energy."
