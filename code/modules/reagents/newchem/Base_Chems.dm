@@ -69,20 +69,103 @@
 	required_reagents = list("water" = 1, "phosphorus" = 2, "sugar" = 2)
 	result_amount = 4
 
-//T1-1a: Liquid, No Effect//
+//T1-2a: Solid, No Effect//
+/datum/reagent/trihydrocarbon
+	name = "Tri-Hydrocarbons"
+	id = "trihydrocarbon"
+	description = "A carbon based mass that is used to make charcoal."
+	reagent_state = SOLID
+	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
+
+/datum/chemical_reaction/trihydrocarbon
+	name = "Tri-Hydrocarbons"
+	id = "trihydrocarbon"
+	result = "trihydrocarbon"
+	required_reagents = list("hydrogen" = 3, "carbon" = 1)
+	result_amount = 3
+	max_temp = 400
+
+//T1-2b: Liquid, No Effect//
 /datum/reagent/acetic_acid
 	name = "Acetic acid"
 	id = "acetic_acid"
 	description = "Acetic acid is a weak acid that is used for basic reactions. Also known as vinegar."
+	reagent_state = LIQUID
 	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
-	on_mob_life(var/mob/living/M as mob)
 
 /datum/chemical_reaction/acetic_acid
 	name = "Acetic acid"
 	id = "acetic_acid"
 	result = "acetic_acid"
-	required_reagents = list("sacid" = 1, "sodium" = 1, "water" = 4)
+	required_reagents = list("sacid" = 1, "water" = 5)
 	result_amount = 4
+
+//T1-1b: Liquid, Effect//
+/datum/reagent/salinesolution
+	name = "Saline Solution"
+	id = "salinesolution"
+	description = "A simple saltwater solution."
+	reagent_state = LIQUID
+	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
+	metabolization_rate = 0.15
+
+/datum/reagent/salinesolution/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(10))
+		M.adjustFireLoss(-0.25*REM)
+	..()
+	return
+
+//T1-1b: Liquid, Effect//
+/datum/chemical_reaction/salinesolution
+	name = "Saline Solution"
+	id = "salinesolution"
+	result = "salinesolution"
+	required_reagents = list("sodium" = 1, "water" = 2)
+	result_amount = 3
+
+//T1-1b: Liquid, Effect//
+/datum/reagent/glucosesolution
+	name = "Glucose Solution"
+	id = "glucosesolution"
+	description = "A simple sugarwater solution."
+	reagent_state = LIQUID
+	color = "#6E3B08" // rgb: 110, 59, 8
+	metabolization_rate = 0.15
+
+/datum/reagent/salinesolution/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(10))
+		M.adjustBruteLoss(-0.25*REM)
+	..()
+	return
+
+/datum/chemical_reaction/glucosesolution
+	name = "Glucose Solution"
+	id = "glucosesolution"
+	result = "glucosesolution"
+	required_reagents = list("sugar" = 1, "water" = 2)
+	result_amount = 3
+
+//T1-2b: Liquid, Effect//
+/datum/reagent/sludgee
+	name = "Sludge"
+	id = "sludgee"
+	description = "A wonderful mix of water and what?."
+	reagent_state = LIQUID
+	color = "#525050"
+
+	on_mob_life(var/mob/living/M as mob)
+		if(!M) M = holder.my_atom
+		M.apply_effect(0.5*REM,IRRADIATE,0)
+
+/datum/chemical_reaction/sludgee
+	name = "Sludge"
+	id = "sludgee"
+	result = "sludgee"
+	required_reagents = list("water" = 2, "radium" = 1, "tungsten" = 1)
+	result_amount = 3
+	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
 //T1-2b: Liquid, No Effect//
 /datum/reagent/carbolic_acid
@@ -115,3 +198,5 @@
 	required_reagents = list("water" = 1, "hydrogen" = 1, "sacid" = 1)
 	result_amount = 2
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
+
+
