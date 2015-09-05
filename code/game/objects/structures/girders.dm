@@ -121,8 +121,8 @@
 		else
 			if(!construct_wall(W, user))
 				return ..()
-		else
-			return ..()
+			else
+				return ..()
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
