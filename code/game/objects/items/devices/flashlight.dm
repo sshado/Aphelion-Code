@@ -18,7 +18,7 @@
 	..()
 	update_icon()
 
-/obj/item/device/flashlight/proc/update_icon()
+/obj/item/device/flashlight/proc/update_brightness()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
@@ -31,7 +31,7 @@
 		user << "You cannot turn the light on while in this [user.loc]." //To prevent some lighting anomalities.
 		return 0
 	on = !on
-	update_icon()
+	update_brightness()
 	return 1
 
 
@@ -160,7 +160,7 @@
 	on = 0
 	src.force = initial(src.force)
 	src.damtype = initial(src.damtype)
-	update_icon()
+	update_brightness()
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 
@@ -193,8 +193,8 @@
 /obj/item/device/flashlight/slime/New()
 	..()
 	set_light(brightness_on)
-	
-/obj/item/device/flashlight/slime/update_icon()
+
+/obj/item/device/flashlight/slime/update_brightness()
 	return
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)
