@@ -151,7 +151,7 @@
 	if(on)
 		if (M.loc == loc)
 			wash(M)
-			process_heat(M))
+			process_heat(M)
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
 
@@ -160,7 +160,7 @@
 		user << "<span class='notice'>The water temperature seems to be [watertemp].</span>"
 	if(istype(I, /obj/item/weapon/wrench))
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
- 		user << "<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>"
+		user << "<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 50))
 			watertemp = newtemp
@@ -316,11 +316,11 @@
 
 /obj/machinery/shower/proc/process_heat(mob/living/M)
 	if(!on || !istype(M)) return
-	
+
 	var/temperature = temperature_settings[watertemp]
 	var/temp_adj = between(BODYTEMP_COOLING_MAX, temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
-	
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(temperature >= H.species.heat_level_1)
