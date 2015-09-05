@@ -1,5 +1,6 @@
 // BEGIN_INTERNALS
 /*
+<<<<<<< HEAD
 LAST_COMPILE_TIME: 1441481162
 DIR: code code\controllers\Processes code\game code\game\antagonist code\game\antagonist\outsider code\game\jobs code\game\objects code\game\objects\items code\game\objects\structures code\modules code\modules\admin code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\spacesuits\rig code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\brain code\modules\mob\living\carbon\human code\modules\mob\living\carbon\human\species code\modules\mob\living\carbon\human\species\outsider code\modules\mob\living\carbon\human\species\xenomorphs code\modules\mob\new_player code\modules\organs code\modules\projectiles code\modules\projectiles\guns code\modules\surgery code\modules\virus2 
 AUTO_FILE_DIR: OFF
@@ -7,5 +8,14 @@ MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 508.1299
 WINDOW: code\modules\clothing\clothing.dm;code\modules\projectiles\guns\alien.dm;code\modules\mob\new_player\new_player.dm;code\modules\mob\living\carbon\human\species\xenomorphs\alien_species.dm;code\modules\mob\living\carbon\human\species\outsider\vox.dm;code\modules\clothing\spacesuits\rig\rig.dm;code\modules\mob\living\carbon\human\species\species.dm
 FILE: code\modules\mob\living\carbon\human\species\species.dm
+=======
+MAP_ICON_TYPE: 0
+WINDOW: code\world.dm;code\game\jobs\access.dm;baystation12.dme
+LAST_COMPILE_VERSION: 508.1299
+DIR: code code\controllers code\controllers\Processes code\game code\game\jobs 
+FILE: baystation12.dme
+LAST_COMPILE_TIME: 1441479776
+AUTO_FILE_DIR: OFF
+>>>>>>> origin/master
 */
 // END_INTERNALS
