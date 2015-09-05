@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
-WINDOW: code\controllers\Processes\pipenet.dm
-DIR: code code\controllers code\controllers\Processes 
-FILE: code\controllers\Processes\pipenet.dm
+LAST_COMPILE_TIME: 1441479776
+DIR: code code\controllers code\controllers\Processes code\game code\game\jobs 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\world.dm;code\game\jobs\access.dm;baystation12.dme
+FILE: baystation12.dme
 */
 // END_INTERNALS
