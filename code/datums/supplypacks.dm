@@ -1515,6 +1515,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/proto
 	containertype = /obj/structure/largecrate/animal/proto
-	containername = "Protohuman test subject crate"
+	containername = "Protohuman subject crate"
 	group = "Science"
 	cost = 35
