@@ -421,8 +421,12 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 			use_species_name = chosen_species.get_station_variant() //Only used by pariahs atm.
+<<<<<<< HEAD
 
 		if(chosen_species && use_species_name)
+=======
+		if(chosen_species)
+>>>>>>> origin/master
 			// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 			if(is_species_whitelisted(chosen_species) || has_admin_rights())
 				new_character = new(loc, use_species_name)
