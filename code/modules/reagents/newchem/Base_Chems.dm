@@ -69,7 +69,7 @@
 	required_reagents = list("water" = 1, "phosphorus" = 2, "sugar" = 2)
 	result_amount = 4
 
-//T1-2a: Solid, No Effect//
+//T1-2a(d): Solid, No Effect//
 /datum/reagent/trihydrocarbon
 	name = "Tri-Hydrocarbons"
 	id = "trihydrocarbon"
@@ -83,7 +83,7 @@
 	result = "trihydrocarbon"
 	required_reagents = list("hydrogen" = 3, "carbon" = 1)
 	result_amount = 3
-	max_temp = 400
+	min_temp = 400
 
 //T1-2b: Liquid, No Effect//
 /datum/reagent/acetic_acid
@@ -199,4 +199,80 @@
 	result_amount = 2
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
+//////////////////////////////////////////////////////////////////////////////////
+//TIER TWO//
+/////////////////////////////////////////////////////////////////////////////////
+
+//T2-2b(e): Liquid, Effect//
+/datum/reagent/opioium
+	name = "opioium"
+	id = "opioium"
+	description = "Used to make opiate painkillers. Has mild sedative properties "
+	reagent_state = LIQUID
+	color = "#525050"
+	overdose_threshold = 45
+	addiction_threshold = 35
+	shock_reduction = 15
+
+datum/reagent/opioium/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	switch(current_cycle)
+		if(0 to 20)
+			if(prob(5))
+				M.emote("yawn")
+		if(21 to 35)
+			M.drowsyness = max(M.drowsyness, 6)
+		if(36 to INFINITY)
+			M.Paralyse(3)
+			M.drowsyness = max(M.drowsyness, 12)
+	..()
+	return
+
+datum/reagent/opioium/overdose_process(var/mob/living/M as mob)
+	if(prob(33))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+	..()
+	return
+
+datum/reagent/opioium/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+	..()
+	return
+datum/reagent/opioium/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+		M.adjustToxLoss(0.25*REM)
+	..()
+	return
+datum/reagent/opioium/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(33))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+		M.adjustToxLoss(0.5*REM)
+	..()
+	return
+datum/reagent/opioium/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(33))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+		M.adjustToxLoss(0.75*REM)
+	..()
+	return
+
+/datum/chemical_reaction/opioium
+	name = "opioium"
+	id = "opioium"
+	result = "opioium"
+	required_reagents = list("atp" = 2, "glucosesolution" = 1, "xenon" = 1)
+	result_amount = 3
+	max_temp = 270
 
