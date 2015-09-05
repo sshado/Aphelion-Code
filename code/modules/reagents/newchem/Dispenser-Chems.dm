@@ -477,3 +477,23 @@ datum/reagent/water/proc/touch_turf_w(var/turf/simulated/T)
 		M.drowsyness = max(M.drowsyness, 2.5)
 		..()
 		return
+
+/datum/reagent/zinc
+	name = "Zinc"
+	id = "zinc"
+	description = "Zinc is a antioxidant metal that could possibility acclerate healing."
+	color = "#6E3B08" // rgb: 110, 59, 8
+	overdose_threshold = 120 // Zinc Poisioning
+	on_mob_life(var/mob/living/M as mob)
+		if(prob(11))
+			M.adjustToxLoss(-1)
+		..()
+		return
+
+	overdose_process(var/mob/living/M as mob)
+		if(volume > 120)
+			if(prob(50))
+				M.adjustToxLoss(rand(1,2))
+		..()
+		return
+

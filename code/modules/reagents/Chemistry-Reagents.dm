@@ -21,6 +21,7 @@ datum
 		var/metabolization_rate = REAGENTS_METABOLISM
 		//var/list/viruses = list()
 		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
+		var/scannable = 0
 		var/shock_reduction = 0
 		var/penetrates_skin = 0 //Whether or not a reagent penetrates the skin
 		proc

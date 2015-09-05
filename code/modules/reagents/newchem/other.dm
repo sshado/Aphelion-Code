@@ -5,13 +5,6 @@
 
 var/list/random_color_list = list("#00aedb","#a200ff","#f47835","#d41243","#d11141","#00b159","#00aedb","#f37735","#ffc425","#008744","#0057e7","#d62d20","#ffa700")
 
-datum/reagent/oil
-	name = "Oil"
-	id = "oil"
-	description = "A decent lubricant for machines. High in benzene, naptha and other hydrocarbons."
-	reagent_state = LIQUID
-	color = "#3C3C3C"
-
 datum/reagent/iodine
 	name = "Iodine"
 	id = "iodine"
@@ -32,6 +25,21 @@ datum/reagent/carpet
 		F.ChangeTurf(/turf/simulated/floor/carpet)
 	..()
 	return
+
+datum/reagent/oil
+	name = "Oil"
+	id = "oil"
+	description = "A decent lubricant for machines. High in benzene, naptha and other hydrocarbons."
+	reagent_state = LIQUID
+	color = "#3C3C3C"
+
+datum/chemical_reaction/oil
+	name = "Oil"
+	id = "oil"
+	result = "oil"
+	required_reagents = list("carbon" = 2, "hydrogen" = 2, "ethanol" = 1)
+	result_amount = 3
+	mix_message = "An iridescent black chemical forms in the container."
 
 datum/reagent/bromine
 	name = "Bromine"
@@ -82,15 +90,6 @@ datum/reagent/acetone
 	required_reagents = list("fungus" = 1, "blood" = 1)
 	result_amount = 2
 	mix_message = "The substance turns thick and stiff, yet soft."
-
-
-/datum/chemical_reaction/oil
-	name = "Oil"
-	id = "oil"
-	result = "oil"
-	required_reagents = list("fuel" = 1, "carbon" = 1, "hydrogen" = 1)
-	result_amount = 3
-	mix_message = "An iridescent black chemical forms in the container."
 
 /datum/chemical_reaction/phenol
 	name = "phenol"
