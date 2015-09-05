@@ -321,6 +321,7 @@ Class Procs:
 						component_parts += B
 						B.loc = null
 						user << "<span class='notice'>[A.name] replaced with [B.name].</span>"
+						playsound(src.loc, 'sound/items/rped.ogg', 40, 1)
 						break
 			update_icon()
 			RefreshParts()
