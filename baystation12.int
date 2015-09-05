@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\controllers\Processes\pipenet.dm
+DIR: code code\controllers code\controllers\Processes 
+FILE: code\controllers\Processes\pipenet.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
