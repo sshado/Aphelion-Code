@@ -207,10 +207,28 @@
 	result_amount = 2
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
+/datum/reagent/hydrofluoride
+	name = "Hydrofluoride"
+	id = "hydrofluoride"
+	description = "A mix of hydrogen and fluoride."
+	reagent_state = GAS
+	color = "#493062"
+
+/datum/chemical_reaction/hydrofluoride
+	name = "Hydrofluoride"
+	id = "hydrofluoride"
+	result = "hydrofluoride"
+	required_reagents = list("hydrogen" = 1, "fluoride" = 1)
+	result_amount = 2
+
 //////////////////////////////////////////////////////////////////////////////////
 //TIER TWO//
 /////////////////////////////////////////////////////////////////////////////////
 
+/datum/reagent/carbonsteel
+	name = "Steel"
+	id = "carbonsteel"
+	description = "An alloy of carbon and iron"
 //T2-2b(e): Liquid, Effect//
 /datum/reagent/opium
 	name = "opium"
@@ -222,7 +240,15 @@
 	addiction_threshold = 35
 	shock_reduction = 15
 
-datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
+/datum/reagent/opium/overdose_process(var/mob/living/M as mob)
+	if(prob(33))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+	..()
+	return
+
+/datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	switch(current_cycle)
 		if(0 to 20)
@@ -236,7 +262,7 @@ datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
 	..()
 	return
 
-datum/reagent/opium/overdose_process(var/mob/living/M as mob)
+/datum/reagent/opium/overdose_process(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -244,14 +270,14 @@ datum/reagent/opium/overdose_process(var/mob/living/M as mob)
 	..()
 	return
 
-datum/reagent/opium/addiction_act_stage1(var/mob/living/M as mob)
+/datum/reagent/opium/addiction_act_stage1(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
 			M.drop_item()
 	..()
 	return
-datum/reagent/opium/addiction_act_stage2(var/mob/living/M as mob)
+/datum/reagent/opium/addiction_act_stage2(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -259,7 +285,7 @@ datum/reagent/opium/addiction_act_stage2(var/mob/living/M as mob)
 		M.adjustToxLoss(0.25*REM)
 	..()
 	return
-datum/reagent/opium/addiction_act_stage3(var/mob/living/M as mob)
+/datum/reagent/opium/addiction_act_stage3(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -267,7 +293,7 @@ datum/reagent/opium/addiction_act_stage3(var/mob/living/M as mob)
 		M.adjustToxLoss(0.5*REM)
 	..()
 	return
-datum/reagent/opium/addiction_act_stage4(var/mob/living/M as mob)
+/datum/reagent/opium/addiction_act_stage4(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -283,4 +309,50 @@ datum/reagent/opium/addiction_act_stage4(var/mob/living/M as mob)
 	required_reagents = list("atp" = 2, "glucosesolution" = 1, "xenon" = 1)
 	result_amount = 3
 	max_temp = 270
+
+/datum/reagent/xenofloracarbon
+	name = "Xeno-Floracarbon"
+	id = "xenofloracarbon"
+	description = "A Retelitivly unstable gas carbon mix used in mixing chemicals."
+	reagent_state = GAS
+	color = "#525050"
+	overdose_threshold = 15
+
+/datum/reagent/xenofloracarbon/overdose_process(var/mob/living/M as mob)
+	if(prob(88))
+		M.adjustToxLoss(-2*REM)
+	if(prob(66))
+		M.fakevomit()
+	..()
+	return
+
+/datum/chemical_reaction/xenofloracarbon
+	name = "Xeno-Floracarbon"
+	id = "xenofloracarbon"
+	result = "xenofloracarbon"
+	required_reagents = list("trihydrocarbon" = 1, "xenon" = 1, "hydrofluoride" = 2)
+	result_amount = 3
+	min_temp = 445
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//TIER THREE//
+///////////////////////
+
+/datum/reagent/nanocarbon
+	name = "Carbon Nanofibers"
+	id = "nanocarbon"
+	description = "The purest form of carbon before diamond. Carbon nanofibers are ultra strong"
+	reagent_state = solid
+	color = "#525050"
+
+/datum/chemical_reaction/nanocarbon
+	name = "Carbon Nanofibers"
+	id = "nanocarbon"
+	result = "nanocarbon"
+	required_reagents = list("xenofloracarbon" = 2 "carbonsteel" = 2 "nanotubing" = 1)
+	result_amount = 2
+	min_temp = 670
 
