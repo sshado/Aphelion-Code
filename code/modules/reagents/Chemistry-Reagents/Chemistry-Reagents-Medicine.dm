@@ -189,7 +189,7 @@
 	metabolism = REM * 0.5
 	scannable = 1
 
-/datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 170)
 		M.adjustCloneLoss(-30 * removed)
 		M.adjustOxyLoss(-3 * removed)
@@ -539,3 +539,8 @@
 	if(dose > 10)
 		M.make_dizzy(5)
 		M.make_jittery(5)
+
+
+//////////////////////////////////////
+//RIP ANDREW BURR//9/4/2015//
+/////////////////////////////////////
