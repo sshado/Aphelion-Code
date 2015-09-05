@@ -1,17 +1,17 @@
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
-
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
-////////////////////////////////////////////////////////
-//Base-Chems Are Building Blocks For Other Chems/////////
+///////////////////////////////////////////////////////////////////
+//Base-Chems Are Building Blocks For Other Chems//3 Tiers Of Fun.//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//-----------------------------------------------------------------------------------------------//////
-//Tier One (Solid(a), Liquid(b), Gas(c), Heated/Cooled(d/e), Phoron(f)) (Effect(1), No Effect(2))///////
-//-----------------------------------------------------------------------------------------------/////
+//-----------------------------------------------------------------------------------------------//
+//Tier One (Solid(a), Liquid(b), Gas(c), Heated/Cooled(d/e), Phoron(f)) (Effect(1), No Effect(2))//
+//-----------------------------------------------------------------------------------------------//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//T1-1a: Solid, Effect////
+
+//T1-1a: Solid, Effect//
 /datum/reagent/atp
 	name = "Adenosine Triphosphate"
 	id = "atp"
@@ -28,24 +28,16 @@
 			M.jitteriness += 10
 		..()
 		return
+
 	overdose_process(var/mob/living/M as mob)
 		if(volume > 145)
-			M << "<span class = 'danger'>You pass out from hyperglycemic shock!</span>"
 			M.Paralyse(1)
 			if(prob(8))
 				M.adjustToxLoss(rand(1,2))
 		..()
 		return
 
-/datum/chemical_reaction/atp
-	name = "Adenosine Triphosphate"
-	id = "atp"
-	result = "atp"
-	required_reagents = list("hydrogen" = 1, "water" = 1, "phosphorus" = 1, "adp" = 1)
-	result_amount = 4
-
 //T1-1a: Solid, Effect//
-/datum/reagent/adp
 	name = "Adenosine Diphosphate"
 	id = "adp"
 	description = "A simple two phosphate sugar that the human body uses for energy.Its pure human energy."
@@ -61,9 +53,9 @@
 			M.jitteriness += 10
 		..()
 		return
+
 	overdose_process(var/mob/living/M as mob)
 		if(volume > 165)
-			M << "<span class = 'danger'>You pass out from hyperglycemic shock!</span>"
 			M.Paralyse(1)
 			if(prob(7))
 				M.adjustToxLoss(rand(1,2))
@@ -93,33 +85,17 @@
 	result_amount = 4
 
 //T1-2b: Liquid, No Effect//
-/datum/reagent/oil
-	name = "Oil"
-	id = "oil"
-	description = "A decent lubricant for machines. High in benzene, naptha and other hydrocarbons."
-	reagent_state = LIQUID
-	color = "#3C3C3C"
-
-/datum/chemical_reaction/oil
-	name = "Oil"
-	id = "oil"
-	result = "oil"
-	required_reagents = list("carbon" = 2, "hydrogen" = 2, "ethanol" = 1)
-	result_amount = 3
-	mix_message = "An iridescent black chemical forms in the container."
-
-//T1-2b: Liquid, No Effect//
-datum/reagent/carbolic acid
+/datum/reagent/carbolic_acid
 	name = "Carbolic Acid"
-	id = "carbolic acid"
+	id = "carbolic_acid"
 	description = "This is a useful building block in organic chemistry."
 	reagent_state = LIQUID
 	color = "#525050"
 
 /datum/chemical_reaction/carbolic_acid
 	name = "Carbolic Acid"
-	id = "carbolic acid"
-	result = "carbolic acid"
+	id = "carbolic_acid"
+	result = "carbolic_acid"
 	required_reagents = list("water" = 1, "chlorine" = 1, "oil" = 1)
 	result_amount = 3
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."

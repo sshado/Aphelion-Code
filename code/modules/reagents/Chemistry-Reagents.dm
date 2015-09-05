@@ -962,36 +962,6 @@ datum
 				return
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//NEW REAGENTS .. NOT SEXY ENOUGH FOR NEW CHEM.////////////////////////////////////////////////////////////////
-//HANDCRAFTED FUN////:p////
-//TEST CODE BY WKSAVAGE -- NOT QUITE SAFE FOR TEH WORLD :P
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		acetic_acid
-			name = "Acetic Acid:"
-			id = "aceticacid"
-			description = "A weak acid used to build other chemicals. Kinda smells like vinegar."
-			reagent_state = LIQUID
-			color = "#9ACD32"
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.adjustToxLoss(0.15)
-				..()
-				return
-
-		kauai_venom
-			name = "Mutated Kauai venom"
-			id = "kauaitoxin"
-			description = "Remember that spider your friend was experminting on? Yeah..."
-			reagent_state = LIQUID
-			color = "#CF3600" // rgb: 207, 54, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.adjustToxLoss(2.5)
-				..()
-				return
 
 /*
 		nanomachines
