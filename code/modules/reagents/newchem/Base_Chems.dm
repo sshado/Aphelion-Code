@@ -204,9 +204,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 //T2-2b(e): Liquid, Effect//
-/datum/reagent/opioium
-	name = "opioium"
-	id = "opioium"
+/datum/reagent/opium
+	name = "opium"
+	id = "opium"
 	description = "Used to make opiate painkillers. Has mild sedative properties "
 	reagent_state = LIQUID
 	color = "#525050"
@@ -214,7 +214,7 @@
 	addiction_threshold = 35
 	shock_reduction = 15
 
-datum/reagent/opioium/on_mob_life(var/mob/living/M as mob)
+datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	switch(current_cycle)
 		if(0 to 20)
@@ -228,7 +228,7 @@ datum/reagent/opioium/on_mob_life(var/mob/living/M as mob)
 	..()
 	return
 
-datum/reagent/opioium/overdose_process(var/mob/living/M as mob)
+datum/reagent/opium/overdose_process(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -236,14 +236,14 @@ datum/reagent/opioium/overdose_process(var/mob/living/M as mob)
 	..()
 	return
 
-datum/reagent/opioium/addiction_act_stage1(var/mob/living/M as mob)
+datum/reagent/opium/addiction_act_stage1(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
 			M.drop_item()
 	..()
 	return
-datum/reagent/opioium/addiction_act_stage2(var/mob/living/M as mob)
+datum/reagent/opium/addiction_act_stage2(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -251,7 +251,7 @@ datum/reagent/opioium/addiction_act_stage2(var/mob/living/M as mob)
 		M.adjustToxLoss(0.25*REM)
 	..()
 	return
-datum/reagent/opioium/addiction_act_stage3(var/mob/living/M as mob)
+datum/reagent/opium/addiction_act_stage3(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -259,7 +259,7 @@ datum/reagent/opioium/addiction_act_stage3(var/mob/living/M as mob)
 		M.adjustToxLoss(0.5*REM)
 	..()
 	return
-datum/reagent/opioium/addiction_act_stage4(var/mob/living/M as mob)
+datum/reagent/opium/addiction_act_stage4(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
 		if(I)
@@ -268,10 +268,10 @@ datum/reagent/opioium/addiction_act_stage4(var/mob/living/M as mob)
 	..()
 	return
 
-/datum/chemical_reaction/opioium
-	name = "opioium"
-	id = "opioium"
-	result = "opioium"
+/datum/chemical_reaction/opium
+	name = "opium"
+	id = "opium"
+	result = "opium"
 	required_reagents = list("atp" = 2, "glucosesolution" = 1, "xenon" = 1)
 	result_amount = 3
 	max_temp = 270

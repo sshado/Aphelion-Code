@@ -20,7 +20,6 @@
 	if(src.analgesic)
 		src.traumatic_shock = 0
 
-
 	// broken or ripped off organs will add quite a bit of pain
 	if(istype(src,/mob/living/carbon/human))
 		var/mob/living/carbon/human/M = src
