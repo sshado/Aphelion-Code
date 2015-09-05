@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1441398502
-DIR: code code\modules code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\glass maps 
+LAST_COMPILE_TIME: 1441413423
+DIR: code code\_defines code\modules code\modules\genetics code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\reagents code\modules\reagents\newchem code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\glass icons icons\effects icons\NTOS maps 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 508.1299
-WINDOW: maps\aphelion-1.dmm;maps\aphelion-2.dmm
-FILE: maps\aphelion-1.dmm
+WINDOW: code\modules\reagents\newchem\Dispenser-Chems.dm;code\modules\reagents\Chemistry-Reagents.dm;code\modules\reagents\Chemistry-Colours.dm;code\modules\reagents\newchem\toxins.dm
+FILE: code\modules\reagents\newchem\Dispenser-Chems.dm
 */
 // END_INTERNALS

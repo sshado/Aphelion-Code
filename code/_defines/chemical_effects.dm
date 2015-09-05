@@ -5,3 +5,4 @@
 #define CE_ALCOHOL "alcohol" // Liver filtering
 #define CE_ALCOHOL_TOXIC "alcotoxic" // Liver damage
 #define CE_SPEEDBOOST "gofast" // Hyperzine
+#define SOBER null
