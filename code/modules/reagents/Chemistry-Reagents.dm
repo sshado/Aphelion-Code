@@ -564,26 +564,6 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				T.germ_level -= min(volume*20, T.germ_level)
 
-		iron
-			name = "Iron"
-			id = "iron"
-			description = "Pure iron is a metal."
-			reagent_state = SOLID
-			color = "#C8A5DC" // rgb: 200, 165, 220
-/*
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if((M.virus) && (prob(8) && (M.virus.name=="Magnitis")))
-					if(M.virus.spread == "Airborne")
-						M.virus.spread = "Remissive"
-					M.virus.stage--
-					if(M.virus.stage <= 0)
-						M.resistances += M.virus.type
-						M.virus = null
-				holder.remove_reagent(src.id, 0.2)
-				return
-*/
-
 		gold
 			name = "Gold"
 			id = "gold"
