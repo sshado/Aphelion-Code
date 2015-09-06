@@ -1,8 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\antagonist\station\revolutionary.dm;code\modules\admin\admin.dm;code\game\gamemodes\objective.dm
 LAST_COMPILE_VERSION: 508.1299
-DIR: icons icons\mob maps 
+DIR: code code\game code\game\antagonist code\game\gamemodes code\modules code\modules\admin 
+FILE: code\game\antagonist\station\revolutionary.dm
 LAST_COMPILE_TIME: 1441501322
 AUTO_FILE_DIR: OFF
 */
