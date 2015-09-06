@@ -18,6 +18,7 @@ var/datum/antagonist/mercenary/mercs
 	initial_spawn_target = 6
 	
 	id_type = /obj/item/weapon/card/id/syndicate
+	antaghud_indicator = "hudoperative"
  
 /datum/antagonist/mercenary/New()
 	..()

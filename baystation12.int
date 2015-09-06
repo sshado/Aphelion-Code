@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1441501322
-DIR: maps 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
+WINDOW: icons\mob\hud.dmi
 LAST_COMPILE_VERSION: 508.1299
-WINDOW: maps\aphelion-1.dmm
-FILE: maps\aphelion-1.dmm
+DIR: icons icons\mob maps 
+FILE: icons\mob\hud.dmi
+LAST_COMPILE_TIME: 1441501322
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
