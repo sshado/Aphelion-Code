@@ -1,5 +1,6 @@
 var/datum/antagonist/traitor/traitors
 
+// Inherits most of its vars from the base datum.
 /datum/antagonist/traitor
 	id = MODE_TRAITOR
 	restricted_jobs = list("AI", "Captain", "Head of Security", "Head of Personnel")

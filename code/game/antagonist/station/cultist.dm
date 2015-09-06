@@ -22,8 +22,11 @@ var/datum/antagonist/cultist/cult
 	victory_feedback_tag = "win - cult win"
 	loss_feedback_tag = "loss - staff stopped the cult"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 5 // No upper limit.
-	max_antags_round = 6
+	hard_cap = 5
+	hard_cap_round = 6
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+ 
 	var/allow_narsie = 1
 
 	var/datum/mind/sacrifice_target
