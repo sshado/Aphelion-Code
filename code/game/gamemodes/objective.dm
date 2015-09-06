@@ -870,7 +870,7 @@ datum/objective/heist/salvage
 /datum/objective/cult/sacrifice/check_completion()
 	return (target && cult && !cult.sacrificed.Find(target))
 
-	/datum/objective/rev/find_target()
+/datum/objective/rev/find_target()
 	..()
 	if(target && target.current)
 		explanation_text = "Assassinate, capture or convert [target.current.real_name], the [target.assigned_role]."
