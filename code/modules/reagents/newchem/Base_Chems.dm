@@ -11,7 +11,7 @@
 //-----------------------------------------------------------------------------------------------//
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-//T1-1a: Solid, Effect//
+//T1-1a: Solid, Effect/////////////////////////////////////////////////////////////////////////////
 /datum/reagent/atp
 	name = "Adenosine Triphosphate"
 	id = "atp"
@@ -44,7 +44,7 @@
 	required_reagents = list("water" = 1, "phosphorus" = 3, "adp" = 1)
 	result_amount = 4
 
-//T1-1a: Solid, Effect//
+//T1-1a: Solid, Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/adp
 	name = "Adenosine Diphosphate"
 	id = "adp"
@@ -77,23 +77,39 @@
 	required_reagents = list("water" = 1, "phosphorus" = 2, "sugar" = 2)
 	result_amount = 4
 
-//T1-2a(d): Solid, No Effect//
+//T1-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
+/datum/reagent/reiorn
+	name = "Refined Iron"
+	id = "reiron"
+	description = "Refined iron is lighter and stronger then standard iron."
+	reagent_state = SOLID
+	color = "#6E3B08" // rgb: 110, 59, 8
+
+/datum/chemical_reaction/reiron
+	name = "Refined Iron"
+	id = "reiron"
+	result = "reiron"
+	required_reagents = list("iron" = 3 "oxygen" = 1)
+	result_amount = 2
+	min_temp = 375
+
+//T1-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/trihydrocarbon
-	name = "Tri-Hydrocarbons"
+	name = "Tri-Hydrocarbon"
 	id = "trihydrocarbon"
 	description = "A carbon based mass that is used to make charcoal."
 	reagent_state = SOLID
 	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
 
 /datum/chemical_reaction/trihydrocarbon
-	name = "Tri-Hydrocarbons"
+	name = "Tri-Hydrocarbon"
 	id = "trihydrocarbon"
 	result = "trihydrocarbon"
 	required_reagents = list("hydrogen" = 3, "carbon" = 1)
 	result_amount = 3
 	min_temp = 400
 
-//T1-2b: Liquid, No Effect//
+//T1-2b: Liquid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/acetic_acid
 	name = "Acetic acid"
 	id = "acetic_acid"
@@ -108,7 +124,7 @@
 	required_reagents = list("sacid" = 1, "water" = 5)
 	result_amount = 4
 
-//T1-1b: Liquid, Effect//
+//T1-1b: Liquid, Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/salinesolution
 	name = "Saline Solution"
 	id = "salinesolution"
@@ -124,7 +140,7 @@
 	..()
 	return
 
-//T1-1b: Liquid, Effect//
+//T1-1b: Liquid, Effect//////////////////////////////////////////////////////////////////
 /datum/chemical_reaction/salinesolution
 	name = "Saline Solution"
 	id = "salinesolution"
@@ -132,7 +148,7 @@
 	required_reagents = list("sodium" = 1, "water" = 2)
 	result_amount = 3
 
-//T1-1b: Liquid, Effect//
+//T1-1b: Liquid, Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/glucosesolution
 	name = "Glucose Solution"
 	id = "glucosesolution"
@@ -155,7 +171,7 @@
 	required_reagents = list("sugar" = 1, "water" = 2)
 	result_amount = 3
 
-//T1-2b: Liquid, Effect//
+//T1-1b: Liquid, Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/sludgee
 	name = "Sludge"
 	id = "sludgee"
@@ -175,7 +191,7 @@
 	result_amount = 3
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
-//T1-2b: Liquid, No Effect//
+//T1-2b: Liquid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/carbolic_acid
 	name = "Carbolic Acid"
 	id = "carbolic_acid"
@@ -207,6 +223,7 @@
 	result_amount = 2
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
+//T1-2c: GAS, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/hydrofluoride
 	name = "Hydrofluoride"
 	id = "hydrofluoride"
@@ -214,17 +231,18 @@
 	reagent_state = GAS
 	color = "#493062"
 
-/datum/chemical_reaction/hydrofluoride
-	name = "Hydrofluoride"
+/datum/chemical_reaction/hydrofluorine
+	name = "Hydrofluorine"
 	id = "hydrofluoride"
-	result = "hydrofluoride"
-	required_reagents = list("hydrogen" = 1, "fluoride" = 1)
+	result = "hydrofluorine"
+	required_reagents = list("hydrogen" = 1, "fluorine" = 1)
 	result_amount = 2
 
-//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 //TIER TWO//
-/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
+//T2-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/carbonsteel
 	name = "Steel"
 	id = "carbonsteel"
@@ -236,7 +254,7 @@
 	name = "Steel"
 	id = "carbonsteel"
 	result = "carbonsteel"
-	required_reagents = list("reiron")
+	required_reagents = list("reiron" = 3, "trihydrocarbon" = 1)
 	result_amount = 3
 	min_temp = 445
 
