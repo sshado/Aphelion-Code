@@ -89,9 +89,24 @@
 	name = "Refined Iron"
 	id = "reiron"
 	result = "reiron"
-	required_reagents = list("iron" = 3 "oxygen" = 1)
+	required_reagents = list("iron" = 3, "oxygen" = 1)
 	result_amount = 2
 	min_temp = 375
+
+//T1-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
+/datum/reagent/fiber
+	name = "Fiber" //Gotta Shit Fast
+	id = "fiber"
+	description = "Got Squirts? Now you do!"
+	reagent_state = SOLID
+	color = "#6E3B08" // rgb: 110, 59, 8
+/datum/chemical_reaction/fiber
+	name = "Fiber"
+	id = "fiber"
+	result = "fiber"
+	required_reagents = list("water" = 3, "copper" = 1, "tungsten" = 1)
+	result_amount = 3
+	min_temp = 400
 
 //T1-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/trihydrocarbon
@@ -99,7 +114,7 @@
 	id = "trihydrocarbon"
 	description = "A carbon based mass that is used to make charcoal."
 	reagent_state = SOLID
-	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
+	color = "#6E3B08" // rgb: 110, 59, 8
 
 /datum/chemical_reaction/trihydrocarbon
 	name = "Tri-Hydrocarbon"
@@ -115,7 +130,7 @@
 	id = "acetic_acid"
 	description = "Acetic acid is a weak acid that is used for basic reactions. Also known as vinegar."
 	reagent_state = LIQUID
-	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
+	color = "#6E3B08" // rgb: 110, 59, 8
 
 /datum/chemical_reaction/acetic_acid
 	name = "Acetic acid"
@@ -130,7 +145,7 @@
 	id = "salinesolution"
 	description = "A simple saltwater solution."
 	reagent_state = LIQUID
-	color = "#6E3B08" // rgb: 110, 59, 8	overdose_threshold = 120 // Zinc Poisioning
+	color = "#6E3B08" // rgb: 110, 59, 8
 	metabolization_rate = 0.15
 
 /datum/reagent/salinesolution/on_mob_life(var/mob/living/M as mob)
@@ -238,9 +253,29 @@
 	required_reagents = list("hydrogen" = 1, "fluorine" = 1)
 	result_amount = 2
 
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 //TIER TWO//
-/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+//T2-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
+/datum/reagent/bisacodyl
+	name = "Bisacodyl"
+	id = "bisacodyl"
+	description = "A laxative, ask your doctor is bisacodyl is right for you!"
+	reagent_state = SOLID
+	color = "#525050"
+/datum/reagent/charcoal/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.adjustToxLoss(-0.099*REM) //GOTTAA SHIT IT OUT
+	..()
+	return
+/datum/chemical_reaction/bisacodyl
+	name = "Bisacodyl"
+	id = "bisacodyl"
+	result = "bisacodyl"
+	required_reagents = list("water" = 1, "fiber" = 1)
+	result_amount = 4
+	min_temp = 355
 
 //T2-2a(d): Solid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/carbonsteel
@@ -249,7 +284,6 @@
 	description = "An alloy of carbon and iron"
 	reagent_state = SOLID
 	color = "#525050"
-
 /datum/chemical_reaction/carbonsteel
 	name = "Steel"
 	id = "carbonsteel"
@@ -257,7 +291,6 @@
 	required_reagents = list("reiron" = 3, "trihydrocarbon" = 1)
 	result_amount = 3
 	min_temp = 445
-
 
 //T2-2b(e): Liquid, Effect//
 /datum/reagent/opium
@@ -269,7 +302,6 @@
 	overdose_threshold = 45
 	addiction_threshold = 35
 	shock_reduction = 15
-
 /datum/reagent/opium/overdose_process(var/mob/living/M as mob)
 	if(prob(33))
 		var/obj/item/I = M.get_active_hand()
@@ -277,7 +309,6 @@
 			M.drop_item()
 	..()
 	return
-
 /datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	switch(current_cycle)
@@ -331,7 +362,6 @@
 		M.adjustToxLoss(0.75*REM)
 	..()
 	return
-
 /datum/chemical_reaction/opium
 	name = "opium"
 	id = "opium"
@@ -340,6 +370,7 @@
 	result_amount = 3
 	max_temp = 270
 
+//T2-2c(e): Gas, Effect//
 /datum/reagent/xenofloracarbon
 	name = "Xeno-Floracarbon"
 	id = "xenofloracarbon"
@@ -347,7 +378,6 @@
 	reagent_state = GAS
 	color = "#525050"
 	overdose_threshold = 15
-
 /datum/reagent/xenofloracarbon/overdose_process(var/mob/living/M as mob)
 	if(prob(88))
 		M.adjustToxLoss(-2*REM)
@@ -355,7 +385,6 @@
 		M.fakevomit()
 	..()
 	return
-
 /datum/chemical_reaction/xenofloracarbon
 	name = "Xeno-Floracarbon"
 	id = "xenofloracarbon"
