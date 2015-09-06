@@ -142,7 +142,7 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
 	var/on_gs = 0
-	var/brightness_range = 12	// luminosity when on, also used in power calculation
+	var/brightness_range = 8	// luminosity when on, also used in power calculation
 	var/brightness_power = 3
 	var/brightness_color = null
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
@@ -160,18 +160,22 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness_range = 8
+	brightness_range = 4
 	brightness_power = 2
 	brightness_color = "#a0a080"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
+/obj/machinery/light/small/emergency
+	brightness_range = 6
+	brightness_power = 2
+	brightness_color = "#da0205"
 
 /obj/machinery/light/spot
 	name = "spotlight"
 	fitting = "large tube"
 	light_type = /obj/item/weapon/light/tube/large
-	brightness_range = 16
+	brightness_range = 12
 	brightness_power = 4
 
 /obj/machinery/light/built/New()
@@ -708,3 +712,4 @@
 		sharp = 1
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()
+

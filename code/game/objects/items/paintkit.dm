@@ -43,7 +43,7 @@
 		user << "You set about modifying the helmet into [src]."
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			species_restricted = list(H.species.name)
+			species_restricted = list(H.species.get_bodytype())
 		kit.use(1,user)
 		return 1
 	return ..()
@@ -62,7 +62,7 @@
 		user << "You set about modifying the suit into [src]."
 		var/mob/living/carbon/human/H = user
 		if(istype(H))
-			species_restricted = list(H.species.name)
+			species_restricted = list(H.species.get_bodytype())
 		kit.use(1,user)
 		return 1
 	return ..()
@@ -111,14 +111,13 @@
 		return ..()
 
 //Ripley APLU kits.
-/*
 /obj/item/device/kit/paint/ripley
 	name = "\"Classic\" APLU customisation kit"
 	new_name = "APLU \"Classic\""
 	new_desc = "A very retro APLU unit; didn't they retire these back in 2543?"
 	new_icon = "ripley-old"
 	allowed_types = list("ripley")
-*/
+
 /obj/item/device/kit/paint/ripley/death
 	name = "\"Reaper\" APLU customisation kit"
 	new_name = "APLU \"Reaper\""

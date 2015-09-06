@@ -4,7 +4,7 @@
 		return
 
 	// TODO :  Change to incapacitated() on merge.
-	if(user.stat || user.lying || user.resting || user.buckled)
+	if(user.stat || user.lying || user.resting || user.buckled || !user.Adjacent(src))
 		user << browse(null, text("window=mob[src.name]"))
 		return
 
@@ -160,3 +160,4 @@
 			internals.icon_state = "internal1"
 	else
 		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
+

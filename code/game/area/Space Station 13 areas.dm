@@ -98,6 +98,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
+	lighting_use_dynamic = 0
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
@@ -131,6 +132,7 @@ area/space/atmosalert()
 	name = "\improper Admin room"
 	icon_state = "start"
 	requires_power = 0
+
 
 
 ////////////
@@ -2182,4 +2184,5 @@ var/list/the_station_areas = list (
 						H << S
 
 		spawn(60) .()
+
 
