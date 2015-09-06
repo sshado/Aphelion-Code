@@ -133,3 +133,42 @@ datum/reagent/neodextraminesolution/overdose_process(var/mob/living/M as mob)
 	..()
 	return
 
+//T3
+/datum/reagent/neodextraminesolution
+	name = "Neodextramine Solution"
+	id = "neodextraminesolution"
+	description = "This potent purgative rids the body of impurities. It is highly toxic however and close supervision is required."
+	color = "#FFFF66"
+	metabolism = 0.8
+	overdose_threshold = 20
+datum/reagent/neodextraminesolution/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	for(var/datum/reagent/R in M.reagents.reagent_list)
+		if(R != src)
+			M.reagents.remove_reagent(R.id,5)
+	if(M.health > 65)
+		M.adjustToxLoss(5*REM)
+	if(prob(10))
+		M.fakevomit()
+	..()
+	return
+/datum/chemical_reaction/neodextraminesolution
+	name = "Neodextramine Solution"
+	id = "neodextraminesolution"
+	result = "neodextraminesolution"
+	required_reagents = list("alkysine" = 1, "mercury" = 1, )
+	result_amount = 2
+	max_temp = 273
+	mix_message = "Stinging vapors rise from the solution."
+
+datum/reagent/neodextraminesolution/overdose_process(var/mob/living/M as mob)
+	if(prob(66))
+		M.adjustToxLoss(3*REM)
+	if(prob(33))
+		M.fakevomit()
+	if(prob(12))
+		M.adjustBruteLoss(1*REM)
+	..()
+	return
+	..()
+	return
