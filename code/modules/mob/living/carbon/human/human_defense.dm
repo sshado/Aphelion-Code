@@ -483,4 +483,3 @@ emp_act
 		perm += perm_by_part[part]
 
 	return perm
-

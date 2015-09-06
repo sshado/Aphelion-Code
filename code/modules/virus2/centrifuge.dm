@@ -203,7 +203,7 @@
 		var/datum/reagent/antibodies/A = locate(/datum/reagent/antibodies) in sample.reagents.reagent_list
 		if (A)
 			P.info += "The following antibodies have been isolated from the blood sample: "
-			P.info += antigens2string(A.data["antibodies"])
+			P.info += A.data["antibodies"] ? antigens2string(A.data["antibodies"]) : "None"
 			P.info += "<br>"
 
 	P.info += {"

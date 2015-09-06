@@ -1,9 +1,11 @@
-/obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob)
+/*
 
-	if(istype(W,/obj/item/weapon/material/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
+/obj/item/weapon/reagent_containers/food/snacks/breadslice/attackby(obj/item/W as obj, mob/user as mob, params)
+
+	if(istype(W,/obj/item/weapon/shard) || istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/csandwich/S = new(get_turf(src))
-		S.attackby(W,user)
-		qdel(src)
+		S.attackby(W,user, params)
+		del(src)
 	..()
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich
@@ -15,7 +17,7 @@
 
 	var/list/ingredients = list()
 
-/obj/item/weapon/reagent_containers/food/snacks/csandwich/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/csandwich/attackby(obj/item/W as obj, mob/user as mob, params)
 
 	var/sandwich_limit = 4
 	for(var/obj/item/O in ingredients)
@@ -25,7 +27,7 @@
 	if(src.contents.len > sandwich_limit)
 		user << "\red If you put anything else on \the [src] it's going to collapse."
 		return
-	else if(istype(W,/obj/item/weapon/material/shard))
+	else if(istype(W,/obj/item/weapon/shard))
 		user << "\blue You hide [W] in \the [src]."
 		user.drop_item()
 		W.loc = src
@@ -34,7 +36,7 @@
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		user << "\blue You layer [W] over \the [src]."
 		var/obj/item/weapon/reagent_containers/F = W
-		F.reagents.trans_to_obj(src, F.reagents.total_volume)
+		F.reagents.trans_to(src, F.reagents.total_volume)
 		user.drop_item()
 		W.loc = src
 		ingredients += W
@@ -71,23 +73,23 @@
 
 	name = lowertext("[fullname] sandwich")
 	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous"))] sandwich"
-	w_class = n_ceil(Clamp((ingredients.len/2),2,4))
+	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich/Destroy()
 	for(var/obj/item/O in ingredients)
-		qdel(O)
-	..()
+		del(O)
+	return ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/csandwich/examine(mob/user)
-	..(user)
+/obj/item/weapon/reagent_containers/food/snacks/csandwich/examine()
+	..()
 	var/obj/item/O = pick(contents)
-	user << "\blue You think you can see [O.name] in there."
+	usr << "\blue You think you can see [O.name] in there."
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
 
 	var/obj/item/shard
 	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/weapon/material/shard))
+		if(istype(O,/obj/item/weapon/shard))
 			shard = O
 			break
 
@@ -99,3 +101,4 @@
 		H << "\red You lacerate your mouth on a [shard.name] in the sandwich!"
 		H.adjustBruteLoss(5) //TODO: Target head if human.
 	..()
+*/

@@ -862,9 +862,9 @@
 			chem_effects.Cut()
 			analgesic = 0
 
-			if(touching) touching.metabolize()
-			if(ingested) ingested.metabolize()
-			if(bloodstr) bloodstr.metabolize()
+			if(touching) touching.metabolizeold()
+			if(ingested) ingested.metabolizeold()
+			if(bloodstr) bloodstr.metabolizeold()
 
 			if(CE_PAINKILLER in chem_effects)
 				analgesic = chem_effects[CE_PAINKILLER]
@@ -1524,7 +1524,7 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(R.volume >= R.overdosed)
 					temp = PULSE_NONE
 
 		return temp

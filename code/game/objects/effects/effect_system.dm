@@ -15,7 +15,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/Destroy()
 	if(reagents)
-		reagents.delete()
+		reagents.Destroy()
 	return ..()
 
 /datum/effect/effect/system
@@ -509,10 +509,10 @@ steam.start() -- spawns the effect
 				M << "\red The solution violently explodes."
 
 			explosion(
-				location, 
-				round(min(devst, BOMBCAP_DVSTN_RADIUS)), 
-				round(min(heavy, BOMBCAP_HEAVY_RADIUS)), 
-				round(min(light, BOMBCAP_LIGHT_RADIUS)), 
+				location,
+				round(min(devst, BOMBCAP_DVSTN_RADIUS)),
+				round(min(heavy, BOMBCAP_HEAVY_RADIUS)),
+				round(min(light, BOMBCAP_LIGHT_RADIUS)),
 				round(min(flash, BOMBCAP_FLASH_RADIUS))
 				)
 
