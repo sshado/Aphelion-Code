@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1441564884
-DIR: code code\game code\game\antagonist code\modules code\modules\assembly code\modules\genetics code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\reagents code\modules\reagents\newchem maps External 
+LAST_COMPILE_TIME: 1441577344
+DIR: code code\controllers code\controllers\Processes 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 508.1299
-WINDOW: code\modules\reagents\newchem\Dispenser-Chems.dm;code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\reagents\newchem\Base_Chems.dm;code\modules\reagents\newchem\medicine.dm;code\modules\reagents\newchem\chem_heater.dm;maps\aphelion-1.dmm;C:\Users\Michael\Downloads\Aphelion-Code-master1\Aphelion-Code-master\maps\aphelion-1.dmm
-FILE: maps\aphelion-1.dmm
+WINDOW: code\controllers\Processes\machinery.dm
+FILE: code\controllers\Processes\machinery.dm
 */
 // END_INTERNALS
