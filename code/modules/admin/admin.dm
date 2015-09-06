@@ -1179,8 +1179,8 @@ proc/admin_notice(var/message, var/rights)
 
 	out += "<hr>"
 
-	if(ticker.mode.antag_tags)
-		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tags]'>[ticker.mode.antag_tags]</a>.</br>"
+	if(ticker.mode.antag_tag)
+		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tag]'>[ticker.mode.antag_tag]</a>.</br>"
 
 	if(ticker.mode.round_autoantag)
 		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b>."
@@ -1197,7 +1197,7 @@ proc/admin_notice(var/message, var/rights)
 		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
 			antag.update_current_antag_max()
 			out += " <a href='?src=\ref[ticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
-			out += " ([antag.get_antag_count()]/[antag.cur_max])"
+			out += " ([antag.get_antag_count()]/[antag.cur_max])
 			out += " <a href='?src=\ref[ticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
 	else
 		out += " None."
@@ -1384,7 +1384,7 @@ proc/admin_notice(var/message, var/rights)
 	set category = "Admin"
 	set name = "Force Template Spawn"
 	set desc = "Force an antagonist template to spawn."
-
+	
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
 	if (!istype(src,/datum/admins))

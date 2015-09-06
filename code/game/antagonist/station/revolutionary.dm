@@ -15,7 +15,7 @@ var/datum/antagonist/revolutionary/revs
 	loss_feedback_tag = "loss - rev heads killed"
 	flags = ANTAG_SUSPICIOUS | ANTAG_VOTABLE
 	antaghud_indicator = "hudrevolutionary"
-
+	
 	hard_cap = 2
 	hard_cap_round = 4
 	initial_spawn_req = 2
@@ -28,9 +28,8 @@ var/datum/antagonist/revolutionary/revs
 	faction_welcome = "Help the cause overturn the ruling class. Do not harm your fellow freedom fighters."
 	faction_indicator = "rev"
 	faction_invisible = 1
-
-	restricted_jobs = list("Internal Affairs Agent", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
+	restricted_jobs = list("AI", "Cyborg", "Captain", "Head of Security", "Head of Personnel")
+	protected_jobs = list("Security Officer", "Chief Engineer", "Research Director", "Chief Medical Officer", "Quartermaster")
 
 /datum/antagonist/revolutionary/New()
 	..()
@@ -45,5 +44,4 @@ var/datum/antagonist/revolutionary/revs
 			continue
 		var/datum/objective/rev/rev_obj = new
 		rev_obj.target = player.mind
-		rev_obj.explanation_text = "Assassinate, capture or convert [player.real_name], the [player.mind.assigned_role]."
-		global_objectives += rev_obj
+		rev_obj.explanation_text = "Assassinate, capture or convert [player.real_name], the [player.mind.assigned_role]."		global_objectives += rev_obj
