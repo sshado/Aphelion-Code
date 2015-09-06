@@ -12,6 +12,9 @@
 	var/on = FALSE
 
 /obj/machinery/chem_heater/New()
+	var/datum/reagents/R = new/datum/reagents(100)
+	reagents = R
+	R.my_atom = src
 	..()
 	component_parts = list()
 //	component_parts += new /obj/item/weapon/circuitboard/chem_heater(null)
@@ -80,10 +83,16 @@
 		B.loc = src
 		user << "You add the beaker to the machine!"
 		src.updateUsrDialog()
+		nanomanager.update_uis(src) // update all UIs attached to src
 		icon_state = "mixer0b"
+
+		nanomanager.update_uis(src) // update all UIs attached to src
+		return
 
 	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", B))
 		return
+
+
 
 ///	if(exchange_parts(user, I))
 ///		return
