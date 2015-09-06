@@ -6433,7 +6433,7 @@
 "ctK" = (/obj/structure/closet/crate,/obj/item/weapon/circuitboard/smes,/obj/item/weapon/circuitboard/smes,/obj/item/weapon/smes_coil,/obj/item/weapon/smes_coil,/obj/item/weapon/smes_coil/super_capacity,/obj/item/weapon/smes_coil/super_capacity,/obj/item/weapon/smes_coil/super_io,/obj/item/weapon/smes_coil/super_io,/turf/simulated/floor/plating,/area/engineering/storage)
 "ctL" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/plating,/area/maintenance/engineering)
 "ctM" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 10},/obj/machinery/meter,/turf/simulated/floor/plating,/area/maintenance/engineering)
-"ctN" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/maintenance{name = "Operating Theatre 1 Maintenance Access"; req_access = list(45)},/turf/simulated/floor/plating,/area/medical/surgery)
+"ctN" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/maintenance{name = "Operating Theatre 1 Maintenance Access"; req_access = list(45)},/obj/machinery/door/blast/shutters{density = 0; dir = 2; icon_state = "shutter0"; id = "medbayquar"; name = "Medbay Emergency Quarantine Shutters"; opacity = 0},/turf/simulated/floor/plating,/area/medical/surgery)
 "ctO" = (/obj/structure/table/rack{dir = 1},/obj/item/weapon/extinguisher,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/maintenance/medbay)
 "ctP" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/maintenance/medbay)
 "ctQ" = (/obj/machinery/light/small{dir = 1},/obj/item/weapon/cigbutt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/maintenance/medbay)
