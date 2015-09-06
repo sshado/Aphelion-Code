@@ -16,20 +16,12 @@ var/datum/antagonist/xenos/xenomorphs
 	spawn_announcement = "Unidentified lifesigns detected coming aboard the station. Secure any exterior access, including ducting and ventilation."
 	spawn_announcement_title = "Lifesign Alert"
 	spawn_announcement_sound = 'sound/AI/aliens.ogg'
-	spawn_announcement_delay = 400
+	spawn_announcement_delay = 5000
 
 /datum/antagonist/xenos/New(var/no_reference)
 	..()
 	if(!no_reference)
 		xenomorphs = src
-
-/datum/antagonist/xenos/Topic(href, href_list)
-	if (..())
-		return
-	if(href_list["move_to_spawn"]) place_mob(locate(href_list["move_to_spawn"]))
-
-/datum/antagonist/xenos/get_extra_panel_options(var/datum/mind/player)
-	return "<a href='?src=\ref[src];move_to_spawn=\ref[player.current]'>\[move to vent\]</a>"
 
 /datum/antagonist/xenos/attempt_random_spawn()
 	if(config.aliens_allowed) ..()
@@ -47,13 +39,6 @@ var/datum/antagonist/xenos/xenomorphs
 		return
 	player.objectives += new /datum/objective/survive()
 	player.objectives += new /datum/objective/escape()
-
-/datum/antagonist/xenos/place_all_mobs()
-	var/list/vents = get_vents()
-	for(var/datum/mind/player in current_antagonists)
-		var/obj/machinery/atmospherics/unary/vent_pump/temp_vent = pick(vents)
-		vents -= temp_vent
-		player.current.loc = get_turf(temp_vent)
 
 /datum/antagonist/xenos/place_mob(var/mob/living/player)
 	player.loc = get_turf(pick(get_vents()))

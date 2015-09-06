@@ -11,8 +11,8 @@ var/datum/antagonist/cultist/cult
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
 	bantype = "cultist"
-	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Head of Security", "Captain")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
+	restricted_jobs = list("AI", "Cyborg", "Captain", "Head of Security", "Head of Personnel", "Chaplain")
+	protected_jobs = list("Chief Engineer", "Research Director", "Chief Medical Officer", "Quartermaster")
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
@@ -22,8 +22,8 @@ var/datum/antagonist/cultist/cult
 	victory_feedback_tag = "win - cult win"
 	loss_feedback_tag = "loss - staff stopped the cult"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
+	max_antags = 5 // No upper limit.
+	max_antags_round = 6
 	var/allow_narsie = 1
 
 	var/datum/mind/sacrifice_target

@@ -1159,8 +1159,10 @@ proc/admin_notice(var/message, var/rights)
 
 	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[ticker.mode];set=shuttle_delay'>[ticker.mode.shuttle_delay]</a><br/>"
 
-	if(ticker.mode.auto_recall_shuttle)
-		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>enabled</a>"
+	if(ticker.mode.antag_tags && ticker.mode.antag_tags.len)
+		out += "<b>Core antag templates:</b></br>"
+		for(var/antag_tag in ticker.mode.antag_tags)
+			out += "<a href='?src=\ref[ticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
 	else
 		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>disabled</a>"
 	out += "<br/><br/>"
@@ -1181,26 +1183,21 @@ proc/admin_notice(var/message, var/rights)
 		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tag]'>[ticker.mode.antag_tag]</a>.</br>"
 
 	if(ticker.mode.round_autoantag)
-		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b> ([ticker.mode.get_antag_prob()]% spawn chance)"
-		if(ticker.mode.antag_scaling_coeff)
+		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b>."
+		if(ticker.mode.antag_scaling_coeff > 0)
 			out += " (scaling with <a href='?src=\ref[ticker.mode];set=antag_scaling'>[ticker.mode.antag_scaling_coeff]</a>)"
-		out += "<br/>"
+		else
+			out += " (not currently scaling, <a href='?src=\ref[ticker.mode];set=antag_scaling'>set a coefficient</a>)"
+			out += "<br/>"
 	else
 		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>disabled</a></b>.<br/>"
 
 	out += "<b>All antag ids:</b>"
 	if(ticker.mode.antag_templates && ticker.mode.antag_templates.len).
-		var/playercount = ticker.mode.num_players()
 		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
-			var/cur_max_antags
-			if(ticker.mode.antag_tag && antag.id == ticker.mode.antag_tag)
-				cur_max_antags = antag.max_antags_round
-			else
-				cur_max_antags = antag.max_antags
-			if(ticker.mode.antag_scaling_coeff)
-				cur_max_antags = Clamp((playercount/ticker.mode.antag_scaling_coeff), 1, cur_max_antags)
+			antag.update_current_antag_max()
 			out += " <a href='?src=\ref[ticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
-			out += " ([antag.get_antag_count()]/[cur_max_antags]) "
+			out += " ([antag.get_antag_count()]/[antag.cur_max])
 			out += " <a href='?src=\ref[ticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
 	else
 		out += " None."
