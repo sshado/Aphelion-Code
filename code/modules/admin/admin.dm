@@ -1159,8 +1159,10 @@ proc/admin_notice(var/message, var/rights)
 
 	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[ticker.mode];set=shuttle_delay'>[ticker.mode.shuttle_delay]</a><br/>"
 
-	if(ticker.mode.auto_recall_shuttle)
-		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>enabled</a>"
+	if(ticker.mode.antag_tags && ticker.mode.antag_tags.len)
+		out += "<b>Core antag templates:</b></br>"
+		for(var/antag_tag in ticker.mode.antag_tags)
+			out += "<a href='?src=\ref[ticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
 	else
 		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>disabled</a>"
 	out += "<br/><br/>"
@@ -1193,7 +1195,7 @@ proc/admin_notice(var/message, var/rights)
 		var/playercount = ticker.mode.num_players()
 		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
 			var/cur_max_antags
-			if(ticker.mode.antag_tag && antag.id == ticker.mode.antag_tag)
+			if(ticker.mode.antag_tags && (antag.id in ticker.mode.antag_tags))
 				cur_max_antags = antag.max_antags_round
 			else
 				cur_max_antags = antag.max_antags
