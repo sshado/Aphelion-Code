@@ -141,6 +141,25 @@
 			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 			overlays += lid
 
+/obj/item/weapon/reagent_containers/glass/beaker/verb/remove_assembly()
+	set name = "Remove Assembly"
+	set category = "Object"
+	set src in usr
+	if(usr.stat || !usr.canmove || usr.restrained())
+		return
+	if (assembly)
+		usr << "<span class='notice'>You detach [assembly] from \the [src]</span>"
+		usr.put_in_hands(assembly)
+		assembly = null
+		update_icon()
+	else
+		usr << "<span class='notice'>There is no assembly to remove.</span>"
+
+/obj/item/weapon/reagent_containers/glass/beaker/proc/heat_beaker()
+	if(reagents)
+		reagents.chem_temp += 30
+		reagents.handle_reactions()
+
 /obj/item/weapon/reagent_containers/glass/beaker/large
 	name = "large beaker"
 	desc = "A large beaker."

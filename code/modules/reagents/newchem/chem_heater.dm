@@ -68,32 +68,30 @@
 			stat |= NOPOWER
 	nanomanager.update_uis(src)
 
-/obj/machinery/chem_heater/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(isrobot(user))
-		return
+/obj/machinery/chem_heater/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob, params)
 
-	if(istype(I, /obj/item/weapon/reagent_containers/glass))
-		if(beaker)
-			user << "<span class='notice'>A beaker is already loaded into the machine.</span>"
+	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass))
+
+		if(src.beaker)
+			user << "A beaker is already loaded into the machine."
 			return
+		src.beaker = B
+		user.drop_item()
+		B.loc = src
+		user << "You add the beaker to the machine!"
+		src.updateUsrDialog()
+		icon_state = "mixer0b"
 
-		if(user.drop_item())
-			beaker = I
-			I.loc = src
-			user << "<span class='notice'>You add the beaker to the machine!</span>"
-			icon_state = "mixer1b"
-			nanomanager.update_uis(src)
-
-	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", I))
+	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", B))
 		return
 
 ///	if(exchange_parts(user, I))
 ///		return
 
 	if(panel_open)
-		if(istype(I, /obj/item/weapon/crowbar))
+		if(istype(B, /obj/item/weapon/crowbar))
 			eject_beaker()
-			default_deconstruction_crowbar(I)
+			default_deconstruction_crowbar(B)
 			return 1
 
 /obj/machinery/chem_heater/attack_hand(var/mob/user as mob)
@@ -126,6 +124,8 @@
 		eject_beaker()
 		. = 0 //updated in eject_beaker() already
 
+
+
 /obj/machinery/chem_heater/ui_interact(var/mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(user.stat || user.restrained()) return
 
@@ -148,6 +148,10 @@
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
-		ui = new(user, src, ui_key, "chem_heater.tmpl", "ChemHeater", 350, 270)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "chem_heater.tmpl", 390, 655)
+		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
+		// open the new ui window
 		ui.open()
