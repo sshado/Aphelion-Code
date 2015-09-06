@@ -229,6 +229,18 @@
 	name = "Steel"
 	id = "carbonsteel"
 	description = "An alloy of carbon and iron"
+	reagent_state = SOLID
+	color = "#525050"
+
+/datum/chemical_reaction/carbonsteel
+	name = "Steel"
+	id = "carbonsteel"
+	result = "carbonsteel"
+	required_reagents = list("reiron")
+	result_amount = 3
+	min_temp = 445
+
+
 //T2-2b(e): Liquid, Effect//
 /datum/reagent/opium
 	name = "opium"
@@ -334,9 +346,6 @@
 	result_amount = 3
 	min_temp = 445
 
-
-
-
 //////////////////////////////////////////////////////////////////////////////
 //TIER THREE//
 ///////////////////////
@@ -345,14 +354,14 @@
 	name = "Carbon Nanofibers"
 	id = "nanocarbon"
 	description = "The purest form of carbon before diamond. Carbon nanofibers are ultra strong"
-	reagent_state = solid
+	reagent_state = SOLID
 	color = "#525050"
 
 /datum/chemical_reaction/nanocarbon
 	name = "Carbon Nanofibers"
 	id = "nanocarbon"
 	result = "nanocarbon"
-	required_reagents = list("xenofloracarbon" = 2 "carbonsteel" = 2 "nanotubing" = 1)
+	required_reagents = list("xenofloracarbon" = 2, "carbonsteel" = 2, "nanotubing" = 1)
 	result_amount = 2
 	min_temp = 670
 
