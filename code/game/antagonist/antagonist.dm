@@ -69,7 +69,6 @@
 /datum/antagonist/proc/get_candidates(var/ghosts_only)
 	candidates = list() // Clear.
 
-
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
 	for(var/datum/mind/player in ticker.mode.get_players_for_role(role_type, id))
@@ -101,7 +100,7 @@
 	if(istype(player.current, /mob/dead))
 		create_default(player.current)
 	else
-		add_antagonist(player,0,1,0,1,1)
+		add_antagonist(player,0,0,0,1,1)
 	return
 
 /datum/antagonist/proc/build_candidate_list(var/ghosts_only)

@@ -5,8 +5,6 @@ var/datum/antagonist/traitor/traitors
 	restricted_jobs = list("AI", "Captain", "Head of Security", "Head of Personnel")
 	protected_jobs = list("Security Officer", "Chief Engineer", "Research Director", "Chief Medical Officer", "Quartermaster", "Cyborg")
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
 
 /datum/antagonist/traitor/New()
 	..()
