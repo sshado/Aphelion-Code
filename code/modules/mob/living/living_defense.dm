@@ -39,6 +39,7 @@
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	flash_weak_pain()
+	failop()
 
 	//Being hit while using a cloaking device
 	var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
@@ -92,7 +93,8 @@
 		apply_effect(EYE_BLUR, agony_amount/10)
 
 /mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
-	  return 0 //only carbon liveforms have this proc
+	failop()
+	return 0 //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
 	var/list/L = src.get_contents()
@@ -116,6 +118,7 @@
 			visible_message("\blue \The [O] misses [src] narrowly!")
 			return
 
+		failop()
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(null, "melee")
 
@@ -236,6 +239,7 @@
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
 /mob/living/fire_act()
+	failop()
 	adjust_fire_stacks(2)
 	IgniteMob()
 
@@ -251,7 +255,7 @@
 		return 0
 
 	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
-	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame. 
+	//lower limit of 700 K, same as matches and roughly the temperature of a cool flame.
 	return max(2.25*round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2), 700)
 
 /mob/living/proc/reagent_permeability()

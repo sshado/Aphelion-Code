@@ -26,7 +26,7 @@ var/datum/antagonist/mercenary/mercs
 	return 1
 
 /datum/antagonist/mercenary/equip(var/mob/living/carbon/human/player)
-
+	var/mob/living/M = player
 	if(!..())
 		return 0
 
@@ -39,6 +39,7 @@ var/datum/antagonist/mercenary/mercs
 	player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(player.back), slot_in_backpack)
 	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
 	player.update_icons()
+	M.mind.isSurgeon = 1
 
 	create_id("Mercenary", player)
 	create_radio(SYND_FREQ, player)

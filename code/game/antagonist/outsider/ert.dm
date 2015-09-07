@@ -29,6 +29,7 @@ var/datum/antagonist/ert/ert
 	player.current << "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready."
 
 /datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
+	var/mob/living/M = player
 
 	//Special radio setup
 	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_l_ear)
@@ -41,5 +42,6 @@ var/datum/antagonist/ert/ert
 	W.registered_name = player.real_name
 	W.name = "[player.real_name]'s ID Card ([W.assignment])"
 	player.equip_to_slot_or_del(W, slot_wear_id)
+	M.mind.isSurgeon = 1
 
 	return 1

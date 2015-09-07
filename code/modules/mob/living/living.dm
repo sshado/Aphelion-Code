@@ -147,6 +147,9 @@ default behaviour is:
 		src.health = 100 - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
 		src << "\blue You have given up life and succumbed to death."
 
+/mob/living/proc/failop() //Cleaner way of setting fail_next_op to true than repeating the code every time it's used
+	if(!src.fail_next_op)
+		src.fail_next_op = 1
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
@@ -466,6 +469,7 @@ default behaviour is:
 	return
 
 /mob/living/Move(a, b, flag)
+	src.failop()
 	if (buckled)
 		return
 
@@ -659,6 +663,7 @@ default behaviour is:
 
 	resting = !resting
 	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src.failop()
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)
@@ -736,6 +741,7 @@ default behaviour is:
 	if(!target_vent)
 		return
 
+	src.failop()
 	for(var/mob/O in viewers(src, null))
 		O.show_message(text("<B>[src] scrambles into the ventillation ducts!</B>"), 1)
 	loc = target_vent

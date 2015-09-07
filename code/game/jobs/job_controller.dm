@@ -61,6 +61,8 @@ var/global/datum/controller/occupations/job_master
 				player.mind.role_alt_title = GetPlayerAltTitle(player, rank)
 				unassigned -= player
 				job.current_positions++
+				if((job = "Chief Medical Officer") || (job = "Medical Doctor") || (job = "Cyborg"))
+					player.mind.isSurgeon = 1
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0

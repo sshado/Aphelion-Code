@@ -446,10 +446,12 @@
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
 
 		if(mind)
-			mind.active = 0					//we wish to transfer the key manually
+			mind.active = 0	//we wish to transfer the key manually
 			if(mind.assigned_role == "Clown")				//give them a clownname if they are a clown
 				new_character.real_name = pick(clown_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
 				new_character.rename_self("clown")
+			if(mind.assigned_role == "Medical Doctor" || mind.assigned_role == "Chief Medical officer" || mind.assigned_role == "Roboticist") //If they have a role with surgical knowledge
+				mind.isSurgeon = 1 //allow them to perform surgery without error
 			mind.original = new_character
 			mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
