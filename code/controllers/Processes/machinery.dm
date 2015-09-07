@@ -58,5 +58,14 @@
 		scheck()
 
 
+/datum/controller/process/machinery/proc/internal_process_pipenets()
+	for(var/datum/pipe_network/pipeNetwork in pipe_networks)
+		if(istype(pipeNetwork) && !pipeNetwork.disposed)
+			pipeNetwork.process()
+			scheck()
+			continue
+
+		pipe_networks.Remove(pipeNetwork)
+
 /datum/controller/process/machinery/getStatName()
-	return ..()+"([machines.len])"
+	return ..()+"(MCH:[machines.len] PWR:[powernets.len] PIP:[pipe_networks.len])"

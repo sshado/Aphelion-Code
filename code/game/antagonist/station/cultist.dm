@@ -11,8 +11,8 @@ var/datum/antagonist/cultist/cult
 	role_text = "Cultist"
 	role_text_plural = "Cultists"
 	bantype = "cultist"
-	restricted_jobs = list("Chaplain","AI", "Cyborg", "Internal Affairs Agent", "Head of Security", "Captain")
-	protected_jobs = list("Security Officer", "Warden", "Detective")
+	restricted_jobs = list("AI", "Cyborg", "Captain", "Head of Security", "Head of Personnel", "Chaplain")
+	protected_jobs = list("Chief Engineer", "Research Director", "Chief Medical Officer", "Quartermaster")
 	role_type = BE_CULTIST
 	feedback_tag = "cult_objective"
 	antag_indicator = "cult"
@@ -22,8 +22,12 @@ var/datum/antagonist/cultist/cult
 	victory_feedback_tag = "win - cult win"
 	loss_feedback_tag = "loss - staff stopped the cult"
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	max_antags = 200 // No upper limit.
-	max_antags_round = 200
+	antaghud_indicator = "hudcultist"
+	hard_cap = 5
+	hard_cap_round = 6
+	initial_spawn_req = 4
+	initial_spawn_target = 6
+ 
 	var/allow_narsie = 1
 
 	var/datum/mind/sacrifice_target
@@ -104,9 +108,9 @@ var/datum/antagonist/cultist/cult
 		player.current.visible_message("<FONT size = 3>[player.current] looks like they just reverted to their old faith!</FONT>")
 
 /datum/antagonist/cultist/add_antagonist(var/datum/mind/player)
-	if(!..())
-		return
-	player << "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
+	. = ..()
+	if(.)
+		player << "You catch a glimpse of the Realm of Nar-Sie, the Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of That Which Waits. Assist your new compatriots in their dark dealings. Their goals are yours, and yours are theirs. You serve the Dark One above all else. Bring It back."
 
 /datum/antagonist/cultist/can_become_antag(var/datum/mind/player)
 	if(!..())
