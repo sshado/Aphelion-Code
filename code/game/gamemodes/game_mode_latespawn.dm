@@ -1,7 +1,6 @@
 /datum/game_mode/var/next_spawn = 0
 /datum/game_mode/var/min_autotraitor_delay = 4200  // Approx 7 minutes.
 /datum/game_mode/var/max_autotraitor_delay = 12000 // Approx 20 minutes.
-/datum/game_mode/var/process_count = 0
 
 /datum/game_mode/proc/get_usable_templates(var/list/supplied_templates)
 	var/list/usable_templates = list()
@@ -14,11 +13,8 @@
 ///process()
 ///Called by the gameticker
 /datum/game_mode/proc/process()
-	// Slow this down a bit so latejoiners have a chance of being antags.
-	process_count++
-	if(process_count >= 10)
-		process_count = 0
-		try_latespawn()
+	try_latespawn()
+
 /datum/game_mode/proc/latespawn(var/mob/living/carbon/human/character)
 	if(!character.mind)
 		return
@@ -33,7 +29,6 @@
 	if(world.time < next_spawn)
 		return
 
-		
 	message_admins("AUTO[uppertext(name)]: Attempting spawn.")
 
 	var/list/usable_templates
@@ -45,7 +40,7 @@
 		message_admins("AUTO[uppertext(name)]: Failed to find configured mode spawn templates, please disable auto-antagonists until one is added.")
 		round_autoantag = 0
 		return
-		
+
 	while(usable_templates.len)
 		var/datum/antagonist/spawn_antag = pick(usable_templates)
 		usable_templates -= spawn_antag
