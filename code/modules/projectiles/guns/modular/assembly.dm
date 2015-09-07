@@ -29,8 +29,6 @@ obj/item/weapon/modular_firearms/assembly
 	var/isKinetic = null
 	var/silenced = null
 	var/compensated = null
-	var/haspin = 0
-	var/buildstage = 1
 	var/list/components = new/list()
 	var/useCell = null
 	var/useSupply = null
@@ -123,17 +121,14 @@ obj/item/weapon/modular_firearms/assembly
 		if((!modBarrel) && (modChamber))
 			add_part(I, user)
 			modBarrel += I
-			buildstage += 1
 
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		if((!modStock) && (modChassis))
 			add_part(I, user)
-			buildstage += 1
 			
 	if(istype(I, /obj/item/weapon/modular_firearms/scope))
 		if((!modScope) && (modChassis))
 			add_part(I, user)
-			buildstage += 1
 
 
 
