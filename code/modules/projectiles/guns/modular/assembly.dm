@@ -35,100 +35,118 @@ obj/item/weapon/modular_firearms/assembly
 	var/useCell = null
 	var/useSupply = null
 	var/useBullet = null
+	
+/obj/item/weapon/modular_firearms/assembly/process_part(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
+		if(istype(I, /obj/item/weapon/modular_firearms/chassis/energy))
+			isEnergy = 1
+		if(istype(I, /obj/item/weapon/modular_firearms/chassis/ballistic))
+			isKinetic = 1
+	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
+		var/obj/item/weapon/modular_firearms/chamber/chamber = I
+		if(chamber.projectile_type) //checking for energy weaponry
+			if(isEnergy)
+			else
+				user << "\red A ballistic chamber won't work with an energy chassis!"
+				return
+		if(chamber.caliber) //checking for kinetic weaponry
+			if(isKinetic)
+			else
+				user << "\red An energy chamber won't work with a ballistic chassis!"
+				return
+	if(istype(I, /obj/item/weapon/modular_firearms/driver))
+		var/obj/item/weapon/modular_firearms/driver/D = I
+		if(D.firemodes)
+		else
+			user << "\red How did you manage this?"
+			return
+	if(istype(I, /obj/item/weapon/modular_firearms/loader))
+		var/obj/item/weapon/modular_firearms/loader/L = I
+		if(!L.Eloader)
+			useBullet = 1
+		if(L.Eloader)
+			if(L.useCell)
+				useCell = 1
+			if(L.useSupply)
+				useSupply = 1
+	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+	if(istype(I, /obj/item/weapon/modular_firearms/stock))
+	if(istype(I, /obj/item/weapon/modular_firearms/scope))
+	
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
-	if(buildstage == 1)
-		if(istype(I, /obj/item/weapon/modular_firearms/chassis))
+	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
+		if(!modChassis)
 			user.drop_item()
 			I.loc = src
 			components += I
 			modChassis = I
-			if(istype(I, /obj/item/weapon/modular_firearms/chassis/energy))
-				isEnergy = 1
-			if(istype(I, /obj/item/weapon/modular_firearms/chassis/ballistic))
-				isKinetic = 1
+			process_part(I, user)
 			user << "\blue You install the [I] onto the [src]. Now you should install a chamber."
 		//	weight = I.weight + weight
-			buildstage += 1
 		else
-			user << "\red You must install a chassis first!"
 
-	else if(buildstage == 2)
-		if(istype(I, /obj/item/weapon/modular_firearms/chamber))
+	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
+		if((!modChamber) && (modChassis))
 			user.drop_item()
 			I.loc = src
 			components += I
 			modChamber = I
-			var/obj/item/weapon/modular_firearms/chamber/chamber = I
-			if(chamber.projectile_type) //checking for energy weaponry
-				if(isEnergy)
-				else
-					user << "\red A ballistic chamber won't work with an energy chassis!"
-					return
-			if(chamber.caliber) //checking for kinetic weaponry
-				if(isKinetic)
-				else
-					user << "\red An energy chamber won't work with a ballistic chassis!"
-					return
-			user << "\blue You install the [I] onto the [src]. Now you should install the driver."
+			process_part(I, user)
+			user << "\blue You install the [I] onto the [src]."
 		//	weight = I.weight + weight
-			buildstage += 1
-		else
-			user << "\red You must install a chamber first!"
+		else if(modChamber)
+			user << "\red There is already a [modChamber] installed!"
+		else if(!modChamber)
+			user << "\red The [I] needs to be attached to a chassis!"
 
-	else if(buildstage == 3)
-		if(istype(I, /obj/item/weapon/modular_firearms/driver))
+	if(istype(I, /obj/item/weapon/modular_firearms/driver))
+		if((!modDriver) && (modChamber))
 			user.drop_item()
 			I.loc = src
 			components += I
 			modDriver = I
-			var/obj/item/weapon/modular_firearms/driver/D = I
-			if(D.firemodes)
-			else
-				user << "\red How did you manage this?"
-				return
-			user << "\blue You install the [I] into the [src]."
-			buildstage += 1
-		else
-			user << "\red You must install a driver first!"
-	else if(buildstage == 4)
-		if(istype(I, /obj/item/weapon/modular_firearms/loader))
+			process_part(I, user)
+			user << "\blue You install the [I] onto the [src]."
+		else if(modDriver)
+			user << "\red There is already a [modDriver] installed!"
+		else if(!modChamber)
+			user << "\red The [I] needs to be attached to a chamber!"
+
+	if(istype(I, /obj/item/weapon/modular_firearms/loader))
+		if((!modLoader) && (modChamber))
 			user.drop_item()
 			I.loc = src
 			components += I
 			modLoader = I
-			var/obj.item/weapon/modular_firearms/loader/L = I
-			if(!L.Eloader)
-				useBullet = 1
-			if(L.Eloader)
-				if(L.useCell)
-					useCell = 1
-				if(L.useSupply)
-					useSupply = 1
-			user << "\blue You install the [I] into the [src]."
-			buildstage += 1
-		else
-			user << "\red You must install a loader first!"
+			process_part(I, user)
+			user << "\blue You install the [I] onto the [src]."
+		else if(modLoader)
+			user << "\red There is already a [modLoader] installed!"
+		else if(!modChamber)
+			user << "\red The [I] needs to be attached to a chamber!"
 
-	else if(buildstage == 5)
-		if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+		if((!modBarrel) && (modChamber))
+			user.drop_item()
+			I.loc = src
+			components += I
+			modBarrel += I
+			buildstage += 1
+
+	if(istype(I, /obj/item/weapon/modular_firearms/stock))
+		if((!modStock) && (modChassis))
+			user.drop_item()
+			I.loc = src
+			components += I
+			buildstage += 1
+			
+	if(istype(I, /obj/item/weapon/modular_firearms/scope))
+		if((!modScope) && (modChassis))
 			user.drop_item()
 			I.loc = src
 			components += I
 			buildstage += 1
 
-	else if(buildstage == 6)
-		if(istype(I, /obj/item/weapon/modular_firearms/stock))
-			user.drop_item()
-			I.loc = src
-			components += I
-			buildstage += 1
-
-	else if(buildstage == 7)
-		if(istype(I, /obj/item/weapon/modular_firearms/lockpin))
-			user.drop_item()
-			I.loc = src
-			components += I
-			buildstage += 1
 
 
