@@ -34,8 +34,8 @@ obj/item/weapon/modular_firearms/assembly
 	var/useSupply = null
 	var/useBullet = null
 	
-/obj/item/weapon/modular_firearms/assembly/process_part(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
+/obj/item/weapon/modular_firearms/assembly/process_part(obj/item/I as obj, mob/user as mob) //this should handle processing new parts in the weapon, without relying on the weapon actually being attacked.
+	if(istype(I, /obj/item/weapon/modular_firearms/chassis)) 
 		if(istype(I, /obj/item/weapon/modular_firearms/chassis/energy))
 			isEnergy = 1
 		if(istype(I, /obj/item/weapon/modular_firearms/chassis/ballistic))
@@ -72,10 +72,13 @@ obj/item/weapon/modular_firearms/assembly
 				useSupply = 1
 		modLoader = I
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+		modBarrel += I
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
+		modStock += I
 	if(istype(I, /obj/item/weapon/modular_firearms/scope))
+		modScope += I
 	
-/obj/item/weapon/modular_firearms/assembly/add_part(obj/item/I as obj, mob/user as mob)
+/obj/item/weapon/modular_firearms/assembly/add_part(obj/item/I as obj, mob/user as mob) //Handles all part processing in a single proc. So clean~
 	user.drop_item()
 	I.loc = src
 	components += I
@@ -85,7 +88,7 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
 		if(!modChassis)
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]. Now you should install a chamber."
+			user << "\blue You install the [I] onto the [src]."
 		//	weight = I.weight + weight
 		else
 
@@ -120,7 +123,7 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 		if((!modBarrel) && (modChamber))
 			add_part(I, user)
-			modBarrel += I
+			
 
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		if((!modStock) && (modChassis))
