@@ -3,8 +3,8 @@
 obj/item/weapon/modular_firearms/stock
 	icon = 'icons/placeholder.dmi'
 	var/weight = null
-	var/folding = null
-	var/telescopic = null
+	var/folding = null //can be folded away. Makes the weapon less unwieldy, but removes recoil bonus
+	var/telescopic = null //can collapse. Slightly better but heavier than the folding stock
 	var/recoil_mod = null
 	
 obj/item/weapon/modular_firearms/stock/comp
@@ -23,7 +23,7 @@ obj/item/weapon/modular_firearms/stock/folding
 	weight = 1
 	folding = 1
 	
-obj/item/weapon/modular_firearms/stock/tele
+obj/item/weapon/modular_firearms/stock/tele //telescopic everything
 	name = "telescopic stock"
 	recoil_mod = -1.5
 	weight = 1.5
