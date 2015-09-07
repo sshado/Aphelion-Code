@@ -8,6 +8,7 @@ obj/item/weapon/modular_firearms/loader
 	var/useSupply = null
 	var/Eloader = null
 	var/max_shells = null
+	var/handle_casings = null
 	
 obj/item/weapon/modular_firearms/loader/magazine
 	name = "magazine loader"
