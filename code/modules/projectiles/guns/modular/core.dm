@@ -39,7 +39,12 @@
 				useSupply = 1
 		src.modLoader = I
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
-		src.modBarrel += I
+		var/obj/item/weapon/modular_firearms/barrel/B = I
+		src.accuracy_mod += B.accuracy_mod
+		src.weight += B.weight
+		if(B.burst_mod) //dear lord
+			src.burst_mod += B.burst_mod
+		src.modBarrel += B
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		src.modStock += I
 	if(istype(I, /obj/item/weapon/modular_firearms/scope))
