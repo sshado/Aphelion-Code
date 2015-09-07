@@ -38,7 +38,7 @@
 	return ..()
 
 /obj/effect/New()
-	..()
+	. = ..()
 	updateVisibility(src)
 
 // DOORS

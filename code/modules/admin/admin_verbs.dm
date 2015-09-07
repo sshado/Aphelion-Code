@@ -164,7 +164,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/Debug2,
 	/client/proc/kill_air,
 	/client/proc/ZASSettings,
-	/client/proc/cmd_dev_say,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
 	/client/proc/debug_controller,
@@ -307,7 +306,6 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/freezemecha,
 	/client/proc/player_panel_new,
 	/client/proc/admin_ghost,
-	/client/proc/cmd_dev_say,
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 //	/client/proc/dsay,
@@ -637,7 +635,7 @@ var/list/admin_verbs_mentor = list(
 	if(istype(T,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = T
 		if (H.species)
-			D.affected_species = list(H.species.name)
+			D.affected_species = list(H.species.get_bodytype())
 			if(H.species.primitive_form)
 				D.affected_species |= H.species.primitive_form
 			if(H.species.greater_form)
