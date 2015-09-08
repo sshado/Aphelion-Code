@@ -47,8 +47,8 @@
 		src.modBarrel += B
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		src.modStock += I
-	if(istype(I, /obj/item/weapon/modular_firearms/scope))
-		src.modScope += I
+	if(istype(I, /obj/item/weapon/modular_firearms/sight))
+		src.modSight += I
 	
 /obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob) //Handles all part processing in a single proc. So clean~
 	user.drop_item()
