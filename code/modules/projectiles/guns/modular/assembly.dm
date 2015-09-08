@@ -42,54 +42,41 @@ obj/item/weapon/modular_firearms/assembly
 		else
 
 	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
+		var/part = modChamber
+		var/prereq = modChassis
 		if((!modChamber) && (modChassis))
 			add_part(I, user)
 		//	weight = I.weight + weight
-		else if(modChamber)
-			user << "\red There is already a [modChamber] installed!"
-		else if(!modChamber)
-			user << "\red The [I] needs to be attached to a chassis!"
 
 	if(istype(I, /obj/item/weapon/modular_firearms/driver))
+		var/part = modDriver
+		var/prereq = modChamber
 		if((!modDriver) && (modChamber))
 			add_part(I, user)
-		else if(modDriver)
-			user << "\red There is already a [modDriver] installed!"
-		else if(!modChamber)
-			user << "\red The [I] needs to be attached to a chamber!"
 
 	if(istype(I, /obj/item/weapon/modular_firearms/loader))
+		var/part = modLoader
+		var/prereq = modChamber
 		if((!modLoader) && (modChamber))
 			add_part(I, user)
-		else if(modLoader)
-			user << "\red There is already a [modLoader] installed!"
-		else if(!modChamber)
-			user << "\red The [I] needs to be attached to a chamber!"
 
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+		var/part = modBarrel
+		var/prereq = modChamber
 		if((!modBarrel) && (modChamber))
 			add_part(I, user)
-		else if(modBarrel)
-			user << "\red There is already a [modBarrel] installed!"
-		else if(!modChamber)
-			user << "\red The [I] needs to be attached to a chamber!"
-			
 
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
+		var/part = modStock
+		var/prereq = modChassis
 		if((!modStock) && (modChassis))
 			add_part(I, user)
-		else if(modStock)
-			user << "\red There is already a [modStock] installed!"
-		else if(!modChassis)
-			user << "\red The [I] needs to be attached to a chassis!"
 			
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
+		var/part = modSight
+		var/prereq = modChassis
 		if((!modSight) && (modChassis))
 			add_part(I, user)
-		else if(modSight)
-			user << "\red There is already a [modSight] installed!"
-		else if(!modChassis)
-			user << "\red The [I] needs to be attached to a chassis!"
 
 
 
