@@ -86,18 +86,18 @@
 	var/removing = removable[picked]
 	removing.loc = user
 	src.components -= removing
-	if(removing = src.modChassis) //will figure out how to make this cleaner at some point
+	if(removing == src.modChassis) //will figure out how to make this cleaner at some point
 		src.modChassis = null
-	if(removing = src.modChamber)
+	if(removing == src.modChamber)
 		src.modChamber = null
-	if(removing = src.modDriver)
+	if(removing == src.modDriver)
 		src.modDriver = null
-	if(removing = src.modLoader)
+	if(removing == src.modLoader)
 		src.modLoader = null
-	if(removing = src.modBarrel)
+	if(removing == src.modBarrel)
 		src.modBarrel = null
-	if(removing = src.modSight)
+	if(removing == src.modSight)
 		src.modSight = null
-	if(removing = src.modStock)
+	if(removing == src.modStock)
 		src.modStock = null
 	user << "\red You remove the [removing] from the frame"
