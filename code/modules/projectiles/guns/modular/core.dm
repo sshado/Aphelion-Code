@@ -53,6 +53,7 @@
 			return
 	else
 		user << "\red Error - null part variable for [I]"
+		return
 	if(prereq)
 		if(!prereq in src.components)
 			user << "\red The [I] needs to be attached to a [prereq]!"
