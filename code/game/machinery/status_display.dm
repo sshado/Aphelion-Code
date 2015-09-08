@@ -28,6 +28,7 @@
 	var/message2 = ""	// message line 2
 	var/index1			// display index for scrolling messages or 0 if non-scrolling
 	var/index2
+	var/picture = null
 
 	var/frequency = 1435		// radio frequency
 
@@ -72,6 +73,7 @@
 
 // set what is displayed
 /obj/machinery/status_display/proc/update()
+	remove_display()
 	if(friendc && !ignore_friendc)
 		set_picture("ai_friend")
 		return 1
@@ -122,6 +124,9 @@
 					index2 -= message2_len
 			update_display(line1, line2)
 			return 1
+		if(STATUS_DISPLAY_ALERT)
+			set_picture(picture_state)
+			return 1
 		if(STATUS_DISPLAY_TIME)
 			message1 = "TIME"
 			message2 = worldtime2text()
@@ -150,9 +155,10 @@
 		index2 = 0
 
 /obj/machinery/status_display/proc/set_picture(state)
-	picture_state = state
-	remove_display()
-	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
+	if(!picture || picture_state != state)
+		picture_state = state
+		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
+	overlays |= picture
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
@@ -208,6 +214,7 @@
 		if("time")
 			mode = STATUS_DISPLAY_TIME
 
+	update()
 
 #undef CHARS_PER_LINE
 #undef FOND_SIZE

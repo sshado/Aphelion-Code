@@ -389,6 +389,9 @@
 	src.stop_pulling()
 	src.client.perspective = EYE_PERSPECTIVE
 	src.client.eye = card
+	
+	//stop resting
+	resting = 0
 
 	//This seems redundant but not including the forced loc setting messes the behavior up.
 	src.loc = card

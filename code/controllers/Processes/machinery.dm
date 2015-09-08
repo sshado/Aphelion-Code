@@ -57,6 +57,5 @@
 			processing_power_items.Remove(I)
 		scheck()
 
-
 /datum/controller/process/machinery/getStatName()
 	return ..()+"([machines.len])"

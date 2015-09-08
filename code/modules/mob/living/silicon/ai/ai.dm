@@ -283,7 +283,7 @@ var/list/ai_verbs_default = list(
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
 	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox", "Helios", "Dug Too Deep", "Goon", "Database", "Glitchman", "Lonestar", "Nanotrasen")
+	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Rainbow", "Blue", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Soviet", "Trapped", "Heartline", "Chatterbox", "Helios", "Dug Too Deep", "Goon", "Database", "Glitchman", "Lonestar", "Nanotrasen", "Fallout", "Tin Can", "Yummy AI", "Beachball", "Dark", "Godfrey", "Xerxes", "Shodan")
 	switch(icontype)
 		if("Custom") icon_state = "[src.ckey]-ai"
 		if("Rainbow") icon_state = "ai-clown"
@@ -312,6 +312,14 @@ var/list/ai_verbs_default = list(
 		if("Glitchman") icon_state = "ai-glitchman"
 		if("Lonestar") icon_state = "ai-lonestar"
 		if("Nanotrasen") icon_state = "ai-nanotrasen"
+		if("Fallout") icon_state = "ai-fallout"
+		if("Tin Can") icon_state = "ai-tincan"
+		if("Yummy AI") icon_state = "ai-yummy"
+		if("Beachball") icon_state = "ai-beachball"
+		if("Dark") icon_state = "ai-dark"
+		if("Godfrey") icon_state = "ai-godfrey"
+		if("Xerxes") icon_state = "ai-xerxes"
+		if("Shodan") icon_state = "ai-shodan"
 		else icon_state = "ai"
 
 
@@ -392,7 +400,7 @@ var/list/ai_verbs_default = list(
 	if(emergency_message_cooldown)
 		usr << "<span class='warning'>Arrays recycling. Please stand by.</span>"
 		return
-	var/input = input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
+	var/input = sanitize(input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 	if(!input)
 		return
 	Centcomm_announce(input, usr)
