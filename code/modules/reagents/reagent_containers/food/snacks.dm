@@ -1727,11 +1727,11 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neara"
+	monkey_type = "Neaera"
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
-	monkey_type = "Neara"
+	monkey_type = "Neaera"
 
 
 /obj/item/weapon/reagent_containers/food/snacks/spellburger
@@ -3319,7 +3319,7 @@
 		..()
 		reagents.add_reagent("nutriment", 6)
 		bitesize = 2
-		
+
 // potato + knife = raw sticks
 /obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(istype(W,/obj/item/weapon/material/kitchen/utensil/knife))
