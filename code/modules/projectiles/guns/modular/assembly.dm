@@ -20,7 +20,6 @@ obj/item/weapon/modular_firearms/assembly
 	var/modLoader = null
 	var/modBarrel = null
 	var/modStock = null
-	var/modLock = null
 	var/modSight = null
 	var/modMisc = list()
 	var/framelevel = 2
@@ -73,15 +72,30 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 		if((!modBarrel) && (modChamber))
 			add_part(I, user)
+			user << "\blue You install the [I] onto the [src]."
+		else if(modBarrel)
+			user << "\red There is already a [modBarrel] installed!"
+		else if(!modChamber)
+			user << "\red The [I] needs to be attached to a chamber!"
 			
 
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		if((!modStock) && (modChassis))
 			add_part(I, user)
+			user << "\blue You install the [I] onto the [src]."
+		else if(modStock)
+			user << "\red There is already a [modStock] installed!"
+		else if(!modChassis)
+			user << "\red The [I] needs to be attached to a chassis!"
 			
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
 		if((!modSight) && (modChassis))
 			add_part(I, user)
+			user << "\blue You install the [I] onto the [src]."
+		else if(modSight)
+			user << "\red There is already a [modStock] installed!"
+		else if(!modChassis)
+			user << "\red The [I] needs to be attached to a chassis!"
 
 
 
