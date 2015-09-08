@@ -65,3 +65,26 @@
 	user.drop_item()
 	I.loc = src
 	src.components += I
+
+/obj/item/weapon/modular_firearms/assembly/proc/remove_part(obj/item/I as obj, mob/user as mob)
+	var/picked = input("Select part to remove", "none")as null|anything in removable
+	if(!picked || !removable[picked])
+		return
+	var/removing = removable[picked]
+	removing.loc = user
+	src.components -= removing
+	if(removing = src.modChassis) //will figure out how to make this cleaner at some point
+		src.modChassis = null
+	if(removing = src.modChamber)
+		src.modChamber = null
+	if(removing = src.modDriver)
+		src.modDriver = null
+	if(removing = src.modLoader)
+		src.modLoader = null
+	if(removing = src.modBarrel)
+		src.modBarrel = null
+	if(removing = src.modSight)
+		src.modSight = null
+	if(removing = src.modStock)
+		src.modStock = null
+	user << "\red You remove the [removing] from the frame"
