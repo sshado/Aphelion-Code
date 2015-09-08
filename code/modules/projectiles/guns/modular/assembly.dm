@@ -35,42 +35,35 @@ obj/item/weapon/modular_firearms/assembly
 	var/useBullet = null
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
-		var/part = modChassis
-		var/prereq = null
-		add_part(I, user, part, prereq)
-		//	weight = I.weight + weight
-		else
+	if(istype(I, /obj/item/weapon/modular_firearms))
+		if(istype(I, /obj/item/weapon/modular_firearms/chassis))
+			var/part = modChassis
+			var/prereq = null
+	
+		if(istype(I, /obj/item/weapon/modular_firearms/chamber))
+			var/part = modChamber
+			var/prereq = modChassis
+	
+		if(istype(I, /obj/item/weapon/modular_firearms/driver))
+			var/part = modDriver
+			var/prereq = modChamber
+	
+		if(istype(I, /obj/item/weapon/modular_firearms/loader))
+			var/part = modLoader
+			var/prereq = modChamber
 
-	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
-		var/part = modChamber
-		var/prereq = modChassis
-		add_part(I, user, part, prereq)
-		//	weight = I.weight + weight
+		if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+			var/part = modBarrel
+			var/prereq = modChamber
 
-	if(istype(I, /obj/item/weapon/modular_firearms/driver))
-		var/part = modDriver
-		var/prereq = modChamber
-		add_part(I, user, part, prereq)
-
-	if(istype(I, /obj/item/weapon/modular_firearms/loader))
-		var/part = modLoader
-		var/prereq = modChamber
-		add_part(I, user, part, prereq)
-
-	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
-		var/part = modBarrel
-		var/prereq = modChamber
-		add_part(I, user, part, prereq)
-
-	if(istype(I, /obj/item/weapon/modular_firearms/stock))
-		var/part = modStock
-		var/prereq = modChassis
-		add_part(I, user, part, prereq)
+		if(istype(I, /obj/item/weapon/modular_firearms/stock))
+			var/part = modStock
+			var/prereq = modChassis
 			
-	if(istype(I, /obj/item/weapon/modular_firearms/sight))
-		var/part = modSight
-		var/prereq = modChassis
+		if(istype(I, /obj/item/weapon/modular_firearms/sight))
+			var/part = modSight
+			var/prereq = modChassis
+		
 		add_part(I, user, part, prereq)
 
 
