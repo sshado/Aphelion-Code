@@ -46,7 +46,17 @@
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
 		src.modSight += I
 	
-/obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob) //Handles all part processing in a single proc. So clean~
+/obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob, var/part, var/prereq) //Handles all part processing in a single proc. So clean~
+	if(part)
+		if(part in src.components)
+			user << "\red There is already a [part] installed!"
+			return
+	else
+		user << "\red Error - null part variable for [I]"
+	if(prereq)
+		if(!prereq in src.components)
+			user << "\red The [I] needs to be attached to a [prereq]!"
+			return
 	src.process_part(I, user)
 	if(!src.msg)
 		src.msg = ("\blue You install the [I] onto the [src].")
