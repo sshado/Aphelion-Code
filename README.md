@@ -1,7 +1,8 @@
 <!-- Change Title to 'NSS Phoenix' If Kaedwulf rules over Station -->
+![Travis Build Status](https://travis-ci.org/sshado/Aphelion-Code.svg)
 # Aphelion Project
 
-[Website](http://baystation12.net/) - [Code](http://github.com/Baystation12/Baystation12/) - [IRC](http://baystation12.net/forums/viewtopic.php?f=12&t=5088)
+[Website](hhttp://aphelion-project.xyz/) - [Code](https://github.com/sshado/Aphelion-Code)
 
 ---
 
@@ -31,8 +32,8 @@ This will take a while to download, but it provides an easier method for updatin
 
 Once the repository is in place, run this command:
 ```bash
-cd Aphelion-Code
-git update-index --assume-unchanged baystation12.int
+$ cd Aphelion-Code
+$ git update-index --assume-unchanged baystation12.int
 ```
 Now git will ignore changes to the file baystation12.int.
 
@@ -68,9 +69,9 @@ as these store your server configuration, player preferences and banlist.
 If you used the zip method, you'll need to download the zip file again and unzip it somewhere else, and then copy the /config and /data folders over.
 
 If you used the git method, you simply need to type this in to git bash:
-
-    git pull
-
+```bash
+    $ git pull
+```
 When this completes, copy over your /data and /config folders again, just in case.
 
 When you have done this, you'll need to recompile the code, but then it should work fine.
