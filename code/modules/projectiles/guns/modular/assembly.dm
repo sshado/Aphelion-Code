@@ -29,7 +29,8 @@ obj/item/weapon/modular_firearms/assembly
 	var/isKinetic = null
 	var/silenced = null
 	var/compensated = null
-	var/list/components = new/list()
+	var/list/components = list()
+	var/list/removable = list()
 	var/useCell = null
 	var/useSupply = null
 	var/useBullet = null
