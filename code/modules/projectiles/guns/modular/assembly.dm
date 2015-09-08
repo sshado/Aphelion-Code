@@ -14,6 +14,7 @@ obj/item/weapon/modular_firearms/assembly
 	name = "basic assembly"
 	desc = "The outer framework for a firearm of some kind. This one looks rather basic."
 	icon = 'icons/placeholder.dmi'
+	var/msg = null
 	var/modChassis = null
 	var/modChamber = null
 	var/modDriver = null
