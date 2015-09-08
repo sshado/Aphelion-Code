@@ -8,6 +8,7 @@
 		if(istype(I, /obj/item/weapon/modular_firearms/chassis/ballistic))
 			src.isKinetic = 1
 		modChassis = I
+		src.removable += I
 	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
 		var/obj/item/weapon/modular_firearms/chamber/chamber = I
 		if(chamber.projectile_type) //checking for energy weaponry
@@ -21,6 +22,8 @@
 				src.msg = "\red An energy chamber won't work with a ballistic chassis!"
 				return
 		src.modChamber = I
+		src.removable -= src.modChassis
+		src.removable += I
 	if(istype(I, /obj/item/weapon/modular_firearms/driver))
 		var/obj/item/weapon/modular_firearms/driver/D = I
 		if(D.firemodes)
@@ -28,6 +31,8 @@
 			src.msg = "\red Have you considered using a real driver?"
 			return
 		src.modDriver = I
+		src.removable += I
+		src.removable -= src.modChamber
 	if(istype(I, /obj/item/weapon/modular_firearms/loader))
 		var/obj/item/weapon/modular_firearms/loader/L = I
 		if(!L.Eloader)
@@ -38,13 +43,21 @@
 			if(L.useSupply)
 				useSupply = 1
 		src.modLoader = I
+		src.removable += I
+		src.removable -= src.modChamber
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 		var/obj/item/weapon/modular_firearms/barrel/B = I
 		src.modBarrel = I
+		src.removable += I
+		src.removable -= src.modChamber
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		src.modStock += I
+		src.removable += I
+		src.removable -= src.modChassis
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
 		src.modSight += I
+		src.removable += I
+		src.removable -= src.modChassis
 	
 /obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob, var/part, var/prereq) //Handles all part processing in a single proc. So clean~
 	if(part)
