@@ -38,14 +38,12 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
 		if(!modChassis)
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		//	weight = I.weight + weight
 		else
 
 	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
 		if((!modChamber) && (modChassis))
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		//	weight = I.weight + weight
 		else if(modChamber)
 			user << "\red There is already a [modChamber] installed!"
@@ -55,7 +53,6 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/driver))
 		if((!modDriver) && (modChamber))
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		else if(modDriver)
 			user << "\red There is already a [modDriver] installed!"
 		else if(!modChamber)
@@ -64,7 +61,6 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/loader))
 		if((!modLoader) && (modChamber))
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		else if(modLoader)
 			user << "\red There is already a [modLoader] installed!"
 		else if(!modChamber)
@@ -73,7 +69,6 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 		if((!modBarrel) && (modChamber))
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		else if(modBarrel)
 			user << "\red There is already a [modBarrel] installed!"
 		else if(!modChamber)
@@ -83,7 +78,6 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		if((!modStock) && (modChassis))
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		else if(modStock)
 			user << "\red There is already a [modStock] installed!"
 		else if(!modChassis)
@@ -92,9 +86,8 @@ obj/item/weapon/modular_firearms/assembly
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
 		if((!modSight) && (modChassis))
 			add_part(I, user)
-			user << "\blue You install the [I] onto the [src]."
 		else if(modSight)
-			user << "\red There is already a [modStock] installed!"
+			user << "\red There is already a [modSight] installed!"
 		else if(!modChassis)
 			user << "\red The [I] needs to be attached to a chassis!"
 
