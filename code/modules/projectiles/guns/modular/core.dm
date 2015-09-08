@@ -1,7 +1,7 @@
 //Will be used for procs instead
 
 
-/obj/item/weapon/modular_firearms/assembly/proc/process_part(obj/item/I as obj, mob/user as mob) //this should handle processing new parts in the weapon, without relying on the weapon actually being attacked.	if(istype(I, /obj/item/weapon/modular_firearms/chassis)) 
+/obj/item/weapon/modular_firearms/assembly/proc/process_part(obj/item/I as obj, mob/user as mob) //this should handle processing new parts in the weapon, without relying on the weapon actually being attacked.
 	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
 		if(istype(I, /obj/item/weapon/modular_firearms/chassis/energy))
 			src.isEnergy = 1
@@ -13,19 +13,19 @@
 		if(chamber.projectile_type) //checking for energy weaponry
 			if(src.isEnergy)
 			else
-				user << "\red A ballistic chamber won't work with an energy chassis!"
+				src.msg = "\red A ballistic chamber won't work with an energy chassis!"
 				return
 		if(chamber.caliber) //checking for kinetic weaponry
 			if(src.isKinetic)
 			else
-				user << "\red An energy chamber won't work with a ballistic chassis!"
+				src.msg = "\red An energy chamber won't work with a ballistic chassis!"
 				return
 		src.modChamber = I
 	if(istype(I, /obj/item/weapon/modular_firearms/driver))
 		var/obj/item/weapon/modular_firearms/driver/D = I
 		if(D.firemodes)
 		else
-			user << "\red How did you manage this?"
+			src.msg = "\red Have you considered using a real driver?"
 			return
 		src.modDriver = I
 	if(istype(I, /obj/item/weapon/modular_firearms/loader))
@@ -40,11 +40,7 @@
 		src.modLoader = I
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 		var/obj/item/weapon/modular_firearms/barrel/B = I
-		src.accuracy_mod += B.accuracy_mod
-		src.weight += B.weight
-		if(B.burst_mod) //dear lord
-			src.burst_mod += B.burst_mod
-		src.modBarrel += B
+		src.modBarrel = I
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		src.modStock += I
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
@@ -52,6 +48,9 @@
 	
 /obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob) //Handles all part processing in a single proc. So clean~
 	src.process_part(I, user)
+	if(!src.msg)
+		src.msg = ("\blue You install the [I] onto the [src].")
+	user << src.msg
 	user.drop_item()
 	I.loc = src
 	src.components += I
