@@ -51,7 +51,7 @@
 		src.modSight += I
 	
 /obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob) //Handles all part processing in a single proc. So clean~
+	src.process_part(I, user)
 	user.drop_item()
 	I.loc = src
 	src.components += I
-	src.process_part(I, user)
