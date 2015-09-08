@@ -79,8 +79,8 @@ obj/item/weapon/modular_firearms/assembly
 		if((!modStock) && (modChassis))
 			add_part(I, user)
 			
-	if(istype(I, /obj/item/weapon/modular_firearms/scope))
-		if((!modScope) && (modChassis))
+	if(istype(I, /obj/item/weapon/modular_firearms/sight))
+		if((!modSight) && (modChassis))
 			add_part(I, user)
 
 
