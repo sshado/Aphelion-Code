@@ -36,47 +36,42 @@ obj/item/weapon/modular_firearms/assembly
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
-		if(!modChassis)
-			add_part(I, user)
+		var/part = modChassis
+		var/prereq = null
+		add_part(I, user, part, prereq)
 		//	weight = I.weight + weight
 		else
 
 	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
 		var/part = modChamber
 		var/prereq = modChassis
-		if((!modChamber) && (modChassis))
-			add_part(I, user)
+		add_part(I, user, part, prereq)
 		//	weight = I.weight + weight
 
 	if(istype(I, /obj/item/weapon/modular_firearms/driver))
 		var/part = modDriver
 		var/prereq = modChamber
-		if((!modDriver) && (modChamber))
-			add_part(I, user)
+		add_part(I, user, part, prereq)
 
 	if(istype(I, /obj/item/weapon/modular_firearms/loader))
 		var/part = modLoader
 		var/prereq = modChamber
-		if((!modLoader) && (modChamber))
-			add_part(I, user)
+		add_part(I, user, part, prereq)
 
 	if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 		var/part = modBarrel
 		var/prereq = modChamber
-		if((!modBarrel) && (modChamber))
-			add_part(I, user)
+		add_part(I, user, part, prereq)
 
 	if(istype(I, /obj/item/weapon/modular_firearms/stock))
 		var/part = modStock
 		var/prereq = modChassis
-		if((!modStock) && (modChassis))
-			add_part(I, user)
+		add_part(I, user, part, prereq)
 			
 	if(istype(I, /obj/item/weapon/modular_firearms/sight))
 		var/part = modSight
 		var/prereq = modChassis
-		if((!modSight) && (modChassis))
-			add_part(I, user)
+		add_part(I, user, part, prereq)
 
 
 
