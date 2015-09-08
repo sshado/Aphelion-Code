@@ -36,33 +36,35 @@ obj/item/weapon/modular_firearms/assembly
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/modular_firearms))
+		var/part = null
+		var/prereq = null
 		if(istype(I, /obj/item/weapon/modular_firearms/chassis))
-			var/part = modChassis
-			var/prereq = null
+			part = modChassis
+			prereq = null
 	
 		if(istype(I, /obj/item/weapon/modular_firearms/chamber))
-			var/part = modChamber
-			var/prereq = modChassis
+			part = modChamber
+			prereq = modChassis
 	
 		if(istype(I, /obj/item/weapon/modular_firearms/driver))
-			var/part = modDriver
-			var/prereq = modChamber
+			part = modDriver
+			prereq = modChamber
 	
 		if(istype(I, /obj/item/weapon/modular_firearms/loader))
-			var/part = modLoader
-			var/prereq = modChamber
+			part = modLoader
+			prereq = modChamber
 
 		if(istype(I, /obj/item/weapon/modular_firearms/barrel))
-			var/part = modBarrel
-			var/prereq = modChamber
+			part = modBarrel
+			prereq = modChamber
 
 		if(istype(I, /obj/item/weapon/modular_firearms/stock))
-			var/part = modStock
-			var/prereq = modChassis
+			part = modStock
+			prereq = modChassis
 			
 		if(istype(I, /obj/item/weapon/modular_firearms/sight))
-			var/part = modSight
-			var/prereq = modChassis
+			part = modSight
+			prereq = modChassis
 		
 		add_part(I, user, part, prereq)
 
