@@ -45,7 +45,7 @@
 /obj/item/stack/material/proc/update_strings()
 	// Update from material datum.
 	singular_name = material.sheet_singular_name
-	
+
 	if(amount>1)
 		name = "[material.use_name] [material.sheet_plural_name]"
 		desc = "A stack of [material.use_name] [material.sheet_plural_name]."
@@ -209,3 +209,9 @@
 	name = "reinforced phoron glass"
 	icon_state = "sheet-phoronrglass"
 	default_type = "rphglass"
+
+/obj/item/stack/material/turbidium
+	name = "Turbidium"
+	icon_state = "sheet-plasteel"
+	item_state = "sheet-metal"
+	default_type = "turbidium"
