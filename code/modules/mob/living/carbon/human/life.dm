@@ -862,9 +862,9 @@
 			chem_effects.Cut()
 			analgesic = 0
 
-			if(touching) touching.metabolizeold()
-			if(ingested) ingested.metabolizeold()
-			if(bloodstr) bloodstr.metabolizeold()
+			if(touching) touching.metabolize()
+			if(ingested) ingested.metabolize()
+			if(bloodstr) bloodstr.metabolize()
 
 			if(CE_PAINKILLER in chem_effects)
 				analgesic = chem_effects[CE_PAINKILLER]
@@ -1524,7 +1524,7 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdosed)
+				if(R.volume >= R.overdose)
 					temp = PULSE_NONE
 
 		return temp
@@ -1679,34 +1679,11 @@
 	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		if(mind)
-
-			// TODO: Update to new antagonist system.
-			switch(mind.special_role)
-				if("traitor","Mercenary")
-					holder.icon_state = "hudsyndicate"
-				if("Revolutionary")
-					holder.icon_state = "hudrevolutionary"
-				if("Head Revolutionary")
-					holder.icon_state = "hudheadrevolutionary"
-				if("Cultist")
-					holder.icon_state = "hudcultist"
-				if("Changeling")
-					holder.icon_state = "hudchangeling"
-				if("Wizard","Fake Wizard")
-					holder.icon_state = "hudwizard"
-				if("Death Commando")
-					holder.icon_state = "huddeathsquad"
-				if("Ninja")
-					holder.icon_state = "hudninja"
-				if("head_loyalist")
-					holder.icon_state = "hudloyalist"
-				if("loyalist")
-					holder.icon_state = "hudloyalist"
-				if("head_mutineer")
-					holder.icon_state = "hudmutineer"
-				if("mutineer")
-					holder.icon_state = "hudmutineer"
+		if(mind && mind.special_role)
+			if(hud_icon_reference[mind.special_role])
+				holder.icon_state = hud_icon_reference[mind.special_role]
+			else
+				holder.icon_state = "hudsyndicate"
 
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
