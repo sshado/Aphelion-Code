@@ -20,6 +20,9 @@ var/list/global/wall_cache = list()
 	var/material/reinf_material
 	var/last_state
 	var/construction_stage
+	var/composite_melting_point
+	var/reinf_material_meltingpoint
+	var/material_meltingpoint
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
@@ -30,6 +33,15 @@ var/list/global/wall_cache = list()
 	if(!isnull(rmaterialtype))
 		reinf_material = get_material_by_name(rmaterialtype)
 	update_material()
+
+	if(isnull(composite_melting_point))
+		if(!isnull(reinf_material))
+			composite_melting_point = ((material.melting_point + reinf_material.melting_point)/2)
+			reinf_material_meltingpoint = reinf_material.melting_point
+			material_meltingpoint = material.melting_point
+		else if(!isnull(material))
+			composite_melting_point = material.melting_point
+			material_meltingpoint = material.melting_point
 
 	processing_turfs |= src
 
@@ -145,13 +157,8 @@ var/list/global/wall_cache = list()
 	burn(exposed_temperature)
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
-	burn(adj_temp)
-	if(!isnull(reinf_material))
-		if(adj_temp > (material.melting_point + reinf_material.melting_point)/2)
-			take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - ((material.melting_point + reinf_material.melting_point)/2))))
-	else if(!(reinf_material))
-		if(adj_temp > material.melting_point)
-			take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - material.melting_point)))
+	if(adj_temp > composite_melting_point)
+		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - composite_melting_point)))
 
 	return ..()
 
