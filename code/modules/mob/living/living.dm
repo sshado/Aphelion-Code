@@ -576,6 +576,9 @@ default behaviour is:
 
 	if(can_resist())
 		next_move = world.time + 20
+		resist_grab()
+		if(!weakened && !restrained())
+			process_resist()
 		process_resist()
 
 /mob/living/proc/can_resist()
@@ -653,7 +656,15 @@ default behaviour is:
 	set category = "IC"
 
 	resting = !resting
-	src << "\blue You are now [resting ? "resting" : "getting up"]"
+	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
+
+/mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	return isnull(get_inventory_slot(carried_item))
+
+/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item == held_item)
+		return 0
+	return ..()
 
 /mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(istype(carried_item, /obj/item/weapon/implant))
