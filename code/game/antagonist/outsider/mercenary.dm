@@ -13,12 +13,12 @@ var/datum/antagonist/mercenary/mercs
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_HAS_NUKE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	id_type = /obj/item/weapon/card/id/syndicate
 	antaghud_indicator = "hudoperative"
-	
+
 	hard_cap = 4
 	hard_cap_round = 8
 	initial_spawn_req = 4
 	initial_spawn_target = 6
-	
+
 /datum/antagonist/mercenary/New()
 	..()
 	mercs = src
@@ -42,7 +42,7 @@ var/datum/antagonist/mercenary/mercs
 	if(player.backbag == 3) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(player), slot_back)
 	if(player.backbag == 4) player.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(player.back), slot_in_backpack)
-	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
+//	player.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(player), slot_in_backpack)
 
 	if (player.mind == leader)
 		var/obj/item/device/radio/uplink/U = new(player.loc)
