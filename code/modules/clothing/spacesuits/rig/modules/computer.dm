@@ -45,9 +45,6 @@
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
-	
-/mob
-	var/get_rig_stats = 0
 
 /mob
 	var/get_rig_stats = 0
