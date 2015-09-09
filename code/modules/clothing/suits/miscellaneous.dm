@@ -229,6 +229,12 @@
 	icon_state = "neocoat"
 	item_state = "neocoat"
 
+/obj/item/clothing/suit/btrench
+	name = "black trenchcoat"
+	desc = "A long, black trenchcoat. You probably look badass."
+	icon_state = "trenchblack"
+	item_state = "trenchblack"
+
 //stripper
 /obj/item/clothing/under/stripper
 	body_parts_covered = 0
