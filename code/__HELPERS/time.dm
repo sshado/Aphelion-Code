@@ -39,6 +39,9 @@ proc/round_duration()
 	var/mins = round((mills % 36000) / 600)
 	var/hours = round(mills / 36000)
 
-	last_round_duration = "[round(hours)]h [round(mins)]m"
+	mins = mins < 10 ? add_zero(mins, 1) : mins
+	hours = hours < 10 ? add_zero(hours, 1) : hours
+
+	last_round_duration = "[hours]:[mins]"
 	next_duration_update = world.time + 1 MINUTES
 	return last_round_duration

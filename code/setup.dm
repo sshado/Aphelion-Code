@@ -596,10 +596,9 @@
 #define BE_NINJA      1024
 #define BE_RAIDER     2048
 #define BE_PLANT      4096
-#define BE_MUTINEER   8192
+#define BE_LOYALIST   8192
 #define BE_PAI        16384
 
-// TODO: Update to new antagonist system.
 var/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
 	"Operative"        = BE_OPERATIVE,
@@ -614,7 +613,7 @@ var/list/be_special_flags = list(
 	"Ninja"            = BE_NINJA,
 	"Raider"           = BE_RAIDER,
 	"Diona"            = BE_PLANT,
-	"Mutineer"         = BE_MUTINEER,
+	"Loyalistr"         = BE_LOYALIST,
 	"pAI"              = BE_PAI
 )
 
@@ -862,6 +861,7 @@ var/list/be_special_flags = list(
 #define MODE_MONKEY "monkey"
 #define MODE_RENEGADE "renegade"
 #define MODE_REVOLUTIONARY "revolutionary"
+#define MODE_LOYALIST "loyalist"
 #define MODE_MALFUNCTION "malf"
 #define MODE_TRAITOR "traitor"
 
