@@ -6,6 +6,7 @@
 
 /datum/controller/process/machinery/doWork()
 	internal_sort()
+	internal_process_pipenets()
 	internal_process_machinery()
 	internal_process_power()
 	internal_process_power_drain()
