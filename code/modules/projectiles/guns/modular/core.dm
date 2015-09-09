@@ -100,4 +100,6 @@
 		src.modSight = null
 	if(removing == src.modStock)
 		src.modStock = null
+	if(removing == src.modAttachment)
+		src.modAttachment = null
 	user << "\red You remove the [removing] from the frame"
