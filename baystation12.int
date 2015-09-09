@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 LAST_COMPILE_TIME: 1441653547
-DIR: code code\controllers code\controllers\Processes code\datums code\game code\game\antagonist code\game\antagonist\station code\game\area code\game\machinery code\game\machinery\computer code\game\machinery\computer3 code\game\machinery\doors maps 
+DIR: code code\controllers code\controllers\Processes code\datums code\game code\game\antagonist code\game\antagonist\outsider code\game\antagonist\station code\game\area code\game\gamemodes code\game\machinery code\game\machinery\computer code\game\machinery\computer3 code\game\machinery\doors code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\robot code\modules code\modules\admin code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\borer maps 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 508.1299
-WINDOW: code\global.dm
-FILE: code\global.dm
+WINDOW: code\global.dm;code\game\antagonist\outsider\mercenary.dm;code\game\gamemodes\game_mode.dm;code\modules\admin\admin.dm;code\game\antagonist\antagonist_factions.dm;code\game\machinery\cryopod.dm;code\game\response_team.dm;code\modules\mob\living\simple_animal\borer\borer.dm;code\modules\mob\living\simple_animal\borer\borer_powers.dm;code\game\objects\items\devices\flash.dm;code\game\objects\items\robot\robot_parts.dm;code\modules\mob\living\carbon\carbon.dm
+FILE: code\modules\mob\living\carbon\carbon.dm
 */
 // END_INTERNALS
