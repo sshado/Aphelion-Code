@@ -8,6 +8,7 @@
 //MEDICINES//// Tier 1, Tier 2, Tier 3, Tier 4, Tier 5, Tier 6
 ///////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////////////////
 //ANTI TOXIN//
 //Tier 1////////////////////////////////////////////////////////////////////////////////////
 /datum/reagent/anti_toxin
@@ -137,14 +138,14 @@ datum/reagent/charcoal
 	color = "#FFFF66"
 	metabolism = 0.8
 	overdose_threshold = 15
-/datum/reagent/neodextraminesolution/on_mob_life(var/mob/living/M as mob)
+/datum/reagent/dermalopein/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	for(var/datum/reagent/R in M.reagents.reagent_list)
 		if(R != src)
 			M.reagents.remove_reagent(R.id,5)
 	if(M.health > 25)
 		M.adjustToxLoss(6*REM)
-	if(prob(10))
+	if(prob(70))
 		M.fakevomit()
 	..()
 	return
@@ -171,3 +172,56 @@ datum/reagent/charcoal
 	..()
 	return
 
+////////////////////////////////////////////////////////////////////////////////////////////
+//Brain Damage////
+//Tier 1////////////////////////////////////////////////////////////////////////////////////
+
+/datum/reagent/sodium_pentathol
+	name = "Dylovene"
+	id = "anti_toxin"
+	description = "Dylovene is a broad-spectrum antitoxin. Reduces hallucinations faster than charcoal"
+	reagent_state = LIQUID
+	color = "#00A000"
+	scannable = 1
+/datum/chemical_reaction/anti_toxin
+	name = "Dylovene"
+	id = "anti_toxin"
+	result = "anti_toxin"
+	required_reagents = list("nitrogen" = 1, "potassium" = 1, "silicon" = 1)
+	result_amount = 3
+/datum/reagent/anti_toxin/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.adjustToxLoss(-0.35*REM)
+	if(prob(50))
+		for(var/datum/reagent/R in M.reagents.reagent_list)
+			if(R != src)
+				M.reagents.remove_reagent(R.id,1)
+	..()
+	return
+
+//Tier 1+///////////////////////////////////////////////////////////////////////////////////
+//ANTI TOXIN//
+datum/reagent/charcoal
+	name = "Charcoal"
+	id = "charcoal"
+	description = "Activated charcoal helps to absorb toxins."
+	reagent_state = LIQUID
+	color = "#000000"
+	scannable = 1
+/datum/reagent/charcoal/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.adjustToxLoss(-0.55*REM)
+	if(prob(35))
+		for(var/datum/reagent/R in M.reagents.reagent_list)
+			if(R != src)
+				M.reagents.remove_reagent(R.id,1)
+	..()
+	return
+/datum/chemical_reaction/charcoal
+	name = "Charcoal"
+	id = "charcoal"
+	result = "charcoal"
+	required_reagents = list("trihydrocarbon" = 2, "oxygen" = 1, "silicon" = 1)
+	result_amount = 2
+	mix_message = "The mixture yields a fine black powder."
+	min_temp = 407

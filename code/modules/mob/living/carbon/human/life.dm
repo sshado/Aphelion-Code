@@ -1550,6 +1550,16 @@
 			else
 				heartbeat++
 
+			if(!heart_attack)
+				return
+			else
+				pulse >= PULSE_2FAST
+				losebreath += 3
+				adjustOxyLoss(3)
+				adjustBrainLoss(rand(3,7))
+				Weaken(2)
+			return
+
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
 	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.

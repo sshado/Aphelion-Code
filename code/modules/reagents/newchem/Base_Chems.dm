@@ -204,7 +204,6 @@
 	result = "sludgee"
 	required_reagents = list("water" = 2, "radium" = 1, "tungsten" = 1)
 	result_amount = 3
-	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
 //T1-2b: Liquid, No Effect//////////////////////////////////////////////////////////////////
 /datum/reagent/carbolic_acid
@@ -220,7 +219,6 @@
 	result = "carbolic_acid"
 	required_reagents = list("water" = 1, "chlorine" = 1, "oil" = 1)
 	result_amount = 3
-	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
 //T1-2c: Gas, No Effect//
 /datum/reagent/iodine
