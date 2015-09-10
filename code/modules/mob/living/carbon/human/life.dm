@@ -960,6 +960,12 @@
 			if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 				Paralyse(3)
 
+			if(seizures)
+				if(seizures >= 15)
+					src << "\red You have a seizure!"
+				Paralyse(10)
+				make_jittery(1000)
+
 			if(hallucination)
 				if(hallucination >= 20)
 					if(prob(3))
@@ -1553,7 +1559,6 @@
 			if(!heart_attack)
 				return
 			else
-				pulse >= PULSE_2FAST
 				losebreath += 3
 				adjustOxyLoss(3)
 				adjustBrainLoss(rand(3,7))

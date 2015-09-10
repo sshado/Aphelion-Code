@@ -410,3 +410,24 @@
 	result_amount = 2
 	min_temp = 670
 
+
+/datum/reagent/testdrug
+	name = "S. Test"
+	id = "testdrug"
+	description = "What ever this is, theres no way in hell its healthy"
+	reagent_state = SOLID
+	color = "#525050"
+/datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	switch(current_cycle)
+		if(0 to INFINITY)
+			M.Seizures()
+	..()
+	return
+/datum/chemical_reaction/testdrug
+	name = "S. Test"
+	id = "testdrug"
+	result = "testdrug"
+	required_reagents = list("water" = 1, "carbon" = 1, "oxygen" = 1)
+	result_amount = 3
+	min_temp = 400

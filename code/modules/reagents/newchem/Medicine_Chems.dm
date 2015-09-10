@@ -160,6 +160,7 @@ datum/reagent/charcoal
 
 /datum/reagent/dermalopein/overdose_process(var/mob/living/M as mob)
 	if(prob(70))
+		M.Seizures()
 		M.adjustToxLoss(3*REM)
 	if(prob(66))
 		M.make_jittery(5)

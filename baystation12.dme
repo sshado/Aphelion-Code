@@ -1495,6 +1495,7 @@
 #include "code\modules\reagents\newchem\other.dm"
 #include "code\modules\reagents\newchem\patch.dm"
 #include "code\modules\reagents\newchem\pyro.dm"
+#include "code\modules\reagents\newchem\Toxin_Chems.dm"
 #include "code\modules\reagents\newchem\toxins.dm"
 #include "code\modules\reagents\reagent_containers\blood_pack.dm"
 #include "code\modules\reagents\reagent_containers\borghydro.dm"

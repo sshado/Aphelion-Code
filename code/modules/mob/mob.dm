@@ -806,6 +806,11 @@
 		update_canmove()	//updates lying, canmove and icons
 	return
 
+/mob/proc/Seizures(amount)
+	if(status_flags & CANSEIZURE)
+		seizures = max(amount, 0)
+	return
+
 /mob/proc/Paralyse(amount)
 	if(status_flags & CANPARALYSE)
 		facing_dir = null
