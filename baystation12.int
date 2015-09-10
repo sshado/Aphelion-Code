@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1441915763
+DIR: code code\controllers code\controllers\Processes code\modules code\modules\mob code\modules\mob\freelook code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\reagents code\modules\reagents\newchem 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\reagents\newchem\medicine.dm;code\modules\reagents\newchem\Base_Chems.dm;code\setup.dm;code\modules\mob\living\carbon\carbon.dm;code\modules\reagents\newchem\Blob-Reagents.dm;code\modules\reagents\newchem\Dispenser-Chems.dm;code\modules\reagents\newchem\drugs.dm;code\modules\reagents\newchem\food.dm
+FILE: code\setup.dm
 */
 // END_INTERNALS
