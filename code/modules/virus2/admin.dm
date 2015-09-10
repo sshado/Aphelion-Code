@@ -167,7 +167,6 @@
 
 				var/I = input("Choose initial infectee", "Infectee", infectee) as null|anything in candidates
 				if(!I || !candidates[I]) return
-				infectee = candidates[I]
 				species |= infectee.species.get_bodytype()
 			if("go")
 				if(!antigens.len)

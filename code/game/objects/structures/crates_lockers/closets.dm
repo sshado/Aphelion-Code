@@ -272,6 +272,8 @@
 		return
 	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
 		return
+	if(user.loc==null) // just in case someone manages to get a closet into the blue light dimension, as unlikely as that seems
+		return
 	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
 	if(!src.opened)

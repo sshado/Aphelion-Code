@@ -806,6 +806,11 @@
 		update_canmove()	//updates lying, canmove and icons
 	return
 
+/mob/proc/Seizures(amount)
+	if(status_flags & CANSEIZURE)
+		seizures = max(amount, 0)
+	return
+
 /mob/proc/Paralyse(amount)
 	if(status_flags & CANPARALYSE)
 		facing_dir = null
@@ -1073,3 +1078,16 @@ mob/proc/yank_out_object()
 	src.in_throw_mode = 1
 	if(src.throw_icon)
 		src.throw_icon.icon_state = "act_throw_on"
+
+/mob/proc/fakevomit(green=0) //for aesthetic vomits that need to be instant and do not stun. -Fox
+	if(stat==DEAD)
+		return
+	var/turf/location = loc
+	if (istype(location, /turf/simulated))
+		if(green)
+			src.visible_message("<span class='warning'>[src] vomits up some green goo!</span>","<span class='warning'>You vomit up some green goo!</span>")
+			new /obj/effect/decal/cleanable/vomit(location)
+		else
+			src.visible_message("<span class='warning'>[src] pukes all over \himself!</span>","<span class='warning'>You puke all over yourself!</span>")
+			location.add_vomit_floor(src, 1)
+		playsound(location, 'sound/effects/splat.ogg', 50, 1)

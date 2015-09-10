@@ -10,3 +10,5 @@ data/
 cfg/
 
 baystation12.int
+#Ignore .DS_Store
+.DS_Store

@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1441847694
+DIR: code code\controllers code\controllers\Processes code\modules code\modules\mob code\modules\mob\freelook code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\reagents code\modules\reagents\newchem 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\reagents\newchem\medicine.dm;code\modules\reagents\newchem\Base_Chems.dm;code\modules\mob\living\carbon\human\life.dm;code\setup.dm;code\modules\mob\living\carbon\carbon.dm;code\modules\reagents\newchem\Toxin_Chems.dm;code\controllers\Processes\machinery.dm;code\modules\mob\mob_defines.dm;code\modules\mob\mob.dm;code\modules\mob\living\carbon\carbon_defines.dm;code\modules\mob\living\damage_procs.dm;code\modules\mob\living\living_defines.dm
+FILE: code\modules\reagents\newchem\Medicine_Chems.dm
 */
 // END_INTERNALS

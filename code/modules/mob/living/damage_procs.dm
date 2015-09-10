@@ -61,11 +61,13 @@
 			eye_blurry = max(eye_blurry,(effect/(blocked+1)))
 		if(DROWSY)
 			drowsyness = max(drowsyness,(effect/(blocked+1)))
+		if(SEIZURE)
+			seizures = max(seizures, (effect/(blocked+1)))
 	updatehealth()
 	return 1
 
 
-/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
+/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/seizures = 0, var/blocked = 0)
 	if(blocked >= 2)	return 0
 	if(stun)		apply_effect(stun, STUN, blocked)
 	if(weaken)		apply_effect(weaken, WEAKEN, blocked)
@@ -75,4 +77,5 @@
 	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
 	if(agony)		apply_effect(agony, AGONY, blocked)
+	if(seizures)	apply_effect(irradiate, SEIZURE, blocked)
 	return 1

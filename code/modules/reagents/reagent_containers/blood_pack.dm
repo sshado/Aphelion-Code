@@ -1,17 +1,3 @@
-/obj/item/weapon/storage/box/bloodpacks
-	name = "blood packs bags"
-	desc = "This box contains blood packs."
-	icon_state = "sterile"
-	New()
-		..()
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-		new /obj/item/weapon/reagent_containers/blood/empty(src)
-
 /obj/item/weapon/reagent_containers/blood
 	name = "BloodPack"
 	desc = "Contains blood used for transfusion."
@@ -37,6 +23,10 @@
 			if(0 to 9)			icon_state = "empty"
 			if(10 to 50) 		icon_state = "half"
 			if(51 to INFINITY)	icon_state = "full"
+
+/obj/item/weapon/reagent_containers/blood/random/New()
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-")
+	..()
 
 /obj/item/weapon/reagent_containers/blood/APlus
 	blood_type = "A+"

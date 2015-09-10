@@ -30,6 +30,8 @@
 	ethanol		spawn_reagent = "ethanol"
 	sacid		spawn_reagent = "sacid"
 	tungsten	spawn_reagent = "tungsten"
+	zinc		spawn_reagent = "zinc"
+	xenon		spawn_reagent = "xenon"
 
 	// Bar, alcoholic
 	beer		spawn_reagent = "beer"

@@ -882,9 +882,9 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/appletart
 
-/datum/recipe/tossedsalad
-	fruit = list("cabbage" = 2, "tomato" = 1, "carrot" = 1, "apple" = 1)
-	result = /obj/item/weapon/reagent_containers/food/snacks/tossedsalad
+//datum/recipe/tossedsalad
+//	fruit = list("cabbage" = 2, "tomato" = 1, "carrot" = 1, "apple" = 1)
+//	result = /obj/item/weapon/reagent_containers/food/snacks/tossedsalad
 
 /datum/recipe/aesirsalad
 	fruit = list("goldapple" = 1, "ambrosiadeus" = 1)

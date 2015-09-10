@@ -960,6 +960,12 @@
 			if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 				Paralyse(3)
 
+			if(seizures)
+				if(seizures >= 15)
+					src << "\red You have a seizure!"
+				Paralyse(10)
+				make_jittery(1000)
+
 			if(hallucination)
 				if(hallucination >= 20)
 					if(prob(3))
@@ -1549,6 +1555,15 @@
 				src << sound('sound/effects/singlebeat.ogg',0,0,0,50)
 			else
 				heartbeat++
+
+			if(!heart_attack)
+				return
+			else
+				losebreath += 3
+				adjustOxyLoss(3)
+				adjustBrainLoss(rand(3,7))
+				Weaken(2)
+			return
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes

@@ -92,6 +92,7 @@
 /obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
 	return
 
+
 /obj/item/weapon/gripper/no_use/loader //This is used to disallow building with metal.
 	name = "sheet loader"
 	desc = "A specialized loading device, designed to pick up and insert sheets of materials inside machines."
