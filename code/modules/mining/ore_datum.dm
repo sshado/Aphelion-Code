@@ -147,5 +147,5 @@ var/global/list/ore_data = list()
 	alloy = 1
 	result_amount = 3
 	spread_chance = 10
-	ore = obj/item/weapon/ore/crystarium
+	ore = /obj/item/weapon/ore/crystarium
 	scan_icon = "mineral_rare"

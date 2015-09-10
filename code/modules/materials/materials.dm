@@ -567,11 +567,12 @@ var/list/name_to_material
 
 /material/turbidium
 	name = "turbidium"
-	stack_type = obj/item/stack/material/turbidium
-	icon_color = "#00aaaa"
-	integrity = 1800
-	melting_point = 30000
+	stack_type = /obj/item/stack/material/turbidium
+	icon_colour = "#00aaaa"
+	integrity = 3000
+	melting_point = 35000
 	weight = 20
+	hardness = 100
 	stack_per_sheet = 3500
 	sheet_singular_name = "sheet"
 	sheet_plural_name = "sheets"

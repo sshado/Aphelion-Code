@@ -25,3 +25,13 @@
 		"hematite" = 1
 		)
 	product = /obj/item/stack/material/steel
+
+/datum/alloy/turbidium
+	metaltag = "turbidium"
+	requires = list(
+		"crystarium" = 1,
+		"phoron" = 1,
+		"platinum" = 1
+		)
+	product_mod = 0.3
+	product = /obj/item/stack/material/turbidium
