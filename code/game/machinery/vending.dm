@@ -827,18 +827,6 @@
 	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,/obj/item/stack/medical/bruise_pack = 3,
 					/obj/item/stack/medical/ointment =3,/obj/item/device/healthanalyzer = 3)
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3)
-	
-	// Xenobio nanomed made for issue #146 - lorwp
-/obj/machinery/vending/wallmed3
-	name = "Xenobiology NanoMed"
-	desc = "Wall-mounted Medical Equipment dispenser, for Xenobiology use."
-	icon_state = "wallmed"
-	icon_deny = "wallmed-deny"
-	req_access = list(access_xenobiology)
-	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
-	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,/obj/item/stack/medical/bruise_pack = 3,
-					/obj/item/stack/medical/ointment =3,/obj/item/device/healthanalyzer = 3)
-	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3)
 
 /obj/machinery/vending/security
 	name = "SecTech"
