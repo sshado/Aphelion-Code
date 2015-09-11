@@ -69,6 +69,7 @@ obj/item/weapon/modular_firearms/chamber/a556
 	caliber = "a556"
 
 obj/item/weapon/modular_firearms/chamber/energy
+	var/charge_cost = 200
 
 obj/item/weapon/modular_firearms/chamber/energy/laser
 	name = "laser emitter"
@@ -80,14 +81,17 @@ obj/item/weapon/modular_firearms/chamber/energy/plaser
 
 obj/item/weapon/modular_firearms/chamber/energy/hlaser
 	name = "heavy laser emitter"
+	charge_cost = 400
 	projectile_type = /obj/item/projectile/beam/heavylaser
 
 obj/item/weapon/modular_firearms/chamber/energy/xray
 	name = "X-ray laser emitter"
+	charge_cost = 100
 	projectile_type = /obj/item/projectile/beam/xray
 
 obj/item/weapon/modular_firearms/chamber/energy/xsniper
 	name = "sniper laser emitter"
+	charge_cost = 400
 	projectile_type = /obj/item/projectile/beam/sniper
 
 obj/item/weapon/modular_firearms/chamber/energy/ltagblue
@@ -104,10 +108,12 @@ obj/item/weapon/modular_firearms/chamber/energy/stun
 
 obj/item/weapon/modular_firearms/chamber/energy/ion
 	name = "ion emitter"
+	charge_cost = 300
 	projectile_type = /obj/item/projectile/ion
 
 obj/item/weapon/modular_firearms/chamber/energy/floramut
 	name = "floral emitter"
+	charge_cost = 100
 	projectile_type = /obj/item/projectile/energy/floramut
 
 obj/item/weapon/modular_firearms/chamber/energy/phoron
