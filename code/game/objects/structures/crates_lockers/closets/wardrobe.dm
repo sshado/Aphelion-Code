@@ -63,6 +63,7 @@
 	new /obj/item/clothing/head/that(src)
 	new /obj/item/clothing/head/that(src)
 	new /obj/item/clothing/head/that(src)
+	new /obj/item/clothing/suit/btrench(src)
 	return
 
 
