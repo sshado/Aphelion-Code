@@ -748,7 +748,7 @@
 
 /mob/living/carbon/human/proc/vomit()
 
-	if(species.flags & IS_SYNTHETIC)
+	if(species.flags & SYNTHETIC)
 		return //Machines don't throw up.
 
 	if(!lastpuke)

@@ -7,7 +7,7 @@
 	Optical meson scanners on your eyes, to prevent hallucinations when looking at the supermatter.<br>\
 	Radiation helmet and suit, as the supermatter is radioactive.<br>\
 	<br>\
-	Touching the supermatter will result in *instant death*, with no corpse left behind!  You can drag the supermatter, but anything else will kill you. \
+	affect_touching the supermatter will result in *instant death*, with no corpse left behind!  You can drag the supermatter, but anything else will kill you. \
 	It is advised to obtain a genetic backup before trying to drag it."
 
 	description_antag = "Exposing the supermatter to oxygen or vaccum will cause it to start rapidly heating up.  Sabotaging the supermatter and making it explode will \

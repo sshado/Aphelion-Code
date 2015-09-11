@@ -2,9 +2,9 @@
 //override procs in children as necessary
 /datum/artifact_effect
 	var/effecttype = "unknown"		//purely used for admin checks ingame, not needed any more
-	var/effect = EFFECT_TOUCH
+	var/effect = EFFECT_affect_touch
 	var/effectrange = 4
-	var/trigger = TRIGGER_TOUCH
+	var/trigger = TRIGGER_affect_touch
 	var/atom/holder
 	var/activated = 0
 	var/chargelevel = 0
@@ -66,7 +66,7 @@
 				toplevelholder = toplevelholder.loc
 			toplevelholder.visible_message("\red \icon[toplevelholder] [toplevelholder] [display_msg]")
 
-/datum/artifact_effect/proc/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/proc/DoEffectaffect_touch(var/mob/user)
 /datum/artifact_effect/proc/DoEffectAura(var/atom/holder)
 /datum/artifact_effect/proc/DoEffectPulse(var/atom/holder)
 /datum/artifact_effect/proc/UpdateMove()

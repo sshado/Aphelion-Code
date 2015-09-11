@@ -18,7 +18,7 @@ datum
 			//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 			if(!chemical_reagents_list)
 				//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-				var/paths = typesof(/datum/reagent) - /datum/reagent
+				var/paths = subtypesof(/datum/reagent)
 				chemical_reagents_list = list()
 				for(var/path in paths)
 					var/datum/reagent/D = new path()
@@ -27,9 +27,9 @@ datum
 				//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
 				// It is filtered into multiple lists within a list.
 				// For example:
-				// chemical_reaction_list["phoron"] is a list of all reactions relating to phoron
+				// chemical_reaction_list["plasma"] is a list of all reactions relating to plasma
 
-				var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
+				var/paths = subtypesof(/datum/chemical_reaction)
 				chemical_reactions_list = list()
 
 				for(var/path in paths)
@@ -37,7 +37,7 @@ datum
 					var/datum/chemical_reaction/D = new path()
 					var/list/reaction_ids = list()
 
-					if(D.required_reagents && D.required_reagents.len)
+					if(D && D.required_reagents && D.required_reagents.len)
 						for(var/reaction in D.required_reagents)
 							reaction_ids += reaction
 
@@ -47,7 +47,6 @@ datum
 							chemical_reactions_list[id] = list()
 						chemical_reactions_list[id] += D
 						break // Don't bother adding ourselves to other reagent ids, it is redundant.
-
 
 		proc
 
@@ -122,7 +121,7 @@ datum
 				src.handle_reactions()
 				return amount
 
-			trans_to_ingest(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items ingested. A delay is added between ingestion and addition of the reagents
+			trans_to_affect_blood(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items affect_blooded. A delay is added between affect_bloodion and addition of the reagents
 				if (!target )
 					return
 				if (!target.reagents || src.total_volume<=0)
@@ -361,6 +360,9 @@ datum
 						qdel(A)
 						update_total()
 						my_atom.on_reagent_change()
+						check_ignoreslow(my_atom)
+						check_gofast(my_atom)
+						check_goreallyfast(my_atom)
 						return 0
 
 
@@ -385,11 +387,27 @@ datum
 				var/can_process = 0
 				if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
 					return can_process
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					//Check if this mob's species is set and can process this type of reagent
+					if(H.species && H.species.reagent_tag)
+						if((R.process_flags & SYNTHETIC) && (H.species.reagent_tag & PROCESS_SYN))		//SYNTHETIC-oriented reagents require PROCESS_SYN
+							can_process = 1
+						if((R.process_flags & ORGANIC) && (H.species.reagent_tag & PROCESS_ORG))		//ORGANIC-oriented reagents require PROCESS_ORG
+							can_process = 1
+						//Species with PROCESS_DUO are only affected by reagents that affect both organics and synthetics, like acid and hellwater
+						if((R.process_flags & ORGANIC) && (R.process_flags & SYNTHETIC) && (H.species.reagent_tag & PROCESS_DUO))
+							can_process = 1
+				//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
+				else
+					if(R.process_flags != SYNTHETIC)
+						can_process = 1
+				return can_process
 
-			reaction(var/atom/A, var/method=TOUCH, var/volume_modifier=0)
+			reaction(var/atom/A, var/method=affect_touch, var/volume_modifier=0)
 
 				switch(method)
-					if(TOUCH)
+					if(affect_touch)
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A))
 								spawn(0)
@@ -398,7 +416,7 @@ datum
 									if(!check)
 										continue
 									else
-										R.reaction_mob(A, TOUCH, R.volume+volume_modifier)
+										R.reaction_mob(A, affect_touch, R.volume+volume_modifier)
 							if(isturf(A))
 								spawn(0)
 									if(!R) return
@@ -407,7 +425,7 @@ datum
 								spawn(0)
 									if(!R) return
 									else R.reaction_obj(A, R.volume+volume_modifier)
-					if(INGEST)
+					if(CHEM_BLOOD)
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A) && R)
 								spawn(0)
@@ -416,7 +434,7 @@ datum
 									if(!check)
 										continue
 									else
-										R.reaction_mob(A, INGEST, R.volume+volume_modifier)
+										R.reaction_mob(A, CHEM_BLOOD, R.volume+volume_modifier)
 							if(isturf(A) && R)
 								spawn(0)
 									if(!R) return
@@ -605,3 +623,19 @@ datum
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+
+// Convenience proc to create a reagents holder for an atom
+// Max vol is maximum volume of holder
+atom/proc/create_reagents(var/max_vol)
+	reagents = new/datum/reagents(max_vol)
+	reagents.my_atom = src
+
+/datum/reagents/Destroy()
+	processing_objects.Remove(src)
+	for(var/datum/reagent/R in reagent_list)
+		qdel(R)
+	reagent_list.Cut()
+	reagent_list = null
+	if(my_atom && my_atom.reagents == src)
+		my_atom.reagents = null
+	return ..()

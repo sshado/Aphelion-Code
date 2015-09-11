@@ -17,10 +17,10 @@
 
 	..()
 
-	// Should this all be in Touch()?
+	// Should this all be in affect_touch()?
 	if(istype(H))
 		if((H != src) && check_shields(0, H.name))
-			visible_message("\red <B>[H] attempted to touch [src]!</B>")
+			visible_message("\red <B>[H] attempted to affect_touch [src]!</B>")
 			H.do_attack_animation(src)
 			return 0
 
@@ -54,7 +54,7 @@
 	switch(M.a_intent)
 		if(I_HELP)
 			if(istype(H) && health < config.health_threshold_crit && health > config.health_threshold_dead)
-				if(H.species.flags & IS_SYNTHETIC) //No CPR on IPC's
+				if(H.species.flags & SYNTHETIC) //No CPR on IPC's
 					return 0
 				else
 					if((H.head && (H.head.flags & HEADCOVERSMOUTH)) || (H.wear_mask && (H.wear_mask.flags & MASKCOVERSMOUTH)))

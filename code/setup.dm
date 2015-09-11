@@ -24,7 +24,7 @@
 /*
 	The pipe looks to be thin vertically and wide horizontally, so we'll assume that it's
 	three centimeters thick, one meter wide, and only explosed to the sun 3 degrees off of edge-on.
-	Since the radiatior is uniform along it's length, the ratio of surface area touched by sunlight
+	Since the radiatior is uniform along it's length, the ratio of surface area affect_touched by sunlight
 	to the total surface area is the same as the ratio of the perimeter of the cross-section.
 */
 #define RADIATOR_EXPOSED_SURFACE_AREA_RATIO 0.04 // (3 cm + 100 cm * sin(3deg))/(2*(3+100 cm)). Unitless ratio.
@@ -671,7 +671,6 @@ var/list/be_special_flags = list(
 #define HAS_UNDERWEAR     512   // Underwear is drawn onto the mob icon.
 #define IS_PLANT          1024  // Is a treeperson.
 #define IS_WHITELISTED    2048  // Must be whitelisted to play.
-#define IS_SYNTHETIC      4096  // Is a machine race.
 #define HAS_EYE_COLOR     8192  // Eye colour selectable in chargen. (RGB)
 #define CAN_JOIN          16384 // Species is selectable in chargen.
 #define IS_RESTRICTED     32768 // Is not a core/normally playable species. (castes, mutantraces)
@@ -755,8 +754,15 @@ var/list/be_special_flags = list(
 #define IS_UNATHI 4
 #define IS_XENOS  5
 
+#define ORGANIC 1
+#define SYNTHETIC 2 // Is a machine race.
+
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 
+//Reagent Metabolization flags, defines the type of reagents that affect this mob
+#define PROCESS_ORG 1		//Only processes reagents with "ORGANIC" or "ORGANIC | SYNTHETIC"
+#define PROCESS_SYN 2		//Only processes reagents with "SYNTHETIC" or "ORGANIC | SYNTHETIC"
+#define PROCESS_DUO 4		//Only processes reagents with "ORGANIC | SYNTHETIC"
 /*
  *	Atmospherics Machinery.
 */

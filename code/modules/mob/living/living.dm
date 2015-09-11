@@ -203,9 +203,9 @@ default behaviour is:
 	return temperature
 
 
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
+// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before affect_touching.
 // Stop! ... Hammertime! ~Carn
-// I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
+// I affect_touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
 
 /mob/living/proc/getBruteLoss()
 	return bruteloss

@@ -1,9 +1,132 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-var/const/TOUCH = 1
-var/const/INGEST = 2
-
 ///////////////////////////////////////////////////////////////////////////////////
+datum/reagent
+	var/overdose_threshold = 0
+	var/addiction_threshold = 0
+	var/addiction_stage = 0
+	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
+	var/current_cycle = 0
+datum/reagents
+	var/chem_temp = 300
+	var/addiction_tick = 1
+	var/list/datum/reagent/addiction_list = new/list()
+
+datum/reagents/proc/metabolize(var/mob/M)
+	if(M)
+		if(!istype(M, /mob/living))		//Non-living mobs can't metabolize reagents, so don't bother trying (runtime safety check)
+			return
+		chem_temp = M.bodytemperature
+		handle_reactions()
+	for(var/A in reagent_list)
+		var/datum/reagent/R = A
+		if(!istype(R))
+			continue
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			//Check if this mob's species is set and can process this type of reagent
+			var/can_process = 0
+			//If we somehow avoided getting a species or reagent_tag set, we'll assume we aren't meant to process ANY reagents (CODERS: SET YOUR SPECIES AND TAG!)
+			if(H.species && H.species.reagent_tag)
+				if((R.process_flags & SYNTHETIC) && (H.species.reagent_tag & PROCESS_SYN))		//SYNTHETIC-oriented reagents require PROCESS_SYN
+					can_process = 1
+				if((R.process_flags & ORGANIC) && (H.species.reagent_tag & PROCESS_ORG))		//ORGANIC-oriented reagents require PROCESS_ORG
+					can_process = 1
+				//Species with PROCESS_DUO are only affected by reagents that affect both organics and synthetics, like acid and hellwater
+				if((R.process_flags & ORGANIC) && (R.process_flags & SYNTHETIC) && (H.species.reagent_tag & PROCESS_DUO))
+					can_process = 1
+			//If the mob can't process it, remove the reagent at it's normal rate without doing any addictions, overdoses, or on_mob_life() for the reagent
+			if(can_process == 0)
+				R.holder.remove_reagent(R.id, R.metabolization_rate)
+				continue
+		//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
+		else
+			if(R.process_flags == SYNTHETIC)
+				R.holder.remove_reagent(R.id, R.metabolization_rate)
+				continue
+		//If you got this far, that means we can process whatever reagent this iteration is for. Handle things normally from here.
+		if(M && R)
+			if(R.volume >= R.overdose_threshold && !R.overdosed && R.overdose_threshold > 0)
+				R.overdosed = 1
+				M << "<span class = 'userdanger'>You feel like you took too much [R.name]!</span>"
+				R.overdose_start(M)
+			if(R.volume >= R.addiction_threshold && !is_type_in_list(R, addiction_list) && R.addiction_threshold > 0)
+				var/datum/reagent/new_reagent = new R.type()
+				addiction_list.Add(new_reagent)
+			if(R.overdosed)
+				R.overdose_process(M)
+			if(is_type_in_list(R,addiction_list))
+				for(var/datum/reagent/addicted_reagent in addiction_list)
+					if(istype(R, addicted_reagent))
+						addicted_reagent.addiction_stage = -15 // you're satisfied for a good while.
+			R.on_mob_life(M)
+	if(addiction_tick == 6)
+		addiction_tick = 1
+		for(var/A in addiction_list)
+			var/datum/reagent/R = A
+			if(M && R)
+				if(R.addiction_stage <= 0)
+					R.addiction_stage++
+				if(R.addiction_stage > 0 && R.addiction_stage <= 10)
+					R.addiction_act_stage1(M)
+					R.addiction_stage++
+				if(R.addiction_stage > 10 && R.addiction_stage <= 20)
+					R.addiction_act_stage2(M)
+					R.addiction_stage++
+				if(R.addiction_stage > 20 && R.addiction_stage <= 30)
+					R.addiction_act_stage3(M)
+					R.addiction_stage++
+				if(R.addiction_stage > 30 && R.addiction_stage <= 40)
+					R.addiction_act_stage4(M)
+					R.addiction_stage++
+				if(R.addiction_stage > 40)
+					M << "<span class = 'notice'>You feel like you've gotten over your need for [R.name].</span>"
+					addiction_list.Remove(R)
+	addiction_tick++
+	update_total()
+
+datum/reagents/proc/reagent_on_tick()
+	for(var/datum/reagent/R in reagent_list)
+		R.on_tick()
+	return
+
+// Called every time reagent containers process.
+datum/reagent/proc/on_tick(var/data)
+	return
+
+// Called when the reagent container is hit by an explosion
+datum/reagent/proc/on_ex_act(var/severity)
+	return
+
+// Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
+datum/reagent/proc/overdose_process(var/mob/living/M as mob)
+	return
+
+datum/reagent/proc/overdose_start(var/mob/living/M as mob)
+	return
+
+datum/reagent/proc/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(30))
+		M << "<span class = 'notice'>You feel like some [name] right about now.</span>"
+	return
+
+datum/reagent/proc/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(30))
+		M << "<span class = 'notice'>You feel like you need [name]. You just can't get enough.</span>"
+	return
+
+datum/reagent/proc/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(30))
+		M << "<span class = 'danger'>You have an intense craving for [name].</span>"
+	return
+
+datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(30))
+		M << "<span class = 'danger'>You're not feeling good at all! You really need some [name].</span>"
+	return
+
+/datum/reagent/proc/reagent_deleted()
+	return
 
 /datum/reagents/metabolism
 	var/metabolism_class //CHEM_affect_touch, CHEM_BLOOD, or CHEM_BLOOD
@@ -15,8 +138,6 @@ var/const/INGEST = 2
 	metabolism_class = met_class
 	if(istype(parent_mob))
 		parent = parent_mob
-
-/datum/reagents/metabolism/proc/metabolize()
 
 	var/metabolism_type = 0 //non-human mobs
 	if(ishuman(parent))
@@ -33,44 +154,44 @@ var/const/INGEST = 2
 	var/metabolism = REM // This would be 0.2 normally
 	var/affect_blood_met = 0
 	var/affect_touch_met = 0
+	var/affect_ingest_met = 0
 	var/dose = 0
 	var/max_dose = 0
 	var/overdose = 0
 	var/affects_dead = 0
+	var/affect_blood = 0
+	var/affect_touch = 0
+	var/affect_ingest = 0
+
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	holder.remove_reagent(id, amount)
-
-// This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
-/datum/reagent/proc/affect_touch_mob(var/mob/M, var/amount)
-	return
-
-/datum/reagent/proc/affect_touch_obj(var/obj/O, var/amount) // Acid melting, cleaner cleaning, etc
-	return
 
 /datum/reagent/proc/on_mob_live(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in affect_touch_mob.
 	if(!istype(M))
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (dose > overdose) && (location != CHEM_affect_touch))
+	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
 		overdose(M, alien)
 	var/removed = metabolism
 	if(affect_blood_met && (location == affect_blood))
 		removed = affect_blood_met
 	if(affect_touch_met && (location == affect_touch))
 		removed = affect_touch_met
+	if(affect_ingest_met && (location == affect_ingest))
+		removed = affect_ingest_met
 	removed = min(removed, volume)
 	max_dose = max(volume, max_dose)
 	dose = min(dose + removed, max_dose)
 	if(removed >= (metabolism * 0.1) || removed >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
+			if(CHEM_TOUCH)
+				affect_touch(M, alien, removed)
+			if(CHEM_INGEST)
+				affect_ingest(M, alien, removed)
 			if(CHEM_BLOOD)
 				affect_blood(M, alien, removed)
-			if(affect_blood)
-				affect_blood(M, alien, removed)
-			if(affect_touch)
-				affect_touch(M, alien, removed)
 	remove_self(removed)
 	return
 
@@ -84,29 +205,35 @@ var/const/INGEST = 2
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 
+/datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_ingest(M, alien, removed * 0.5)
+	return
+
 /datum/reagents/proc/on_mob_live(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in affect_touch_mob.
 	if(!istype(M))
 		return
 	if(!affects_dead && M.stat == DEAD)
 		return
-	if(overdose && (dose > overdose) && (location != CHEM_affect_touch))
+	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
 		overdose(M, alien)
 	var/removed = metabolism
-	if(affect_blood_met && (location == affect_blood))
+	if(affect_blood_met && (location == CHEM_BLOOD))
 		removed = affect_blood_met
 	if(affect_touch_met && (location == affect_touch))
 		removed = affect_touch_met
+	if(affect_ingest_met && (location == affect_ingest))
+		removed = affect_ingest_met
 	removed = min(removed, volume)
 	max_dose = max(volume, max_dose)
 	dose = min(dose + removed, max_dose)
 	if(removed >= (metabolism * 0.1) || removed >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
 		switch(location)
+			if(CHEM_TOUCH)
+				affect_touch(M, alien, removed)
+			if(CHEM_INGEST)
+				affect_ingest(M, alien, removed)
 			if(CHEM_BLOOD)
 				affect_blood(M, alien, removed)
-			if(affect_blood)
-				affect_blood(M, alien, removed)
-			if(affect_touch)
-				affect_touch(M, alien, removed)
 	remove_self(removed)
 	return
 
@@ -117,10 +244,11 @@ var/const/INGEST = 2
 	affect_blood(M, alien, removed * 0.5)
 	return
 
-/datum/reagents/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagents/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_ingest(M, alien, removed * 0.5)
 	return
 
-/datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
+/datum/reagents/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
 	M.adjustToxLoss(REM)
 	return
 
@@ -346,7 +474,7 @@ var/const/INGEST = 2
 	if(isliving(target)) //will we ever even need to tranfer reagents to non-living mobs?
 		var/mob/living/L = target
 		perm = L.reagent_permeability()
-	return trans_to_mob(target, amount, CHEM_affect_touch, perm, copy)
+	return trans_to_mob(target, amount, CHEM_TOUCH, perm, copy)
 
 /datum/reagents/proc/splash(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
 	trans_to(target, amount, multiplier, copy)
@@ -357,14 +485,14 @@ var/const/INGEST = 2
 		return
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
-		if(type == CHEM_BLOOD)
-			var/datum/reagents/R = C.reagents
+		if(type == CHEM_TOUCH)
+			var/datum/reagents/R = C.affect_touching
+			return trans_to_holder(R, amount, multiplier, copy)
+		if(type == CHEM_INGEST)
+			var/datum/reagents/R = C.affect_ingesting
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_BLOOD)
 			var/datum/reagents/R = C.affect_blooded
-			return trans_to_holder(R, amount, multiplier, copy)
-		if(type == CHEM_affect_touch)
-			var/datum/reagents/R = C.affect_touching
 			return trans_to_holder(R, amount, multiplier, copy)
 	else
 		var/datum/reagents/R = new /datum/reagents(amount)
@@ -391,8 +519,3 @@ var/const/INGEST = 2
 		return
 
 	return trans_to_holder(target.reagents, amount, multiplier, copy)
-
-/* Atom reagent creation - use it all the time */
-
-/atom/proc/create_reagents(var/max_vol)
-	reagents = new/datum/reagents(max_vol, src)

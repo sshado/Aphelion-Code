@@ -124,7 +124,7 @@ datum/reagent/colorful_reagent
 	result_amount = 6
 	mix_message = "The substance flashes multiple colors and emits the smell of a pocket protector."
 
-datum/reagent/colorful_reagent/reaction_mob(var/mob/living/simple_animal/M, var/method=TOUCH, var/volume)
+datum/reagent/colorful_reagent/reaction_mob(var/mob/living/simple_animal/M, var/method=affect_touch, var/volume)
     if(M && istype(M))
         M.color = pick(random_color_list)
     ..()
@@ -205,7 +205,7 @@ datum/reagent/hairgrownium
 	description = "A mysterious chemical purported to help grow hair. Often found on late-night TV infomercials."
 	reagent_state = LIQUID
 	color = "#5DDA5D"
-	penetrates_skin = 1
+
 
 /datum/chemical_reaction/hairgrownium
 	name = "hairgrownium"
@@ -230,7 +230,7 @@ datum/reagent/super_hairgrownium
 	description = "A mysterious and powerful chemical purported to cause rapid hair growth."
 	reagent_state = LIQUID
 	color = "#5DD95D"
-	penetrates_skin = 1
+
 
 
 /datum/chemical_reaction/super_hairgrownium

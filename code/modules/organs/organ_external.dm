@@ -203,7 +203,7 @@
 
 		if(istype(owner,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = owner
-			if(H.species && H.species.flags & IS_SYNTHETIC)
+			if(H.species && H.species.flags & SYNTHETIC)
 				brmod = H.species.brute_mod
 				bumod = H.species.burn_mod
 

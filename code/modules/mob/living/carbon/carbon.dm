@@ -4,7 +4,6 @@
 	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 	reagents = bloodstr
-
 	..()
 
 /mob/living/carbon/Life()
@@ -17,14 +16,20 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
-	qdel(INGEST)
-	qdel(TOUCH)
+	qdel(affect_blood)
+	qdel(affect_touch)
 	// We don't qdel(trans_to) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
 	for(var/food in stomach_contents)
 		qdel(food)
 	return ..()
+
+/mob/living/carbon/rejuvenate()
+	bloodstr.clear_reagents()
+	ingested.clear_reagents()
+	touching.clear_reagents()
+	..()
 
 /mob/living/carbon/rejuvenate()
 	/datum/reagents/Destroy()
@@ -93,13 +98,13 @@
 
 	for(var/datum/disease/D in viruses)
 
-		if(D.spread_by_touch())
+		if(D.spread_by_affect_touch())
 
 			M.contract_disease(D, 0, 1, CONTACT_HANDS)
 
 	for(var/datum/disease/D in M.viruses)
 
-		if(D.spread_by_touch())
+		if(D.spread_by_affect_touch())
 
 			contract_disease(D, 0, 1, CONTACT_HANDS)
 
@@ -210,7 +215,7 @@
 				if(org.dislocated == 2)
 					status += "dislocated"
 				if(org.status & ORGAN_BROKEN)
-					status += "hurts when touched"
+					status += "hurts when affect_touched"
 				if(org.status & ORGAN_DEAD)
 					status += "is bruised and necrotic"
 				if(!org.is_usable())
@@ -288,7 +293,7 @@
 /mob/living/carbon/proc/eyecheck()
 	return 0
 
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
+// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before affect_touching.
 // Stop! ... Hammertime! ~Carn
 
 /mob/living/carbon/proc/getDNA()

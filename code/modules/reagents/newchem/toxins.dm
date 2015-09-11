@@ -11,7 +11,7 @@ datum/reagent/polonium
 	reagent_state = LIQUID
 	color = "#CF3600"
 	metabolization_rate = 0.1
-	penetrates_skin = 1
+
 
 datum/reagent/polonium/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
@@ -29,9 +29,9 @@ datum/reagent/histamine
 	metabolization_rate = 0.2
 	overdose_threshold = 30
 
-datum/reagent/histamine/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume) //dumping histamine on someone is VERY mean.
+datum/reagent/histamine/reaction_mob(var/mob/living/M as mob, var/method=affect_touch, var/volume) //dumping histamine on someone is VERY mean.
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.reagents.add_reagent("histamine",10)
 
 datum/reagent/histamine/on_mob_life(var/mob/living/M as mob)
@@ -64,7 +64,7 @@ datum/reagent/formaldehyde
 	description = "Formaldehyde is a common industrial chemical and is used to preserve corpses and medical samples. It is highly toxic and irritating."
 	reagent_state = LIQUID
 	color = "#DED6D0"
-	penetrates_skin = 1
+
 
 datum/reagent/formaldehyde/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
@@ -155,7 +155,7 @@ datum/reagent/cyanide
 	reagent_state = LIQUID
 	color = "#CF3600"
 	metabolization_rate = 0.1
-	penetrates_skin = 1
+
 
 datum/reagent/cyanide/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
@@ -189,7 +189,7 @@ datum/reagent/itching_powder
 	reagent_state = LIQUID
 	color = "#B0B0B0"
 	metabolization_rate = 0.3
-	penetrates_skin = 1
+
 
 datum/reagent/itching_powder/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
@@ -230,10 +230,10 @@ datum/reagent/facid
 	reagent_state = LIQUID
 	color = "#4141D2"
 
-datum/reagent/facid/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+datum/reagent/facid/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
 	if(!istype(M, /mob/living))
 		return //wooo more runtime fixin
-	if(method == TOUCH || method == INGEST)
+	if(method == affect_touch || method == affect_blood)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
@@ -248,7 +248,7 @@ datum/reagent/facid/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 
 			if(volume > 10)
 
-				if(method == TOUCH)
+				if(method == affect_touch)
 					if(H.wear_mask)
 						if(!H.wear_mask.unacidable)
 							qdel(H.wear_mask)
@@ -373,7 +373,7 @@ datum/reagent/ketamine
 	reagent_state = LIQUID
 	color = "#646EA0"
 	metabolization_rate = 0.8
-	penetrates_skin = 1
+
 
 datum/reagent/ketamine/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
@@ -485,7 +485,7 @@ datum/reagent/curare
 	reagent_state = LIQUID
 	color = "#191919"
 	metabolization_rate = 0.1
-	penetrates_skin = 1
+
 
 datum/reagent/curare/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
@@ -505,7 +505,7 @@ datum/reagent/tabun
 	reagent_state = LIQUID
 	color = "#C7C7C7"
 	metabolization_rate = 0.1
-	penetrates_skin = 1
+
 
 /datum/chemical_reaction/tabun
 	name = "tabun"
@@ -563,7 +563,7 @@ datum/reagent/atrazine/on_mob_life(var/mob/living/M as mob)
 
 			// Clear off wallrot fungi
 
-datum/reagent/atrazine/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+datum/reagent/atrazine/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
 	src = null
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
@@ -654,11 +654,11 @@ datum/reagent/glowing_slurry
 	reagent_state = LIQUID
 	color = "#00FD00"
 
-datum/reagent/glowing_slurry/reaction_mob(var/mob/M, var/method=TOUCH, var/volume) //same as mutagen
+datum/reagent/glowing_slurry/reaction_mob(var/mob/M, var/method=affect_touch, var/volume) //same as mutagen
 	if(!..())	return
 	if(!M.dna) return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
 	src = null
-	if((method==TOUCH && prob(33)) || method==INGEST)
+	if((method==affect_touch && prob(33)) || method==affect_blood)
 		if(prob(98))
 			randmutb(M)
 		else
@@ -686,9 +686,9 @@ datum/reagent/ants
 	reagent_state = SOLID
 	color = "#993333"
 
-datum/reagent/ants/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume) //NOT THE ANTS
+datum/reagent/ants/reaction_mob(var/mob/living/M as mob, var/method=affect_touch, var/volume) //NOT THE ANTS
 	if(iscarbon(M))
-		if(method == TOUCH || method==INGEST)
+		if(method == affect_touch || method==affect_blood)
 			M.adjustBruteLoss(4)
 			M.emote("scream")
 			M << "<span class='warning'>OH SHIT ANTS!!!!</span>"

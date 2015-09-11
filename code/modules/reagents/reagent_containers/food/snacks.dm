@@ -98,15 +98,15 @@
 				user << "This creature does not seem to have a mouth!"
 				return
 
-		if(reagents)								//Handle ingestion of the reagent.
+		if(reagents)								//Handle affect_bloodion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
+				reagents.reaction(M, affect_blood)
 				spawn(0)
 					if(reagents.total_volume > bitesize)
-						reagents.trans_to_ingest(M, bitesize, CHEM_INGEST)
+						reagents.trans_to_affect_blood(M, bitesize, CHEM_BLOOD)
 					else
-						reagents.trans_to_ingest(M, reagents.total_volume, CHEM_INGEST)
+						reagents.trans_to_affect_blood(M, reagents.total_volume, CHEM_BLOOD)
 					bitecount++
 					On_Consume(M)
 			return 1
@@ -242,7 +242,7 @@
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
 	bitecount++
 	if(reagents && user.reagents)
-		reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
+		reagents.trans_to_mob(user, bitesize, CHEM_BLOOD)
 	spawn(5)
 		if(!src && !user.client)
 			user.custom_emote(1,"[pick("burps", "cries for more", "burps twice", "looks at the area where the food was")]")
@@ -548,7 +548,7 @@
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.trans_to_turf(get_turf(hit_atom))
 	for(var/atom/A in get_turf(hit_atom))
-		src.reagents.touch_turf(A)
+		src.reagents.affect_touch_turf(A)
 	src.visible_message("\red [src.name] has been squashed.","\red You hear a smack.")
 	for(var/atom/A in get_turf(hit_atom))
 	qdel(src)
@@ -566,7 +566,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/friedegg
 	name = "Fried egg"
-	desc = "A fried egg, with a touch of salt and pepper."
+	desc = "A fried egg, with a affect_touch of salt and pepper."
 	icon_state = "friedegg"
 	filling_color = "#FFDF78"
 

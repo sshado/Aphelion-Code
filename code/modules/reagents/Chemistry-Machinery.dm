@@ -257,7 +257,7 @@
 /obj/machinery/chem_dispenser/soda
 	icon_state = "soda_dispenser"
 	name = "soda fountain"
-	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
+	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one affect_touch."
 	ui_title = "Soda Dispens-o-matic"
 	energy = 100
 	max_energy = 100

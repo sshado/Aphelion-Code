@@ -44,12 +44,12 @@
 					if(safe_thing)
 						if(!safe_thing.reagents)
 							safe_thing.create_reagents(100)
-						trans = src.reagents.trans_to(safe_thing, amount_per_transfer_from_this, CHEM_INGEST)
+						trans = src.reagents.trans_to(safe_thing, amount_per_transfer_from_this, CHEM_BLOOD)
 
 						for(var/mob/O in viewers(world.view, user))
 							O.show_message(text("\red <B>[] tries to squirt something into []'s eyes, but fails!</B>", user, target), 1)
 						spawn(5)
-							src.reagents.reaction(safe_thing, TOUCH)
+							src.reagents.reaction(safe_thing, CHEM_TOUCH)
 
 
 
@@ -62,7 +62,7 @@
 
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red <B>[] squirts something into []'s eyes!</B>", user, target), 1)
-				src.reagents.reaction(target, TOUCH)
+				src.reagents.reaction(target, CHEM_TOUCH)
 
 				var/mob/living/M = target
 

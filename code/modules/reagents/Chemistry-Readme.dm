@@ -66,11 +66,11 @@ About the Holder:
 		clear_reagents()
 			This proc removes ALL reagents from the holder.
 
-		reaction(var/atom/A, var/method=TOUCH, var/volume_modifier=0)
+		reaction(var/atom/A, var/method=affect_touch, var/volume_modifier=0)
 			This proc calls the appropriate reaction procs of the reagents.
 			I.e. if A is an object, it will call the reagents reaction_obj
 			proc. The method var is used for reaction on mobs. It simply tells
-			us if the mob TOUCHed the reagent or if it INGESTed the reagent.
+			us if the mob affect_touched the reagent or if it affect_blooded the reagent.
 			Since the volume can be checked in a reagents proc, you might want to
 			use the volume_modifier var to modifiy the passed value without actually
 			changing the volume of the reagents.
@@ -120,11 +120,11 @@ About Reagents:
 	Reagents are all the things you can mix and fille in bottles etc. This can be anything from
 	rejuvs over water to ... iron. Each reagent also has a few procs - i'll explain those below.
 
-		reaction_mob(var/mob/M, var/method=TOUCH)
+		reaction_mob(var/mob/M, var/method=affect_touch)
 			This is called by the holder's reation proc.
 			This version is only called when the reagent
 			reacts with a mob. The method var can be either
-			TOUCH or INGEST. You'll want to put stuff like
+			affect_touch or affect_blood. You'll want to put stuff like
 			acid-facemelting in here.
 
 		reaction_obj(var/obj/O)

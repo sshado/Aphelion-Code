@@ -113,7 +113,7 @@ var/list/name_to_material
 	// Path to resulting stacktype. Todo remove need for this.
 	var/stack_type
 	// Wallrot crumble message.
-	var/rotting_touch_message = "crumbles under your touch"
+	var/rotting_affect_touch_message = "crumbles under your affect_touch"
 
 // Placeholders for light tiles and rglass.
 /material/proc/build_rod_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
@@ -362,12 +362,12 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	melting_point = 3700
 	stack_origin_tech = "materials=6"
-	cut_delay = 60	
+	cut_delay = 60
 	explosion_resistance = 30
 	integrity = 600
 	hardness = 90
 	weight = 25
-	
+
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
@@ -494,7 +494,7 @@ var/list/name_to_material
 /material/glass/phoron/reinforced
 	name = "rphglass"
 	display_name = "reinforced phoron glass"
-	icon_colour = "#d60db4"	
+	icon_colour = "#d60db4"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = "materials=4;phorontech=2"
 	composite_material = list() //todo
@@ -554,7 +554,7 @@ var/list/name_to_material
 	stack_origin_tech = "materials=2"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	
+
 /material/iron
 	name = "iron"
 	stack_type = /obj/item/stack/material/iron

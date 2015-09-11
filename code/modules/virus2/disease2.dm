@@ -45,7 +45,7 @@
 	var/list/res = list()
 	for (var/specie in all_species)
 		var/datum/species/S = all_species[specie]
-		if(!(S.flags & IS_SYNTHETIC) && S.flags & CAN_JOIN)
+		if(!(S.flags & SYNTHETIC) && S.flags & CAN_JOIN)
 			meat += S
 	if(meat.len)
 		var/num = rand(1,meat.len)
@@ -62,7 +62,7 @@
 
 	/*if (ishuman(mob))
 		var/mob/living/carbon/human/H = mob
-		if(H.species.flags & IS_SYNTHETIC)   //TEMP FIX UNTIL IPC BUG CONFIRMED
+		if(H.species.flags & SYNTHETIC)   //TEMP FIX UNTIL IPC BUG CONFIRMED
 			cure(mob)
 			return
 	*/

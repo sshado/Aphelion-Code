@@ -35,7 +35,7 @@
 	description = "A chemical element."
 	reagent_state = GAS
 	color = "#808080" // rgb: 128, 128, 128
-	penetrates_skin = 1
+
 
 	on_mob_life(var/mob/living/M as mob)
 		if(!M) M = holder.my_atom
@@ -120,10 +120,10 @@
 				usr << "It wasn't enough..."
 		return
 
-	reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+	reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
 		if(!istype(M, /mob/living))
 			return
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.adjust_fire_stacks(volume / 15)
 			return
 
@@ -133,7 +133,7 @@
 	description = "A highly-reactive chemical element."
 	reagent_state = GAS
 	color = "#6A6054"
-	penetrates_skin = 1
+
 
 
 	on_mob_life(var/mob/living/M as mob)
@@ -190,7 +190,7 @@
 	reagent_state = LIQUID
 	color = "#484848" // rgb: 72, 72, 72
 	metabolization_rate = 0.2
-	penetrates_skin = 1
+
 
 	on_mob_life(var/mob/living/M as mob)
 		if(!M) M = holder.my_atom
@@ -255,7 +255,7 @@
 	reagent_state = SOLID
 	color = "#C7C7C7" // rgb: 199,199,199
 	metabolization_rate = 0.4
-	penetrates_skin = 1
+
 
 	on_mob_life(var/mob/living/M as mob)
 		if(!M) M = holder.my_atom
@@ -293,10 +293,10 @@
 		M.adjustFireLoss(1)
 		..()
 		return
-	reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+	reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
 		if(!istype(M, /mob/living))
 			return
-		if(method == TOUCH)
+		if(method == affect_touch)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 
@@ -322,7 +322,7 @@
 				else
 					M.take_organ_damage(15,0)
 
-		if(method == INGEST)
+		if(method == affect_blood)
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M
 
@@ -429,7 +429,7 @@
 	reagent_state = LIQUID
 	color = "#0064C877"
 	metabolization_rate = REAGENTS_METABOLISM * 10
-datum/reagent/water/proc/touch_turf_w(var/turf/simulated/T)
+datum/reagent/water/proc/affect_touch_turf_w(var/turf/simulated/T)
 	if(!istype(T))
 		return
 	var/datum/gas_mixture/environment = T.return_air()

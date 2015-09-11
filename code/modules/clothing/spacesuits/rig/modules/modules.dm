@@ -27,7 +27,7 @@
 	var/redundant                       // Set to 1 to ignore duplicate module checking when installing.
 	var/permanent                       // If set, the module can't be removed.
 	var/disruptive = 1                  // Can disrupt by other effects.
-	var/activates_on_touch              // If set, unarmed attacks will call engage() on the target.
+	var/activates_on_affect_touch              // If set, unarmed attacks will call engage() on the target.
 
 	var/active                          // Basic module status
 	var/disruptable                     // Will deactivate if some other powers are used.

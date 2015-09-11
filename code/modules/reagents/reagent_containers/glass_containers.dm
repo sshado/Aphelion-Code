@@ -4,6 +4,7 @@
 /obj/item/weapon/reagent_containers/glass
 	name = " "
 	var/base_name = " "
+	var/affect_touch = CHEM_TOUCH
 	desc = " "
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
@@ -98,7 +99,7 @@
 
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("\red [] has been splashed with something by []!", target, user), 1)
-			src.reagents.reaction(target, TOUCH)
+			src.reagents.reaction(target, affect_touch)
 			spawn(5) src.reagents.clear_reagents()
 			return
 		else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
@@ -137,7 +138,7 @@
 
 		else if(reagents.total_volume)
 			user << "\blue You splash the solution onto [target]."
-			src.reagents.reaction(target, TOUCH)
+			src.reagents.reaction(target, affect_touch)
 			spawn(5) src.reagents.clear_reagents()
 			return
 

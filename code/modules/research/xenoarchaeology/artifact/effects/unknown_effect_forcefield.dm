@@ -6,7 +6,7 @@
 
 /datum/artifact_effect/forcefield/New()
 	..()
-	trigger = TRIGGER_TOUCH
+	trigger = TRIGGER_affect_touch
 
 /datum/artifact_effect/forcefield/ToggleActivate()
 	..()

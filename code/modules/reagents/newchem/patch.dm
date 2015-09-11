@@ -1,12 +1,12 @@
 /obj/item/weapon/reagent_containers/pill/patch
 	name = "chemical patch"
-	desc = "A chemical patch for touch based applications."
+	desc = "A chemical patch for affect_touch based applications."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bandaid"
 	item_state = "bandaid"
 	possible_transfer_amounts = null
 	volume = 50
-	apply_type = TOUCH
+	apply_type = affect_touch
 	apply_method = "apply"
 
 /obj/item/weapon/reagent_containers/pill/patch/New()

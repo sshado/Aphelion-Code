@@ -9,7 +9,7 @@
 	item_state = "pill"
 	possible_transfer_amounts = null
 	volume = 60
-	var/apply_type = INGEST
+	var/apply_type = CHEM_BLOOD
 	var/apply_method = "swallow"
 
 	New()
@@ -32,7 +32,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, apply_type)
 				spawn(0)
-					reagents.trans_to_ingest(M, reagents.total_volume, CHEM_INGEST)
+					reagents.trans_to_affect_blood(M, reagents.total_volume, CHEM_BLOOD)
 					qdel(src)
 			else
 				qdel(src)
@@ -66,7 +66,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, apply_type)
 				spawn(0)
-					reagents.trans_to_ingest(M, reagents.total_volume, CHEM_INGEST)
+					reagents.trans_to_affect_blood(M, reagents.total_volume, CHEM_BLOOD)
 					qdel(src)
 			else
 				qdel(src)
@@ -104,7 +104,7 @@
 	New()
 		..()
 		reagents.add_reagent("toxin", 50)
-		
+
 /obj/item/weapon/reagent_containers/pill/bicaridine
 	name = "Bicaridine pill"
 	desc = "Used to treat physical injuries."
@@ -112,7 +112,7 @@
 	New()
 		..()
 		reagents.add_reagent("bicaridine", 20)
-		
+
 /obj/item/weapon/reagent_containers/pill/antitox
 	name = "Anti-toxins pill"
 	desc = "Neutralizes many common toxins."
@@ -128,7 +128,7 @@
 	New()
 		..()
 		reagents.add_reagent("initropidril", 50)
-		
+
 /obj/item/weapon/reagent_containers/pill/methylphenidate
 	name = "Methylphenidate pill"
 	desc = "Improves the ability to concentrate."
@@ -160,7 +160,7 @@
 	New()
 		..()
 		reagents.add_reagent("haloperidol", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/inaprovaline
 	name = "Inaprovaline pill"
 	desc = "Used to stabilize patients."
@@ -176,7 +176,7 @@
 	New()
 		..()
 		reagents.add_reagent("dexalin", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/citalopram
 	name = "Citalopram pill"
 	desc = "Mild anti-depressant."
@@ -184,7 +184,7 @@
 	New()
 		..()
 		reagents.add_reagent("citalopram", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/tramadol
 	name = "Tramadol pill"
 	desc = "A simple painkiller."
@@ -192,7 +192,7 @@
 	New()
 		..()
 		reagents.add_reagent("tramadol", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/spaceacillin
 	name = "Spaceacillin pill"
 	desc = "Contains antiviral agents."
@@ -200,7 +200,7 @@
 	New()
 		..()
 		reagents.add_reagent("spaceacillin", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/kelotane
 	name = "Kelotane pill"
 	desc = "Used to treat burns."
@@ -224,7 +224,7 @@
 	New()
 		..()
 		reagents.add_reagent("dexalinp", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/dermaline
 	name = "Dermaline pill"
 	desc = "Used to treat burn wounds."
@@ -232,7 +232,7 @@
 	New()
 		..()
 		reagents.add_reagent("dermaline", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/happy
 	name = "Happy pill"
 	desc = "Happy happy joy joy!"
@@ -249,7 +249,7 @@
 	New()
 		..()
 		reagents.add_reagent("anti_toxin", 15)
-		
+
 /obj/item/weapon/reagent_containers/pill/zoom
 	name = "Zoom pill"
 	desc = "Zoooom!"

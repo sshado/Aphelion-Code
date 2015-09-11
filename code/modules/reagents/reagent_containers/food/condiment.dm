@@ -13,6 +13,7 @@
 	flags = OPENCONTAINER
 	possible_transfer_amounts = list(1,5,10)
 	volume = 50
+	var/affect_blood = CHEM_BLOOD
 	//Possible_states has the reagent id as key and a list of, in order, the icon_state, the name and the desc as values. Used in the on_reagent_change() to change names, descs and sprites.
 	var/list/possible_states = list("ketchup" = list("ketchup", "Ketchup", "You feel more American already."), "capsaicin" = list("hotsauce", "Hotsauce", "You can almost TASTE the stomach ulcers now!"), "enzyme" = list("enzyme", "Universal Enzyme", "Used in cooking various dishes"), "soysauce" = list("soysauce", "Soy Sauce", "A salty soy-based flavoring"), "frostoil" = list("coldsauce", "Coldsauce", "Leaves the tongue numb in it's passage"), "sodiumchloride" = list("saltshaker", "Salt Shaker", "Salt. From space oceans, presumably"), "blackpepper" = list("pepermillsmall", "Pepper Mill", "Often used to flavor food or make people sneeze"), "cornoil" = list("oliveoil", "Corn Oil", "A delicious oil used in cooking. Made from corn"), "sugar" = list("emptycondiment", "Sugar", "Tasty spacey sugar!"))
 
@@ -34,9 +35,9 @@
 	if(M == user)
 		M << "\blue You swallow some of contents of the [src]."
 		if(reagents.total_volume)
-			reagents.reaction(M, INGEST)
+			reagents.reaction(M, affect_blood)
 			spawn(0)
-				reagents.trans_to_ingest(M, 10)
+				reagents.trans_to_affect_blood(M, 10)
 
 		playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 		return 1
@@ -58,7 +59,7 @@
 			M.LAssailant = user
 
 		if(reagents.total_volume)
-			reagents.reaction(M, INGEST)
+			reagents.reaction(M, affect_blood)
 			spawn(0)
 				reagents.trans_to(M, 10)
 

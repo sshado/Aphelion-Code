@@ -12,13 +12,13 @@ datum/reagent/silver_sulfadiazine
 	color = "#F0C814"
 	metabolization_rate = 3
 
-datum/reagent/silver_sulfadiazine/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+datum/reagent/silver_sulfadiazine/reaction_mob(var/mob/living/M as mob, var/method=affect_touch, var/volume, var/show_message = 1)
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.adjustFireLoss(-volume)
 			if(show_message)
 				M << "<span class='notice'>The silver sulfadiazine soothes your burns.</span>"
-		if(method == INGEST)
+		if(method == affect_blood)
 			M.adjustToxLoss(0.5*volume)
 			if(show_message)
 				M << "<span class='warning'>You feel sick...</span>"
@@ -39,14 +39,14 @@ datum/reagent/styptic_powder
 	color = "#C8A5DC"
 	metabolization_rate = 3
 
-datum/reagent/styptic_powder/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+datum/reagent/styptic_powder/reaction_mob(var/mob/living/M as mob, var/method=affect_touch, var/volume, var/show_message = 1)
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.adjustBruteLoss(-volume)
 			if(show_message)
 				M << "<span class='notice'>The styptic powder stings like hell as it closes some of your wounds!</span>"
 			M.emote("scream")
-		if(method == INGEST)
+		if(method == affect_blood)
 			M.adjustToxLoss(0.5*volume)
 			if(show_message)
 				M << "<span class='warning'>You feel gross!</span>"
@@ -82,10 +82,10 @@ datum/reagent/synthflesh
 	reagent_state = LIQUID
 	color = "#FFEBEB"
 
-datum/reagent/synthflesh/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume,var/show_message = 1)
+datum/reagent/synthflesh/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume,var/show_message = 1)
 	if(!M) M = holder.my_atom
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.adjustBruteLoss(-1.5*volume)
 			M.adjustFireLoss(-1.5*volume)
 			if(show_message)
@@ -951,13 +951,13 @@ datum/reagent/haloperidol/on_mob_life(var/mob/living/M as mob)
 	required_reagents = list("sulfur" = 1, "oxygen" = 1, "chlorine" = 1)
 	result_amount = 3
 
-datum/reagent/duoderm/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+datum/reagent/duoderm/reaction_mob(var/mob/living/M as mob, var/method=affect_touch, var/volume, var/show_message = 1)
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.adjustFireLoss(-volume)
 			if(show_message)
 				M << "<span class='notice'>The duoderm patch soothes your burns.</span>"
-		if(method == INGEST)
+		if(method == affect_blood)
 			M.adjustToxLoss(0.5*volume)
 			if(show_message)
 				M << "<span class='warning'>You feel sick...</span>"
@@ -985,14 +985,14 @@ datum/reagent/antihemorrhagic
 	required_reagents = list("aluminum" = 1, "hydrogen" = 1, "oxygen" = 1, "aceticacid" = 1)
 	result_amount = 3
 
-datum/reagent/styptic_powder/reaction_mob(var/mob/living/M as mob, var/method=TOUCH, var/volume, var/show_message = 1)
+datum/reagent/styptic_powder/reaction_mob(var/mob/living/M as mob, var/method=affect_touch, var/volume, var/show_message = 1)
 	if(iscarbon(M))
-		if(method == TOUCH)
+		if(method == affect_touch)
 			M.adjustBruteLoss(-volume)
 			if(show_message)
 				M << "<span class='notice'>The antihemorrhagic powder stings like hell as it closes some of your wounds!</span>"
 			M.emote("scream")
-		if(method == INGEST)
+		if(method == affect_blood)
 			M.adjustToxLoss(0.5*volume)
 			if(show_message)
 				M << "<span class='warning'>You feel gross!</span>"

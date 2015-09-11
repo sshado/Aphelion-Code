@@ -36,9 +36,9 @@
 
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
+				reagents.reaction(M, affect_blood)
 				spawn(0)
-					reagents.trans_to_ingest(M, gulp_size)
+					reagents.trans_to_affect_blood(M, gulp_size)
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
@@ -64,9 +64,9 @@
 				M.LAssailant = user
 
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
+				reagents.reaction(M, affect_blood)
 				spawn(0)
-					reagents.trans_to_ingest(M, gulp_size)
+					reagents.trans_to_affect_blood(M, gulp_size)
 
 			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
 				var/mob/living/silicon/robot/bro = user
@@ -175,7 +175,7 @@
 
 
 ///////////////////////////////////////////////Drinks
-//Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be ingested directly
+//Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be affect_blooded directly
 //	rather then having to add it to something else first. They should only contain liquids. They have a default container size of 50.
 //	Formatting is the same as food.
 

@@ -76,7 +76,7 @@
 	reagent_state = LIQUID
 	color = "#000000"
 	metabolization_rate = 0.05
-	penetrates_skin = 1
+
 
 /datum/chemical_reaction/blackpowder
 	name = "Black Powder"
@@ -258,8 +258,8 @@
 	..()
 	return
 
-/datum/reagent/napalm/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
-	if(method == TOUCH && isliving(M))
+/datum/reagent/napalm/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
+	if(method == affect_touch && isliving(M))
 		M.adjust_fire_stacks(7)
 		return
 
@@ -362,12 +362,12 @@ datum/reagent/firefighting_foam
 	result_amount = 3
 	mix_message = "The mixture bubbles gently."
 
-datum/reagent/firefighting_foam/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+datum/reagent/firefighting_foam/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
 	if(!istype(M, /mob/living))
 		return
 
 // Put out fire
-	if(method == TOUCH)
+	if(method == affect_touch)
 		M.adjust_fire_stacks(-(volume / 5)) // more effective than water
 		if(M.fire_stacks <= 0)
 			M.ExtinguishMob()

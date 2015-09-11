@@ -49,7 +49,7 @@
 						for(var/mob/O in viewers(world.view, user))
 							O.show_message(text("\red <B>[] tries to squirt something into []'s eyes, but fails!</B>", user, target), 1)
 						spawn(5)
-							src.reagents.reaction(safe_thing, TOUCH)
+							src.reagents.reaction(safe_thing, CHEM_TOUCH)
 
 
 						user << "\blue You transfer [trans] units of the solution."
@@ -61,7 +61,7 @@
 
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red <B>[] squirts something into []'s eyes!</B>", user, target), 1)
-				src.reagents.reaction(target, TOUCH)
+				src.reagents.reaction(target, CHEM_TOUCH)
 
 				var/mob/M = target
 				var/list/injected = list()

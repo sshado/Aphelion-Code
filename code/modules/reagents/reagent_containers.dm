@@ -98,7 +98,7 @@
 	if(target == user)
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(H.species.flags & IS_SYNTHETIC)
+			if(H.species.flags & SYNTHETIC)
 				H << "<span class='notice'>You have a monitor for a head, where do you think you're going to put that?</span>"
 				return 1
 
@@ -108,13 +108,13 @@
 				return
 
 		self_feed_message(user)
-		reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_INGEST)
+		reagents.trans_to_mob(user, amount_per_transfer_from_this, CHEM_BLOOD)
 		feed_sound(user)
 		return 1
 	else
 		if(istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = target
-			if(H.species.flags & IS_SYNTHETIC)
+			if(H.species.flags & SYNTHETIC)
 				H << "<span class='notice'>They have a monitor for a head, where do you think you're going to put that?</span>"
 				return
 
@@ -135,7 +135,7 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Fed [name] by [target.name] ([target.ckey]). Reagents: [contained]</font>")
 		msg_admin_attack("[key_name(user)] fed [key_name(target)] with [name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-		reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
+		reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 		feed_sound(user)
 		return 1
 

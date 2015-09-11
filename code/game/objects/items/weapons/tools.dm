@@ -335,7 +335,7 @@
 		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
 			return
-		if(H.species.flags & IS_SYNTHETIC)
+		if(H.species.flags & SYNTHETIC)
 			return
 		switch(safety)
 			if(1)
@@ -435,7 +435,7 @@
 
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(H.species.flags & IS_SYNTHETIC)
+			if(H.species.flags & SYNTHETIC)
 				if(M == user)
 					user << "\red You can't repair damage to your own body - it's against OH&S."
 					return

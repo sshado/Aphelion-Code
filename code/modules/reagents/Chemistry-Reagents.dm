@@ -25,13 +25,13 @@ datum
 		var/shock_reduction = 0
 		var/penetrates_skin = 0 //Whether or not a reagent penetrates the skin
 		proc
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume) //Some reagents transfer on touch, others don't; dependent on if they penetrate the skin or not.
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume) //Some reagents transfer on affect_touch, others don't; dependent on if they penetrate the skin or not.
 				if(!istype(M, /mob/living))	return 0
 				var/datum/reagent/self = src
 				src = null
 
 				if(self.holder)		//for catching rare runtimes
-					if(method == TOUCH && self.penetrates_skin)
+					if(method == affect_touch && self.penetrates_skin)
 						var/block  = 0
 						for(var/obj/item/clothing/C in M.get_equipped_items())
 							if(istype(C, /obj/item/clothing/suit/bio_suit))
@@ -43,7 +43,7 @@ datum
 								M.reagents.add_reagent(self.id,self.volume)
 
 /*
-					if(method == INGEST && istype(M, /mob/living/carbon))
+					if(method == affect_blood && istype(M, /mob/living/carbon))
 						if(prob(1 * self.addictiveness))
 							if(prob(5 * volume))
 								var/datum/disease/addiction/A = new /datum/disease/addiction
@@ -67,7 +67,7 @@ datum
 				src = null
 				return
 
-			touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
+			affect_touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
 				src = null
 				return
 
@@ -113,7 +113,7 @@ datum
 			reagent_state = LIQUID
 			color = "#C80000" // rgb: 200, 0, 0
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				var/datum/reagent/blood/self = src
 				src = null
 				if(self.data && self.data["virus2"] && istype(M, /mob/living/carbon))//infecting...
@@ -122,7 +122,7 @@ datum
 						for (var/ID in vlist)
 							var/datum/disease2/disease/V = vlist[ID]
 
-							if(method == TOUCH)
+							if(method == affect_touch)
 								infect_virus2(M,V.getcopy())
 							else
 								infect_virus2(M,V.getcopy(),1) //injected, force infection!
@@ -181,10 +181,10 @@ datum
 			reagent_state = LIQUID
 			color = "#C81040" // rgb: 200, 16, 64
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				var/datum/reagent/vaccine/self = src
 				src = null
-				if(self.data&&method == INGEST)
+				if(self.data&&method == affect_blood)
 					for(var/datum/disease/D in M.viruses)
 						if(istype(D, /datum/disease/advance))
 							var/datum/disease/advance/A = D
@@ -215,10 +215,10 @@ datum
 			reagent_state = LIQUID
 			color = "#757547"
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				if(!istype(M, /mob/living))
 					return
-				if(method == INGEST)
+				if(method == affect_blood)
 					M << "Oh god, why did you drink that?"
 
 #define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
@@ -229,7 +229,7 @@ datum
 			reagent_state = LIQUID
 			color = "#0064C877"
 			metabolization_rate = REAGENTS_METABOLISM * 10
-		datum/reagent/water/proc/touch_turf_w(var/turf/simulated/T)
+		datum/reagent/water/proc/affect_touch_turf_w(var/turf/simulated/T)
 			if(!istype(T))
 				return
 			var/datum/gas_mixture/environment = T.return_air()
@@ -498,11 +498,11 @@ datum
 			color = "#04DF27"
 			metabolization_rate = 0.3
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				if(!..())	return
 				if(!M.dna) return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
 				src = null
-				if((method==TOUCH && prob(33)) || method==INGEST)
+				if((method==affect_touch && prob(33)) || method==affect_blood)
 					if(prob(98))
 						randmutb(M)
 					else
@@ -555,8 +555,8 @@ datum
 			color = "#C8A5DC" // rgb: 200, 165, 220
 
 			//makes you squeaky clean
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
-				if (method == TOUCH)
+			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
+				if (method == affect_touch)
 					M.germ_level -= min(volume*20, M.germ_level)
 
 			reaction_obj(var/obj/O, var/volume)
@@ -606,10 +606,10 @@ datum
 			reagent_state = LIQUID
 			color = "#060606"
 
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with welding fuel to make them easy to ignite!
 				if(!istype(M, /mob/living))
 					return
-				if(method == TOUCH)
+				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 10)
 				return
 			/*
@@ -636,10 +636,10 @@ datum
 			reagent_state = LIQUID
 			color = "#660000" // rgb: 102, 0, 0
 
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with welding fuel to make them easy to ignite!
 				if(!istype(M, /mob/living))
 					return
-				if(method == TOUCH)
+				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 10)
 				return
 
@@ -683,7 +683,7 @@ datum
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
 					S.dirt = 0
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				if(iscarbon(M))
 					var/mob/living/carbon/C = M
 					if(istype(M,/mob/living/carbon/human))
@@ -731,10 +731,10 @@ datum
 				..()
 				return
 
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with plasma is stronger than fuel!
 				if(!istype(M, /mob/living))
 					return
-				if(method == TOUCH)
+				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 5)
 					..()
 					return
@@ -951,7 +951,7 @@ datum
 		spores
 			name = "Spore Toxin"
 			id = "spores"
-			description = "A toxic spore cloud which blocks vision when ingested."
+			description = "A toxic spore cloud which blocks vision when affect_blooded."
 			color = "#9ACD32"
 
 			on_mob_life(var/mob/living/M as mob)
@@ -971,9 +971,9 @@ datum
 			reagent_state = LIQUID
 			color = "#535E66" // rgb: 83, 94, 102
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				src = null
-				if( (prob(10) && method==TOUCH) || method==INGEST)
+				if( (prob(10) && method==affect_touch) || method==affect_blood)
 					M.contract_disease(new /datum/disease/robotic_transformation(0),1)
 
 		xenomicrobes
@@ -983,9 +983,9 @@ datum
 			reagent_state = LIQUID
 			color = "#535E66" // rgb: 83, 94, 102
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
 				src = null
-				if( (prob(10) && method==TOUCH) || method==INGEST)
+				if( (prob(10) && method==affect_touch) || method==affect_blood)
 					M.contract_disease(new /datum/disease/xeno_transformation(0),1)
 
 
@@ -1145,10 +1145,10 @@ datum
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 179, 16, 8
 
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
 				if(!istype(M, /mob/living))
 					return
-				if(method == TOUCH)
+				if(method == affect_touch)
 					if(istype(M, /mob/living/carbon/human))
 						var/mob/living/carbon/human/victim = M
 						var/mouth_covered = 0
@@ -1981,10 +1981,10 @@ datum
 					if(H.species && (H.species.name == "Skrell" || H.species.name =="Neara"))	 //Skrell and Neara get very drunk very quickly.
 						d*=5
 
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
 				if(!istype(M, /mob/living))
 					return
-				if(method == TOUCH)
+				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 15)
 					return
 
