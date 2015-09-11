@@ -103,3 +103,36 @@
 	if(removing == src.modAttachment)
 		src.modAttachment = null
 	user << "\red You remove the [removing] from the frame"
+
+/*	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
+	var/charge_cost = 200 //How much energy is needed to fire.
+	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
+	var/cell_type = null
+	var/projectile_type = /obj/item/projectile/beam/practice
+	var/modifystate
+	var/charge_meter = 1	
+	*/
+/obj/item/weapon/modular_firearms/assembly/proc/compile(mob/user as mob)
+	var/type = null
+	if(src.isKinetic)
+		var/new/obj/item/weapon/gun/MFCS/projectile/P as obj
+		type = 1
+	if(src.isEnergy)
+		var/new/obj/item/weapon/gun/MFCS/energy/P as obj
+		type = 2
+	P.modChassis = src.modChassis
+	P.modChamber = src.modChamber
+	if(type = 1)
+		if(src.caliber)
+			P.caliber = src.caliber
+	if(type = 2)
+		if(src.projectile_type)
+			P.projectile_type = src.projectile_type
+			P.charge_cost = src.modChamber.charge_cost
+	P.modLoader = src.modLoader
+		if(!Eloader)
+			P.max_shells = src.modLoader.max_shells
+			P.load_method = src.modLoader.load_method
+	
+			
+		
