@@ -5,10 +5,11 @@
 	role_text_plural = "Changelings"
 	bantype = "changeling"
 	feedback_tag = "changeling_objective"
-	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
+	restricted_jobs = list("AI", "Cyborg", "Captain", "Head of Security", "Head of Personnel")
+	protected_jobs = list("Chief Engineer", "Research Director", "Chief Medical Officer", "Quartermaster")
 	welcome_text = "Use say \":g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them."
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
+	antaghud_indicator = "hudchangeling"
 
 /datum/antagonist/changeling/get_special_objective_text(var/datum/mind/player)
 	return "<br><b>Changeling ID:</b> [player.changeling.changelingID].<br><b>Genomes Absorbed:</b> [player.changeling.absorbedcount]"

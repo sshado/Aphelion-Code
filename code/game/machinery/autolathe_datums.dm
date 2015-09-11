@@ -397,6 +397,12 @@
 	hidden = 1
 	category = "Tools"
 
+/datum/autolathe/recipe/beartrap
+	name = "mechanical trap"
+	path = /obj/item/weapon/beartrap
+	hidden = 1
+	category = "Devices and Components"
+
 /datum/autolathe/recipe/handcuffs
 	name = "handcuffs"
 	path = /obj/item/weapon/handcuffs
