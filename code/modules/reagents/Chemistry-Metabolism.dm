@@ -20,7 +20,7 @@ datum/reagents
 	var/affect_blood = 0
 	var/affect_touch = 0
 	var/affect_ingest = 0
-	var/chem_temp = 300
+	var/chem_temp = 420 //296.33 Degrees Fahrenheit
 	var/addiction_tick = 1
 	var/list/datum/reagent/addiction_list = new/list()
 

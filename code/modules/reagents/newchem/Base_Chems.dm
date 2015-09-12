@@ -230,3 +230,106 @@
 //   TIER TWO    //
 ///////////////////
 
+/datum/reagent/bisacodyl
+
+
+/datum/reagent/carbonsteel
+
+
+/datum/reagent/nanotubes
+	name = "Nano-Tubing"
+	id = "nanotubes"
+	description = "Very small tube like structures. There pretty strong."
+	reagent_state = SOLID
+	color = "#525050"
+/datum/chemical_reaction/nanotubes
+	name = "Nano-Tubing"
+	id = "nanotubes"
+	result = "nanotubes"
+	required_reagents = list("reiron" = 1, "carbon" = 1)
+	result_amount = 2
+	min_temp = 485
+
+
+/datum/reagent/opium
+	name = "Opium"
+	id = "opium"
+	description = "Used to make opiate painkillers. Has mild sedative properties "
+	reagent_state = LIQUID
+	color = "#525050"
+	overdose_threshold = 45
+	addiction_threshold = 35
+	shock_reduction = 15
+/datum/reagent/opium/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	switch(current_cycle)
+		if(0 to 24)
+			if(prob(5))
+				M.emote("yawn")
+		if(25 to 34)
+			M.drowsyness = max(M.drowsyness, 5)
+		if(35 to INFINITY)
+			M.Paralyse(1.5)
+			M.drowsyness = max(M.drowsyness, 10)
+	..()
+	return
+/datum/reagent/opium/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(20))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+	..()
+	return
+/datum/reagent/opium/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(20))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+		M.adjustToxLoss(0.25*REM)
+	..()
+	return
+/datum/reagent/opium/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(20))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+		M.adjustToxLoss(0.5*REM)
+	..()
+	return
+/datum/reagent/opium/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(20))
+		var/obj/item/I = M.get_active_hand()
+		if(I)
+			M.drop_item()
+		M.adjustToxLoss(0.75*REM)
+	..()
+	return
+/datum/chemical_reaction/opium
+	name = "Opium"
+	id = "opium"
+	result = "opium"
+	required_reagents = list("atp" = 2, "glucosesolution" = 1, "xenon" = 1)
+	result_amount = 3
+	max_temp = 260
+
+
+/datum/reagent/xenofloracarbon
+
+
+///////////////////
+//  TIER THREE   //
+///////////////////
+
+/datum/reagent/nanocarbon
+	name = "Carbon Nanofibers"
+	id = "nanocarbon"
+	description = "The purest form of carbon before diamond. Carbon nanofibers are ultra strong"
+	reagent_state = SOLID
+	color = "#525050"
+/datum/chemical_reaction/nanocarbon
+	name = "Carbon Nanofibers"
+	id = "nanocarbon"
+	result = "nanocarbon"
+	required_reagents = list("xenofloracarbon" = 2, "carbonsteel" = 2, "nanotubing" = 1)
+	result_amount = 2
+	min_temp = 700

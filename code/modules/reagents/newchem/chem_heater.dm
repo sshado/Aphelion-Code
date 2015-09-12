@@ -5,10 +5,10 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0b"
 	use_power = 1
-	idle_power_usage = 40
+	idle_power_usage = 65
 	var/obj/item/weapon/reagent_containers/beaker = null
-	var/desired_temp = 300
-	var/heater_coefficient = 0.03
+	var/desired_temp = 420 // 296.33 Degrees Fahrenheit
+	var/heater_coefficient = 0.04
 	var/on = FALSE
 
 /obj/machinery/chem_heater/New()
@@ -121,10 +121,10 @@
 	if(href_list["adjust_temperature"])
 		var/val = href_list["adjust_temperature"]
 		if(isnum(val))
-			desired_temp = Clamp(desired_temp+val, 0, 1250)
+			desired_temp = Clamp(desired_temp+val, 0, 1500)
 		else if(val == "input")
 			var/target = input("Please input the target temperature", name) as num
-			desired_temp = Clamp(target, 0, 1250)
+			desired_temp = Clamp(target, 0, 1500)
 		else
 			return 0
 		. = 1
