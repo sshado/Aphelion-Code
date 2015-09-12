@@ -123,7 +123,7 @@
 				if(9 to 10)	filling.icon_state = "[icon_state]10"
 
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.color = reagents.get_color()
 			overlays += filling
 
 /obj/item/weapon/reagent_containers/drugs/baggie/meth

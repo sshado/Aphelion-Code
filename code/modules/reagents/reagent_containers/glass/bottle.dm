@@ -48,7 +48,7 @@
 				if(75 to 90)	filling.icon_state = "[icon_state]75"
 				if(91 to INFINITY)	filling.icon_state = "[icon_state]100"
 
-			filling.icon += mix_color_from_reagents(reagents.reagent_list)
+			filling.color = reagents.get_color()
 			overlays += filling
 
 		if (!is_open_container())
@@ -84,7 +84,7 @@
 	New()
 		..()
 		reagents.add_reagent("mutagen", 30)
-		
+
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin
 	name = "soporific bottle"
 	desc = "A small bottle of soporific. Just the fumes make you sleepy."
@@ -95,7 +95,7 @@
 		..()
 		reagents.add_reagent("stoxin", 60)
 		update_icon()
-		
+
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin
 	name = "dylovene bottle"
 	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
@@ -106,7 +106,7 @@
 		..()
 		reagents.add_reagent("anti_toxin", 60)
 		update_icon()
-		
+
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
 	name = "inaprovaline bottle"
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."

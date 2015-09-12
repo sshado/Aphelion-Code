@@ -3134,10 +3134,6 @@
                 update_icon()
 
         update_icon()
-                overlays.Cut()
-                var/image/filling = image('icons/obj/kitchen.dmi', src, "icecream_color")
-                filling.icon += mix_color_from_reagents(reagents.reagent_list)
-                overlays += filling
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream/icecreamcone
         name = "ice cream cone"
