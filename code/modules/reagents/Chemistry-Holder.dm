@@ -18,7 +18,7 @@ datum
 			//I dislike having these here but map-objects are initialised before world/New() is called. >_>
 			if(!chemical_reagents_list)
 				//Chemical Reagents - Initialises all /datum/reagent into a list indexed by reagent id
-				var/paths = subtypesof(/datum/reagent)
+				var/paths = typesof(/datum/reagent)
 				chemical_reagents_list = list()
 				for(var/path in paths)
 					var/datum/reagent/D = new path()
@@ -29,7 +29,7 @@ datum
 				// For example:
 				// chemical_reaction_list["plasma"] is a list of all reactions relating to plasma
 
-				var/paths = subtypesof(/datum/chemical_reaction)
+				var/paths = typesof(/datum/chemical_reaction)
 				chemical_reactions_list = list()
 
 				for(var/path in paths)
@@ -121,7 +121,7 @@ datum
 				src.handle_reactions()
 				return amount
 
-			trans_to_affect_blood(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items affect_blooded. A delay is added between affect_bloodion and addition of the reagents
+			trans_to_affect_blood(var/obj/target, var/amount=1, var/multiplier=1, var/preserve_data=1)//For items bloodstr. A delay is added between affect_bloodion and addition of the reagents
 				if (!target )
 					return
 				if (!target.reagents || src.total_volume<=0)
@@ -359,10 +359,6 @@ datum
 						reagent_list -= A
 						qdel(A)
 						update_total()
-						my_atom.on_reagent_change()
-						check_ignoreslow(my_atom)
-						check_gofast(my_atom)
-						check_goreallyfast(my_atom)
 						return 0
 
 
@@ -404,10 +400,10 @@ datum
 						can_process = 1
 				return can_process
 
-			reaction(var/atom/A, var/method=affect_touch, var/volume_modifier=0)
+			reaction(var/atom/A, var/method=CHEM_TOUCH, var/volume_modifier=0)
 
 				switch(method)
-					if(affect_touch)
+					if(CHEM_TOUCH)
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A))
 								spawn(0)
@@ -416,7 +412,7 @@ datum
 									if(!check)
 										continue
 									else
-										R.reaction_mob(A, affect_touch, R.volume+volume_modifier)
+										R.reaction_mob(A, CHEM_TOUCH, R.volume+volume_modifier)
 							if(isturf(A))
 								spawn(0)
 									if(!R) return

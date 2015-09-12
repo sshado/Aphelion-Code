@@ -36,7 +36,7 @@
 
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
-				reagents.reaction(M, affect_blood)
+				reagents.reaction(M, CHEM_BLOOD)
 				spawn(0)
 					reagents.trans_to_affect_blood(M, gulp_size)
 
@@ -64,7 +64,7 @@
 				M.LAssailant = user
 
 			if(reagents.total_volume)
-				reagents.reaction(M, affect_blood)
+				reagents.reaction(M, CHEM_BLOOD)
 				spawn(0)
 					reagents.trans_to_affect_blood(M, gulp_size)
 
@@ -175,7 +175,7 @@
 
 
 ///////////////////////////////////////////////Drinks
-//Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be affect_blooded directly
+//Notes by Darem: Drinks are simply containers that start preloaded. Unlike condiments, the contents can be bloodstr directly
 //	rather then having to add it to something else first. They should only contain liquids. They have a default container size of 50.
 //	Formatting is the same as food.
 

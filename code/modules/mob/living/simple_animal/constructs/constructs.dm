@@ -4,7 +4,7 @@
 	desc = ""
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
-	response_help  = "thinks better of affect_touching"
+	response_help  = "thinks better of touching"
 	response_disarm = "flailed at"
 	response_harm   = "punched"
 	icon_dead = "shade_dead"

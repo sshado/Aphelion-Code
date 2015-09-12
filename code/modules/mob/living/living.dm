@@ -203,7 +203,7 @@ default behaviour is:
 	return temperature
 
 
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before affect_touching.
+// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
 // Stop! ... Hammertime! ~Carn
 // I affect_touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
 

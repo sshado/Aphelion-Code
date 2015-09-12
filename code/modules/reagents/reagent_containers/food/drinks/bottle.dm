@@ -109,7 +109,7 @@
 	if(src.reagents)
 		for(var/mob/O in viewers(user, null))
 			O.show_message(text("\blue <B>The contents of the [src] splashes all over [target]!</B>"), 1)
-		src.reagents.reaction(target, affect_touch)
+		src.reagents.reaction(target, CHEM_TOUCH)
 
 	//Finally, smash the bottle. This kills (del) the bottle.
 	src.smash(target, user)

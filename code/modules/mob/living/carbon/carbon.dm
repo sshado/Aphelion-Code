@@ -16,8 +16,8 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
-	qdel(affect_blood)
-	qdel(affect_touch)
+	qdel(bloodstr)
+	qdel(touching)
 	// We don't qdel(trans_to) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
@@ -293,7 +293,7 @@
 /mob/living/carbon/proc/eyecheck()
 	return 0
 
-// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before affect_touching.
+// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
 // Stop! ... Hammertime! ~Carn
 
 /mob/living/carbon/proc/getDNA()

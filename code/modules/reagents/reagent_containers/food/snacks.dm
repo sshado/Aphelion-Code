@@ -101,7 +101,7 @@
 		if(reagents)								//Handle affect_bloodion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.total_volume)
-				reagents.reaction(M, affect_blood)
+				reagents.reaction(M, CHEM_BLOOD)
 				spawn(0)
 					if(reagents.total_volume > bitesize)
 						reagents.trans_to_affect_blood(M, bitesize, CHEM_BLOOD)

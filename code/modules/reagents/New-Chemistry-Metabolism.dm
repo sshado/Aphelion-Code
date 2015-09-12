@@ -8,6 +8,18 @@ datum/reagent
 	var/overdosed = 0 // You fucked up and this is now triggering it's overdose effects, purge that shit quick.
 	var/current_cycle = 0
 datum/reagents
+	var/metabolism = REM // This would be 0.2 normally
+	var/affect_blood_met = 0
+	var/affect_touch_met = 0
+	var/affect_ingest_met = 0
+	var/dose = 0
+	var/max_dose = 0
+	var/volume = 0
+	var/overdose = 0
+	var/affects_dead = 0
+	var/affect_blood = 0
+	var/affect_touch = 0
+	var/affect_ingest = 0
 	var/chem_temp = 300
 	var/addiction_tick = 1
 	var/list/datum/reagent/addiction_list = new/list()
@@ -209,49 +221,6 @@ datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
 	affect_ingest(M, alien, removed * 0.5)
 	return
 
-/datum/reagents/proc/on_mob_live(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in affect_touch_mob.
-	if(!istype(M))
-		return
-	if(!affects_dead && M.stat == DEAD)
-		return
-	if(overdose && (dose > overdose) && (location != CHEM_TOUCH))
-		overdose(M, alien)
-	var/removed = metabolism
-	if(affect_blood_met && (location == CHEM_BLOOD))
-		removed = affect_blood_met
-	if(affect_touch_met && (location == affect_touch))
-		removed = affect_touch_met
-	if(affect_ingest_met && (location == affect_ingest))
-		removed = affect_ingest_met
-	removed = min(removed, volume)
-	max_dose = max(volume, max_dose)
-	dose = min(dose + removed, max_dose)
-	if(removed >= (metabolism * 0.1) || removed >= 0.1) // If there's too little chemical, don't affect the mob, just remove it
-		switch(location)
-			if(CHEM_TOUCH)
-				affect_touch(M, alien, removed)
-			if(CHEM_INGEST)
-				affect_ingest(M, alien, removed)
-			if(CHEM_BLOOD)
-				affect_blood(M, alien, removed)
-	remove_self(removed)
-	return
-
-/datum/reagents/proc/blood(var/mob/living/carbon/M, var/alien, var/removed)
-	return
-
-/datum/reagents/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M, alien, removed * 0.5)
-	return
-
-/datum/reagents/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_ingest(M, alien, removed * 0.5)
-	return
-
-/datum/reagents/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.
-	M.adjustToxLoss(REM)
-	return
-
 /datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
 	if(!isnull(newdata))
 		data = newdata
@@ -350,7 +319,7 @@ datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
 
 /datum/reagents/proc/handle_reaction()
 	if(!my_atom) // No reactions in temporary holders
-		returan
+		return
 	if(my_atom.flags & NOREACT) // No reactions here
 		return
 
@@ -486,13 +455,13 @@ datum/reagent/proc/addiction_act_stage4(var/mob/living/M as mob)
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 		if(type == CHEM_TOUCH)
-			var/datum/reagents/R = C.affect_touching
+			var/datum/reagents/R = C.touching
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_INGEST)
-			var/datum/reagents/R = C.affect_ingesting
+			var/datum/reagents/R = C.ingested
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_BLOOD)
-			var/datum/reagents/R = C.affect_blooded
+			var/datum/reagents/R = C.bloodstr
 			return trans_to_holder(R, amount, multiplier, copy)
 	else
 		var/datum/reagents/R = new /datum/reagents(amount)
