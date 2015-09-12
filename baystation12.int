@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1442018729
+LAST_COMPILE_TIME: 1442023569
 DIR: code code\_onclick code\controllers code\controllers\Processes code\modules code\modules\examine code\modules\examine\descriptions code\modules\mob code\modules\mob\freelook code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\reagents code\modules\reagents\newchem code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food code\modules\reagents\reagent_containers\glass 
 AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 508.1299
-WINDOW: code\modules\reagents\Chemistry-Colours.dm;code\modules\reagents\reagent_containers\food\snacks.dm;code\modules\reagents\reagent_containers\glass\bottle.dm;code\modules\reagents\reagent_containers\glass_containers.dm;code\modules\reagents\reagent_containers\drugs.dm;code\modules\reagents\reagent_containers\spray.dm
-FILE: code\modules\reagents\reagent_containers\spray.dm
+WINDOW: code\modules\reagents\reagent_containers\drugs.dm;code\modules\reagents\Reagents-Chemicals.dm;code\modules\reagents\newchem\Base_Chems.dm;code\modules\reagents\newchem\other.dm;code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\reagents\Chemistry-Reagents.dm;code\modules\reagents\reagent_containers\pill.dm
+FILE: code\modules\reagents\newchem\Base_Chems.dm
 */
 // END_INTERNALS

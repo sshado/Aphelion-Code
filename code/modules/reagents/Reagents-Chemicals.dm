@@ -179,7 +179,7 @@ datum
 			name = "Hell Water"
 			id = "hell_water"
 			description = "YOUR FLESH! IT BURNS!"
-//			process_flags = ORGANIC | SYNTHETIC		//Admin-bus has no brakes! KILL THEM ALL.
+			process_flags = ORGANIC | SYNTHETIC		//Admin-bus has no brakes! KILL THEM ALL.
 
 			on_mob_life(var/mob/living/M as mob)
 				M.fire_stacks = min(5,M.fire_stacks + 3)
