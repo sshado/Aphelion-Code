@@ -31,7 +31,7 @@
 	RefreshParts()
 
 /obj/machinery/chem_heater/RefreshParts()
-	heater_coefficient = 0.03
+	heater_coefficient = 0.04
 	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts)
 		heater_coefficient *= M.rating
 

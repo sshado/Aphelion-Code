@@ -8,9 +8,9 @@
 //MEDICINES//// Tier 1, Tier 2, Tier 3, Tier 4, Tier 5, Tier 6
 ///////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////////////////////
+
 //ANTI TOXIN//
-//Tier 1////////////////////////////////////////////////////////////////////////////////////
+//Tier 1/////
 /datum/reagent/anti_toxin
 	name = "Dylovene"
 	id = "anti_toxin"
@@ -178,17 +178,17 @@ datum/reagent/charcoal
 //Tier 1////////////////////////////////////////////////////////////////////////////////////
 
 /datum/reagent/sodium_pentathol
-	name = "Dylovene"
-	id = "anti_toxin"
-	description = "Dylovene is a broad-spectrum antitoxin. Reduces hallucinations faster than charcoal"
+	name = "Sodium Pentahol"
+	id = "sodium_pentahol"
+	description = "Sodium Pentahol reduces minior brain trama."
 	reagent_state = LIQUID
 	color = "#00A000"
 	scannable = 1
-/datum/chemical_reaction/anti_toxin
-	name = "Dylovene"
-	id = "anti_toxin"
-	result = "anti_toxin"
-	required_reagents = list("nitrogen" = 1, "potassium" = 1, "silicon" = 1)
+/datum/chemical_reaction/sodium_pentahol
+	name = "Sodium Pentahol"
+	id = "sodium_pentahol"
+	result = "sodium_pentahol"
+	required_reagents = list("salinesolution" = 1, "pentahol" = 1)
 	result_amount = 3
 /datum/reagent/anti_toxin/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom

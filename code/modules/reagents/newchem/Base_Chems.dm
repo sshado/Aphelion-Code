@@ -112,7 +112,7 @@
 	result = "fiber"
 	required_reagents = list("water" = 3, "copper" = 1, "tungsten" = 1)
 	result_amount = 3
-	min_temp = 400
+	min_temp = 430
 
 
 /datum/reagent/glucosesolution
@@ -165,6 +165,20 @@
 	mix_message = "The mixture bubbles and gives off an unpleasant medicinal odor."
 
 
+/datum/reagent/pentahol
+	name = "Pentahol"
+	id = "pentahol"
+	description = "A ethanol based sugar."
+	reagent_state = LIQUID
+	color = "#6E3B08" // rgb: 110, 59, 8
+/datum/chemical_reaction/pentahol
+	name = "Pentahol"
+	id = "pentahol"
+	result = "pentahol"
+	required_reagents = list("ethanol" = 1, "sugar" = 1, "water" = 1)
+	result_amount = 3
+
+
 /datum/reagent/reiorn
 	name = "Refined Iron"
 	id = "reiron"
@@ -177,7 +191,7 @@
 	result = "reiron"
 	required_reagents = list("iron" = 3, "oxygen" = 1)
 	result_amount = 2
-	min_temp = 396
+	min_temp = 470
 
 
 /datum/reagent/salinesolution
@@ -224,16 +238,45 @@
 	result = "trihydrocarbon"
 	required_reagents = list("hydrogen" = 3, "carbon" = 1)
 	result_amount = 3
-	min_temp = 400
+	max_temp = 400
 
 ///////////////////
 //   TIER TWO    //
 ///////////////////
 
 /datum/reagent/bisacodyl
+	name = "Bisacodyl"
+	id = "bisacodyl"
+	description = "A laxative, ask your doctor is bisacodyl is right for you!"
+	reagent_state = SOLID
+	color = "#525050"
+/datum/reagent/bisacodyl/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.adjustToxLoss(-0.099*REM) //GOTTAA SHIT IT OUT
+	..()
+	return
+/datum/chemical_reaction/bisacodyl
+	name = "Bisacodyl"
+	id = "bisacodyl"
+	result = "bisacodyl"
+	required_reagents = list("water" = 1, "fiber" = 1)
+	result_amount = 2
+	max_temp = 355
 
 
 /datum/reagent/carbonsteel
+	name = "Steel"
+	id = "carbonsteel"
+	description = "An alloy of carbon and iron"
+	reagent_state = SOLID
+	color = "#525050"
+/datum/chemical_reaction/carbonsteel
+	name = "Steel"
+	id = "carbonsteel"
+	result = "carbonsteel"
+	required_reagents = list("reiron" = 3, "trihydrocarbon" = 1, "oxygen" = 1)
+	result_amount = 3
+	min_temp = 535
 
 
 /datum/reagent/nanotubes
@@ -314,7 +357,24 @@
 
 
 /datum/reagent/xenofloracarbon
-
+	name = "Xeno-Floracarbon"
+	id = "xenofloracarbon"
+	description = "A Retelitivly unstable gas carbon mix used in mixing chemicals."
+	reagent_state = GAS
+	color = "#525050"
+	overdose_threshold = 15
+/datum/reagent/xenofloracarbon/overdose_process(var/mob/living/M as mob) //THIS SHIT ISNT TASTY.
+	if(prob(66))
+		M.fakevomit()
+	..()
+	return
+/datum/chemical_reaction/xenofloracarbon
+	name = "Xeno-Floracarbon"
+	id = "xenofloracarbon"
+	result = "xenofloracarbon"
+	required_reagents = list("trihydrocarbon" = 1, "xenon" = 1, "hydrofluoride" = 2)
+	result_amount = 3
+	min_temp = 445
 
 ///////////////////
 //  TIER THREE   //
