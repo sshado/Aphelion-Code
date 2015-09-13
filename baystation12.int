@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
-LAST_COMPILE_TIME: 1442107885
-DIR: code code\game code\game\jobs code\game\jobs\job code\game\objects code\game\objects\items 
-AUTO_FILE_DIR: OFF
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 508.1299
-WINDOW: code\game\jobs\job\civilian.dm;code\game\jobs\access.dm;code\game\objects\items\crayons.dm
-FILE: code\game\jobs\job\civilian.dm
+AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
