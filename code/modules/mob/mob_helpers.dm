@@ -98,7 +98,7 @@
 	return 0
 
 /mob/living/carbon/human/isSynthetic()
-	return species.flags & IS_SYNTHETIC
+	return species.flags & SYNTHETIC
 
 /mob/living/silicon/isSynthetic()
 	return 1
@@ -634,7 +634,7 @@ proc/is_blind(A)
 	// A proper	CentCom id is hard currency.
 	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
 		return SAFE_PERP
-	
+
 	if(check_access && !access_obj.allowed(src))
 		threatcount += 4
 

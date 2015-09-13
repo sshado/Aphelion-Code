@@ -86,7 +86,7 @@
 	if(src.invuln)
 		return
 
-	//camera dies if an explosion touches it!
+	//camera dies if an explosion affect_touches it!
 	if(severity <= 2 || prob(50))
 		destroy()
 

@@ -6,9 +6,9 @@
 	..()
 	effect_type = pick(2,5)
 
-/datum/artifact_effect/stun/DoEffectTouch(var/mob/toucher)
-	if(toucher && iscarbon(toucher))
-		var/mob/living/carbon/C = toucher
+/datum/artifact_effect/stun/DoEffectaffect_touch(var/mob/affect_toucher)
+	if(affect_toucher && iscarbon(affect_toucher))
+		var/mob/living/carbon/C = affect_toucher
 		var/susceptibility = GetAnomalySusceptibility(C)
 		if(prob(susceptibility * 100))
 			C << "\red A powerful force overwhelms your consciousness."

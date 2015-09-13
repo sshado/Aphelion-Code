@@ -35,7 +35,7 @@
 			return ..()
 
 	if (reagents.total_volume > 0)
-		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
+		reagents.trans_to_mob(M, reagents.total_volume, CHEM_BLOOD)
 		if(M == user)
 			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
 		else

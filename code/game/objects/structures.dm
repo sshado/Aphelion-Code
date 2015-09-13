@@ -79,7 +79,7 @@
 		return ..()
 
 /obj/structure/proc/can_climb(var/mob/living/user, post_climb_check=0)
-	if (!can_touch(user) || !climbable || (!post_climb_check && (user in climbers)))
+	if (!can_affect_touch(user) || !climbable || (!post_climb_check && (user in climbers)))
 		return 0
 
 	if (!user.Adjacent(src))
@@ -173,7 +173,7 @@
 			H.updatehealth()
 	return
 
-/obj/structure/proc/can_touch(var/mob/user)
+/obj/structure/proc/can_affect_touch(var/mob/user)
 	if (!user)
 		return 0
 	if(!Adjacent(user))

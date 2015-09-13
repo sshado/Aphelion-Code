@@ -212,7 +212,7 @@
 
 	if(!protected)
 		playsound(src.loc, "sparks", 75, 1, -1)
-		user << "<font color='red'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</font>"
+		user << "<font color='red'>You try to affect_touch the controls but you get zapped. There must be a short circuit somewhere.</font>"
 		return*/
 	else  //welp, the guy is protected, we can continue
 		if(src.issuperUV)
@@ -238,7 +238,7 @@
 
 	if(!protected)
 		playsound(src.loc, "sparks", 75, 1, -1)
-		user << "<font color='red'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</font>"
+		user << "<font color='red'>You try to affect_touch the controls but you get zapped. There must be a short circuit somewhere.</font>"
 		return*/
 	else
 		user << "You push the button. The coloured LED next to it changes."

@@ -163,6 +163,8 @@
 		user << "<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 50))
+			user << "<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>"
+		if(do_after(user, 50))
 			watertemp = newtemp
 			user.visible_message("<span class='notice'>[user] adjusts the shower with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I].</span>")
 			add_fingerprint(user)
@@ -222,11 +224,6 @@
 		if(M.back)
 			if(M.back.clean_blood())
 				M.update_inv_back(0)
-
-		//flush away reagents on the skin
-		if(M.touching)
-			var/remove_amount = M.touching.maximum_volume * M.reagent_permeability() //take off your suit first
-			M.touching.remove_any(remove_amount)
 
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M

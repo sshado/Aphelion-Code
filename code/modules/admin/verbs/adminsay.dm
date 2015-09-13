@@ -33,23 +33,6 @@
 	if(check_rights(R_ADMIN, 0))
 		sender_name = "<span class='admin'>[sender_name]</span>"
 	for(var/client/C in admins)
-		C << "<span class='mod_channel'>" + create_text_tag("mod", "MOD:", C) + " <span class='name'>[sender_name]</span>(<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
+		C << "<span class='mod_channel'>" + create_text_tag("mod", "MOD:", C) + " <span class='name'>[key_name(usr, 1)]</span>(<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
 
 	feedback_add_details("admin_verb","MS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/client/proc/cmd_dev_say(msg as text)
-	set category = "Special Verbs"
-	set name = "DEVsay"
-	set hidden = 1
-
-	msg = sanitize(msg)
-	log_devsay("DEV: [key_name(src)] : [msg]")
-
-	if(!msg)	return
-	var/sender_name = src.key
-	if(check_rights(R_ADMIN, 0))
-		sender_name = "<span class='ADMINMOD'>[sender_name]</span>"
-	for(var/client/C in admins)
-		C << "<span class='DEV'>" + create_text_tag("dev", "DEV:", C) + " <span class='name'>[sender_name]</span>(<A HREF='?src=\ref[C.holder];adminplayerobservejump=\ref[mob]'>JMP</A>): <span class='message'>[msg]</span></span>"
-
-	feedback_add_details("admin_verb","DEVS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

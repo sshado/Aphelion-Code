@@ -32,13 +32,13 @@
 	spawn(1)
 		dismantle_wall(1)
 
-/turf/simulated/wall/proc/try_touch(var/mob/user, var/rotting)
+/turf/simulated/wall/proc/try_affect_touch(var/mob/user, var/rotting)
 
 	if(rotting)
 		if(reinf_material)
 			user << "<span class='danger'>\The [reinf_material.display_name] feels porous and crumbly.</span>"
 		else
-			user << "<span class='danger'>\The [material.display_name] crumbles under your touch!</span>"
+			user << "<span class='danger'>\The [material.display_name] crumbles under your affect_touch!</span>"
 			dismantle_wall()
 			return 1
 
@@ -64,14 +64,14 @@
 			fail_smash(user)
 			return 1
 
-	try_touch(user, rotting)
+	try_affect_touch(user, rotting)
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
 	radiate()
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
 	if(!damage || !wallbreaker)
-		try_touch(user, rotting)
+		try_affect_touch(user, rotting)
 		return
 
 	if(rotting)

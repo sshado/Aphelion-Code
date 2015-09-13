@@ -10,10 +10,10 @@
 
 /datum/artifact_effect/gasco2/New()
 	..()
-	effect = pick(EFFECT_TOUCH, EFFECT_AURA)
+	effect = pick(EFFECT_affect_touch, EFFECT_AURA)
 	max_pressure = rand(115,1000)
 
-/datum/artifact_effect/gasco2/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/gasco2/DoEffectaffect_touch(var/mob/user)
 	if(holder)
 		var/turf/holder_loc = holder.loc
 		if(istype(holder_loc))

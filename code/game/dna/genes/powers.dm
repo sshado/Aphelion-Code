@@ -65,7 +65,7 @@
 /* Not used on bay
 /datum/dna/gene/basic/heat_resist
 	name="Heat Resistance"
-	activation_messages=list("Your skin is icy to the touch.")
+	activation_messages=list("Your skin is icy to the affect_touch.")
 	mutation=mHeatres
 
 	New()

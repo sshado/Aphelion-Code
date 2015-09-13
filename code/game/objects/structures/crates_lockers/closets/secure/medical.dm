@@ -18,10 +18,10 @@
 		new /obj/item/weapon/reagent_containers/dropper(src)
 		new /obj/item/weapon/reagent_containers/glass/beaker(src)
 		new /obj/item/weapon/reagent_containers/glass/beaker(src)
-		new /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline(src)
-		new /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline(src)
-		new /obj/item/weapon/reagent_containers/glass/bottle/antitoxin(src)
-		new /obj/item/weapon/reagent_containers/glass/bottle/antitoxin(src)
+//		new /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline(src)
+//		new /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline(src)
+//		new /obj/item/weapon/reagent_containers/glass/bottle/antitoxin(src)
+//		new /obj/item/weapon/reagent_containers/glass/bottle/antitoxin(src)
 		return
 
 
@@ -40,10 +40,10 @@
 
 	New()
 		..()
-		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
-		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
-		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
-		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+//		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+//		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+//		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
+//		new /obj/item/weapon/reagent_containers/syringe/melorazine(src)
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/weapon/tank/anesthetic(src)
 		new /obj/item/clothing/mask/breath/medical(src)

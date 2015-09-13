@@ -103,7 +103,7 @@
 	name = "\improper [mineral.display_name] deposit"
 	new /obj/effect/mineral(src, mineral)
 
-//Not even going to touch this pile of spaghetti
+//Not even going to affect_touch this pile of spaghetti
 /turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")

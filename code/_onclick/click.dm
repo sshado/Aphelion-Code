@@ -167,7 +167,7 @@
 	not be called at ranged except with telekinesis.
 
 	proximity_flag is not currently passed to attack_hand, and is instead used
-	in human click code to allow glove touches only at melee range.
+	in human click code to allow glove affect_touches only at melee range.
 */
 /mob/proc/UnarmedAttack(var/atom/A, var/proximity_flag)
 	return
@@ -192,7 +192,7 @@
 
 	This currently is just a default for all mobs, involving
 	laser eyes and telekinesis.  You could easily add exceptions
-	for things like ranged glove touches, spitting alien acid/neurotoxin,
+	for things like ranged glove affect_touches, spitting alien acid/neurotoxin,
 	animals lunging, etc.
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
