@@ -14,6 +14,7 @@
 ///Called by the gameticker
 /datum/game_mode/proc/process()
 	try_latespawn()
+
 /datum/game_mode/proc/latespawn(var/mob/living/carbon/human/character)
 	if(!character.mind)
 		return
@@ -28,7 +29,6 @@
 	if(world.time < next_spawn)
 		return
 
-		
 	message_admins("AUTO[uppertext(name)]: Attempting spawn.")
 
 	var/list/usable_templates
@@ -40,7 +40,7 @@
 		message_admins("AUTO[uppertext(name)]: Failed to find configured mode spawn templates, please disable auto-antagonists until one is added.")
 		round_autoantag = 0
 		return
-		
+
 	while(usable_templates.len)
 		var/datum/antagonist/spawn_antag = pick(usable_templates)
 		usable_templates -= spawn_antag
