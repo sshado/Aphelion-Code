@@ -751,7 +751,8 @@ proc/admin_notice(var/message, var/rights)
 	if(message)
 		if(!check_rights(R_SERVER,0))
 			message = sanitize(message, 500, extra = 0)
-		world << "\blue <b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b>\n \t [message]"
+		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
+		world << "<span class=notice><b>[usr.client.holder.fakekey ? "Administrator" : usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>"
 		log_admin("Announce: [key_name(usr)] : [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -1159,8 +1160,10 @@ proc/admin_notice(var/message, var/rights)
 
 	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[ticker.mode];set=shuttle_delay'>[ticker.mode.shuttle_delay]</a><br/>"
 
-	if(ticker.mode.auto_recall_shuttle)
-		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>enabled</a>"
+	if(ticker.mode.antag_tags && ticker.mode.antag_tags.len)
+		out += "<b>Core antag templates:</b></br>"
+		for(var/antag_tag in ticker.mode.antag_tags)
+			out += "<a href='?src=\ref[ticker.mode];debug_antag=[antag_tag]'>[antag_tag]</a>.</br>"
 	else
 		out += "<b>Shuttle auto-recall:</b> <a href='?src=\ref[ticker.mode];toggle=shuttle_recall'>disabled</a>"
 	out += "<br/><br/>"
@@ -1177,30 +1180,25 @@ proc/admin_notice(var/message, var/rights)
 
 	out += "<hr>"
 
-	if(ticker.mode.antag_tag)
-		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tag]'>[ticker.mode.antag_tag]</a>.</br>"
+	if(ticker.mode.antag_tags)
+		out += "<b>Core antag id:</b>  <a href='?src=\ref[ticker.mode];debug_antag=[ticker.mode.antag_tags]'>[ticker.mode.antag_tags]</a>.</br>"
 
 	if(ticker.mode.round_autoantag)
-		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b> ([ticker.mode.get_antag_prob()]% spawn chance)"
-		if(ticker.mode.antag_scaling_coeff)
+		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>enabled</a></b>."
+		if(ticker.mode.antag_scaling_coeff > 0)
 			out += " (scaling with <a href='?src=\ref[ticker.mode];set=antag_scaling'>[ticker.mode.antag_scaling_coeff]</a>)"
-		out += "<br/>"
+		else
+			out += " (not currently scaling, <a href='?src=\ref[ticker.mode];set=antag_scaling'>set a coefficient</a>)"
+			out += "<br/>"
 	else
 		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>disabled</a></b>.<br/>"
 
 	out += "<b>All antag ids:</b>"
 	if(ticker.mode.antag_templates && ticker.mode.antag_templates.len).
-		var/playercount = ticker.mode.num_players()
 		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
-			var/cur_max_antags
-			if(ticker.mode.antag_tag && antag.id == ticker.mode.antag_tag)
-				cur_max_antags = antag.max_antags_round
-			else
-				cur_max_antags = antag.max_antags
-			if(ticker.mode.antag_scaling_coeff)
-				cur_max_antags = Clamp((playercount/ticker.mode.antag_scaling_coeff), 1, cur_max_antags)
+			antag.update_current_antag_max()
 			out += " <a href='?src=\ref[ticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"
-			out += " ([antag.get_antag_count()]/[cur_max_antags]) "
+			out += " ([antag.get_antag_count()]/[antag.cur_max])"
 			out += " <a href='?src=\ref[ticker.mode];remove_antag_type=[antag.id]'>\[-\]</a><br/>"
 	else
 		out += " None."
@@ -1319,15 +1317,15 @@ proc/admin_notice(var/message, var/rights)
 			return "<b>[key_name(C, link, name, highlight_special)]</b>"
 
 		if(1)	//Private Messages
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)(<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 
 		if(2)	//Admins
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)(<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 
 		if(3)	//Devs
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>)(<A HREF='?_src_=holder;takeadminhelp=\ref[M]'>TAKE</A>)</b>"
 
 		if(4)	//Mentors
 			var/ref_mob = "\ref[M]"
@@ -1382,3 +1380,46 @@ proc/admin_notice(var/message, var/rights)
 	tomob.ckey = frommob.ckey
 	qdel(frommob)
 	return 1
+
+/datum/admins/proc/force_antag_latespawn()
+	set category = "Admin"
+	set name = "Force Template Spawn"
+	set desc = "Force an antagonist template to spawn."
+
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		usr << "Error: you are not an admin!"
+		return
+
+	if(!ticker || !ticker.mode)
+		usr << "Mode has not started."
+		return
+
+	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
+	if(!antag_type || !all_antag_types[antag_type])
+		usr << "Aborting."
+		return
+
+	var/datum/antagonist/antag = all_antag_types[antag_type]
+	message_admins("[key_name(usr)] attempting to force latespawn with template [antag.id].")
+	antag.attempt_late_spawn()
+
+/datum/admins/proc/force_mode_latespawn()
+	set category = "Admin"
+	set name = "Force Mode Spawn"
+	set desc = "Force autotraitor to proc."
+
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		usr << "Error: you are not an admin!"
+		return
+
+	if(!ticker || !ticker.mode)
+		usr << "Mode has not started."
+		return
+
+	message_admins("[key_name(usr)] attempting to force mode latespawn.")
+	ticker.mode.next_spawn = 0
+	ticker.mode.try_latespawn()

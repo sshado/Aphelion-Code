@@ -38,6 +38,21 @@
 
 	faction = "carp"
 
+/mob/living/simple_animal/hostile/carp/shark
+	name = "space shark"
+	desc = "A shark. In space. You're probably dead."
+	icon = 'icons/mob/alienqueen.dmi' //icon is 64x64, so it can't go in animals.dmi.
+	icon_state = "shark"
+	icon_living = "shark"
+	icon_dead = "shark_dead"
+	maxHealth = 150 // Tougher than carp
+	health = 150
+	melee_damage_upper = 25
+	melee_damage_lower = 25 // Fucks up more shit than the carp
+	harm_intent_damage = 10
+	speed = -2 // Faster than carp
+	break_stuff_probability = 30 // Breaks more shit than the carp
+
 /mob/living/simple_animal/hostile/carp/Process_Spacemove(var/check_drift = 0)
 	return 1	//No drifting in space for space carp!	//original comments do not steal
 

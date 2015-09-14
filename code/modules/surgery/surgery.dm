@@ -32,12 +32,12 @@
 
 		if(allowed_species)
 			for(var/species in allowed_species)
-				if(target.species.name == species)
+				if(target.species.get_bodytype() == species)
 					return 1
 
 		if(disallowed_species)
 			for(var/species in disallowed_species)
-				if(target.species.name == species)
+				if(target.species.get_bodytype() == species)
 					return 0
 
 		return 1
@@ -103,7 +103,7 @@ proc/do_surgery(mob/living/carbon/M, mob/living/user, obj/item/tool)
 					S.fail_step(user, M, zone, tool)		//malpractice~
 				else // This failing silently was a pain.
 					user << "\red You must remain close to your patient to conduct surgery."
-				M.op_stage.in_progress -= zone 		
+				M.op_stage.in_progress -= zone
 				user.operating = 0
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
