@@ -130,9 +130,11 @@
 			P.projectile_type = src.projectile_type
 			P.charge_cost = src.modChamber.charge_cost
 	P.modLoader = src.modLoader
-		if(!Eloader)
-			P.max_shells = src.modLoader.max_shells
-			P.load_method = src.modLoader.load_method
+	var/load = src.modLoader
+		if(!load.Eloader)
+			P.max_shells = load.max_shells
+			P.load_method = load.load_method
+			P.handle_casings = load.handle_casings
 	
 			
 		
