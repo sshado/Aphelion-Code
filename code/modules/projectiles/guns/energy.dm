@@ -19,8 +19,8 @@
 	var/projectile_type = /obj/item/projectile/beam/practice
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
-	var/heat_level = 0 //Handles overheating for energy weapons
-	var/heat_cap = null
+	var/heat_level = null //Handles overheating for energy weapons
+	var/heat_cap = 5
 	var/vent_stack = null
 
 	//self-recharging
@@ -63,6 +63,8 @@
 /obj/item/weapon/gun/energy/process()
 	if(heat_level)
 		heat_level -= 0.5
+	if(vent_stack)
+		vent_stack -= 1
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
 		if(charge_tick < recharge_time) return 0
