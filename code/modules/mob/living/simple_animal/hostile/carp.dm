@@ -40,7 +40,7 @@
 
 /mob/living/simple_animal/hostile/carp/shark
 	name = "space shark"
-	desc = "A shark. In space. You're probably already dead."
+	desc = "A shark. In space. You're probably dead."
 	icon = 'icons/mob/alienqueen.dmi' //icon is 64x64, so it can't go in animals.dmi.
 	icon_state = "shark"
 	icon_living = "shark"
