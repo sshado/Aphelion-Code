@@ -152,13 +152,23 @@
 		return
 		
 	if(istype (src, /obj/item/weapon/gun/energy))
+		if(src.vent_stack)
+			return
 		if(src.heat_level = src.heat_cap)
-			user << "<span class='warning'>[src] overheats, flashing a red warning indicator!<span>""
+			user << "<span class='warning'>[src] feels hot in your hands!<span>""
 		if((src.heat_level - src.heat_cap) = 1)
-			user << "<span class='warning'>[src] beeps in alarm, searing hot!<span>"
+			user << "<span class='warning'>[src] beeps in alarm, painfully hot!<span>"
 		if((src.heat_level - src.heat_cap) = 2)
-			user << "<span class='warning'>[src] hisses, leaking steam. It can't take any more!<span>"
+			user << "<span class='warning'>[src] flashes a red warning light, searing hot! It can't take much more!<span>"
 		if((src.heat_level - src.heat_cap) >= 3)
+			if(prob(80))
+				user << "<span class='warning'>[src] overheats, venting boiling-hot steam!"
+				src.vent_stack += 5
+				return
+			else
+				user << "<span class='danger'>[src] explodes violently in your hands!"
+				src.explode()
+				return
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
