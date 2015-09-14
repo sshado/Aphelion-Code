@@ -155,7 +155,7 @@
 		if(src.vent_stack)
 			return
 		if(src.heat_level = src.heat_cap)
-			user << "<span class='warning'>[src] feels hot in your hands!<span>""
+			user << "<span class='warning'>[src] feels hot in your hands!<span>"
 		if((src.heat_level - src.heat_cap) = 1)
 			user << "<span class='warning'>[src] beeps in alarm, painfully hot!<span>"
 		if((src.heat_level - src.heat_cap) = 2)
