@@ -20,6 +20,7 @@
 	var/modifystate
 	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
 	var/heat_level = 0 //Handles overheating for energy weapons
+	var/heat_cap = null
 
 	//self-recharging
 	var/self_recharge = 0	//if set, the weapon will recharge itself
