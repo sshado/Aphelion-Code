@@ -1,4 +1,4 @@
-//Will be used for procs instead
+//MFCS procs -- Cirra
 
 
 /obj/item/weapon/modular_firearms/assembly/proc/process_part(obj/item/I as obj, mob/user as mob) //this should handle processing new parts in the weapon, without relying on the weapon actually being attacked.
@@ -8,7 +8,7 @@
 		if(istype(I, /obj/item/weapon/modular_firearms/chassis/ballistic))
 			src.isKinetic = 1
 		modChassis = I
-		src.removable += I
+		src.removable += I //adds itself to the removable list
 	if(istype(I, /obj/item/weapon/modular_firearms/chamber))
 		var/obj/item/weapon/modular_firearms/chamber/chamber = I
 		if(chamber.projectile_type) //checking for energy weaponry
@@ -22,14 +22,14 @@
 				src.msg = "\red An energy chamber won't work with a ballistic chassis!"
 				return
 		src.modChamber = I
-		src.removable -= src.modChassis
+		src.removable -= src.modChassis //removes its source part from the removable list.
 		src.removable += I
 	if(istype(I, /obj/item/weapon/modular_firearms/driver))
 		var/obj/item/weapon/modular_firearms/driver/D = I
 		if(D.firemodes)
 		else
-			src.msg = "\red Have you considered using a real driver?"
-			return
+			src.msg = "\red Have you considered using a real driver?" //this will usually only be returned if
+			return							  // they try and use the base driver
 		src.modDriver = I
 		src.removable += I
 		src.removable -= src.modChamber
@@ -65,7 +65,7 @@
 			user << "\red There is already a [part] installed!"
 			return
 	else
-		user << "\red Error - null part variable for [I]"
+		user << "\red Error - null part variable for [I]." //for debugging
 		return
 	if(prereq)
 		if(!prereq in src.components)
@@ -102,7 +102,7 @@
 		src.modStock = null
 	if(removing == src.modAttachment)
 		src.modAttachment = null
-	user << "\red You remove the [removing] from the frame"
+	user << "\red You remove the [removing] from the frame."
 
 /*	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 200 //How much energy is needed to fire.
