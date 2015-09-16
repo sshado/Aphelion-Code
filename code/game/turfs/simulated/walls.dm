@@ -42,6 +42,7 @@ var/list/global/wall_cache = list()
 		else if(!isnull(material))
 			composite_melting_point = material.melting_point
 			material_meltingpoint = material.melting_point
+
 	processing_turfs |= src
 
 /turf/simulated/wall/Destroy()
@@ -156,9 +157,9 @@ var/list/global/wall_cache = list()
 	burn(exposed_temperature)
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
-	burn(adj_temp)
 	if(adj_temp > composite_melting_point)
 		take_damage(log(RAND_F(0.9, 1.1) * (adj_temp - composite_melting_point)))
+
 	return ..()
 
 /turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)

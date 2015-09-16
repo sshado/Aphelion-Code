@@ -196,7 +196,7 @@
 			if (user_protected && prob(80))
 				h_user << "Small electrical arc almost burns your hand. Luckily you had your gloves on!"
 			else
-				h_user << "Small electrical arc sparks and burns your hand as you touch the [src]!"
+				h_user << "Small electrical arc sparks and burns your hand as you affect_touch the [src]!"
 				h_user.adjustFireLoss(rand(5,10))
 				h_user.Paralyse(2)
 			charge = 0
@@ -209,7 +209,7 @@
 			if (user_protected && prob(25))
 				h_user << "Medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!"
 			else
-				h_user << "Medium electrical sparks as you touch the [src], severely burning your hand!"
+				h_user << "Medium electrical sparks as you affect_touch the [src], severely burning your hand!"
 				h_user.adjustFireLoss(rand(10,25))
 				h_user.Paralyse(5)
 			spawn(0)
@@ -300,7 +300,7 @@
 /obj/machinery/power/smes/buildable/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	// No more disassembling of overloaded SMESs. You broke it, now enjoy the consequences.
 	if (failing)
-		user << "<span class='warning'>The [src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.</span>"
+		user << "<span class='warning'>The [src]'s screen is flashing with alerts. It seems to be overloaded! touching it now is probably not a good idea.</span>"
 		return
 	// If parent returned 1:
 	// - Hatch is open, so we can modify the SMES

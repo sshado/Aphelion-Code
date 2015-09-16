@@ -21,6 +21,8 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ethanol,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sugar,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sacid,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/xenon,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/zinc,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tungsten
 		)
 

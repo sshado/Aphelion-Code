@@ -18,12 +18,13 @@
 	..()
 	update_icon()
 
-/obj/item/device/flashlight/proc/update_brightness()
+/obj/item/device/flashlight/update_icon()
+
+/obj/item/device/flashlight/proc/update_brightness(var/mob/user = null)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		set_light(brightness_on)
 	else
-		icon_state = "[initial(icon_state)]"
 		set_light(0)
 
 /obj/item/device/flashlight/attack_self(mob/user)
@@ -31,7 +32,7 @@
 		user << "You cannot turn the light on while in this [user.loc]." //To prevent some lighting anomalities.
 		return 0
 	on = !on
-	update_brightness()
+	update_icon()
 	return 1
 
 
@@ -160,7 +161,7 @@
 	on = 0
 	src.force = initial(src.force)
 	src.damtype = initial(src.damtype)
-	update_brightness()
+	update_icon()
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 
@@ -191,10 +192,9 @@
 	on = 1 //Bio-luminesence has one setting, on.
 
 /obj/item/device/flashlight/slime/New()
-	..()
 	set_light(brightness_on)
 
-/obj/item/device/flashlight/slime/update_brightness()
+/obj/item/device/flashlight/slime/update_icon()
 	return
 
 /obj/item/device/flashlight/slime/attack_self(mob/user)

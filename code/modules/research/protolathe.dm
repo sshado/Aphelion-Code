@@ -57,7 +57,7 @@ Note: Must be placed west/left of and R&D console to function.
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		T += M.rating
 	mat_efficiency = 1 - (T - 2) / 8
-
+/*
 /obj/machinery/r_n_d/protolathe/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
@@ -84,6 +84,7 @@ Note: Must be placed west/left of and R&D console to function.
 		var/obj/item/stack/material/diamond/G = new /obj/item/stack/material/diamond(loc)
 		G.amount = round(diamond_amount / G.perunit)
 	..()
+*/
 
 /obj/machinery/r_n_d/protolathe/update_icon()
 	if(panel_open)
@@ -148,7 +149,7 @@ Note: Must be placed west/left of and R&D console to function.
 		if(istype(material) && do_after(user, 16) && stack.use(amount))
 			user << "<span class='notice'>You add [amount] sheets to \the [src].</span>"
 			icon_state = "protolathe"
-			
+
 			var/amount_to_add = amount * material.stack_per_sheet
 			switch(material.name)
 				if(DEFAULT_WALL_MATERIAL)

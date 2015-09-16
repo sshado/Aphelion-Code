@@ -12,10 +12,10 @@
 	else
 		severity = rand(25,95)
 
-/datum/artifact_effect/dnaswitch/DoEffectTouch(var/mob/toucher)
-	var/weakness = GetAnomalySusceptibility(toucher)
-	if(ishuman(toucher) && prob(weakness * 100))
-		toucher << pick("\green You feel a little different.",\
+/datum/artifact_effect/dnaswitch/DoEffectaffect_touch(var/mob/affect_toucher)
+	var/weakness = GetAnomalySusceptibility(affect_toucher)
+	if(ishuman(affect_toucher) && prob(weakness * 100))
+		affect_toucher << pick("\green You feel a little different.",\
 		"\green You feel very strange.",\
 		"\green Your stomach churns.",\
 		"\green Your skin feels loose.",\
@@ -23,9 +23,9 @@
 		"\green You feel a tingling sensation in your chest.",\
 		"\green Your entire body vibrates.")
 		if(prob(75))
-			scramble(1, toucher, weakness * severity)
+			scramble(1, affect_toucher, weakness * severity)
 		else
-			scramble(0, toucher, weakness * severity)
+			scramble(0, affect_toucher, weakness * severity)
 	return 1
 
 /datum/artifact_effect/dnaswitch/DoEffectAura()

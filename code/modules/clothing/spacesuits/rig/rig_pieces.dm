@@ -51,7 +51,7 @@
 /obj/item/clothing/head/helmet/space/rig/proc/prevent_track()
 	return 0
 
-/obj/item/clothing/gloves/rig/Touch(var/atom/A, var/proximity)
+/obj/item/clothing/gloves/rig/affect_touch(var/atom/A, var/proximity)
 
 	if(!A || !proximity)
 		return 0
@@ -65,7 +65,7 @@
 		return 0
 
 	for(var/obj/item/rig_module/module in suit.installed_modules)
-		if(module.active && module.activates_on_touch)
+		if(module.active && module.activates_on_affect_touch)
 			if(module.engage(A))
 				return 1
 

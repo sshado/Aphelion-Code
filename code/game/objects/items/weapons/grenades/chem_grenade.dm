@@ -173,7 +173,7 @@
 
 			for(var/atom/A in view(affected_area, src.loc))
 				if( A == src ) continue
-				src.reagents.touch(A)
+				src.reagents.affect_touch(A)
 
 		if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
 			var/mob/living/carbon/C = loc

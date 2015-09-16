@@ -258,7 +258,7 @@
 
 	proc/handle_mutations_and_radiation()
 
-		if(species.flags & IS_SYNTHETIC) //Robots don't suffer from mutations or radloss.
+		if(species.flags & SYNTHETIC) //Robots don't suffer from mutations or radloss.
 			return
 
 		if(getFireLoss())
@@ -709,7 +709,7 @@
 	*/
 
 	proc/stabilize_body_temperature()
-		if (species.flags & IS_SYNTHETIC)
+		if (species.flags & SYNTHETIC)
 			bodytemperature += species.synth_temp_gain		//just keep putting out heat.
 			return
 
@@ -858,12 +858,12 @@
 
 	proc/handle_chemicals_in_body()
 
-		if(!(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+		if(!(species.flags & SYNTHETIC)) //Synths don't process reagents.
 			chem_effects.Cut()
 			analgesic = 0
 
 			if(touching) touching.metabolize()
-			if(ingested) ingested.metabolize()
+			if(bloodstr) bloodstr.metabolize()
 			if(bloodstr) bloodstr.metabolize()
 
 			if(CE_PAINKILLER in chem_effects)
@@ -930,7 +930,7 @@
 				take_overall_damage(2,0)
 				traumatic_shock++
 
-		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
+		if(!(species.flags & SYNTHETIC)) handle_trace_chems()
 
 		updatehealth()
 
@@ -959,6 +959,12 @@
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 				Paralyse(3)
+
+			if(seizures)
+				if(seizures >= 15)
+					src << "\red You have a seizure!"
+				Paralyse(10)
+				make_jittery(1000)
 
 			if(hallucination)
 				if(hallucination >= 20)
@@ -1261,7 +1267,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - ((species && species.flags & NO_PAIN & !IS_SYNTHETIC) ? 0 : traumatic_shock))
+							switch(100 - ((species && species.flags & NO_PAIN & !SYNTHETIC) ? 0 : traumatic_shock))
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"
@@ -1549,6 +1555,15 @@
 				src << sound('sound/effects/singlebeat.ogg',0,0,0,50)
 			else
 				heartbeat++
+
+			if(!heart_attack)
+				return
+			else
+				losebreath += 3
+				adjustOxyLoss(3)
+				adjustBrainLoss(rand(3,7))
+				Weaken(2)
+			return
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes

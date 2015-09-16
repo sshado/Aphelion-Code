@@ -97,7 +97,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 
 		if(AIRLOCK_WIRE_ELECTRIFY)
 			if(!mended)
-				//Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted.
+				//Cutting this wire electrifies the door, so that the next person to affect_touch the door without insulated gloves gets electrocuted.
 				A.electrify(-1)
 			else
 				A.electrify(0)

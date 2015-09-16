@@ -1,10 +1,10 @@
 
-#define EFFECT_TOUCH 0
+#define EFFECT_affect_touch 0
 #define EFFECT_AURA 1
 #define EFFECT_PULSE 2
 #define MAX_EFFECT 2
 
-#define TRIGGER_TOUCH 0
+#define TRIGGER_affect_touch 0
 #define TRIGGER_WATER 1
 #define TRIGGER_ACID 2
 #define TRIGGER_VOLATILE 3
@@ -97,7 +97,7 @@ var/list/valid_secondary_effect_types = list(\
 		name = "alien computer"
 		desc = "It is covered in strange markings."
 		if(prob(75))
-			my_effect.trigger = TRIGGER_TOUCH
+			my_effect.trigger = TRIGGER_affect_touch
 	else if(icon_num == 10)
 		desc = "A large alien device, there appear to be some kind of vents in the side."
 		if(prob(50))
@@ -229,25 +229,25 @@ var/list/valid_secondary_effect_types = list(\
 		user << "\red You can't reach [src] from here."
 		return
 	if(ishuman(user) && user:gloves)
-		user << "<b>You touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
+		user << "<b>You affect_touch [src]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
 		return
 
 	src.add_fingerprint(user)
 
-	if(my_effect.trigger == TRIGGER_TOUCH)
-		user << "<b>You touch [src].<b>"
+	if(my_effect.trigger == TRIGGER_affect_touch)
+		user << "<b>You affect_touch [src].<b>"
 		my_effect.ToggleActivate()
 	else
-		user << "<b>You touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
+		user << "<b>You affect_touch [src],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")]."
 
-	if(prob(25) && secondary_effect && secondary_effect.trigger == TRIGGER_TOUCH)
+	if(prob(25) && secondary_effect && secondary_effect.trigger == TRIGGER_affect_touch)
 		secondary_effect.ToggleActivate(0)
 
-	if (my_effect.effect == EFFECT_TOUCH)
-		my_effect.DoEffectTouch(user)
+	if (my_effect.effect == EFFECT_affect_touch)
+		my_effect.DoEffectaffect_touch(user)
 
-	if(secondary_effect && secondary_effect.effect == EFFECT_TOUCH && secondary_effect.activated)
-		secondary_effect.DoEffectTouch(user)
+	if(secondary_effect && secondary_effect.effect == EFFECT_affect_touch && secondary_effect.activated)
+		secondary_effect.DoEffectaffect_touch(user)
 
 /obj/machinery/artifact/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 
@@ -306,22 +306,22 @@ var/list/valid_secondary_effect_types = list(\
 	else if(ishuman(M) && !istype(M:gloves,/obj/item/clothing/gloves))
 		var/warn = 0
 
-		if (my_effect.trigger == TRIGGER_TOUCH && prob(50))
+		if (my_effect.trigger == TRIGGER_affect_touch && prob(50))
 			my_effect.ToggleActivate()
 			warn = 1
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_TOUCH && prob(25))
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_affect_touch && prob(25))
 			secondary_effect.ToggleActivate(0)
 			warn = 1
 
-		if (my_effect.effect == EFFECT_TOUCH && prob(50))
-			my_effect.DoEffectTouch(M)
+		if (my_effect.effect == EFFECT_affect_touch && prob(50))
+			my_effect.DoEffectaffect_touch(M)
 			warn = 1
-		if(secondary_effect && secondary_effect.effect == EFFECT_TOUCH && secondary_effect.activated && prob(50))
-			secondary_effect.DoEffectTouch(M)
+		if(secondary_effect && secondary_effect.effect == EFFECT_affect_touch && secondary_effect.activated && prob(50))
+			secondary_effect.DoEffectaffect_touch(M)
 			warn = 1
 
 		if(warn)
-			M << "<b>You accidentally touch [src].<b>"
+			M << "<b>You accidentally affect_touch [src].<b>"
 	..()
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)

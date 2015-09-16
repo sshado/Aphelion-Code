@@ -35,7 +35,7 @@
 		user << "Even to a heart as dark as yours, you know nothing good will come of this.  Something instinctual makes you pull away."
 
 	else if (!insistinga)
-		user << "Your first touch makes the Wish Granter stir, listening to you.  Are you really sure you want to do this?"
+		user << "Your first affect_touch makes the Wish Granter stir, listening to you.  Are you really sure you want to do this?"
 		insistinga++
 
 	else

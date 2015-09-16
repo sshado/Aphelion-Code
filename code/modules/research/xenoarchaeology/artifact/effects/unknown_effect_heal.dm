@@ -3,16 +3,16 @@
 	effecttype = "heal"
 	effect_type = 5
 
-/datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
+/datum/artifact_effect/heal/DoEffectaffect_touch(var/mob/affect_toucher)
 	//todo: check over this properly
-	if(toucher && iscarbon(toucher))
-		var/weakness = GetAnomalySusceptibility(toucher)
+	if(affect_toucher && iscarbon(affect_toucher))
+		var/weakness = GetAnomalySusceptibility(affect_toucher)
 		if(prob(weakness * 100))
-			var/mob/living/carbon/C = toucher
+			var/mob/living/carbon/C = affect_toucher
 			C << "\blue You feel a soothing energy invigorate you."
 
-			if(ishuman(toucher))
-				var/mob/living/carbon/human/H = toucher
+			if(ishuman(affect_toucher))
+				var/mob/living/carbon/human/H = affect_toucher
 				for(var/obj/item/organ/external/affecting in H.organs)
 					if(affecting && istype(affecting))
 						affecting.heal_damage(25 * weakness, 25 * weakness)

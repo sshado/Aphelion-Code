@@ -44,7 +44,6 @@
 	return
 
 /obj/structure/girder/proc/reset_girder()
-	anchored = 1
 	cover = initial(cover)
 	health = min(health,initial(health))
 	state = 0
@@ -121,8 +120,9 @@
 		else
 			if(!construct_wall(W, user))
 				return ..()
-			else
-				return ..()
+
+	else
+		return ..()
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
@@ -242,7 +242,7 @@
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-		user << "<span class='notice'>Now slicing apart the girder..."
+		user << "<span class='notice'>Now slicing apart the girder...</span>"
 		if(do_after(user,30))
 			user << "<span class='notice'>You slice apart the girder!</span>"
 		dismantle()

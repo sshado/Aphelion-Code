@@ -1,5 +1,5 @@
 /*
-	Adjacency proc for determining touch range
+	Adjacency proc for determining affect_touch range
 
 	This is mostly to determine if a user can enter a square for the purposes of touching something.
 	Examples include reaching a square diagonally or reaching something on the other side of a glass window.

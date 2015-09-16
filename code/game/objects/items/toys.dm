@@ -73,9 +73,9 @@
 /obj/item/toy/balloon/throw_impact(atom/hit_atom)
 	if(src.reagents.total_volume >= 1)
 		src.visible_message("\red The [src] bursts!","You hear a pop and a splash.")
-		src.reagents.touch_turf(get_turf(hit_atom))
+		src.reagents.trans_to_turf(get_turf(hit_atom))
 		for(var/atom/A in get_turf(hit_atom))
-			src.reagents.touch(A)
+			src.reagents.affect_touch(A)
 		src.icon_state = "burst"
 		spawn(5)
 			if(src)
@@ -471,9 +471,9 @@
 		spawn(0)
 			for(var/i=0, i<1, i++)
 				step_towards(D,A)
-				D.reagents.touch_turf(get_turf(D))
+				D.reagents.trans_to_turf(get_turf(D))
 				for(var/atom/T in get_turf(D))
-					D.reagents.touch(T)
+					D.reagents.affect_touch(T)
 					if(ismob(T) && T:client)
 						T:client << "\red [user] has sprayed you with water!"
 				sleep(4)

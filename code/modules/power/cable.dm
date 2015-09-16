@@ -519,7 +519,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(H.species.flags & IS_SYNTHETIC)
+		if(H.species.flags & SYNTHETIC)
 			if(M == user)
 				user << "\red You can't repair damage to your own body - it's against OH&S."
 				return

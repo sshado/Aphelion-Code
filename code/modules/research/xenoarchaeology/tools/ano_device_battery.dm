@@ -31,7 +31,7 @@
 	var/last_process = 0
 	var/obj/item/weapon/anobattery/inserted_battery
 	var/turf/archived_loc
-	var/energy_consumed_on_touch = 100
+	var/energy_consumed_on_affect_touch = 100
 
 /obj/item/weapon/anodevice/New()
 	..()
@@ -99,17 +99,17 @@
 
 			//handle charge
 			if(world.time - last_activation > interval)
-				if(inserted_battery.battery_effect.effect == EFFECT_TOUCH)
+				if(inserted_battery.battery_effect.effect == EFFECT_affect_touch)
 					if(interval > 0)
-						//apply the touch effect to the holder
+						//apply the affect_touch effect to the holder
 						if(holder)
 							holder << "the \icon[src] [src] held by [holder] shudders in your grasp."
 						else
 							src.loc.visible_message("the \icon[src] [src] shudders.")
-						inserted_battery.battery_effect.DoEffectTouch(holder)
+						inserted_battery.battery_effect.DoEffectaffect_touch(holder)
 
 						//consume power
-						inserted_battery.use_power(energy_consumed_on_touch)
+						inserted_battery.use_power(energy_consumed_on_affect_touch)
 					else
 						//consume power equal to time passed
 						inserted_battery.use_power(world.time - last_process)
@@ -198,9 +198,9 @@
 	if (!istype(M))
 		return
 
-	if(activated && inserted_battery.battery_effect.effect == EFFECT_TOUCH && !isnull(inserted_battery))
-		inserted_battery.battery_effect.DoEffectTouch(M)
-		inserted_battery.use_power(energy_consumed_on_touch)
+	if(activated && inserted_battery.battery_effect.effect == EFFECT_affect_touch && !isnull(inserted_battery))
+		inserted_battery.battery_effect.DoEffectaffect_touch(M)
+		inserted_battery.use_power(energy_consumed_on_affect_touch)
 		user.visible_message("\blue [user] taps [M] with [src], and it shudders on contact.")
 	else
 		user.visible_message("\blue [user] taps [M] with [src], but nothing happens.")
