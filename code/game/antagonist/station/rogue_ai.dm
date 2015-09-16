@@ -54,13 +54,9 @@ var/datum/antagonist/rogue_ai/malf
 			error("Non-AI mob designated malf AI! Report this.")
 			world << "##ERROR: Non-AI mob designated malf AI! Report this."
 			return 0
-
 		A.setup_for_malf()
 		A.laws = new /datum/ai_laws/nanotrasen/malfunction
-
-
 		var/mob/living/silicon/ai/malf = player.current
-
 		malf << "<span class='notice'><B>SYSTEM ERROR:</B> Memory index 0x00001ca89b corrupted.</span>"
 		sleep(10)
 		malf << "<B>running MEMCHCK</B>"
