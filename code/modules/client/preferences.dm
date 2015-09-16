@@ -578,15 +578,15 @@ datum/preferences
 
 	HTML += "<a href=\"byond://?src=\ref[user];preference=records;task=med_record\">Medical Records</a><br>"
 
-	HTML += TextPreview(med_record,40)
+	HTML += TextPreview(med_record,80)
 
 	HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=gen_record\">Employment Records</a><br>"
 
-	HTML += TextPreview(gen_record,40)
+	HTML += TextPreview(gen_record,80)
 
 	HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=sec_record\">Security Records</a><br>"
 
-	HTML += TextPreview(sec_record,40)
+	HTML += TextPreview(sec_record,80)
 
 	HTML += "<br>"
 	HTML += "<a href=\"byond://?src=\ref[user];preference=records;records=-1\">\[Done\]</a>"

@@ -508,6 +508,41 @@ datum
 			required_container = /obj/item/slime_extract/gold
 			required_other = 1
 
+/datum/chemical_reaction/slime/metal
+	name = "Slime Metal"
+	id = "m_metal"
+	result = null
+	required_reagents = list("phoron" = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/metal
+
+/datum/chemical_reaction/slime/metal/on_reaction(var/datum/reagents/holder)
+	var/obj/item/stack/material/steel/M = new /obj/item/stack/material/steel
+	M.amount = 15
+	M.loc = get_turf(holder.my_atom)
+	var/obj/item/stack/material/plasteel/P = new /obj/item/stack/material/plasteel
+	P.amount = 5
+	P.loc = get_turf(holder.my_atom)
+	..()
+
+//Gold - removed // Re-Added and changed
+/datum/chemical_reaction/slime/crit
+	name = "Slime Crit"
+	id = "m_tele"
+	result = null
+	required_reagents = list("phoron" = 1)
+	result_amount = 1
+	required = /obj/item/slime_extract/gold
+
+/datum/chemical_reaction/slime/gold/on_reaction(var/datum/reagents/holder)
+	var/obj/item/stack/material/gold/M = new /obj/item/stack/material/gold
+	M.amount = 3
+	M.loc = get_turf(holder.my_atom)
+	var/obj/item/stack/material/silver/P = new /obj/item/stack/material/silver
+	P.amount = 2
+	P.loc = get_turf(holder.my_atom)
+	..()
+
 //Silver
 		slimebork
 			name = "Slime Bork"
