@@ -1038,7 +1038,7 @@
      /obj/item/clothing/under/color/white = 10, /obj/item/clothing/under/color/yellow = 10, /obj/item/clothing/under/purple = 10,
      /obj/item/clothing/under/aqua = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/lightpurple = 10,
      /obj/item/clothing/under/lightgreen = 10, /obj/item/clothing/under/lightblue = 10, /obj/item/clothing/under/brown = 10)
-	contraband = list(/obj/item/clothing/under/psyche = 1)
+	contraband = list(/obj/item/clothing/under/rank/clown = 1)
 	prices = list(/obj/item/clothing/under/color/black = 10, /obj/item/clothing/under/color/blackf = 10,
      /obj/item/clothing/under/color/blue = 10, /obj/item/clothing/under/color/green = 10, /obj/item/clothing/under/color/grey = 10,
      /obj/item/clothing/under/color/orange = 10, /obj/item/clothing/under/color/pink = 10, /obj/item/clothing/under/color/red = 10,
@@ -1054,10 +1054,8 @@
 	icon_state = "shoe"
 	products = list(/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
 	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
-	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
-	 /obj/item/clothing/shoes/jackboots = 10)
+	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10)
 	contraband = list (/obj/item/clothing/shoes/clown_shoes = 1)
 	prices = list (/obj/item/clothing/shoes/blue = 10, /obj/item/clothing/shoes/red = 10,
 	 /obj/item/clothing/shoes/yellow = 10, /obj/item/clothing/shoes/green = 10, /obj/item/clothing/shoes/orange = 10,
-	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10,
-	 /obj/item/clothing/shoes/jackboots = 25)
+	 /obj/item/clothing/shoes/purple = 10, /obj/item/clothing/shoes/red = 10, /obj/item/clothing/shoes/leather = 10)
