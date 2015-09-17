@@ -1,4 +1,4 @@
-#define CARTRIDGE_VOLUME_LARGE  9999 //shhhhhh for "testing"
+#define CARTRIDGE_VOLUME_LARGE  700 //shhhhhh for "testing"
 #define CARTRIDGE_VOLUME_MEDIUM 250
 #define CARTRIDGE_VOLUME_SMALL  100
 
