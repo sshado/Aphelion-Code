@@ -5,13 +5,13 @@ The only Guidelines for Contributing are simple
 - Make a Pull Request (Or `PR`) for a large amount of changes *before* you Finish them, and mention in your pull request something like `do not merge` to make sure your Incomplete changes are *not* merged to `A-Dev`
 - Speaking of `A-Dev`, this Repository uses the [gitflow](https://datasift.github.io/gitflow/IntroducingGitFlow.html), In short:
   - Fork the Repository and make a new Branch based off of `A-Dev` if you are making Major changes (Add items to map, Add new features, etc)
-  - if you are making Minor fixes (Fix Xenomorphs randomly teleporting, fix critical bug) base it off the latest release tagged in `master` and make a Pull request to merge it into `hotfix`
+  - if you are making Emergency fixes (Fix Xenomorphs randomly teleporting) base it off the latest release tagged in `master` and make a Pull request to merge it into `hotfix`
   - Make sure to also `git fetch` these new branches and `git checkout` them as local branches, and to also `git pull` from the main Repository, you can do this with the command line with the following commands:
   ```bash
   # Add main Repository as a remote called 'upstream'
   git remote add upstream https://github.com/sshado/Aphelion-Code.git
   # Fetch remote Repositories from main repo
-  $ git fetch
+  $ git fetch upstream
   # Checkout remote branch 'A-Dev' and 'hotfix' as local branches
   $ git checkout -b A-Dev upstream/A-Dev
   $ git checkout -b hotfix upstream/hotfix
