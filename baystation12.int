@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1442540551
+DIR: code code\modules code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\organs code\modules\reagents code\modules\reagents\Chemistry-Reagents code\modules\reagents\newchem 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\modules\reagents\newchem\medicine.dm;code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Medicine.dm;code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Other.dm;code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\mob\living\carbon\shock.dm;code\modules\mob\living\carbon\human\human_damage.dm;code\modules\organs\pain.dm;code\modules\mob\living\living_defines.dm;code\setup.dm;code\modules\client\preferences.dm;code\modules\mob\living\living.dm
+FILE: code\modules\organs\pain.dm
 */
 // END_INTERNALS

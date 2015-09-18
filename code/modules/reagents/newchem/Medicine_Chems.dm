@@ -286,3 +286,263 @@ datum/reagent/dramadorax
 	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles freely, creating a head of bluish foam."
+
+//Oxygen Loss////
+//Tier 3////////
+
+
+/datum/reagent/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	description = "Salbutamol is a common bronchodilation medication for asthmatics. It may help with other breathing problems as well."
+	reagent_state = LIQUID
+	color = "#00FFFF"
+	metabolization_rate = 0.2
+/datum/reagent/oxycocetosmo/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.adjustOxyLoss(-2.5*REM)
+	..()
+	return
+/datum/chemical_reaction/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	result = "oxycocetosmo"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+	mix_message = "The solution bubbles freely, creating a head of bluish foam."
+
+//Oxygen Loss////
+//Tier 4////////
+
+datum/reagent/perfluorodecalin
+	name = "Perfluorodecalin"
+	id = "perfluorodecalin"
+	description = "This experimental perfluoronated solvent has applications in liquid breathing and tissue oxygenation. Use with caution."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	metabolization_rate = 0.2
+
+datum/reagent/perfluorodecalin/on_mob_life(var/mob/living/carbon/human/M as mob)
+	if(!M) M = holder.my_atom
+	M.adjustOxyLoss(-25*REM)
+	M.silent = max(M.silent, 5)
+	if(prob(33))
+		M.adjustBruteLoss(-1*REM)
+		M.adjustFireLoss(-1*REM)
+	..()
+	return
+
+/datum/chemical_reaction/perfluorodecalin
+	name = "Perfluorodecalin"
+	id = "perfluorodecalin"
+	result = "perfluorodecalin"
+	required_reagents = list("hydrogen" = 1, "fluorine" = 1, "oil" = 1)
+	result_amount = 3
+	min_temp = 370
+	mix_message = "The mixture rapidly turns into a dense pink liquid."
+
+//Brute Damage////
+//Tier 1////////
+
+/datum/reagent/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	description = "Salbutamol is a common bronchodilation medication for asthmatics. It may help with other breathing problems as well."
+	reagent_state = LIQUID
+	color = "#00FFFF"
+	metabolization_rate = 0.2
+/datum/reagent/pen_acid/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(99))
+		M.adjustBruteLoss(-0.75*REM)
+	if(prob(49))
+		M.adjustBruteLoss(-1.5*REM)
+	..()
+	return
+/datum/chemical_reaction/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	result = "oxycocetosmo"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+	mix_message = "The solution bubbles freely, creating a head of bluish foam."
+
+//Brute Damage////
+//Tier 2////////
+
+/datum/reagent/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	description = "Salbutamol is a common bronchodilation medication for asthmatics. It may help with other breathing problems as well."
+	reagent_state = LIQUID
+	color = "#00FFFF"
+	metabolization_rate = 0.2
+/datum/reagent/pen_acid/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(99))
+		M.adjustBruteLoss(-1.5*REM)
+	if(prob(49))
+		M.adjustBruteLoss(-2.5*REM)
+	..()
+	return
+/datum/chemical_reaction/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	result = "oxycocetosmo"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+	mix_message = "The solution bubbles freely, creating a head of bluish foam."
+
+//Brute Damage////
+//Tier 3////////
+
+/datum/reagent/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	description = "Salbutamol is a common bronchodilation medication for asthmatics. It may help with other breathing problems as well."
+	reagent_state = LIQUID
+	color = "#00FFFF"
+	metabolization_rate = 0.2
+
+/datum/reagent/pen_acid/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(99))
+		M.adjustBruteLoss(-1.5*REM)
+	if(prob(49))
+		M.adjustBruteLoss(-2.5*REM)
+	..()
+	return
+
+/datum/chemical_reaction/oxycocetosmo
+	name = "Oxycocet Osmo"
+	id = "oxycocetosmo"
+	result = "oxycocetosmo"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+	mix_message = "The solution bubbles freely, creating a head of bluish foam."
+
+//Stimulant (Nervous System & Heart)////
+//Tier 5 (Special Drug)//
+
+/datum/reagent/ephedrine
+	name = "Ephedrine"
+	id = "ephedrine"
+	description = "Ephedrine is a plant-derived stimulant."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	metabolization_rate = 0.3
+	overdose_threshold = 45
+	addiction_threshold = 30
+
+/datum/reagent/ephedrine/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.AdjustParalysis(-1)
+	M.AdjustStunned(-1)
+	M.AdjustWeakened(-1)
+	..()
+	return
+
+/datum/reagent/ephedrine/overdose_process(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(1*REM)
+		M.losebreath++
+	..()
+	return
+
+/datum/reagent/ephedrine/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(2*REM)
+		M.losebreath += 2
+	..()
+	return
+/datum/reagent/ephedrine/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(3*REM)
+		M.losebreath += 3
+	..()
+	return
+/datum/reagent/ephedrine/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(4*REM)
+		M.losebreath += 4
+	..()
+	return
+/datum/reagent/ephedrine/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(5*REM)
+		M.losebreath += 5
+	..()
+	return
+
+/datum/chemical_reaction/ephedrine
+	name = "Ephedrine"
+	id = "ephedrine"
+	result = "ephedrine"
+	required_reagents = list("sugar" = 1, "oil" = 1, "hydrogen" = 1, "diethylamine" = 1)
+	result_amount = 4
+	mix_message = "The solution fizzes and gives off toxic fumes."
+
+//Stimulant (Nervous System & Heart)////
+//Tier 5 (Special Drug)//
+
+/datum/reagent/crystodigin
+	name = "Crystodigin"
+	id = "crystodigin"
+	description = "Salbutamol is a common bronchodilation medication for asthmatics. It may help with other breathing problems as well."
+	reagent_state = LIQUID
+	color = "#00FFFF"
+	metabolization_rate = 0.65
+	overdose_threshold = 45
+	addiction_threshold = 30
+
+/datum/reagent/pen_acid/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(99))
+		M.adjustBruteLoss(-1.5*REM)
+	if(prob(49))
+		M.adjustBruteLoss(-2.5*REM)
+	..()
+	return
+
+/datum/reagent/crystodigin/overdose_process(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(1*REM)
+		M.losebreath++
+	..()
+	return
+
+/datum/reagent/crystodigin/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(2*REM)
+		M.losebreath += 2
+	..()
+	return
+/datum/reagent/crystodigin/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(3*REM)
+		M.losebreath += 3
+	..()
+	return
+/datum/reagent/crystodigin/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(4*REM)
+		M.losebreath += 4
+	..()
+	return
+/datum/reagent/crystodigin/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(5*REM)
+		M.losebreath += 5
+	..()
+	return
+
+/datum/chemical_reaction/crystodigin
+	name = "Crystodigin"
+	id = "crystodigin"
+	result = "crystodigin"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+	mix_message = "The solution bubbles freely, creating a head of bluish foam."
+
+
+
