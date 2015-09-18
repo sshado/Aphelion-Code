@@ -236,17 +236,6 @@ default behaviour is:
 	if(status_flags & GODMODE)	return 0	//godmode
 	toxloss = amount
 
-/mob/living/proc/getInternalBurn()
-	return internalburn
-
-/mob/living/proc/ajustInternalBurn(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	internalburn = min(max(internalburn + amount, 0),(maxHealth*2))
-
-/mob/living/proc/setInternalBurn(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-	internalburn = amount
-
 /mob/living/proc/getFireLoss()
 	return fireloss
 

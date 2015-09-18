@@ -221,23 +221,6 @@
 	else
 		..()
 
-/mob/living/carbon/human/getInternalBurn()
-	if(species.flags)
-		toxloss = 0
-	return ..()
-
-/mob/living/carbon/human/ajustInternalBurn(var/amount)
-	if(species.flags)
-		toxloss = 0
-	else
-		..()
-
-/mob/living/carbon/human/setInternalBurn(var/amount)
-	if(species.flags)
-		toxloss = 0
-	else
-		..()
-
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs

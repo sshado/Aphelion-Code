@@ -422,7 +422,6 @@
 #define OXY       "oxy"
 #define CLONE     "clone"
 #define HALLOSS   "halloss"
-#define INTBURN   "internalburn"
 
 #define CUT       "cut"
 #define BRUISE    "bruise"
