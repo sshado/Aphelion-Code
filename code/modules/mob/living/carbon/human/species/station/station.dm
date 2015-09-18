@@ -245,7 +245,7 @@
 
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
-	language = "Tradeband"
+	language = "Encoded Audio Language"
 	unarmed_types = list(/datum/unarmed_attack/punch)
 	rarity_value = 2
 
@@ -274,6 +274,34 @@
 	flesh_color = "#575757"
 
 	has_organ = list() //TODO: Positronic brain.
+	
+/datum/species/kidan
+	name = "Kidan"
+	name_plural = "Kidan"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	eyes = "kidan_eyes_s"
+	language = "Chittin"
+	unarmed_types = list(/datum/unarmed_attack/claws)
+	
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS | HAS_SKIN_COLOR
+	
+	blood_color = "#328332"
+	flesh_color = "#8C4600"
+	
+	/*/datum/species/kidan
+	name = "Kidan"
+	name_plural = "Kida"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	eyes = "kidan_eyes_s"
+	language = "Chittin"
+	unarmed_types = list(/datum/unarmed_attack/claws)
+
+	flags = IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
+
+	blood_color = "#328332"
+	flesh_color = "#8C4600"*/
 
 /datum/species/machine/equip_survival_gear(var/mob/living/carbon/human/H)
 
