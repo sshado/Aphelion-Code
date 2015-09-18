@@ -343,7 +343,7 @@
 		// them win or lose based on cryo is silly so we remove the objective.
 		if(O.target == occupant.mind)
 			if(O.owner && O.owner.current)
-					O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach. Time for Plan B...</span>"
+				O.owner.current << "<span class='warning'>You get the feeling your target is no longer within your reach. Time for Plan B...</span>"
 				O.target = null
 				spawn(1) //This should ideally fire after the occupant is deleted.
 					if(!O) return
