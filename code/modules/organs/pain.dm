@@ -8,7 +8,7 @@ mob/var/next_pain_time = 0
 // partname is the name of a body part
 // amount is a num from 1 to 100
 mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0)
-	if(stat >= 1) 
+	if(stat >= 1)
 		return
 	if(species && (species.flags & NO_PAIN))
 		return
@@ -51,9 +51,9 @@ mob/living/carbon/proc/pain(var/partname, var/amount, var/force, var/burning = 0
 // message is the custom message to be displayed
 // flash_strength is 0 for weak pain flash, 1 for strong pain flash
 mob/living/carbon/human/proc/custom_pain(var/message, var/flash_strength)
-	if(stat >= 1) 
+	if(stat >= 1)
 		return
-	if(species.flags & NO_PAIN) 
+	if(species.flags & NO_PAIN)
 		return
 	if(reagents.has_reagent("tramadol"))
 		return
@@ -120,3 +120,25 @@ mob/living/carbon/human/proc/handle_pain()
 
 	if(toxDamageMessage && prob(toxMessageProb))
 		src.custom_pain(toxDamageMessage, getToxLoss() >= 15)
+
+	var/internalburnDamageMessage = null
+	var/internalburnMessageProb = 1
+	switch(getInternalBurn())
+		if(1 to 5)
+			internalburnMessageProb = 1
+			internalburnDamageMessage = "You feel a burning sensation."
+		if(6 to 10)
+			internalburnMessageProb = 2
+			internalburnDamageMessage = "You feel your blood burning."
+		if(11 to 15)
+			internalburnMessageProb = 2
+			internalburnDamageMessage = "It feels as if your insides are being burned!"
+		if(15 to 25)
+			internalburnMessageProb = 3
+			internalburnDamageMessage = "You feel your insides melting away!"
+		if(26 to INFINITY)
+			internalburnMessageProb = 5
+			internalburnDamageMessage = "You feel your brain melting, you cant take the pain anymore!"
+
+	if(internalburnDamageMessage && prob(internalburnMessageProb))
+		src.custom_pain(internalburnDamageMessage, getInternalBurn() >= 15)
