@@ -597,6 +597,10 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>You have a seizure!</span>")
 		M.Paralyse(5)
 		M.jitteriness = 1000
+	if(volume >=19)
+		var/mob/living/carbon/human/H = M
+		if(!H.heart_attack)
+			H.heart_attack = 1 // rip in pepperoni kek kek kek
 	..()
 	return
 /datum/reagent/methylprednisolone/addiction_act_stage1(var/mob/living/M as mob)
@@ -615,12 +619,20 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	if(prob(33))
 		M.adjustToxLoss(4*REM)
 		M.losebreath += 4
+	if(prob(1))
+		var/mob/living/carbon/human/H = M
+		if(!H.heart_attack)
+			H.heart_attack = 1 // rip in pepperoni
 	..()
 	return
 /datum/reagent/methylprednisolone/addiction_act_stage4(var/mob/living/M as mob)
 	if(prob(33))
 		M.adjustToxLoss(5*REM)
 		M.losebreath += 5
+	if(prob(1))
+		var/mob/living/carbon/human/H = M
+		if(!H.heart_attack)
+			H.heart_attack = 1 // rip in pepperoni
 	..()
 	return
 /datum/chemical_reaction/methylprednisolone
