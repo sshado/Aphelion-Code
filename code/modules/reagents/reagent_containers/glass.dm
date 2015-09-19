@@ -5,6 +5,8 @@
 /obj/item/weapon/reagent_containers/glass
 	name = " "
 	desc = " "
+	var/base_name = " "
+	var/label_text = " "
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
 	item_state = "null"

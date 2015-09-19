@@ -139,12 +139,6 @@ datum/reagent/chocolate/on_mob_life(var/mob/living/M as mob)
 	..()
 	return
 
-datum/reagent/chocolate/reaction_turf(var/turf/T, var/volume)
-	src = null
-	if(volume >= 5)
-		new /obj/item/weapon/reagent_containers/food/snacks/reagentchocolatebar(T)
-		return
-
 /datum/reagent/mugwort
 	name = "Mugwort"
 	id = "mugwort"
@@ -261,20 +255,6 @@ datum/reagent/cheese/reaction_turf(var/turf/T, var/volume)
 	reagent_state = SOLID
 	color = "#50FF00"
 
-datum/reagent/weird_cheese/reaction_turf(var/turf/T, var/volume)
-	src = null
-	if(volume >= 5)
-		new /obj/item/weapon/reagent_containers/food/snacks/weirdcheesewedge(T)
-		return
-
-/datum/chemical_reaction/weird_cheese
-	name = "Weird cheese"
-	id = "weird_cheese"
-	result = "weird_cheese"
-	required_reagents = list("green_vomit" = 1, "milk" = 1)
-	result_amount = 1
-	mix_message = "The disgusting mixture sloughs together horribly, emitting a foul stench."
-
 datum/reagent/beans
 	name = "Refried beans"
 	id = "beans"
@@ -351,12 +331,6 @@ datum/reagent/ectoplasm/reaction_mob(var/mob/M, var/method=affect_touch, var/vol
 		M << "<span class='warning'>[spooky_message]</span>"
 	..()
 	return
-
-datum/reagent/ectoplasm/reaction_turf(var/turf/T, var/volume)
-	src = null
-	if(volume >= 10)
-		new /obj/item/weapon/reagent_containers/food/snacks/ectoplasm(T)
-		return
 
 /datum/reagent/soybeanoil
 	name = "Space-soybean oil "

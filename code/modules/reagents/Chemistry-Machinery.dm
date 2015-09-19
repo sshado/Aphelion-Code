@@ -534,14 +534,6 @@
 						if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
 							P.loc = loaded_pill_bottle
 							src.updateUsrDialog()
-			else
-				var/name = reject_bad_text(input(usr,"Name:","Name your bag!",reagents.get_master_reagent_name()))
-				var/obj/item/weapon/reagent_containers/food/condiment/pack/P = new/obj/item/weapon/reagent_containers/food/condiment/pack(src.loc)
-				if(!name) name = reagents.get_master_reagent_name()
-				P.originalname = name
-				P.name = "[name] pack"
-				P.desc = "A small condiment pack. The label says it contains [name]."
-				reagents.trans_to(P,10)
 		else if (href_list["createbottle"])
 			if(!condi)
 				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))

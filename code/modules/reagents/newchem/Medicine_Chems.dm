@@ -890,7 +890,7 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	scannable = 1
 	addiction_threshold = 10
 	metabolism = 0.01
-/datum/reagent/opanaer/on_mob_life(var/mob/living/M as mob)
+/datum/reagent/opanaer/affect_blood(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	switch(current_cycle)
 		if(0 to 4)

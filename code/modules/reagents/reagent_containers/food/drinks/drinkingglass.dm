@@ -4,82 +4,47 @@
 	name = "glass"
 	desc = "Your standard drinking glass."
 	icon_state = "glass_empty"
-	amount_per_transfer_from_this = 10
-	volume = 50
+	amount_per_transfer_from_this = 5
+	volume = 30
+	unacidable = 1 //glass
+	center_of_mass = list("x"=16, "y"=10)
 
+	on_reagent_change()
+		/*if(reagents.reagent_list.len > 1 )
+			icon_state = "glass_brown"
+			name = "Glass of Hooch"
+			desc = "Two or more drinks, mixed together."*/
+		/*else if(reagents.reagent_list.len == 1)
+			for(var/datum/reagent/R in reagents.reagent_list)
+				switch(R.id)*/
+		if (reagents.reagent_list.len > 0)
+			var/datum/reagent/R = reagents.get_master_reagent()
 
+			if(R.glass_icon_state)
+				icon_state = R.glass_icon_state
+			else
+				icon_state = "glass_brown"
 
-	proc/smash(mob/living/target as mob, mob/living/user as mob)
-		//Creates a shattering noise and replaces the drinking glass with a glass shard
-		user.drop_item()
-		var/obj/item/weapon/material/shard/S = PoolOrNew(/obj/item/weapon/material/shard, user.loc)
-		user.put_in_active_hand(S)
+			if(R.glass_name)
+				name = R.glass_name
+			else
+				name = "Glass of.. what?"
 
-		playsound(src, "shatter", 70, 1)
-		user.put_in_active_hand(S)
-		src.transfer_fingerprints_to(S)
+			if(R.glass_desc)
+				desc = R.glass_desc
+			else
+				desc = "You can't really tell what this is."
 
-		qdel(src)
-
-
-	attack(mob/living/target as mob, mob/living/user as mob)
-
-		if(!target)
+			if(R.glass_center_of_mass)
+				center_of_mass = R.glass_center_of_mass
+			else
+				center_of_mass = list("x"=16, "y"=10)
+		else
+			icon_state = "glass_empty"
+			name = "glass"
+			desc = "Your standard drinking glass."
+			center_of_mass = list("x"=16, "y"=10)
 			return
-
-		if(user.a_intent != "harm")
-			return ..()
-
-		force = 5
-
-		var/obj/item/organ/external/affecting = user.zone_sel.selecting //Find what the player is aiming at
-
-		var/armor_block = 0 //Get the target's armour values for normal attack damage.
-
-		//Calculating damage.
-		if(ishuman(target))
-
-			var/mob/living/carbon/human/H = target
-			armor_block = H.run_armor_check(affecting, "melee") // For normal attack damage
-
-		else
-			//Only humans can have armour, right?
-			armor_block = target.run_armor_check(affecting, "melee")
-
-		//Apply the damage!
-		target.apply_damage(force, BRUTE, affecting, armor_block)
-
-		if(affecting == "head" && istype(target, /mob/living/carbon/))
-
-			//Display an attack message.
-			for(var/mob/O in viewers(user, null))
-				if(target != user) O.show_message(text("\red <B>[target] has been hit over the head with a [src.name], by [user]!</B>"), 1)
-				else O.show_message(text("\red <B>[target] hit himself with a [src.name] on the head!</B>"), 1)
-
-		else
-			//Default attack message
-			for(var/mob/O in viewers(user, null))
-				if(target != user) O.show_message(text("\red <B>[target] has been attacked with a [src.name], by [user]!</B>"), 1)
-				else O.show_message(text("\red <B>[target] has attacked himself with a [src.name]!</B>"), 1)
-
-		//Attack logs
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has attacked [target.name] ([target.ckey]) with a drinking glass!</font>")
-		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been smashed with a drinking glass by [user.name] ([user.ckey])</font>")
-		log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [target.name] with a drinking glass. ([target.ckey])</font>")
-		if(!iscarbon(user))
-			target.LAssailant = null
-		else
-			target.LAssailant = user
-
-		//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
-		if(src.reagents)
-			for(var/mob/O in viewers(user, null))
-				O.show_message(text("\blue <B>The contents of the [src] splashes all over [target]!</B>"), 1)
-			src.reagents.reaction(target, CHEM_TOUCH)
-
-		//Finally, smash the bottle. This kills (del) the bottle.
-		src.smash(target, user)
-
 
 	on_reagent_change()
 		/*if(reagents.reagent_list.len > 1 )

@@ -400,47 +400,6 @@ datum
 						can_process = 1
 				return can_process
 
-			reaction(var/atom/A, var/method=CHEM_TOUCH, var/volume_modifier=0)
-
-				switch(method)
-					if(CHEM_TOUCH)
-						for(var/datum/reagent/R in reagent_list)
-							if(ismob(A))
-								spawn(0)
-									if(!R) return
-									var/check = reaction_check(A, R)
-									if(!check)
-										continue
-									else
-										R.reaction_mob(A, CHEM_TOUCH, R.volume+volume_modifier)
-							if(isturf(A))
-								spawn(0)
-									if(!R) return
-									else R.reaction_turf(A, R.volume+volume_modifier)
-							if(isobj(A))
-								spawn(0)
-									if(!R) return
-									else R.reaction_obj(A, R.volume+volume_modifier)
-					if(CHEM_BLOOD)
-						for(var/datum/reagent/R in reagent_list)
-							if(ismob(A) && R)
-								spawn(0)
-									if(!R) return
-									var/check = reaction_check(A, R)
-									if(!check)
-										continue
-									else
-										R.reaction_mob(A, CHEM_BLOOD, R.volume+volume_modifier)
-							if(isturf(A) && R)
-								spawn(0)
-									if(!R) return
-									else R.reaction_turf(A, R.volume+volume_modifier)
-							if(isobj(A) && R)
-								spawn(0)
-									if(!R) return
-									else R.reaction_obj(A, R.volume+volume_modifier)
-				return
-
 			add_reagent(var/reagent, var/amount, var/list/data=null, var/reagtemp = 300)
 				if(!isnum(amount)) return 1
 				update_total()
