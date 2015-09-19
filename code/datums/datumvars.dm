@@ -184,6 +184,7 @@ client
 				FIRE:<font size='1'><a href='?_src_=vars;mobToDamage=\ref[D];adjustDamage=fire'>[M.getFireLoss()]</a>
 				TOXIN:<font size='1'><a href='?_src_=vars;mobToDamage=\ref[D];adjustDamage=toxin'>[M.getToxLoss()]</a>
 				OXY:<font size='1'><a href='?_src_=vars;mobToDamage=\ref[D];adjustDamage=oxygen'>[M.getOxyLoss()]</a>
+				INTBURN:<font size='1'><a href='?_src_=vars;mobToDamage=\ref[D];adjustDamage=internalburn'>[M.getInternalBurn()]</a>
 				CLONE:<font size='1'><a href='?_src_=vars;mobToDamage=\ref[D];adjustDamage=clone'>[M.getCloneLoss()]</a>
 				BRAIN:<font size='1'><a href='?_src_=vars;mobToDamage=\ref[D];adjustDamage=brain'>[M.getBrainLoss()]</a>
 				</font>
@@ -964,6 +965,7 @@ client
 			if("brute")	L.adjustBruteLoss(amount)
 			if("fire")	L.adjustFireLoss(amount)
 			if("toxin")	L.adjustToxLoss(amount)
+			if("internalburn")	L.adjustInternalBurn(amount)
 			if("oxygen")L.adjustOxyLoss(amount)
 			if("brain")	L.adjustBrainLoss(amount)
 			if("clone")	L.adjustCloneLoss(amount)

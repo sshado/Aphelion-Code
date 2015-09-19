@@ -18,6 +18,8 @@
 			adjustFireLoss(damage/(blocked+1))
 		if(TOX)
 			adjustToxLoss(damage/(blocked+1))
+		if(INTBURN)
+			adjustInternalBurn(damage/(blocked+1))
 		if(OXY)
 			adjustOxyLoss(damage/(blocked+1))
 		if(CLONE)
@@ -33,6 +35,7 @@
 	if(brute)	apply_damage(brute, BRUTE, def_zone, blocked)
 	if(burn)	apply_damage(burn, BURN, def_zone, blocked)
 	if(tox)		apply_damage(tox, TOX, def_zone, blocked)
+	if(internalburn)	apply_damage(internalburn, INTBURN, def_zone, blocked)
 	if(oxy)		apply_damage(oxy, OXY, def_zone, blocked)
 	if(clone)	apply_damage(clone, CLONE, def_zone, blocked)
 	if(halloss) apply_damage(halloss, HALLOSS, def_zone, blocked)
@@ -77,5 +80,5 @@
 	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
 	if(agony)		apply_effect(agony, AGONY, blocked)
-	if(seizures)	apply_effect(irradiate, SEIZURE, blocked)
+	if(seizures)	apply_effect(seizures, SEIZURE, blocked)
 	return 1

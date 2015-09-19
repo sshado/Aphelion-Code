@@ -239,7 +239,7 @@ default behaviour is:
 /mob/living/proc/getInternalBurn()
 	return internalburn
 
-/mob/living/proc/ajustInternalBurn(var/amount)
+/mob/living/proc/adjustInternalBurn(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	internalburn = min(max(internalburn + amount, 0),(maxHealth*2))
 

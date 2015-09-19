@@ -31,10 +31,6 @@
 	touching.clear_reagents()
 	..()
 
-/mob/living/carbon/rejuvenate()
-	/datum/reagents/Destroy()
-	..()
-
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)

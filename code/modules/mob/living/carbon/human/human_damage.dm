@@ -226,7 +226,7 @@
 		toxloss = 0
 	return ..()
 
-/mob/living/carbon/human/ajustInternalBurn(var/amount)
+/mob/living/carbon/human/adjustInternalBurn(var/amount)
 	if(species.flags)
 		toxloss = 0
 	else
