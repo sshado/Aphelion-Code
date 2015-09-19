@@ -164,7 +164,7 @@
 		update_icon()
 
 /obj/item/weapon/defibrillator/proc/remove_paddles(mob/user)
-	var/mob/living/carbon/human/M = user
+//	var/mob/living/carbon/human/M = user
 //	if(paddles in put_in_hand(user))
 //		M.unEquip(paddles)
 	update_icon()

@@ -590,8 +590,8 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	M.adjustOxyLoss(-1)
 	return
 /datum/reagent/methylprednisolone/overdose_process(var/mob/living/M as mob) //May RNGesus be with you
-	if(prob(50))
-		M.adjustToxLoss(0.5*REM)
+	if(prob(60))
+		M.adjustToxLoss(1.0*REM)
 		M.losebreath++
 	if(prob(10))
 		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>You have a seizure!</span>")
@@ -639,5 +639,422 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	name = "Methylprednisolone"
 	id = "methylprednisolone"
 	result = "methylprednisolone"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Pain Killer////
+//Tier 1////////
+
+/datum/reagent/ibuprofen
+	name = "Ibuprofen"
+	id = "ibuprofen"
+	description = "A weak painkiller. Is usally enough for minor aches and pains."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 61
+	shock_reduction = 20
+	scannable = 1
+	metabolism = 0.085
+/datum/reagent/ibuprofen/overdose_process(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(0.5*REM)
+	..()
+	return
+/datum/chemical_reaction/ibuprofen
+	name = "Ibuprofen"
+	id = "ibuprofen"
+	result = "ibuprofen"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Pain Killer////
+//Tier 2////////
+
+/datum/reagent/tramadol
+	name = "Tramadol"
+	id = "tramadol"
+	description = "This painkiller works by suppressing pain singles to the brain."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 31
+	shock_reduction = 40
+	scannable = 1
+	metabolism = 0.075
+/datum/reagent/tramadol/overdose_process(var/mob/living/M as mob)
+	if(prob(44))
+		M.adjustToxLoss(0.75*REM)
+	..()
+	return
+/datum/chemical_reaction/tramadol
+	name = "Tramadol"
+	id = "tramadol"
+	result = "tramadol"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Pain Killer////
+//Tier 3////////
+
+/datum/reagent/vicodin
+	name = "Vicodin"
+	id = "vicodin"
+	description = "An opiate based painkiller. Strong and addictive."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 31
+	shock_reduction = 80
+	scannable = 1
+	metabolism = 0.025
+/datum/reagent/vicodin/overdose_process(var/mob/living/M as mob)
+	if(prob(44))
+		M.adjustToxLoss(0.75*REM)
+	if(prob(33))
+		M.druggy = max(M.druggy, 10)
+		M.hallucination = max(M.hallucination, 10)
+	..()
+	return
+/datum/reagent/vicodin/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(0.15*REM)
+	..()
+	return
+/datum/reagent/vicodin/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(0.25*REM)
+	..()
+	return
+/datum/reagent/vicodin/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(0.5*REM)
+	..()
+	return
+/datum/reagent/vicodin/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(0.75*REM)
+	..()
+	return
+/datum/chemical_reaction/vicodin
+	name = "Vicodin"
+	id = "vicodin"
+	result = "vicodin"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Pain Killer////
+//Tier 4////////
+
+/datum/reagent/oxycodone
+	name = "Oxycodone"
+	id = "oxycodone"
+	description = "A powerful opiate painkiller. Takes the pain the pain fast."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 25
+	shock_reduction = 120
+	scannable = 1
+	addiction_threshold = 15
+	metabolism = 0.025
+/datum/reagent/oxycodone/overdose_process(var/mob/living/M as mob)
+	if(prob(66))
+		M.adjustToxLoss(1*REM)
+	if(prob(44))
+		M.druggy = max(M.druggy, 20)
+		M.hallucination = max(M.hallucination, 30)
+	..()
+	return
+/datum/reagent/oxycodone/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.druggy = max(M.druggy, 5)
+		M.hallucination = max(M.hallucination, 2)
+	..()
+	return
+/datum/reagent/oxycodone/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		M.druggy = max(M.druggy, 6)
+		M.hallucination = max(M.hallucination, 6)
+	..()
+	return
+/datum/reagent/oxycodone/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(44))
+		M.druggy = max(M.druggy, 10)
+		M.hallucination = max(M.hallucination, 8)
+	if(prob(4))
+		M.stuttering = max(M.stuttering, 1)
+		M.make_jittery(50)
+		M.make_dizzy(5)
+	..()
+	return
+/datum/reagent/oxycodone/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(50))
+		M.adjustToxLoss(5*REM)
+		M.losebreath += 5
+	if(prob(8))
+		M.stuttering = max(M.stuttering, 3)
+		M.make_jittery(100)
+		M.make_dizzy(10)
+	..()
+	return
+/datum/chemical_reaction/oxycodone
+	name = "Oxycodone"
+	id = "oxycodone"
+	result = "oxycodone"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Pain Killer/////////////
+//Tier 5 (Special Drug)//
+
+/datum/reagent/morphine
+	name = "Morphine"
+	id = "morphine"
+	description = "A powerful opiate painkiller. Takes the pain the pain fast."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 25
+	shock_reduction = 180
+	scannable = 1
+	addiction_threshold = 13
+	metabolism = 0.025
+/datum/reagent/morphine/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	switch(current_cycle)
+		if(0 to 10)
+			if(prob(5))
+				M.emote("yawn")
+		if(11 to 25)
+			M.drowsyness = max(M.drowsyness, 10)
+		if(26 to INFINITY)
+			M.Paralyse(10)
+			M.drowsyness = max(M.drowsyness, 15)
+	..()
+	return
+/datum/reagent/morphine/overdose_process(var/mob/living/M as mob)
+	if(prob(66))
+		M.Paralyse(20)
+		M.drowsyness = max(M.drowsyness, 20)
+	if(prob(44))
+		M.druggy = max(M.druggy, 30)
+		M.hallucination = max(M.hallucination, 50)
+	..()
+	return
+/datum/reagent/morphine/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.druggy = max(M.druggy, 5)
+		M.hallucination = max(M.hallucination, 2)
+	..()
+	return
+/datum/reagent/morphine/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		M.druggy = max(M.druggy, 6)
+		M.hallucination = max(M.hallucination, 6)
+	..()
+	return
+/datum/reagent/morphine/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(44))
+		M.druggy = max(M.druggy, 10)
+		M.hallucination = max(M.hallucination, 8)
+	if(prob(4))
+		M.stuttering = max(M.stuttering, 1)
+		M.make_jittery(50)
+		M.make_dizzy(5)
+	..()
+	return
+/datum/reagent/morphine/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(50))
+		M.druggy = max(M.druggy, 10)
+		M.hallucination = max(M.hallucination, 8)
+	if(prob(8))
+		M.stuttering = max(M.stuttering, 4)
+		M.make_jittery(1000)
+		M.make_dizzy(10)
+	..()
+	return
+/datum/chemical_reaction/morphine
+	name = "Morphine"
+	id = "morphine"
+	result = "morphine"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Pain Killer/////////////
+//Tier 6 (Special Drug)//
+
+/datum/reagent/opanaer
+	name = "Opana ER"
+	id = "opanaer"
+	description = "An extremely powerful sedative/painkiller used to keep paitents from feeling pain during a surgery.."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 15
+	shock_reduction = 250
+	scannable = 1
+	addiction_threshold = 10
+	metabolism = 0.01
+/datum/reagent/opanaer/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	switch(current_cycle)
+		if(0 to 4)
+			if(prob(5))
+				M.emote("yawn")
+		if(5 to 7)
+			M.drowsyness = max(M.drowsyness, 20)
+		if(8 to INFINITY)
+			M.Paralyse(10)
+			M.drowsyness = max(M.drowsyness, 30)
+	if(volume >=10)
+	var/mob/living/carbon/human/H = M
+	if(!H.heart_attack)
+		H.heart_attack = 1 // rip in pepperoni kek kek kek
+	..()
+	return
+/datum/reagent/opanaer/overdose_process(var/mob/living/M as mob)
+	if(prob(66))
+		M.Paralyse(50)
+		M.drowsyness = max(M.drowsyness, 50)
+	if(prob(44))
+		M.druggy = max(M.druggy, 30)
+		M.hallucination = max(M.hallucination, 50)
+	..()
+	return
+/datum/reagent/opanaer/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.druggy = max(M.druggy, 5)
+		M.hallucination = max(M.hallucination, 2)
+		M.drowsyness = max(M.drowsyness, 10)
+	..()
+	return
+/datum/reagent/opanaer/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(44))
+		M.druggy = max(M.druggy, 6)
+		M.hallucination = max(M.hallucination, 6)
+		M.drowsyness = max(M.drowsyness, 15)
+	..()
+	return
+/datum/reagent/opanaer/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(55))
+		M.druggy = max(M.druggy, 10)
+		M.hallucination = max(M.hallucination, 8)
+		M.drowsyness = max(M.drowsyness, 25)
+	if(prob(4))
+		M.stuttering = max(M.stuttering, 1)
+		M.make_jittery(50)
+	var/mob/living/carbon/human/H = M
+	if(!H.heart_attack)
+		H.heart_attack = 1 // rip in pepperoni kek kek kek
+	..()
+	return
+/datum/reagent/opanaer/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(66))
+		M.druggy = max(M.druggy, 15)
+		M.hallucination = max(M.hallucination, 15)
+		M.losebreath += 5
+		M.drowsyness = max(M.drowsyness, 25)
+	if(prob(8))
+		M.stuttering = max(M.stuttering, 4)
+		M.make_jittery(1000)
+	var/mob/living/carbon/human/H = M
+	if(!H.heart_attack)
+		H.heart_attack = 1 // rip in pepperoni kek kek kek
+	..()
+	return
+/datum/chemical_reaction/opanaer
+	name = "Opana ER"
+	id = "opanaer"
+	result = "opanaer"
+	required_reagents = list("water" = 1)
+	result_amount = 1
+	max_temp = 350
+
+//Burns//////
+//Tier 1 //
+
+/datum/reagent/kelotane
+	name = "Kelotane"
+	id = "kelotane"
+	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
+	reagent_state = LIQUID
+	color = "#d16023"
+	metabolization_rate = 0.3
+/datum/reagent/kelotane/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(99))
+		M.adjustFireLoss(-1*REM)
+	..()
+	return
+/datum/chemical_reaction/kelotane
+	name = "Kelotane"
+	id = "kelotane"
+	result = "kelotane"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Burns////
+//Tier 2//
+
+/datum/reagent/adapin
+	name = "Adapin"
+	id = "adapin"
+	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
+	reagent_state = LIQUID
+	color = "#d16023"
+	metabolization_rate = 0.3
+/datum/reagent/adapin/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	if(prob(99))
+		M.adjustFireLoss(-2.5*REM)
+	..()
+	return
+/datum/chemical_reaction/adapin
+	name = "Adapin"
+	id = "adapin"
+	result = "adapin"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Cryogenics////////
+//Tier 6 (Speical)//
+
+/datum/reagent/cryoxadone
+	name = "Cryoxadone"
+	id = "cryoxadone"
+	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
+	reagent_state = LIQUID
+	color = "#8080FF"
+	metabolism = REM * 0.5
+	scannable = 1
+/datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature < 170)
+		M.adjustCloneLoss(-10 * removed)
+		M.adjustOxyLoss(-10 * removed)
+		M.heal_organ_damage(10 * removed, 10 * removed)
+		M.adjustToxLoss(-10 * removed)
+/datum/chemical_reaction/cryoxadone
+	name = "Cryoxadone"
+	id = "cryoxadone"
+	result = "cryoxadone"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
+
+//Cryogenics////////
+//Tier 6 (Speical)//
+
+/datum/reagent/clonexadone
+	name = "Clonexadone"
+	id = "clonexadone"
+	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
+	reagent_state = LIQUID
+	color = "#80BFFF"
+	metabolism = REM * 0.5
+	scannable = 1
+/datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature < 170)
+		M.adjustCloneLoss(-30 * removed)
+		M.adjustOxyLoss(-3 * removed)
+		M.heal_organ_damage(30 * removed, 30 * removed)
+		M.adjustToxLoss(-30 * removed)
+/datum/chemical_reaction/clonexadone
+	name = "Clonexadone"
+	id = "clonexadone"
+	result = "clonexadone"
 	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
 	result_amount = 5
