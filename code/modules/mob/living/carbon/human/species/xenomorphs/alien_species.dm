@@ -64,6 +64,7 @@
 /datum/species/xenos/get_bodytype()
 	return "Xenomorph"
 
+/datum/species/xenos/get_random_name()
 	return "alien [caste_name] ([alien_number])"
 
 /datum/species/xenos/can_understand(var/mob/other)

@@ -73,7 +73,7 @@
 		var/f = 1
 		for(var/k in all_species)
 			var/datum/species/S = all_species[k]
-			if(!(S.flags & IS_SYNTHETIC))
+			if(!(S.flags & SYNTHETIC))
 				if(!f) H += " | "
 				else f = 0
 				H += "<a href='?src=\ref[src];what=species;toggle=[k]' style='color:[(k in species) ? "#006600" : "#ff0000"]'>[k]</a>"
@@ -167,7 +167,6 @@
 
 				var/I = input("Choose initial infectee", "Infectee", infectee) as null|anything in candidates
 				if(!I || !candidates[I]) return
-				infectee = candidates[I]
 				species |= infectee.species.get_bodytype()
 			if("go")
 				if(!antigens.len)

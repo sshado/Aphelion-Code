@@ -230,7 +230,7 @@ var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J
 var/list/tachycardics  = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine") // Increase heart rate.
 var/list/bradycardics  = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")                 // Decrease heart rate.
 var/list/heartstopper  = list("potassium_phorochloride", "dylamadon") // This stops the heart.
-var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose is met. -- c = conditional
+var/list/cheartstopper = list("potassium_chloride")                       // This stops the heart when overdose_threshold is met. -- c = conditional
 
 // Used by robots and robot preferences.
 var/list/robot_module_types = list(

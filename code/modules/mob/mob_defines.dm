@@ -112,6 +112,7 @@
 	var/paralysis = 0.0
 	var/stunned = 0.0
 	var/weakened = 0.0
+	var/seizures = 0.0//Carbon
 	var/losebreath = 0.0//Carbon
 	var/intent = null//Living
 	var/shakecamera = 0

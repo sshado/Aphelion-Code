@@ -33,7 +33,7 @@
 	toggleable = 1
 	usable = 1
 	disruptive = 0
-	activates_on_touch = 1
+	activates_on_affect_touch = 1
 
 	engage_string = "Eject AI"
 	activate_string = "Enable Dataspike"
@@ -45,7 +45,7 @@
 	var/mob/integrated_ai // Direct reference to the actual mob held in the suit.
 	var/obj/item/ai_card  // Reference to the MMI, posibrain, intellicard or pAI card previously holding the AI.
 	var/obj/item/ai_verbs/verb_holder
-	
+
 /mob
 	var/get_rig_stats = 0
 
@@ -121,7 +121,7 @@
 			integrate_ai(input_device,user)
 		return 1
 
-	// Okay, it wasn't a terminal being touched, check for all the simple insertions.
+	// Okay, it wasn't a terminal being affect_touched, check for all the simple insertions.
 	if(input_device.type in list(/obj/item/device/paicard, /obj/item/device/mmi, /obj/item/device/mmi/digital/posibrain))
 		if(integrated_ai)
 			integrated_ai.attackby(input_device,user)
@@ -232,7 +232,7 @@
 	desc = "A simple induction datalink module."
 	icon_state = "datajack"
 	toggleable = 1
-	activates_on_touch = 1
+	activates_on_affect_touch = 1
 	usable = 0
 
 	activate_string = "Enable Datajack"
@@ -354,7 +354,7 @@
 	desc = "An heavy-duty power sink."
 	icon_state = "powersink"
 	toggleable = 1
-	activates_on_touch = 1
+	activates_on_affect_touch = 1
 	disruptive = 0
 
 	activate_string = "Enable Power Sink"

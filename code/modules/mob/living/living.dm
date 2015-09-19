@@ -205,7 +205,7 @@ default behaviour is:
 
 // ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
 // Stop! ... Hammertime! ~Carn
-// I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
+// I affect_touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
 
 /mob/living/proc/getBruteLoss()
 	return bruteloss
@@ -235,6 +235,17 @@ default behaviour is:
 /mob/living/proc/setToxLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	toxloss = amount
+
+/mob/living/proc/getInternalBurn()
+	return internalburn
+
+/mob/living/proc/adjustInternalBurn(var/amount)
+	if(status_flags & GODMODE)	return 0	//godmode
+	internalburn = min(max(internalburn + amount, 0),(maxHealth*2))
+
+/mob/living/proc/setInternalBurn(var/amount)
+	if(status_flags & GODMODE)	return 0	//godmode
+	internalburn = amount
 
 /mob/living/proc/getFireLoss()
 	return fireloss
@@ -385,7 +396,7 @@ default behaviour is:
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 
-		if (C.handcuffed && !initial(C.handcuffed))
+		if (C. && !initial(C.handcuffed))
 			C.drop_from_inventory(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
 
@@ -589,7 +600,6 @@ default behaviour is:
 	if(next_move > world.time)
 		return 0
 	return 1
-
 /mob/living/proc/process_resist()
 	//Getting out of someone's inventory.
 	if(istype(src.loc, /obj/item/weapon/holder))
@@ -659,13 +669,31 @@ default behaviour is:
 	resting = !resting
 	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>"
 
-/mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	return isnull(get_inventory_slot(carried_item))
-
 /mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item == held_item)
 		return 0
 	return ..()
+
+/mob/living/proc/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(istype(carried_item, /obj/item/weapon/implant))
+		return 1
+	if(istype(carried_item, /obj/item/clothing/mask/facehugger))
+		return 1
+	return 0
+
+/mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item in internal_organs)
+		return 1
+	return ..()
+
+/mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	if(carried_item in organs)
+		return 1
+	return ..()
+
+/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	return carried_item != held_item
+
 
 /mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
 	if(stat)

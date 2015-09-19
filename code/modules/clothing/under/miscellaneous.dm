@@ -531,4 +531,3 @@
 	icon_state = "olddressuniform"
 	item_state = "olddressuniform"
 	worn_state = "olddressuniform"
-

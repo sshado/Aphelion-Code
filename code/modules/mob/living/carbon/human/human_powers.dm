@@ -97,7 +97,7 @@
 
 	T.Weaken(3)
 
-// Pariahs are not good at leaping. This is snowflakey, pls fix.
+	// Pariahs are not good at leaping. This is snowflakey, pls fix.
 	if(species.name == "Vox Pariah")
 		src.Weaken(5)
 		return
@@ -254,5 +254,4 @@
 	visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 
 	qdel(src)
-
 

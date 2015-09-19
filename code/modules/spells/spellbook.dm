@@ -300,7 +300,7 @@
 	spell = /spell/targeted/projectile/dumbfire/fireball
 	spellname = "fireball"
 	icon_state ="bookfireball"
-	desc = "This book feels warm to the touch."
+	desc = "This book feels warm to the affect_touch."
 
 /obj/item/weapon/spellbook/oneuse/fireball/recoil(mob/user as mob)
 	..()

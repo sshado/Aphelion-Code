@@ -97,12 +97,12 @@
 		if(inserted_battery.battery_effect)
 			inserted_battery.battery_effect.process()
 
-			//if the effect works by touch, activate it on anyone viewing the console
-			if(inserted_battery.battery_effect.effect == EFFECT_TOUCH)
+			//if the effect works by affect_touch, activate it on anyone viewing the console
+			if(inserted_battery.battery_effect.effect == EFFECT_affect_touch)
 				var/list/nearby = viewers(1, src)
 				for(var/mob/M in nearby)
 					if(M.machine == src)
-						inserted_battery.battery_effect.DoEffectTouch(M)
+						inserted_battery.battery_effect.DoEffectaffect_touch(M)
 
 		//if there's no charge left, finish
 		if(inserted_battery.stored_charge <= 0)

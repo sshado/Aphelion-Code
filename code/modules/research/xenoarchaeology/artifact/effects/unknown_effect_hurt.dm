@@ -3,11 +3,11 @@
 	effecttype = I_HURT
 	effect_type = 5
 
-/datum/artifact_effect/hurt/DoEffectTouch(var/mob/toucher)
-	if(toucher)
-		var/weakness = GetAnomalySusceptibility(toucher)
-		if(iscarbon(toucher) && prob(weakness * 100))
-			var/mob/living/carbon/C = toucher
+/datum/artifact_effect/hurt/DoEffectaffect_touch(var/mob/affect_toucher)
+	if(affect_toucher)
+		var/weakness = GetAnomalySusceptibility(affect_toucher)
+		if(iscarbon(affect_toucher) && prob(weakness * 100))
+			var/mob/living/carbon/C = affect_toucher
 			C << "\red A painful discharge of energy strikes you!"
 			C.adjustOxyLoss(rand(5,25) * weakness)
 			C.adjustToxLoss(rand(5,25) * weakness)

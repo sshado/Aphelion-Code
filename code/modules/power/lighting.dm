@@ -142,7 +142,7 @@
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
 	var/on_gs = 0
-	var/brightness_range = 12	// luminosity when on, also used in power calculation
+	var/brightness_range = 8	// luminosity when on, also used in power calculation
 	var/brightness_power = 3
 	var/brightness_color = null
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
@@ -160,18 +160,22 @@
 	icon_state = "bulb1"
 	base_state = "bulb"
 	fitting = "bulb"
-	brightness_range = 8
+	brightness_range = 4
 	brightness_power = 2
 	brightness_color = "#a0a080"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 
+/obj/machinery/light/small/emergency
+	brightness_range = 6
+	brightness_power = 2
+	brightness_color = "#da0205"
 
 /obj/machinery/light/spot
 	name = "spotlight"
 	fitting = "large tube"
 	light_type = /obj/item/weapon/light/tube/large
-	brightness_range = 16
+	brightness_range = 12
 	brightness_power = 4
 
 /obj/machinery/light/built/New()
@@ -234,8 +238,8 @@
 			if(rigged)
 				if(status == LIGHT_OK && trigger)
 
-					log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-					message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+					log_admin("LOG: Rigged light explosion, last affect_touched by [fingerprintslast]")
+					message_admins("LOG: Rigged light explosion, last affect_touched by [fingerprintslast]")
 
 					explode()
 			else if( prob( min(60, switchcount*switchcount*0.01) ) )
@@ -324,8 +328,8 @@
 
 				if(on && rigged)
 
-					log_admin("LOG: Rigged light explosion, last touched by [fingerprintslast]")
-					message_admins("LOG: Rigged light explosion, last touched by [fingerprintslast]")
+					log_admin("LOG: Rigged light explosion, last affect_touched by [fingerprintslast]")
+					message_admins("LOG: Rigged light explosion, last affect_touched by [fingerprintslast]")
 
 					explode()
 			else
@@ -390,8 +394,8 @@
 // returns whether this light has power
 // true if area has power and lightswitch is on
 /obj/machinery/light/proc/has_power()
-	var/area/A = src.loc.loc
-	return A.lightswitch && (!A.requires_power || A.power_light)
+	var/area/A = get_area(src)
+	return A && A.lightswitch && (!A.requires_power || A.power_light)
 
 /obj/machinery/light/proc/flicker(var/amount = rand(10, 20))
 	if(flickering) return

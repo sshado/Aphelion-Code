@@ -42,6 +42,7 @@
 			m = min(m, cable.amount)
 			m = min(m, 30)
 			if(m)
+				playsound(loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				use_cable(m)
 				var/obj/item/stack/cable_coil/CC = new (get_turf(src))
 				CC.amount = m
@@ -50,7 +51,7 @@
 
 /obj/machinery/cablelayer/examine(mob/user)
 	..()
-	user << "\The [src] has [cable.amount] meter\s."
+	user << "\The [src]'s cable reel has [cable.amount] length\s left."
 
 /obj/machinery/cablelayer/proc/load_cable(var/obj/item/stack/cable_coil/CC)
 	if(istype(CC) && CC.amount)
@@ -72,11 +73,8 @@
 	if(!cable || cable.amount<1)
 		visible_message("A red light flashes on \the [src].")
 		return
-/*	if(cable.amount < amount)
-		visible_message("No enough cable to finish the task.")
-		return*/
 	cable.use(amount)
-	if(deleted(cable)) 
+	if(deleted(cable))
 		cable = null
 	return 1
 

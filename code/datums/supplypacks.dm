@@ -43,6 +43,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 	hidden = 1
 
+/*
 /datum/supply_packs/food
 	name = "Kitchen supply crate"
 	contains = list(/obj/item/weapon/reagent_containers/food/condiment/flour,
@@ -61,6 +62,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "Food crate"
 	group = "Supply"
+*/
 
 /datum/supply_packs/monkey
 	name = "Monkey crate"
@@ -337,6 +339,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_hydroponics
 	group = "Hydroponics"
 
+/*
 /datum/supply_packs/weedcontrol
 	name = "Weed control crate"
 	contains = list(/obj/item/weapon/material/hatchet,
@@ -354,6 +357,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Weed control crate"
 	access = access_hydroponics
 	group = "Hydroponics"
+*/
 
 /datum/supply_packs/exoticseeds
 	name = "Exotic seeds crate"
@@ -374,6 +378,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_hydroponics
 	group = "Hydroponics"
 
+/*
 /datum/supply_packs/medical
 	name = "Medical crate"
 	contains = list(/obj/item/weapon/storage/firstaid/regular,
@@ -400,6 +405,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/medical
 	containername = "BloodPack crate"
 	group = "Medical"
+*/
 
 /datum/supply_packs/bodybag
 	name = "Body bag crate"
@@ -986,8 +992,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	num_contained = 5
 	contains = list(/obj/item/seeds/bloodtomatoseed,
 					/obj/item/weapon/storage/pill_bottle/zoom,
-					/obj/item/weapon/storage/pill_bottle/happy,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
+					/obj/item/weapon/storage/pill_bottle/happy)
+//					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "Contraband crate"
 	cost = 30

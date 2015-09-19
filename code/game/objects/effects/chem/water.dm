@@ -23,15 +23,15 @@
 		step_towards(src, target)
 		var/turf/T = get_turf(src)
 		if(T && reagents)
-			reagents.touch_turf(T)
+			reagents.trans_to_turf(T)
 			var/mob/M
 			for(var/atom/A in T)
 				if(!ismob(A) && A.simulated) // Mobs are handled differently
-					reagents.touch(A)
+					reagents.trans_to_mob(A)
 				else if(ismob(A) && !M)
 					M = A
 			if(M)
-				reagents.splash(M, reagents.total_volume)
+				reagents.splash_mob(M, reagents.total_volume)
 				break
 			if(T == get_turf(target))
 				break
@@ -46,7 +46,7 @@
 
 /obj/effect/effect/water/Bump(atom/A)
 	if(reagents)
-		reagents.touch(A)
+		reagents.trans_to_mob(A)
 	return ..()
 
 //Used by spraybottles.

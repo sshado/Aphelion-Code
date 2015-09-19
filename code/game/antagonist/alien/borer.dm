@@ -9,7 +9,7 @@ var/datum/antagonist/xenos/borer/borers
 	welcome_text = "Use your Infest power to crawl into the ear of a host and fuse with their brain. You can only take control temporarily, and at risk of hurting your host, so be clever and careful; your host is encouraged to help you however they can. Talk to your fellow borers with :x."
 	antag_indicator = "brainworm"
 	antaghud_indicator = "hudborer"
-	
+
 	faction_role_text = "Borer Thrall"
 	faction_descriptor = "Unity"
 	faction_welcome = "You are now a thrall to a cortical borer. Please listen to what they have to say; they're in your head."
@@ -30,13 +30,13 @@ var/datum/antagonist/xenos/borer/borers
 	player.objectives += new /datum/objective/borer_survive()
 	player.objectives += new /datum/objective/borer_reproduce()
 	player.objectives += new /datum/objective/escape()
-	
+
 /datum/antagonist/xenos/borer/place_mob(var/mob/living/mob)
 	var/mob/living/simple_animal/borer/borer = mob
 	if(istype(borer))
 		var/mob/living/carbon/human/host
 		for(var/mob/living/carbon/human/H in mob_list)
-			if(H.stat != 2 && !(H.species.flags & IS_SYNTHETIC) && !H.has_brain_worms())
+			if(H.stat != 2 && !(H.species.flags & SYNTHETIC) && !H.has_brain_worms())
 				host = H
 				break
 		if(istype(host))

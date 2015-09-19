@@ -101,7 +101,7 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 
 	return result
 
-/datum/disease/proc/spread_by_touch()
+/datum/disease/proc/spread_by_affect_touch()
 	switch(spread_type)
 		if(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL)
 			return 1
@@ -126,7 +126,7 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 			source = affected_mob
 		else //no source and no mob affected. Rogue disease. Break
 			return
-	
+
 	if(affected_mob.reagents != null)
 		if(affected_mob)
 			if(affected_mob.reagents.has_reagent("spaceacillin"))

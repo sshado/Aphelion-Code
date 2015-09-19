@@ -288,7 +288,7 @@
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
-					if(!species.flags & IS_SYNTHETIC)
+					if(!species.flags & SYNTHETIC)
 						wound_flavor_text["[temp.name]"] = "<span class='warning'>[t_He] [t_has] a robot [temp.name]!</span>\n"
 						continue
 				else

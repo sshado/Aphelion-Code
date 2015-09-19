@@ -51,10 +51,10 @@
 		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-		
+
 		if (( usr.restrained() ) || ( usr.stat ))
 			return
-		
+
 		if ((src.loc == usr) && !usr.unEquip(src))
 			return
 
@@ -191,7 +191,7 @@
 		sample_object = sample
 		number = 1
 
-//This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
+//This proc determins the size of the inventory to be displayed. Please affect_touch it only if you know what you're doing.
 /obj/item/weapon/storage/proc/orient2hud(mob/user as mob)
 
 	var/adjusted_contents = contents.len

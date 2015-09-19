@@ -4,7 +4,6 @@
 	ingested = new/datum/reagents/metabolism(1000, src, CHEM_INGEST)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
 	reagents = bloodstr
-
 	..()
 
 /mob/living/carbon/Life()
@@ -17,9 +16,9 @@
 		germ_level++
 
 /mob/living/carbon/Destroy()
-	qdel(ingested)
+	qdel(bloodstr)
 	qdel(touching)
-	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
+	// We don't qdel(trans_to) because it's the same as qdel(reagents)
 	for(var/guts in internal_organs)
 		qdel(guts)
 	for(var/food in stomach_contents)
@@ -95,13 +94,13 @@
 
 	for(var/datum/disease/D in viruses)
 
-		if(D.spread_by_touch())
+		if(D.spread_by_affect_touch())
 
 			M.contract_disease(D, 0, 1, CONTACT_HANDS)
 
 	for(var/datum/disease/D in M.viruses)
 
-		if(D.spread_by_touch())
+		if(D.spread_by_affect_touch())
 
 			contract_disease(D, 0, 1, CONTACT_HANDS)
 
@@ -113,6 +112,8 @@
 	if (shock_damage<1)
 		return 0
 
+	if(heart_attack && prob(25))
+		heart_attack = 0
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
@@ -212,7 +213,7 @@
 				if(org.dislocated == 2)
 					status += "dislocated"
 				if(org.status & ORGAN_BROKEN)
-					status += "hurts when touched"
+					status += "hurts when affect_touched"
 				if(org.status & ORGAN_DEAD)
 					status += "is bruised and necrotic"
 				if(!org.is_usable())

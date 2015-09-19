@@ -62,7 +62,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/TotalMaterials()
 	return g_amount + gold_amount + diamond_amount + uranium_amount
-
+/*
 /obj/machinery/r_n_d/circuit_imprinter/dismantle()
 	for(var/obj/I in component_parts)
 		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
@@ -80,6 +80,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 		var/obj/item/stack/material/uranium/G = new /obj/item/stack/material/uranium(loc)
 		G.amount = round(uranium_amount / 2000)
 	..()
+*/
 
 /obj/machinery/r_n_d/circuit_imprinter/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(shocked)

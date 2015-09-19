@@ -18,6 +18,8 @@
 			adjustFireLoss(damage/(blocked+1))
 		if(TOX)
 			adjustToxLoss(damage/(blocked+1))
+		if(INTBURN)
+			adjustInternalBurn(damage/(blocked+1))
 		if(OXY)
 			adjustOxyLoss(damage/(blocked+1))
 		if(CLONE)
@@ -33,6 +35,7 @@
 	if(brute)	apply_damage(brute, BRUTE, def_zone, blocked)
 	if(burn)	apply_damage(burn, BURN, def_zone, blocked)
 	if(tox)		apply_damage(tox, TOX, def_zone, blocked)
+	if(internalburn)	apply_damage(internalburn, INTBURN, def_zone, blocked)
 	if(oxy)		apply_damage(oxy, OXY, def_zone, blocked)
 	if(clone)	apply_damage(clone, CLONE, def_zone, blocked)
 	if(halloss) apply_damage(halloss, HALLOSS, def_zone, blocked)
@@ -61,11 +64,13 @@
 			eye_blurry = max(eye_blurry,(effect/(blocked+1)))
 		if(DROWSY)
 			drowsyness = max(drowsyness,(effect/(blocked+1)))
+		if(SEIZURE)
+			seizures = max(seizures, (effect/(blocked+1)))
 	updatehealth()
 	return 1
 
 
-/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
+/mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/irradiate = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/seizures = 0, var/blocked = 0)
 	if(blocked >= 2)	return 0
 	if(stun)		apply_effect(stun, STUN, blocked)
 	if(weaken)		apply_effect(weaken, WEAKEN, blocked)
@@ -75,4 +80,5 @@
 	if(eyeblur)		apply_effect(eyeblur, EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy, DROWSY, blocked)
 	if(agony)		apply_effect(agony, AGONY, blocked)
+	if(seizures)	apply_effect(seizures, SEIZURE, blocked)
 	return 1

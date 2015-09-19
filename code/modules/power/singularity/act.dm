@@ -83,11 +83,11 @@
 
 	var/prints = ""
 	if(src.fingerprintshidden)
-		prints = ", all touchers : " + src.fingerprintshidden
+		prints = ", all affect_touchers : " + src.fingerprintshidden
 
 	SetUniversalState(/datum/universal_state/supermatter_cascade)
-	log_admin("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
-	message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
+	log_admin("New super singularity made by eating a SM crystal [prints]. Last affect_touched by [src.fingerprintslast].")
+	message_admins("New super singularity made by eating a SM crystal [prints]. Last affect_touched by [src.fingerprintslast].")
 	src.loc = null
 	qdel(src)
 	return 50000

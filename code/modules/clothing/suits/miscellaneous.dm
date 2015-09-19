@@ -233,7 +233,7 @@
 	name = "black trenchcoat"
 	desc = "A long, black trenchcoat. You probably look badass."
 	icon_state = "trenchblack"
-	item_state = "trenchblack"
+	item_state = "tblackinhand"
 
 //stripper
 /obj/item/clothing/under/stripper

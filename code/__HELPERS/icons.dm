@@ -42,7 +42,7 @@ icon/BecomeAlphaMask()
     The black parts become transparent, the white parts stay white, and anything in between becomes a translucent shade of white.
 icon/AddAlphaMask(mask)
     The alpha values of the mask icon will be blended with the current icon. Anywhere the mask is opaque,
-    the current icon is untouched. Anywhere the mask is transparent, the current icon becomes transparent.
+    the current icon is unaffect_touched. Anywhere the mask is transparent, the current icon becomes transparent.
     Where the mask is translucent, the current icon becomes more transparent.
 icon/UseAlphaMask(mask, mode)
     Sometimes you may want to take the alpha values from one icon and use them on a different icon.

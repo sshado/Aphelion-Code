@@ -126,7 +126,7 @@
 	integrity = round(100 - integrity * 100)
 	integrity = integrity < 0 ? 0 : integrity
 	var/alert_msg = " Integrity at [integrity]%"
-	
+
 	if(damage > emergency_point)
 		alert_msg = emergency_alert + alert_msg
 		lastwarning = world.timeofday - WARNING_DELAY * 4
@@ -149,7 +149,7 @@
 		else if(safe_warned && public_alert)
 			radio.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
-		
+
 
 /obj/machinery/power/supermatter/process()
 
@@ -277,8 +277,8 @@
 	user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
-	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
-		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
+	user.visible_message("<span class=\"warning\">\The [user] reaches out and affect_touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
+		"<span class=\"danger\">You reach out and affect_touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 
 	Consume(user)
@@ -294,8 +294,8 @@
 */
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
-	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
-		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
+	user.visible_message("<span class=\"warning\">\The [user] affect_touches \a [W] to \the [src] as a silence fills the room...</span>",\
+		"<span class=\"danger\">You affect_touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
 		"<span class=\"warning\">Everything suddenly goes silent.</span>")
 
 	user.drop_from_inventory(W)

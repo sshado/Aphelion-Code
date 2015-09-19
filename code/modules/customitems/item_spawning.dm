@@ -91,7 +91,7 @@
 
 	//If l_hand or r_hand are not present, preserve them using item_icons/item_state_slots
 	//Then use icon_override to make every other slot use the custom sprites by default.
-	//This has to be done before we touch any of item's vars
+	//This has to be done before we affect_touch any of item's vars
 	if(!("[item_icon]_l" in available_states))
 		new_item_state_slots[slot_l_hand_str] = get_state(item, slot_l_hand_str, "_l")
 		new_item_icons[slot_l_hand_str] = get_icon(item, slot_l_hand_str, 'icons/mob/items/lefthand.dmi')

@@ -35,7 +35,10 @@
 	else
 		return null
 
-//return flags that should be added to the viewer's sight var. 
+/atom/proc/CheckParts()
+	return
+
+//return flags that should be added to the viewer's sight var.
 //Otherwise return a negative number to indicate that the view should be cancelled.
 /atom/proc/check_eye(user as mob)
 	if (istype(user, /mob/living/silicon/ai)) // WHYYYY
@@ -343,7 +346,7 @@ its easier to just keep the beam vertical.
 						fingerprints[full_print] = full_print
 
 		else
-			fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+			fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial affect_touch, not leaving much evidence the first time.
 
 
 		return 1

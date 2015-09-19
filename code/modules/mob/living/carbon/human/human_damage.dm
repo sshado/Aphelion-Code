@@ -141,12 +141,12 @@
 	..()
 
 /mob/living/carbon/human/getCloneLoss()
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (SYNTHETIC | NO_SCAN))
 		cloneloss = 0
 	return ..()
 
 /mob/living/carbon/human/setCloneLoss(var/amount)
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (SYNTHETIC | NO_SCAN))
 		cloneloss = 0
 	else
 		..()
@@ -154,7 +154,7 @@
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 
-	if(species.flags & (IS_SYNTHETIC | NO_SCAN))
+	if(species.flags & (SYNTHETIC | NO_SCAN))
 		cloneloss = 0
 		return
 
@@ -217,6 +217,23 @@
 
 /mob/living/carbon/human/setToxLoss(var/amount)
 	if(species.flags & NO_POISON)
+		toxloss = 0
+	else
+		..()
+
+/mob/living/carbon/human/getInternalBurn()
+	if(species.flags)
+		toxloss = 0
+	return ..()
+
+/mob/living/carbon/human/adjustInternalBurn(var/amount)
+	if(species.flags)
+		toxloss = 0
+	else
+		..()
+
+/mob/living/carbon/human/setInternalBurn(var/amount)
+	if(species.flags)
 		toxloss = 0
 	else
 		..()

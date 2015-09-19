@@ -271,7 +271,7 @@ Alien plants should do something if theres a lot of poison
  */
 /obj/effect/alien/acid
 	name = "acid"
-	desc = "Burbling corrossive stuff. I wouldn't want to touch it."
+	desc = "Burbling corrossive stuff. I wouldn't want to affect_touch it."
 	icon_state = "acid"
 
 	density = 0
