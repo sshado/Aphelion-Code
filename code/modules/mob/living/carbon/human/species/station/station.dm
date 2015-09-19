@@ -283,25 +283,14 @@
 	eyes = "kidan_eyes_s"
 	language = "Chittin"
 	unarmed_types = list(/datum/unarmed_attack/claws)
+	brute_mod = 0.6
+	burn_mod = 1.4
+	darksight = 8
 	
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS | HAS_SKIN_COLOR
 	
 	blood_color = "#328332"
 	flesh_color = "#8C4600"
-	
-	/*/datum/species/kidan
-	name = "Kidan"
-	name_plural = "Kida"
-	icobase = 'icons/mob/human_races/r_kidan.dmi'
-	deform = 'icons/mob/human_races/r_def_kidan.dmi'
-	eyes = "kidan_eyes_s"
-	language = "Chittin"
-	unarmed_types = list(/datum/unarmed_attack/claws)
-
-	flags = IS_WHITELISTED | HAS_UNDERWEAR | IS_STRONG
-
-	blood_color = "#328332"
-	flesh_color = "#8C4600"*/
 
 /datum/species/machine/equip_survival_gear(var/mob/living/carbon/human/H)
 
