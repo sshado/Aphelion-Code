@@ -976,7 +976,7 @@
 	P.loc = get_turf(holder.my_atom)
 	..()
 
-//Gold - removed
+//Gold - removed // Re-Added and changed
 /datum/chemical_reaction/slime/crit
 	name = "Slime Crit"
 	id = "m_tele"
@@ -984,7 +984,15 @@
 	required_reagents = list("phoron" = 1)
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
-	mix_message = "The slime core fizzles disappointingly."
+
+/datum/chemical_reaction/slime/gold/on_reaction(var/datum/reagents/holder)
+	var/obj/item/stack/material/gold/M = new /obj/item/stack/material/gold
+	M.amount = 3
+	M.loc = get_turf(holder.my_atom)
+	var/obj/item/stack/material/silver/P = new /obj/item/stack/material/silver
+	P.amount = 2
+	P.loc = get_turf(holder.my_atom)
+	..()
 
 //Silver
 /datum/chemical_reaction/slime/bork
