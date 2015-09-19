@@ -1,0 +1,8 @@
+ author: walmartcheapo
+
+delete-after: True
+
+changes: 
+  - rscadd:	"Traitors will receive new objectives when their kill/maim objective goes to cryo."
+  - rscadd: "Kidan."
+  - rscadd: "IPC language."
