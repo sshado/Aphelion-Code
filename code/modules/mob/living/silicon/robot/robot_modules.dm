@@ -725,6 +725,7 @@ var/global/list/robot_modules = list(
 
 /obj/item/weapon/robot_module/drone/construction/New()
 	..()
+	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/weapon/rcd/borg(src)
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
