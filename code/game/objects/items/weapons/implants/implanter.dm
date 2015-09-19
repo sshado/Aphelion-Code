@@ -43,6 +43,7 @@
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
 
 				user.show_message("\red You implanted the implant into [M].")
+				M.slaver = user
 				if(src.imp.implanted(M))
 					src.imp.loc = M
 					src.imp.imp_in = M
@@ -61,6 +62,23 @@
 	return
 
 
+/obj/item/weapon/implanter/enslavement
+	name = "implanter-enslavement"
+
+/obj/item/weapon/implanter/enslavement/New()
+	src.imp = new /obj/item/weapon/implant/enslavement( src )
+	..()
+	update()
+	return
+
+/obj/item/weapon/implanter/amnesia
+	name = "implanter-amnesia"
+
+/obj/item/weapon/implanter/amnesia/New()
+	src.imp = new /obj/item/weapon/implant/amnesia( src )
+	..()
+	update()
+	return
 
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"

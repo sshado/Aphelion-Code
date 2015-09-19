@@ -209,6 +209,44 @@
 					return 1
 	return 0
 
+/mob/living/carbon/human/proc/implant_slave(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
+	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/obj/item/weapon/implant/enslavement/L = new/obj/item/weapon/implant/enslavement(M)
+	L.imp_in = M
+	L.implanted = 1
+	var/obj/item/organ/external/affected = M.organs_by_name["head"]
+	affected.implants += L
+	L.part = affected
+	L.implanted(src)
+
+/mob/living/carbon/human/proc/is_slave_implanted(mob/living/carbon/human/M)
+	for(var/L in M.contents)
+		if(istype(L, /obj/item/weapon/implant/enslavement))
+			for(var/obj/item/organ/external/O in M.organs)
+				if(L in O.implants)
+					return 1
+	return 0
+
+/mob/living/carbon/human/proc/implant_amnesia(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
+	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
+
+	var/obj/item/weapon/implant/amnesia/L = new/obj/item/weapon/implant/amnesia(M)
+	L.imp_in = M
+	L.implanted = 1
+	var/obj/item/organ/external/affected = M.organs_by_name["head"]
+	affected.implants += L
+	L.part = affected
+	L.implanted(src)
+
+/mob/living/carbon/human/proc/is_amnesia_implanted(mob/living/carbon/human/M)
+	for(var/L in M.contents)
+		if(istype(L, /obj/item/weapon/implant/amnesia))
+			for(var/obj/item/organ/external/O in M.organs)
+				if(L in O.implants)
+					return 1
+	return 0
+
 /mob/living/carbon/human/restrained()
 	if (handcuffed)
 		return 1
