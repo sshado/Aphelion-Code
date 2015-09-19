@@ -274,7 +274,17 @@
 	flesh_color = "#575757"
 
 	has_organ = list() //TODO: Positronic brain.
+
 	
+/datum/species/machine/equip_survival_gear(var/mob/living/carbon/human/H)
+
+/datum/species/machine/handle_death(var/mob/living/carbon/human/H)
+	..()
+	if(flags & IS_SYNTHETIC)
+		H.h_style = ""
+		spawn(100)
+			if(H) H.update_hair()
+
 /datum/species/kidan
 	name = "Kidan"
 	name_plural = "Kidan"
@@ -291,12 +301,3 @@
 	
 	blood_color = "#328332"
 	flesh_color = "#8C4600"
-
-/datum/species/machine/equip_survival_gear(var/mob/living/carbon/human/H)
-
-/datum/species/machine/handle_death(var/mob/living/carbon/human/H)
-	..()
-	if(flags & IS_SYNTHETIC)
-		H.h_style = ""
-		spawn(100)
-			if(H) H.update_hair()
