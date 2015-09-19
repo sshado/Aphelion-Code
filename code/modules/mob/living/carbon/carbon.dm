@@ -112,6 +112,8 @@
 	if (shock_damage<1)
 		return 0
 
+	if(heart_attack && prob(25))
+		heart_attack = 0
 	src.apply_damage(shock_damage, BURN, def_zone, used_weapon="Electrocution")
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)

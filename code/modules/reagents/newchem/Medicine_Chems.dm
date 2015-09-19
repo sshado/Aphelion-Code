@@ -514,25 +514,25 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 /datum/reagent/crystodigin
 	name = "Crystodigin"
 	id = "crystodigin"
-	description = "Salbutamol is a common bronchodilation medication for asthmatics. It may help with other breathing problems as well."
+	description = "Crystodigin is the next step up in stimulants. This powerful stimulant should be used with caution."
 	reagent_state = LIQUID
 	color = "#9d65bd"
 	metabolization_rate = 0.65
 	overdose_threshold = 25
 	addiction_threshold = 18
 	shock_reduction = 15
-/datum/reagent/pen_acid/on_mob_life(var/mob/living/M as mob)
+/datum/reagent/crystodigin/on_mob_life(var/mob/living/M as mob)
 	if(!M) M = holder.my_atom
 	M.AdjustParalysis(-3)
 	M.AdjustWeakened(-3)
+	M.AdjustStunned (-4)
 	M.adjustOxyLoss(-1)
-	M.adjustStunned (-4)
 	return
 /datum/reagent/crystodigin/overdose_process(var/mob/living/M as mob) //May RNGesus be with you
 	if(prob(33))
 		M.adjustToxLoss(1*REM)
 		M.losebreath++
-	if(prob(2))
+	if(prob(1))
 		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>You have a seizure!</span>")
 		M.Paralyse(5)
 		M.jitteriness = 1000
@@ -569,6 +569,63 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
 	result_amount = 5
 
+//Stimulant (Nervous System & Heart)////
+//Tier 5 (Special Drug)////////////////
 
-
-
+/datum/reagent/methylprednisolone
+	name = "Methylprednisolone"
+	id = "methylprednisolone"
+	description = "Methylprednisolone is the strongest legal stimulant. This drug is extremely addictive."
+	reagent_state = LIQUID
+	color = "#9d65bd"
+	metabolization_rate = 0.65
+	overdose_threshold = 15
+	addiction_threshold = 5
+	shock_reduction = 20
+/datum/reagent/methylprednisolone/on_mob_life(var/mob/living/M as mob)
+	if(!M) M = holder.my_atom
+	M.AdjustParalysis(-3)
+	M.AdjustWeakened(-3)
+	M.AdjustStunned (-4)
+	M.adjustOxyLoss(-1)
+	return
+/datum/reagent/methylprednisolone/overdose_process(var/mob/living/M as mob) //May RNGesus be with you
+	if(prob(50))
+		M.adjustToxLoss(0.5*REM)
+		M.losebreath++
+	if(prob(10))
+		M.visible_message("<span class='danger'>[M] starts having a seizure!</span>", "<span class='danger'>You have a seizure!</span>")
+		M.Paralyse(5)
+		M.jitteriness = 1000
+	..()
+	return
+/datum/reagent/methylprednisolone/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(2*REM)
+		M.losebreath += 2
+	..()
+	return
+/datum/reagent/methylprednisolone/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(3*REM)
+		M.losebreath += 3
+	..()
+	return
+/datum/reagent/methylprednisolone/addiction_act_stage3(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(4*REM)
+		M.losebreath += 4
+	..()
+	return
+/datum/reagent/methylprednisolone/addiction_act_stage4(var/mob/living/M as mob)
+	if(prob(33))
+		M.adjustToxLoss(5*REM)
+		M.losebreath += 5
+	..()
+	return
+/datum/chemical_reaction/methylprednisolone
+	name = "Methylprednisolone"
+	id = "methylprednisolone"
+	result = "methylprednisolone"
+	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
+	result_amount = 5
