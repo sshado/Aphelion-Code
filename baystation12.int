@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1442626466
+DIR: code code\game code\game\gamemodes code\game\gamemodes\cult code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\admin\verbs code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\living\simple_animal\hostile code\modules\mob\living\simple_animal\hostile\retaliate code\modules\organs code\modules\reagents code\modules\reagents\Chemistry-Reagents code\modules\reagents\newchem code\modules\research code\modules\research\xenoarchaeology code\modules\research\xenoarchaeology\artifact code\modules\spells code\modules\spells\targeted code\modules\surgery icons icons\mob icons\mob\items 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\reagents\newchem\medicine.dm;code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Medicine.dm;code\modules\mob\living\damage_procs.dm;code\datums\datumvars.dm;code\modules\reagents\newchem\toxins.dm;code\game\objects\items\weapons\defib.dm;code\game\machinery\recharger.dm;code\modules\organs\organ_external.dm;code\modules\mob\living\carbon\carbon.dm;code\game\objects\items\weapons\twohanded.dm;code\modules\client\preferences.dm;code\modules\mob\living\carbon\human\human_damage.dm
+FILE: code\game\objects\items\weapons\defib.dm
 */
 // END_INTERNALS
