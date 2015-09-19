@@ -29,6 +29,8 @@
 	name = "Encoded Audio Language"
 	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
 	speech_verb = "beeps"
+	ask_verb = "beeps"
+	exclaim_verb = "pings"
 	colour = "machine"
 	key = "p"
 	flags = RESTRICTED
