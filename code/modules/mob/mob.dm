@@ -806,11 +806,6 @@
 		update_canmove()	//updates lying, canmove and icons
 	return
 
-/mob/proc/Seizures(amount)
-	if(status_flags & CANSEIZURE)
-		seizures = max(amount, 0)
-	return
-
 /mob/proc/Paralyse(amount)
 	if(status_flags & CANPARALYSE)
 		facing_dir = null
@@ -945,7 +940,7 @@ mob/proc/yank_out_object()
 			var/mob/living/carbon/human/human_user = U
 			human_user.bloody_hands(H)
 
-	selection.loc = get_turf(src)
+	selection.forceMove(get_turf(src))
 	if(!(U.l_hand && U.r_hand))
 		U.put_in_hands(selection)
 
@@ -1090,4 +1085,4 @@ mob/proc/yank_out_object()
 		else
 			src.visible_message("<span class='warning'>[src] pukes all over \himself!</span>","<span class='warning'>You puke all over yourself!</span>")
 			location.add_vomit_floor(src, 1)
-		playsound(location, 'sound/effects/splat.ogg', 50, 1)
+			playsound(location, 'sound/effects/splat.ogg', 50, 1)

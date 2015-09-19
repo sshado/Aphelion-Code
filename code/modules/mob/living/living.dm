@@ -205,7 +205,7 @@ default behaviour is:
 
 // ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching.
 // Stop! ... Hammertime! ~Carn
-// I affect_touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
+// I touched them without asking... I'm soooo edgy ~Erro (added nodamage checks)
 
 /mob/living/proc/getBruteLoss()
 	return bruteloss
@@ -396,7 +396,7 @@ default behaviour is:
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 
-		if (C. && !initial(C.handcuffed))
+		if (C.handcuffed && !initial(C.handcuffed))
 			C.drop_from_inventory(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
 

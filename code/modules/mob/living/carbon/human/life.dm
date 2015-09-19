@@ -863,7 +863,7 @@
 			analgesic = 0
 
 			if(touching) touching.metabolize()
-			if(bloodstr) bloodstr.metabolize()
+			if(ingested) ingested.metabolize()
 			if(bloodstr) bloodstr.metabolize()
 
 			if(CE_PAINKILLER in chem_effects)
@@ -959,12 +959,6 @@
 			//UNCONSCIOUS. NO-ONE IS HOME
 			if((getOxyLoss() > 50) || (health <= config.health_threshold_crit))
 				Paralyse(3)
-
-			if(seizures)
-				if(seizures >= 15)
-					src << "\red You have a seizure!"
-				Paralyse(10)
-				make_jittery(1000)
 
 			if(hallucination)
 				if(hallucination >= 20)

@@ -902,9 +902,9 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 			M.Paralyse(10)
 			M.drowsyness = max(M.drowsyness, 30)
 	if(volume >=10)
-	var/mob/living/carbon/human/H = M
-	if(!H.heart_attack)
-		H.heart_attack = 1 // rip in pepperoni kek kek kek
+		var/mob/living/carbon/human/H = M
+		if(!H.heart_attack)
+			H.heart_attack = 1 // rip in pepperoni kek kek kek
 	..()
 	return
 /datum/reagent/opanaer/overdose_process(var/mob/living/M as mob)
@@ -1020,7 +1020,7 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 	reagent_state = LIQUID
 	color = "#8080FF"
-	metabolism = REM * 0.5
+	metabolization_rate = 0.3
 	scannable = 1
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 170)
@@ -1044,7 +1044,7 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	description = "A liquid compound similar to that used in the cloning process. Can be used to 'finish' the cloning process when used in conjunction with a cryo tube."
 	reagent_state = LIQUID
 	color = "#80BFFF"
-	metabolism = REM * 0.5
+	metabolization_rate = 0.3
 	scannable = 1
 /datum/reagent/clonexadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.bodytemperature < 170)
@@ -1058,3 +1058,44 @@ datum/reagent/perfluorodecalindx/on_mob_life(var/mob/living/carbon/human/M as mo
 	result = "clonexadone"
 	required_reagents = list("sal_acid" = 1, "lithium" = 1, "aluminum" = 1, "bromine" = 1, "ammonia" = 1)
 	result_amount = 5
+
+//Movement Stim///
+//Tier 5/////////
+
+/datum/reagent/hyperzine
+	name = "Hyperzine"
+	id = "hyperzine"
+	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
+	reagent_state = LIQUID
+	color = "#FF3300"
+	metabolization_rate = 0.2
+	overdose_threshold = 20
+/datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	if(prob(5))
+		M.emote(pick("twitch", "blink_r", "shiver"))
+	M.add_chemical_effect(CE_SPEEDBOOST, 2)
+/datum/reagent/hyperzine/overdose_process(var/mob/living/M as mob)
+	if(prob(66))
+		M.Paralyse(5)
+		M.adjustToxLoss(-1*REM)
+	..()
+	return
+
+//Fever////
+//Tier 1///
+
+/datum/reagent/acetaminophen
+	name = "Acetaminophen"
+	id = "acetaminophen"
+	description = "Acetaminophen can be use to stabilize an individuals body temperature."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose = REAGENTS_OVERDOSE
+	scannable = 1
+/datum/reagent/acetaminophen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(M.bodytemperature > 310)
+		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	else if(M.bodytemperature < 311)
+		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
