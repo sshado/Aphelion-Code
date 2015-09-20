@@ -293,8 +293,8 @@
 	eyes = "kidan_eyes_s"
 	language = "Chittin"
 	unarmed_types = list(/datum/unarmed_attack/claws)
-	brute_mod = 0.6
-	burn_mod = 1.4
+	brute_mod = 0.7
+	burn_mod = 1.6
 	darksight = 8
 	
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS | HAS_SKIN_COLOR
