@@ -345,6 +345,63 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			H << "<span class='notice'>You feel a surge of loyalty towards Nanotrasen.</span>"
 		return 1
 
+/obj/item/weapon/implant/enslavement		
+	name = "strange implant"		
+	desc = "That's a strange implant."		
+		
+	get_data()		
+		var/dat = {"		
+<b>Implant Specifications:</b><BR>		
+<b>Name:</b> MK-U17R4.<BR>		
+<b>Life:</b> Exceds Host Lifespan<BR>		
+<b>Important Notes:</b> Personnel injected with this device often appear to develop a crippling dependency on another person.<BR>		
+<HR>		
+<b>Implant Details:</b><BR>		
+<b>Function:</b> Modifies thought processes to ensure a desired response.<BR>		
+<b>Special Features:</b> Contains a small mechanism that redirects electric signals in the brain. <BR>		
+<b>Integrity:</b>  Dura-titanium hull ensures the chip will survive longer than the host."}		
+		return dat		
+		
+		
+	implanted(mob/M)		
+		if(!istype(M, /mob/living/carbon/human))	return 0		
+		var/mob/living/carbon/human/H = M		
+		if(H.is_loyalty_implanted(H))		
+			H.visible_message("[H] seems to resist the implant!", "You feel something try to invade your mind, but your loyalty implant blocks it!")		
+			return 0		
+		
+		H << "\red You feel your mind blank, and a dark, whispering voice echos through your mind, binding you to [M.slaver]."		
+		H << "<b>1. You will follow any and all orders from [M.slaver] at all times.</b>"		
+		H << "<b>2. You will not act against [M.slaver] in any way, shape, or form.</b>"		
+		H << "<b>3. You will aid [M.slaver] in every way, shape, and form at all costs. Following orders takes priority over giving aid.</b>"		
+		
+/obj/item/weapon/implant/amnesia		
+	name = "strange implant"		
+	desc = "That's a strange implant."		
+		
+		
+	get_data()		
+		var/dat = {"		
+<b>Implant Specifications:</b><BR>		
+<b>Name:</b> Brain-Drain 3000<BR>		
+<b>Life:</b> UNKNOWN.<BR>		
+<b>Important Notes:</b> Personnel injected with this device experience dampening across the length of their cerebral cortex, halting specific thought processes.<BR>		
+<HR>		
+<b>Implant Details:</b><BR>		
+<b>Function:</b> Contains small pods of nanobots that seem to be programmed to target memory-related regions of the brain.<BR>		
+<b>Special Features:</b> Now comes in strawberry!<BR>		
+<b>Integrity:</b> The nanobots will cease functionality when the controller is removed."}		
+		return dat		
+		
+		
+	implanted(mob/M)		
+		if(!istype(M, /mob/living/carbon/human))	return 0		
+		var/mob/living/carbon/human/H = M		
+		if(H.is_loyalty_implanted(H))		
+			H.visible_message("[H] seems to hesitate for a moment.", "You feel odd. You can't quite tell if [M.slaver] is there any more. You are sure they are, but something is wrong.")		
+			return 0		
+					
+		H << "<b>Your thoughts drain away. You no longer remember anything about [M.slaver], nor can you hold on to any new memories related to them for long.</b>"		
 
 /obj/item/weapon/implant/adrenalin
 	name = "adrenalin"

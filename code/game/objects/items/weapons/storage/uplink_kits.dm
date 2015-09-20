@@ -87,6 +87,26 @@
 	O.update()
 	return
 
+/obj/item/weapon/storage/box/syndie_kit/imp_enslavement		
+	name = "boxed enslavement implant (with injector)"		
+		
+/obj/item/weapon/storage/box/syndie_kit/imp_enslavement/New()		
+	..()		
+	var/obj/item/weapon/implanter/O = new(src)		
+	O.imp = new /obj/item/weapon/implant/enslavement(O)		
+	O.update()		
+	return		
+		
+/obj/item/weapon/storage/box/syndie_kit/imp_amnesia		
+	name = "boxed amnesia implant (with injector)"		
+		
+/obj/item/weapon/storage/box/syndie_kit/imp_amnesia/New()		
+	..()		
+	var/obj/item/weapon/implanter/O = new(src)		
+	O.imp = new /obj/item/weapon/implant/amnesia(O)		
+	O.update()		
+	return
+	
 /obj/item/weapon/storage/box/syndie_kit/imp_compress
 	name = "box (C)"
 
