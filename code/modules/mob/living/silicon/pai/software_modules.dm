@@ -471,10 +471,14 @@
 			user.add_language("Sinta'unathi")
 			user.add_language("Siik'tajr")
 			user.add_language("Skrellian")
+			user.add_language("Chittin")
+			user.add_language("Encoded Audio Language")
 		else
 			user.remove_language("Sinta'unathi")
 			user.remove_language("Siik'tajr")
 			user.remove_language("Skrellian")
+			user.remove_language("Chittin")
+			user.remove_language("Encoded Audio Language")
 
 	is_active(mob/living/silicon/pai/user)
 		return user.translator_on
