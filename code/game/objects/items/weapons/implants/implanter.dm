@@ -61,23 +61,22 @@
 
 	return
 
-
-/obj/item/weapon/implanter/enslavement
-	name = "implanter-enslavement"
-
-/obj/item/weapon/implanter/enslavement/New()
-	src.imp = new /obj/item/weapon/implant/enslavement( src )
-	..()
-	update()
-	return
-
-/obj/item/weapon/implanter/amnesia
-	name = "implanter-amnesia"
-
-/obj/item/weapon/implanter/amnesia/New()
-	src.imp = new /obj/item/weapon/implant/amnesia( src )
-	..()
-	update()
+/obj/item/weapon/implanter/enslavement		
+	name = "implanter-slv"		
+		
+/obj/item/weapon/implanter/enslavement/New()		
+	src.imp = new /obj/item/weapon/implant/enslavement( src )		
+	..()		
+	update()		
+	return		
+		
+/obj/item/weapon/implanter/amnesia		
+	name = "implanter-amn"		
+		
+/obj/item/weapon/implanter/amnesia/New()		
+	src.imp = new /obj/item/weapon/implant/amnesia( src )		
+	..()		
+	update()		
 	return
 
 /obj/item/weapon/implanter/loyalty

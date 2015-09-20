@@ -173,3 +173,11 @@
 	icon_state = "miner"
 	item_state = "lb_suit"
 	worn_state = "miner"
+
+/obj/item/clothing/under/rank/miner/kidaminer //Majora
+	desc = "This old and worn brown dress smells of various pheromones woven into the fabric with a miner's insignia on the back. It reads \"Miner Class Laborer.\" It is clear this jacket was not intended for humans due to the tight waist section."
+	name = "Kidan mining dress"
+	icon_state = "kidaminer"
+	item_state = "kidaminer"
+	worn_state = "kidaminer" //Not gonna work
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS //Sleeveless.
