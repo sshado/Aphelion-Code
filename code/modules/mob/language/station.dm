@@ -23,7 +23,7 @@
 	colour = "Chittin"
 	key = "l"
 	flags = RESTRICTED
-	syllables = list("he","lp","ge","or","ge","me","ll","on","s","gr","if","fi","ng","me")
+	syllables = list("zz", "zzz", "mm", "ti")
 
 /datum/language/machine
 	name = "Encoded Audio Language"
