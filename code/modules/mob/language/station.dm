@@ -21,7 +21,7 @@
 	ask_verb = "chirps and hums"
 	exclaim_verb = "chirps"
 	colour = "Chittin"
-	key = "5"
+	key = "l"
 	flags = RESTRICTED
 	syllables = list("he","lp","ge","or","ge","me","ll","on","s","gr","if","fi","ng","me")
 
