@@ -32,7 +32,7 @@
 	ask_verb = "beeps"
 	exclaim_verb = "pings"
 	colour = "machine"
-	key = "p"
+	key = "i"
 	flags = RESTRICTED
 	syllables = list("beep", "boop", "buzz","beepleep","*","!")
 
