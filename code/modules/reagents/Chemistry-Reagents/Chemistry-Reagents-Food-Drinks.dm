@@ -1932,3 +1932,77 @@
 	glass_name = "glass of special blend whiskey"
 	glass_desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
 	glass_center_of_mass = list("x"=16, "y"=12)
+
+/////Drink Expansion/////
+
+/datum/reagent/drink/cherrycola
+	name = "Cherry Space Cola"
+	id = "cherrycola"
+	description = "The only variation of space cola anyone likes."
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "glass_brown"
+	glass_name = "glass of Cherry Space Cola"
+	glass_desc = "The only variation of space cola anyone likes."
+
+/datum/reagent/drink/vanillacola
+	name = "Vanilla Space Cola"
+	id = "vanillacola"
+	description = "Tastes like vanilla ice cream filtered through a Space Cola factory workers socks."
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "glass_brown"
+	glass_name = "glass of Vanilla Space Cola"
+	glass_desc = "Tastes like vanilla ice cream filtered through a Space Cola factory workers socks."
+
+/datum/reagent/drink/nanopop
+	name = "Nanopop"
+	id = "nanopop"
+	description = "NanoTrasen's attempt to break through into the cola market."
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "glass_brown"
+	glass_name = "glass of Nanopop"
+	glass_desc = "NanoTrasen's attempt to break through into the cola market"
+
+/datum/reagent/drink/mintwalker
+	name = "Mint Walker"
+	id = "mintwalker"
+	description = "Walk the path of freshness."
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "glass_green"
+	glass_name = "glass of Mint Walker"
+	glass_desc = "Walk the path of freshness."
+
+/datum/reagent/drink/noblelotus
+	name = "Noble Lotus"
+	id = "noblelotus"
+	description = "You'd rate this a Tenno out of Ten."
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "glass_clear"
+	glass_name = "glass of Noble Lotus"
+	glass_desc = "You'd rate this a Tenno out of Ten."
+
+/datum/reagent/drink/holyslammer
+	name = "Holy Slammer"
+	id = "holyslammer"
+	description = "Reverend Barkley invites you to slam."
+	color = "#102000"
+	adj_drowsy = -6
+	adj_temp = -5
+
+	glass_icon_state = "glass_clear"
+	glass_name = "glass of Holy Slammer"
+	glass_desc = "Reverend Barkley invites you to slam."
