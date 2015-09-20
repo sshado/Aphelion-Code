@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
-MAP_ICON_TYPE: 0
+LAST_COMPILE_TIME: 1442706406
+DIR: code code\game code\game\machinery code\game\objects code\game\objects\effects code\game\objects\effects\chem code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\grenades code\game\objects\items\weapons\tanks code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\game\objects\structures\crates_lockers\closets\secure code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\new_player code\modules\reagents code\modules\reagents\Chemistry-Reagents code\modules\reagents\newchem code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food code\modules\reagents\reagent_containers\food\drinks code\modules\reagents\reagent_containers\food\drinks\bottle code\modules\reagents\reagent_containers\glass code\modules\reagents\reagent_containers\glass\bottle code\modules\virus2 
 AUTO_FILE_DIR: OFF
+MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 508.1299
+WINDOW: code\modules\reagents\newchem\Medicine_Chems.dm;code\modules\reagents\newchem\medicine.dm;code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Medicine.dm;code\modules\reagents\Chemistry-Reagents.dm;code\modules\reagents\newchem\NewChem_Procs.dm;code\modules\reagents\newchem\food.dm;code\modules\reagents\newchem\Blob-Reagents.dm;code\modules\reagents\Reagents-Chemicals.dm;code\modules\reagents\Chemistry-Holder.dm;code\modules\reagents\newchem\Dispenser-Chems.dm;code\modules\reagents\newchem\other.dm;code\modules\reagents\newchem\pyro.dm;code\modules\virus2\antibodies.dm;code\game\objects\effects\chem\chemsmoke.dm;code\game\objects\items\weapons\grenades\chem_grenade.dm;code\game\objects\items\toys.dm
+FILE: code\modules\reagents\newchem\NewChem_Procs.dm
 */
 // END_INTERNALS

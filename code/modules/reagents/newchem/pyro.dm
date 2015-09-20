@@ -258,8 +258,8 @@
 	..()
 	return
 
-/datum/reagent/napalm/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
-	if(method == affect_touch && isliving(M))
+/datum/reagent/napalm/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(isliving(M))
 		M.adjust_fire_stacks(7)
 		return
 
@@ -362,12 +362,9 @@ datum/reagent/firefighting_foam
 	result_amount = 3
 	mix_message = "The mixture bubbles gently."
 
-datum/reagent/firefighting_foam/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
+datum/reagent/firefighting_foam/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living))
-		return
-
 // Put out fire
-	if(method == affect_touch)
 		M.adjust_fire_stacks(-(volume / 5)) // more effective than water
 		if(M.fire_stacks <= 0)
 			M.ExtinguishMob()

@@ -120,10 +120,8 @@
 				usr << "It wasn't enough..."
 		return
 
-	reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
+	affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 		if(!istype(M, /mob/living))
-			return
-		if(method == affect_touch)
 			M.adjust_fire_stacks(volume / 15)
 			return
 
@@ -293,67 +291,33 @@
 		M.adjustFireLoss(1)
 		..()
 		return
-	reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
+	affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 		if(!istype(M, /mob/living))
 			return
-		if(method == affect_touch)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
 
-				if(volume > 25)
+			if(volume > 25)
 
-					if(H.wear_mask)
-						H << "\red Your mask protects you from the acid!"
-						return
+				if(H.wear_mask)
+					H << "\red Your mask protects you from the acid!"
+					return
 
-					if(H.head)
-						H << "\red Your helmet protects you from the acid!"
-						return
+				if(H.head)
+					H << "\red Your helmet protects you from the acid!"
+					return
 
-					if(!M.unacidable)
-						if(prob(75))
-							var/obj/item/organ/external/affecting = H.get_organ("head")
-							if(affecting)
-								affecting.take_damage(20, 0)
-								H.UpdateDamageIcon()
-								H.emote("scream")
-						else
-							M.take_organ_damage(15,0)
-				else
-					M.take_organ_damage(15,0)
-
-		if(method == affect_blood)
-			if(ishuman(M))
-				var/mob/living/carbon/human/H = M
-
-				if(volume < 10)
-					M << "<span class = 'danger'>The greenish acidic substance stings you, but isn't concentrated enough to harm you!</span>"
-
-				if(volume >=10 && volume <=25)
-					if(!H.unacidable)
-						M.take_organ_damage(min(max(volume-10,2)*2,20),0)
-						M.emote("scream")
-
-
-				if(volume > 25)
-					if(!M.unacidable)
-						if(prob(75))
-							var/obj/item/organ/external/affecting = H.get_organ("head")
-							if(affecting)
-								affecting.take_damage(20, 0)
-								H.UpdateDamageIcon()
-								H.emote("scream")
-						else
-							M.take_organ_damage(15,0)
-
-//			reaction_obj(var/obj/O, var/volume)
-//				if((istype(O,/obj/item) || istype(O,game/obj/effect/glowshroom)) && prob(40))
-//					if(!O.unacidable)
-//						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
-//						I.desc = "Looks like this was \an [O] some time ago."
-//						for(var/mob/M in viewers(5, O))
-//							M << "\red \the [O] melts."
-//						qdel(O)
+				if(!M.unacidable)
+					if(prob(75))
+						var/obj/item/organ/external/affecting = H.get_organ("head")
+						if(affecting)
+							affecting.take_damage(20, 0)
+							H.UpdateDamageIcon()
+							H.emote("scream")
+					else
+						M.take_organ_damage(15,0)
+			else
+				M.take_organ_damage(15,0)
 
 /datum/reagent/silicon
 	name = "Silicon"

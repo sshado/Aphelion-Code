@@ -42,7 +42,7 @@ datum/reagent/antibodies
 	reagent_state = LIQUID
 	color = "#0050F0"
 
-	reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+	affect_touch(var/mob/living/carbon/M, var/alien, var/removed, var/method, var/affect_blood)
 		if(istype(M,/mob/living/carbon))
 			if(src.data && method == affect_blood)
 				if(M:virus2) if(src.data["antibodies"] & M:virus2.antigen)

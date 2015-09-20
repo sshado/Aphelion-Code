@@ -74,7 +74,6 @@
 
 	var/where = "[A.name] | [location.x], [location.y]"
 	var/whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>[where]</a>"
-
 	if(show_log)
 		if(carry.my_atom.fingerprintslast)
 			var/mob/M = get_mob_by_key(carry.my_atom.fingerprintslast)
@@ -86,7 +85,6 @@
 		else
 			message_admins("A chemical smoke reaction has taken place in ([whereLink]). No associated key.", 0, 1)
 			log_game("A chemical smoke reaction has taken place in ([where])[contained]. No associated key.")
-
 //Runs the chem smoke effect
 // Spawns damage over time loop for each reagent held in the cloud.
 // Applies reagents to walls that affect walls (only thermite and plant-b-gone at the moment).
@@ -95,18 +93,16 @@
 /datum/effect/effect/system/smoke_spread/chem/start()
 	if(!location)
 		return
-
 	if(chemholder.reagents.reagent_list.len) //reagent application - only run if there are extra reagents in the smoke
 		for(var/turf/T in wallList)
-			chemholder.reagents.trans_to_turf(T)
+			chemholder.reagents.touch_turf(T)
 		for(var/turf/T in targetTurfs)
-			chemholder.reagents.trans_to_turf(T)
+			chemholder.reagents.touch_turf(T)
 			for(var/atom/A in T.contents)
 				if(istype(A, /obj/effect/effect/smoke/chem) || istype(A, /mob))
 					continue
 				else if(isobj(A) && !A.simulated)
-					chemholder.reagents.affect_touch_obj(A)
-
+					chemholder.reagents.touch_obj(A)
 	var/color = chemholder.reagents.get_color() //build smoke icon
 	var/icon/I
 	if(color)
@@ -114,23 +110,18 @@
 		I += color
 	else
 		I = icon('icons/effects/96x96.dmi', "smoke")
-
 	var/const/arcLength = 2.3559 //distance between each smoke cloud
-
 	for(var/i = 0, i < range, i++) //calculate positions for smoke coverage - then spawn smoke
 		var/radius = i * 1.5
 		if(!radius)
 			spawn(0)
 				spawnSmoke(location, I, 1)
 			continue
-
 		var/offset = 0
 		var/points = round((radius * 2 * M_PI) / arcLength)
 		var/angle = round(ToDegrees(arcLength / radius), 1)
-
 		if(!IsInteger(radius))
 			offset = 45		//degrees
-
 		for(var/j = 0, j < points, j++)
 			var/a = (angle * j) + offset
 			var/x = round(radius * cos(a) + location.x, 1)
@@ -141,19 +132,16 @@
 			if(T in targetTurfs)
 				spawn(0)
 					spawnSmoke(T, I, range)
-
 //------------------------------------------
 // Randomizes and spawns the smoke effect.
 // Also handles deleting the smoke once the effect is finished.
 //------------------------------------------
 /datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1, var/obj/effect/effect/smoke/chem/passed_smoke)
-
 	var/obj/effect/effect/smoke/chem/smoke
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
 		smoke = PoolOrNew(/obj/effect/effect/smoke/chem, location)
-
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 	smoke.icon = I
@@ -167,12 +155,10 @@
 	smoke.opacity = 0		// lighting and view range updates
 	fadeOut(smoke)
 	qdel(src)
-
 /datum/effect/effect/system/smoke_spread/chem/spores/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
 	var/obj/effect/effect/smoke/chem/spores = PoolOrNew(/obj/effect/effect/smoke/chem, location)
 	spores.name = "cloud of [seed.seed_name] [seed.seed_noun]"
 	..(T, I, dist, spores)
-
 /datum/effect/effect/system/smoke_spread/chem/proc/fadeOut(var/atom/A, var/frames = 16) // Fades out the smoke smoothly using it's alpha variable.
 	if(A.alpha == 0) //Handle already transparent case
 		return

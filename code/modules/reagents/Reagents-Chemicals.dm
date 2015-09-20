@@ -30,52 +30,72 @@ datum
 			reagent_state = LIQUID
 			color = "#C80000" // rgb: 200, 0, 0
 
-			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
-				var/datum/reagent/blood/self = src
-				src = null
-				if(self.data && self.data["virus2"] && istype(M, /mob/living/carbon))//infecting...
-					var/list/vlist = self.data["virus2"]
-					if (vlist.len)
-						for (var/ID in vlist)
-							var/datum/disease2/disease/V = vlist[ID]
+		affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+			if(dose > 5)
+				M.adjustToxLoss(removed)
+			if(dose > 15)
+				M.adjustToxLoss(removed)
+			if(data && data["viruses"])
+				for(var/datum/disease/D in data["viruses"])
+					if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
+						continue
+					if(D.spread_type in list(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL))
+						M.contract_disease(D)
+			if(data && data["virus2"])
+				var/list/vlist = data["virus2"]
+				if(vlist.len)
+					for(var/ID in vlist)
+						var/datum/disease2/disease/V = vlist[ID]
+						if(V.spreadtype == "Contact")
+							infect_virus2(M, V.getcopy())
 
-							if(method == affect_touch)
-								infect_virus2(M,V.getcopy())
-							else
-								infect_virus2(M,V.getcopy(),1) //injected, force infection!
-				if(self.data && self.data["antibodies"] && istype(M, /mob/living/carbon))//... and curing
-					var/mob/living/carbon/C = M
-					C.antibodies |= self.data["antibodies"]
+		affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+			if(data && data["viruses"])
+				for(var/datum/disease/D in data["viruses"])
+					if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS)
+						continue
+					if(D.spread_type in list(CONTACT_FEET, CONTACT_HANDS, CONTACT_GENERAL))
+						M.contract_disease(D)
+			if(data && data["virus2"])
+				var/list/vlist = data["virus2"]
+				if(vlist.len)
+					for(var/ID in vlist)
+						var/datum/disease2/disease/V = vlist[ID]
+						if(V.spreadtype == "Contact")
+							infect_virus2(M, V.getcopy())
+			if(data && data["antibodies"])
+				M.antibodies |= data["antibodies"]
 
-			on_merge(var/data)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
-				return ..()
+		affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+			M.inject_blood(src, volume)
+			remove_self(volume)
 
-			on_update(var/atom/A)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
-				return ..()
+		on_merge(var/data)
+			if(data["blood_colour"])
+				color = data["blood_colour"]
+			return ..()
 
+		on_update(var/atom/A)
+			if(data["blood_colour"])
+				color = data["blood_colour"]
+			return ..()
 
+		reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
+			if(!istype(T)) return
+			var/datum/reagent/blood/self = src
+			src = null
+			if(!(volume >= 3)) return
+			//var/datum/disease/D = self.data["virus"]
+			if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
+				var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T //find some blood here
+				if(!blood_prop) //first blood!
+					blood_prop = new(T)
+					blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
 
-			reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
-				if(!istype(T)) return
-				var/datum/reagent/blood/self = src
-				src = null
-				if(!(volume >= 3)) return
-				//var/datum/disease/D = self.data["virus"]
-				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
-					var/obj/effect/decal/cleanable/blood/blood_prop = locate() in T //find some blood here
-					if(!blood_prop) //first blood!
-						blood_prop = new(T)
-						blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
-
-					if(self.data["virus2"])
-						blood_prop.virus2 = virus_copylist(self.data["virus2"])
+				if(self.data["virus2"])
+					blood_prop.virus2 = virus_copylist(self.data["virus2"])
 
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
-					var/obj/effect/decal/cleanable/blood/xeno/blood_prop = locate() in T
 					if(!blood_prop)
 						blood_prop = new(T)
 						blood_prop.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
@@ -126,11 +146,6 @@ datum
 			reagent_state = LIQUID
 			color = "#757547"
 
-			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
-				if(!istype(M, /mob/living))
-					return
-				if(method == affect_blood)
-					M << "Oh god, why did you drink that?"
 
 #define WATER_LATENT_HEAT 19000 // How much heat is removed when applied to a hot turf, in J/unit (19000 makes 120 u of water roughly equivalent to 4L)
 		water
@@ -409,17 +424,16 @@ datum
 			color = "#04DF27"
 			metabolization_rate = 0.3
 
-			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+			affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 				if(!..())	return
 				if(!M.dna) return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
 				src = null
-				if((method==affect_touch && prob(33)) || method==affect_blood)
-					if(prob(98))
-						randmutb(M)
-					else
-						randmutg(M)
-					domutcheck(M, null)
-					M.UpdateAppearance()
+				if(prob(98))
+					randmutb(M)
+				else
+					randmutg(M)
+				domutcheck(M, null)
+				M.UpdateAppearance()
 				return
 			on_mob_life(var/mob/living/M as mob)
 				if(!M.dna) return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
@@ -466,9 +480,8 @@ datum
 			color = "#C8A5DC" // rgb: 200, 165, 220
 
 			//makes you squeaky clean
-			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
-				if (method == affect_touch)
-					M.germ_level -= min(volume*20, M.germ_level)
+			affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+				M.germ_level -= min(volume*20, M.germ_level)
 
 			reaction_obj(var/obj/O, var/volume)
 				O.germ_level -= min(volume*20, O.germ_level)
@@ -517,10 +530,8 @@ datum
 			reagent_state = LIQUID
 			color = "#060606"
 
-			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+			affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 				if(!istype(M, /mob/living))
-					return
-				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 10)
 				return
 			/*
@@ -547,10 +558,8 @@ datum
 			reagent_state = LIQUID
 			color = "#660000" // rgb: 102, 0, 0
 
-			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+			affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 				if(!istype(M, /mob/living))
-					return
-				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 10)
 				return
 
@@ -594,7 +603,7 @@ datum
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
 					S.dirt = 0
-			reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+			affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 				if(iscarbon(M))
 					var/mob/living/carbon/C = M
 					if(istype(M,/mob/living/carbon/human))
@@ -642,10 +651,8 @@ datum
 				..()
 				return
 
-			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with plasma is stronger than fuel!
+			affect_touch(var/mob/living/carbon/M, var/alien, var/removed)//Splashing people with plasma is stronger than fuel!
 				if(!istype(M, /mob/living))
-					return
-				if(method == affect_touch)
 					M.adjust_fire_stacks(volume / 5)
 					..()
 					return
@@ -1052,73 +1059,78 @@ datum
 		condensedcapsaicin
 			name = "Condensed Capsaicin"
 			id = "condensedcapsaicin"
-			description = "This shit goes in pepperspray."
+			description = "A chemical agent used for self-defense and in police work."
 			reagent_state = LIQUID
-			color = "#B31008" // rgb: 179, 16, 8
+			touch_met = 50 // Get rid of it quickly
+			color = "#B31008"
 
-			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
-				if(!istype(M, /mob/living))
-					return
-				if(method == affect_touch)
-					if(istype(M, /mob/living/carbon/human))
-						var/mob/living/carbon/human/victim = M
-						var/mouth_covered = 0
-						var/eyes_covered = 0
-						var/obj/item/safe_thing = null
-						if( victim.wear_mask )
-							if ( victim.wear_mask.flags & MASKCOVERSEYES )
-								eyes_covered = 1
-								safe_thing = victim.wear_mask
-							if ( victim.wear_mask.flags & MASKCOVERSMOUTH )
-								mouth_covered = 1
-								safe_thing = victim.wear_mask
-						if( victim.head )
-							if ( victim.head.flags & MASKCOVERSEYES )
-								eyes_covered = 1
-								safe_thing = victim.head
-							if ( victim.head.flags & MASKCOVERSMOUTH )
-								mouth_covered = 1
-								safe_thing = victim.head
-						if(victim.glasses)
-							eyes_covered = 1
-							if ( !safe_thing )
-								safe_thing = victim.glasses
-						if ( eyes_covered && mouth_covered )
-							victim << "\red Your [safe_thing] protects you from the pepperspray!"
-							return
-						else if ( mouth_covered )	// Reduced effects if partially protected
-							victim << "\red Your [safe_thing] protect you from most of the pepperspray!"
-							if(prob(5))
-								victim.emote("scream")
-							victim.eye_blurry = max(M.eye_blurry, 3)
-							victim.eye_blind = max(M.eye_blind, 1)
-							victim.confused = max(M.confused, 3)
-							victim.damageoverlaytemp = 60
-							victim.Weaken(3)
-							victim.drop_item()
-							return
-						else if ( eyes_covered ) // Eye cover is better than mouth cover
-							victim << "\red Your [safe_thing] protects your eyes from the pepperspray!"
-							victim.eye_blurry = max(M.eye_blurry, 3)
-							victim.damageoverlaytemp = 30
-							return
-						else // Oh dear :D
-							if(prob(5))
-								victim.emote("scream")
-							victim << "\red You're sprayed directly in the eyes with pepperspray!"
-							victim.eye_blurry = max(M.eye_blurry, 5)
-							victim.eye_blind = max(M.eye_blind, 2)
-							victim.confused = max(M.confused, 6)
-							victim.damageoverlaytemp = 75
-							victim.Weaken(5)
-							victim.drop_item()
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(prob(5))
-					M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")
-				..()
+		affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+			if(alien == IS_DIONA)
 				return
+			M.adjustToxLoss(0.5 * removed)
+		affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+			var/eyes_covered = 0
+			var/mouth_covered = 0
+			var/obj/item/safe_thing = null
+			if(istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.species && (H.species.flags & NO_PAIN))
+					return
+				if(H.head)
+					if(H.head.flags & MASKCOVERSEYES)
+						eyes_covered = 1
+						safe_thing = H.head
+					if(H.head.flags & MASKCOVERSMOUTH)
+						mouth_covered = 1
+						safe_thing = H.head
+				if(H.wear_mask)
+					if(!eyes_covered && H.wear_mask.flags & MASKCOVERSEYES)
+						eyes_covered = 1
+						safe_thing = H.wear_mask
+					if(!mouth_covered && H.wear_mask.flags & MASKCOVERSMOUTH)
+						mouth_covered = 1
+						safe_thing = H.wear_mask
+				if(H.glasses)
+					if(!eyes_covered)
+						eyes_covered = 1
+						if(!safe_thing)
+							safe_thing = H.glasses
+			if(eyes_covered && mouth_covered)
+				M << "<span class='warning'>Your [safe_thing] protects you from the pepperspray!</span>"
+				return
+			else if(eyes_covered)
+				M << "<span class='warning'>Your [safe_thing] protect you from most of the pepperspray!</span>"
+				M.eye_blurry = max(M.eye_blurry, 15)
+				M.eye_blind = max(M.eye_blind, 5)
+				M.Stun(5)
+				M.Weaken(5)
+				return
+			else if (mouth_covered) // Mouth cover is better than eye cover
+				M << "<span class='warning'>Your [safe_thing] protects your face from the pepperspray!</span>"
+				M.eye_blurry = max(M.eye_blurry, 5)
+				return
+			else // Oh dear :D
+				M << "<span class='warning'>You're sprayed directly in the eyes with pepperspray!</span>"
+				M.eye_blurry = max(M.eye_blurry, 25)
+				M.eye_blind = max(M.eye_blind, 10)
+				M.Stun(5)
+				M.Weaken(5)
+				return
+		affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.species && (H.species.flags & (NO_PAIN | SYNTHETIC)))
+					return
+			if(dose == metabolism)
+				M << "<span class='danger'>You feel like your insides are burning!</span>"
+			else
+				M.apply_effect(4, AGONY, 0)
+				if(prob(5))
+					M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
+			if(istype(M, /mob/living/carbon/slime))
+				M.bodytemperature += rand(15, 30)
+			holder.remove_reagent("frostoil", 5)
+
 
 		frostoil
 			name = "Frost Oil"
@@ -1892,12 +1904,9 @@ datum
 					if(H.species && (H.species.name == "Skrell" || H.species.name =="Neara"))	 //Skrell and Neara get very drunk very quickly.
 						d*=5
 
-			reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)//Splashing people with ethanol isn't quite as good as fuel.
-				if(!istype(M, /mob/living))
-					return
-				if(method == affect_touch)
-					M.adjust_fire_stacks(volume / 15)
-					return
+			touch_mob(var/mob/living/L, var/amount)
+				if(istype(L))
+					L.adjust_fire_stacks(amount / 15)
 
 			beer	//It's really much more stronger than other drinks.
 				name = "Beer"

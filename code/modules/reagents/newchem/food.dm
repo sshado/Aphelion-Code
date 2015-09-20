@@ -6,10 +6,8 @@
 	color = "#63DE63"
 	metabolization_rate = 0.4
 
-datum/reagent/questionmark/reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+datum/reagent/questionmark/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living))
-		return
-	if(method == affect_blood)
 		M.Weaken(2)
 		M << "<span class = 'danger'>Ugh! Eating that was a terrible idea!</span>"
 
@@ -42,10 +40,8 @@ datum/reagent/triple_citrus
 	result_amount = 3
 	mix_message = "The citrus juices begin to blend together."
 
-datum/reagent/triple_citrus/reaction_mob(var/mob/living/carbon/M as mob, var/method=affect_touch, var/volume)
+datum/reagent/triple_citrus/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon))
-		return
-	if(method == affect_blood)
 		M.adjustToxLoss(-rand(1,2))
 
 datum/reagent/corn_starch
@@ -181,10 +177,8 @@ datum/reagent/porktonium/overdose_process(var/mob/living/M as mob)
 	reagent_state = LIQUID
 	color = "#C87D28"
 
-datum/reagent/fungus/reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+datum/reagent/fungus/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living))
-		return
-	if(method == affect_blood)
 		M << "<span class = 'danger'>Yuck!</span>"
 
 /datum/reagent/chicken_soup
@@ -206,12 +200,9 @@ datum/reagent/fungus/reaction_mob(var/mob/M, var/method=affect_touch, var/volume
 	reagent_state = LIQUID
 	color = "#F5F5F5"
 
-datum/reagent/msg/reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+datum/reagent/msg/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living))
-		return
-	if(method == affect_blood)
 		M << "<span class = 'notice'>That tasted amazing!</span>"
-
 
 /datum/reagent/msg/on_mob_life(var/mob/living/M as mob)
 	if(prob(1))
@@ -318,10 +309,8 @@ datum/reagent/greenvomit/reaction_turf(var/turf/T, var/volume)
 	reagent_state = LIQUID
 	color = "#8EAE7B"
 
-datum/reagent/ectoplasm/reaction_mob(var/mob/M, var/method=affect_touch, var/volume)
+datum/reagent/ectoplasm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living))
-		return
-	if(method == affect_blood)
 		var/spooky_eat = pick("Ugh, why did you eat that? Your mouth feels haunted. Haunted with bad flavors.", "Ugh, why did you eat that? It has the texture of ham aspic.  From the 1950s.  Left out in the sun.", "Ugh, why did you eat that? It tastes like a ghost fart.", "Ugh, why did you eat that? It tastes like flavor died.")
 		M << "<span class = 'warning'>[spooky_eat]</span>"
 
@@ -441,26 +430,25 @@ datum/reagent/ectoplasm/reaction_mob(var/mob/M, var/method=affect_touch, var/vol
 	reagent_state = SOLID
 	color = "#AC7E67"
 
-datum/reagent/pepperoni/reaction_mob(var/mob/living/M, var/method=affect_touch, var/volume)
-	if(method == affect_touch)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
+datum/reagent/pepperoni/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
 
-			if(H.wear_mask)
-				H << "<span class='warning'>The pepperoni bounces off your mask!</span>"
-				return
+		if(H.wear_mask)
+			H << "<span class='warning'>The pepperoni bounces off your mask!</span>"
+			return
 
-			if(H.head)
-				H << "<span class='warning'>Your mask protects you from the errant pepperoni!</span>"
-				return
+		if(H.head)
+			H << "<span class='warning'>Your mask protects you from the errant pepperoni!</span>"
+			return
 
-			if(prob(50))
-				M.adjustBruteLoss(1)
-				playsound(M, 'sound/effects/woodhit.ogg', 50, 1, -1)
-				M << "<span class='warning'>A slice of pepperoni slaps you!</span>"
-			else
-				M.emote("burp")
-				M << "<span class='warning'>My goodness, that was tasty!</span>"
+		if(prob(50))
+			M.adjustBruteLoss(1)
+			playsound(M, 'sound/effects/woodhit.ogg', 50, 1, -1)
+			M << "<span class='warning'>A slice of pepperoni slaps you!</span>"
+		else
+			M.emote("burp")
+			M << "<span class='warning'>My goodness, that was tasty!</span>"
 
 
 /datum/chemical_reaction/pepperoni
