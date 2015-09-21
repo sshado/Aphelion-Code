@@ -6,6 +6,10 @@
 	h_style = "Skrell Male Tentacles"
 	..(new_loc, "Skrell")
 
+/mob/living/carbon/human/Kidan/New(var/new_loc)
+	h_style = "Bald"
+	..(new_loc, "Kidan")
+	
 /mob/living/carbon/human/tajaran/New(var/new_loc)
 	h_style = "Tajaran Ears"
 	..(new_loc, "Tajara")
