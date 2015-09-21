@@ -16,12 +16,12 @@
 		if(chamber.projectile_type) //checking for energy weaponry
 			if(src.isEnergy)
 			else
-				src.msg = "\red A ballistic chamber won't work with an energy chassis!"
+				src.msg = "<span class="warning"> A ballistic chamber won't work with an energy chassis!</span>"
 				return
 		if(chamber.caliber) //checking for kinetic weaponry
 			if(src.isKinetic)
 			else
-				src.msg = "\red An energy chamber won't work with a ballistic chassis!"
+				src.msg = "<span class="warning"> An energy chamber won't work with a ballistic chassis!</span>"
 				return
 		src.modChamber = I
 		src.removable -= src.modChassis //removes its source part from the removable list.
@@ -30,7 +30,7 @@
 		var/obj/item/weapon/modular_firearms/driver/D = I
 		if(D.firemodes)
 		else
-			src.msg = "\red Have you considered using a real driver?" //this will usually only be returned if
+			src.msg = "<span class="warning"> Have you considered using a real driver?</span>" //this will usually only be returned if
 			return							  // they try and use the base driver
 		src.modDriver = I
 		src.removable += I
@@ -64,18 +64,18 @@
 /obj/item/weapon/modular_firearms/assembly/proc/add_part(obj/item/I as obj, mob/user as mob, var/part, var/prereq) //Handles all part processing in a single proc. So clean~
 	if(part)
 		if(part in src.components)
-			user << "\red There is already a [part] installed!"
+			user << "<span class="warning"> There is already a [part] installed!</span>"
 			return
 	else
-		user << "\red Error - null part variable for [I]." //for debugging
+		user << "<span class="warning"> Error - null part variable for [I].</span>" //for debugging
 		return
 	if(prereq)
 		if(!prereq in src.components)
-			user << "\red The [I] needs to be attached to a [prereq]!"
+			user << "<span class="warning"> The [I] needs to be attached to a [prereq]!</span>"
 			return
 	src.process_part(I, user)
 	if(!src.msg)
-		src.msg = ("\blue You install the [I] onto the [src].")
+		src.msg = ("<span class="info">\blue You install the [I] onto the [src]."</span>)
 	user << src.msg
 	user.drop_item()
 	I.loc = src
@@ -104,7 +104,7 @@
 		src.modStock = null
 	if(removing == src.modAttachment)
 		src.modAttachment = null
-	user << "\red You remove the [removing] from the frame."
+	user << "<span class="warning"> You remove the [removing] from the frame.</span>"
 
 /*	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 200 //How much energy is needed to fire.
