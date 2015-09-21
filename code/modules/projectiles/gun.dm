@@ -154,13 +154,13 @@
 	if(istype (src, /obj/item/weapon/gun/energy))
 		if(src.vent_stack)
 			return
-		if(src.heat_level = src.heat_cap)
+		else if(src.heat_level = src.heat_cap)
 			user << "<span class='warning'>[src] feels hot in your hands!<span>"
-		if((src.heat_level - src.heat_cap) = 1)
+		else if((src.heat_level - src.heat_cap) = 1)
 			user << "<span class='warning'>[src] beeps in alarm, painfully hot!<span>"
-		if((src.heat_level - src.heat_cap) = 2)
+		else if((src.heat_level - src.heat_cap) = 2)
 			user << "<span class='warning'>[src] flashes a red warning light, searing hot! It can't take much more!<span>"
-		if((src.heat_level - src.heat_cap) >= 3)
+		else if((src.heat_level - src.heat_cap) >= 3)
 			if(prob(80))
 				user << "<span class='warning'>[src] overheats, venting boiling-hot steam!"
 				src.vent_stack += 5
