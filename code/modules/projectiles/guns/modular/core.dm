@@ -135,11 +135,17 @@
 			P.load_method = load.load_method
 			P.handle_casings = load.handle_casings
 		else
-			P.cell = new/obj/item/weapon/cell(P)
+			P.cell = new/obj/item/weapon/cell(P) //Initializes a powercell inside of the energy weapon.
 	P.modDriver = src.modDriver
 	var/driver = src.modDriver
 	for(datum/firemode/F in driver.firemodes())
-		P.firemodes += F
-		
+		P.firemodes += F //adds each firemode from the driver to the gun
+	P.modBarrel = src.modBarrel
+	var/barrel = src.modBarrel
+	if(barrel.accuracy_mod)
+		P.accuracy += barrel.accuracy_mod
+	if(barrel.burst_mod) //checking if it's some kind of special barrel such as double or rotating
+		for(datum/firemode/F in P.firemodes())
+			F.burst += barrel.burst_mod //should add the number of extra shots to each firemode the gun has
 	for(obj/item/I in P.contents())
 		src.debug(I, I.name)
