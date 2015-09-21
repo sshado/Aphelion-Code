@@ -1,5 +1,7 @@
 //MFCS procs -- Cirra
 
+/obj/item/weapon/modular_firearms/assembly/proc/debug(var/part as var, var/type as var)
+	user << "<span class="info">DEBUG: [part] is current [type]</span>"
 
 /obj/item/weapon/modular_firearms/assembly/proc/process_part(obj/item/I as obj, mob/user as mob) //this should handle processing new parts in the weapon, without relying on the weapon actually being attacked.
 	if(istype(I, /obj/item/weapon/modular_firearms/chassis))
@@ -112,29 +114,33 @@
 	var/modifystate
 	var/charge_meter = 1	
 	*/
+	
 /obj/item/weapon/modular_firearms/assembly/proc/compile(mob/user as mob)
 	var/type = null
 	if(src.isKinetic)
-		var/new/obj/item/weapon/gun/MFCS/projectile/P as obj
-		type = 1
+		type = obj/item/weapon/gun/MFCS/projectile
 	if(src.isEnergy)
-		var/new/obj/item/weapon/gun/MFCS/energy/P as obj
-		type = 2
+		type = obj/item/weapon/gun/MFCS/energy
+	var/new/[type]/P //No idea if this'll work. Let's hope.
 	P.modChassis = src.modChassis
 	P.modChamber = src.modChamber
-	if(type = 1)
-		if(src.caliber)
-			P.caliber = src.caliber
-	if(type = 2)
-		if(src.projectile_type)
-			P.projectile_type = src.projectile_type
-			P.charge_cost = src.modChamber.charge_cost
+	if(src.caliber)
+		P.caliber = src.caliber
+	else
+		P.projectile_type = src.projectile_type
+		P.charge_cost = src.modChamber.charge_cost
 	P.modLoader = src.modLoader
 	var/load = src.modLoader
 		if(!load.Eloader)
 			P.max_shells = load.max_shells
 			P.load_method = load.load_method
 			P.handle_casings = load.handle_casings
-	
-			
+		else
+			P.cell = new/obj/item/weapon/cell(P)
+	P.modDriver = src.modDriver
+	var/driver = src.modDriver
+	for(datum/firemode/F in driver.firemodes())
+		P.firemodes += F
 		
+	for(obj/item/I in P.contents())
+		src.debug(I, I.name)
