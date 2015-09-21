@@ -43,27 +43,27 @@ obj/item/weapon/modular_firearms/assembly
 			part = modChassis
 			prereq = null
 	
-		if(istype(I, /obj/item/weapon/modular_firearms/chamber))
+		else if(istype(I, /obj/item/weapon/modular_firearms/chamber))
 			part = modChamber
 			prereq = modChassis
 	
-		if(istype(I, /obj/item/weapon/modular_firearms/driver))
+		else if(istype(I, /obj/item/weapon/modular_firearms/driver))
 			part = modDriver
 			prereq = modChamber
 	
-		if(istype(I, /obj/item/weapon/modular_firearms/loader))
+		else if(istype(I, /obj/item/weapon/modular_firearms/loader))
 			part = modLoader
 			prereq = modChamber
 
-		if(istype(I, /obj/item/weapon/modular_firearms/barrel))
+		else if(istype(I, /obj/item/weapon/modular_firearms/barrel))
 			part = modBarrel
 			prereq = modChamber
 
-		if(istype(I, /obj/item/weapon/modular_firearms/stock))
+		else if(istype(I, /obj/item/weapon/modular_firearms/stock))
 			part = modStock
 			prereq = modChassis
 			
-		if(istype(I, /obj/item/weapon/modular_firearms/sight))
+		else if(istype(I, /obj/item/weapon/modular_firearms/sight))
 			part = modSight
 			prereq = modChassis
 		
