@@ -290,6 +290,20 @@
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
 		new /obj/item/weapon/reagent_containers/pill/tramadol( src )
 
+/obj/item/weapon/storage/pill_bottle/paracetamol
+	name = "bottle of paracetamol pills"
+	desc = "Contains pills used to relieve minor pain."
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+		new /obj/item/weapon/reagent_containers/pill/paracetamol( src )
+
 /obj/item/weapon/storage/pill_bottle/citalopram
 	name = "bottle of Citalopram pills"
 	desc = "Contains pills used to stabilize a patient's mood."

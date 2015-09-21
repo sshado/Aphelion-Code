@@ -14,6 +14,28 @@
 	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
 	return new_name
 
+/datum/language/kidan
+	name = "Chittin"
+	desc = "The Kidan language."
+	speech_verb = "chirps and hums"
+	ask_verb = "chirps and hums"
+	exclaim_verb = "chirps"
+	colour = "Chittin"
+	key = "l"
+	flags = RESTRICTED
+	syllables = list("zz", "zzz", "mm", "ti")
+
+/datum/language/machine
+	name = "Encoded Audio Language"
+	desc = "A fast paced array of beeps and buzzes, mostly used by machines."
+	speech_verb = "beeps"
+	ask_verb = "beeps"
+	exclaim_verb = "pings"
+	colour = "machine"
+	key = "i"
+	flags = RESTRICTED
+	syllables = list("beep", "boop", "buzz","beepleep","*","!")
+
 /datum/language/unathi
 	name = "Sinta'unathi"
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."

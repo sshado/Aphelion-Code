@@ -9,16 +9,37 @@
 	density = 1
 	anchored = 1
 	use_power = 0
-	idle_power_usage = 5			// 5 Watts for thermostat related circuitry
+	idle_power_usage = 5		// 5 Watts for thermostat related circuitry
 
 	var/heatsink_temperature = T20C	// The constant temperature reservoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600		// L
+	var/heat_transfer_coeffecient = 1.0 // Coeffecient on heat exchange. It uses decimal division.
+
+	var/max_temp
+	var/min_temp
 
 	var/max_power_rating = 20000	// Power rating when the usage is turned up to 100
 	var/power_setting = 100
 
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
+
+	min_temp =0
+	max_temp = 600
+
+/obj/machinery/atmospherics/unary/freezer/engine
+	name = "engine class gas cooling system"
+	set_temperature = 2500
+	max_temp = 3000
+	min_temp =240
+	heat_transfer_coeffecient = 0.71
+
+/obj/machinery/atmospherics/unary/freezer/cryogenics
+	name = "cryogenic class gas cooling system"
+	set_temperature = 64
+	min_temp =32
+	heat_transfer_coeffecient = 0.20
+	max_power_rating = 30000
 
 /obj/machinery/atmospherics/unary/freezer/New()
 	..()
@@ -74,8 +95,8 @@
 	data["on"] = use_power ? 1 : 0
 	data["gasPressure"] = round(air_contents.return_pressure())
 	data["gasTemperature"] = round(air_contents.temperature)
-	data["minGasTemperature"] = 0
-	data["maxGasTemperature"] = round(T20C+500)
+	data["minGasTemperature"] = min_temp
+	data["maxGasTemperature"] = max_temp
 	data["targetGasTemperature"] = round(set_temperature)
 	data["powerSetting"] = power_setting
 
@@ -108,9 +129,9 @@
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
 		if(amount > 0)
-			set_temperature = min(set_temperature + amount, 1000)
+			set_temperature = min(set_temperature + amount, max_temp)
 		else
-			set_temperature = max(set_temperature + amount, 0)
+			set_temperature = max(set_temperature + amount, min_temp)
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
 		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
 		set_power_level(new_setting)
@@ -135,7 +156,7 @@
 		var/cop = FREEZER_PERF_MULT * air_contents.temperature/heatsink_temperature	//heatpump coefficient of performance from thermodynamics -> power used = heat_transfer/cop
 		heat_transfer = min(heat_transfer, cop * power_rating)	//limit heat transfer by available power
 
-		var/removed = -air_contents.add_thermal_energy(-heat_transfer)		//remove the heat
+		var/removed = -air_contents.add_thermal_energy(-heat_transfer/heat_transfer_coeffecient)		//remove the heat
 		if(debug)
 			visible_message("[src]: Removing [removed] W.")
 
