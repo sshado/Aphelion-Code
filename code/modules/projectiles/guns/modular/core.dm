@@ -142,10 +142,25 @@
 		P.firemodes += F //adds each firemode from the driver to the gun
 	P.modBarrel = src.modBarrel
 	var/barrel = src.modBarrel
-	if(barrel.accuracy_mod)
-		P.accuracy += barrel.accuracy_mod
 	if(barrel.burst_mod) //checking if it's some kind of special barrel such as double or rotating
 		for(datum/firemode/F in P.firemodes())
 			F.burst += barrel.burst_mod //should add the number of extra shots to each firemode the gun has
-	for(obj/item/I in P.contents())
+	if(src.modStock)
+		P.modStock = src.modStock
+		var/stock = src.modStock
+		if(stock.folding)
+			P.stockmessage = "<span class="notice">You fold away the [modStock]</span>"
+		else if(stock.telescopic)
+			P.stockmessage = "<span class="notice">You collapse the [modStock]</span>"
+
+	for(obj/item/I in P.contents()) //so I don't have to repeat these lines every time something modifies them
+		if(I.accuracy_mod)
+			P.accuracy += I.accuracy_mod
+		if(I.weight) //will be used to calculate w_class
+			P.weight += I.weight
+		if(I.overlays) //critical component of the upcoming modular sprite system
+			P.overlays += I.overlays
+		if(I.recoil_mod)
+			P.recoil += I.recoil_mod
+			
 		src.debug(I, I.name)
