@@ -144,6 +144,7 @@
 		return ..() //Pistolwhippin'
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
+	var/isenergy = null
 	if(!user || !target) return
 
 	add_fingerprint(user)
@@ -152,6 +153,7 @@
 		return
 		
 	if(istype (src, /obj/item/weapon/gun/energy))
+		isenergy = 1
 		if(src.vent_stack)
 			return
 		else if(src.heat_level = src.heat_cap)
@@ -199,7 +201,7 @@
 		var/disp = firemode.dispersion[min(i, firemode.dispersion.len)]
 		process_accuracy(projectile, user, target, acc, disp)
 		
-		if(istype (src, /obj/item/weapon/gun/energy))
+		if(isenergy)
 			src.heat_level += 1
 
 		if(pointblank)
