@@ -116,13 +116,12 @@
 	*/
 	
 /obj/item/weapon/modular_firearms/assembly/proc/compile(mob/user as mob)
-	var/type = null
+    	var/obj/item/weapon/gun/MFCS/P // Declares but does not instantiate a variable or create the object.
 	if(src.isKinetic)
-		type = obj/item/weapon/gun/MFCS/projectile
-	if(src.isEnergy)
-		type = obj/item/weapon/gun/MFCS/energy
-	var/new/[type]/P //No idea if this'll work. Let's hope.
-	P.modChassis = src.modChassis
+        	P = new obj/item/weapon/gun/MFCS/projectile(loc) // Previously declared variable refers to this object.
+    	else if(src.isEnergy)
+        	P = new obj/item/weapon/gun/MFCS/energy(loc) // As above, different path, shared parent type.
+    	P.modChassis = src.modChassis //etc. Credit to Zuhayr for the above.
 	P.modChamber = src.modChamber
 	if(src.caliber)
 		P.caliber = src.caliber
