@@ -167,7 +167,7 @@ update_flag
 		var/atom/location = src.loc
 		location.assume_air(air_contents)
 		
-		release_pressure = 1000
+		src.release_pressure = 1000
 		src.destroyed = 1
 		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
 		src.density = 0
