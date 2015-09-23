@@ -624,7 +624,7 @@
 	model_text = "Engineering"
 	req_access = list(access_construction)
 	departments = list("Engineering","Atmos")
-	species = list("Human","Tajara","Skrell","Unathi") //Add Unathi when sprites exist for their suits.
+	species = list("Human","Tajara","Skrell","Unathi") //Add Kidan when sprites exist for their suits.
 
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
