@@ -60,9 +60,9 @@ var/datum/antagonist/rogue_ai/malf
 
 
 		var/mob/living/silicon/ai/malf = player.current
-		for(mob/living/silicon/ai/AI in world)
-			if(!(AI = player.current))
-				AI.del
+		for(var/mob/living/silicon/ai/AI in world)
+			if(!(AI = malf))
+				AI.del()
 				empty_playable_ai_cores -= AI
 
 		malf << "<span class='notice'><B>SYSTEM ERROR:</B> Memory index 0x00001ca89b corrupted.</span>"
