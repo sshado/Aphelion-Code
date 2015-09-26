@@ -627,3 +627,17 @@
 		new /obj/item/weapon/light/tube(src)
 	for(var/i = 0; i < 7; i++)
 		new /obj/item/weapon/light/bulb(src)
+
+/obj/item/weapon/storage/box/pmeson
+	name = "box of prescription meson scanners"
+	desc = "For the visually impaired engineers."
+
+	New()
+		..()
+		new /obj/item/clothing/glasses/meson/prescription(src)
+		new /obj/item/clothing/glasses/meson/prescription(src)
+		new /obj/item/clothing/glasses/meson/prescription(src)
+		new /obj/item/clothing/glasses/meson/prescription(src)
+		new /obj/item/clothing/glasses/meson/prescription(src)
+		new /obj/item/clothing/glasses/meson/prescription(src)
+		new /obj/item/clothing/glasses/meson/prescription(src)
