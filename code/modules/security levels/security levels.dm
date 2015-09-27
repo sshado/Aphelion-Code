@@ -2,7 +2,8 @@
 //0 = code green
 //1 = code blue
 //2 = code red
-//3 = code delta
+//3 = code black
+//4 = code delta
 
 //config.alert_desc_blue_downto
 /var/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
@@ -16,6 +17,8 @@
 			level = SEC_LEVEL_BLUE
 		if("red")
 			level = SEC_LEVEL_RED
+		if("black")
+			level = SEC_LEVEL_BLACK
 		if("delta")
 			level = SEC_LEVEL_DELTA
 
@@ -56,6 +59,17 @@
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
 
+			if(SEC_LEVEL_BLACK)
+				if(security_level < SEC_LEVEL_BLACK)
+					security_announcement_up.Announce("[config.alert_desc_black_upto]", "Attention! Code black!")
+				else
+					security_announcement_down.Announce("[config.alert_desc_black_downto]", "Attention! Code black!")
+				security_level = SEC_LEVEL_BLACK
+				for(var/obj/machinery/firealarm/FA in machines)
+					if(FA.z in config.contact_levels)
+						FA.overlays = list()
+						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
+
 			if(SEC_LEVEL_DELTA)
 				security_announcement_up.Announce("[config.alert_desc_delta]", "Attention! Delta security level reached!", new_sound = 'sound/effects/siren.ogg')
 				security_level = SEC_LEVEL_DELTA
@@ -74,6 +88,8 @@
 			return "blue"
 		if(SEC_LEVEL_RED)
 			return "red"
+		if(SEC_LEVEL_BLACK)
+			return "black"
 		if(SEC_LEVEL_DELTA)
 			return "delta"
 
@@ -85,6 +101,8 @@
 			return "blue"
 		if(SEC_LEVEL_RED)
 			return "red"
+		if(SEC_LEVEL_BLACK)
+			return "black"
 		if(SEC_LEVEL_DELTA)
 			return "delta"
 
@@ -96,6 +114,8 @@
 			return SEC_LEVEL_BLUE
 		if("red")
 			return SEC_LEVEL_RED
+		if("black")
+			return SEC_LEVEL_BLACK
 		if("delta")
 			return SEC_LEVEL_DELTA
 
@@ -109,4 +129,6 @@
 	set_security_level(2)
 /mob/verb/set_thing3()
 	set_security_level(3)
+/mob/verb/set_thing4()
+	set_security_level(4)
 */

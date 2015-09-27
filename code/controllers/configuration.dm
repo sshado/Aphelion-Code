@@ -107,6 +107,8 @@ var/list/gamemode_cache = list()
 	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
 	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
+	var/alert_desc_black_upto = "There is a confirmed viral outbreak aboard the NES Aphelion. Quartine procedures are to be enacted until the viral threat has passed. All crew members should corporate with medical personnel until the threat has passed."
+	var/alert_desc_black_downto = "A cure for the virus has been found. All crew report to the medical bay to be administered a vaccine."
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
 
 	var/forbid_singulo_possession = 0
@@ -497,6 +499,12 @@ var/list/gamemode_cache = list()
 
 				if("load_jobs_from_txt")
 					load_jobs_from_txt = 1
+
+				if("alert_black_upto")
+					config.alert_desc_red_upto = value
+
+				if("alert_black_downto")
+					config.alert_desc_red_downto = value
 
 				if("alert_red_upto")
 					config.alert_desc_red_upto = value

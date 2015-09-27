@@ -443,7 +443,8 @@
 #define SEC_LEVEL_GREEN 0
 #define SEC_LEVEL_BLUE  1
 #define SEC_LEVEL_RED   2
-#define SEC_LEVEL_DELTA 3
+#define SEC_LEVEL_BLACK 3
+#define SEC_LEVEL_DELTA 4
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
