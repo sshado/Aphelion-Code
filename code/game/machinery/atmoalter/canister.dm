@@ -166,7 +166,8 @@ update_flag
 	if (src.health <= 10)
 		var/atom/location = src.loc
 		location.assume_air(air_contents)
-
+		
+		src.release_pressure = 1000
 		src.destroyed = 1
 		playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
 		src.density = 0
@@ -181,12 +182,8 @@ update_flag
 		return 1
 
 /obj/machinery/portable_atmospherics/canister/process()
-	if (destroyed)
-		return
 
-	..()
-
-	if(valve_open)
+	if((valve_open) || (destroyed))
 		var/datum/gas_mixture/environment
 		if(holding)
 			environment = holding.air_contents
@@ -195,6 +192,7 @@ update_flag
 
 		var/env_pressure = environment.return_pressure()
 		var/pressure_delta = release_pressure - env_pressure
+
 
 		if((air_contents.temperature > 0) && (pressure_delta > 0))
 			var/transfer_moles = calculate_transfer_moles(air_contents, environment, pressure_delta)
