@@ -10,6 +10,13 @@
 	w_class = 3
 	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 	recoil = 1
+	
+	modFrame = /obj/item/weapon/modular_firearms/assembly
+	modChassis = /obj/item/weapon/modular_firearms/chassis/ballistic
+	modLoader = /obj/item/weapon/modular_firearms/loader/speedloader
+	modChamber = /obj/item/weapon/modular_firearms/chamber/a357
+	modBarrel = /obj/item/weapon/modular_firearms/barrel/snub
+	modDriver = /obj/item/weapon/modular_firearms/driver
 
 	var/caliber = "357"		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
