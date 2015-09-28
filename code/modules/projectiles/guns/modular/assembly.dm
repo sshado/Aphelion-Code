@@ -1,14 +1,6 @@
 //Frames are the starting blocks of the weapon. The type of frame decides how large a weapon you can build.
 //In general, weight affects the size and weight (slow to use, bulky, etc) of the weapon
 
-/datum/firemode/modular
-	name = "modular-default"
-	burst = 1
-	burst_delay = null
-	fire_delay = null
-	move_delay = 1
-	list/accuracy = list(0)
-	list/dispersion = list(0)
 
 obj/item/weapon/modular_firearms/assembly
 	name = "standard assembly"
@@ -30,9 +22,6 @@ obj/item/weapon/modular_firearms/assembly
 	var/isKinetic = null
 	var/list/components = list()
 	var/list/removable = list()
-	var/useCell = null
-	var/useSupply = null
-	var/useBullet = null
 
 /obj/item/weapon/modular_firearms/assembly/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/modular_firearms))
