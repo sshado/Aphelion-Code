@@ -107,12 +107,13 @@
 		scoped_accuracy = accuracy
 		
 	if(modAssembly)
+		mastertype = src
 		if(!modAssembly.compiled)
 			recompile()
 
 /obj/item/weapon/gun/proc/recompile()
 	var/assembly/A = new modAssembly(loc)
-	A.mastertype = src
+	A.mastertype = mastertype
 	A.modChassis = modChassis
 	A.modChamber = modChamber
 	A.modDriver = modDriver
