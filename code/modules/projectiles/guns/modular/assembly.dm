@@ -14,6 +14,8 @@ obj/item/weapon/modular_firearms/assembly
 	name = "standard assembly"
 	desc = "The outer framework for a firearm of some kind. This one looks rather basic."
 	icon = 'icons/placeholder.dmi'
+	var/mastertype = null
+	var/compiled = null
 	var/msg = null
 	var/modChassis = null
 	var/modChamber = null
@@ -24,11 +26,8 @@ obj/item/weapon/modular_firearms/assembly
 	var/modSight = null
 	var/modMisc = list()
 	w_class = 3
-	var/weight = 1
 	var/isEnergy = null
 	var/isKinetic = null
-	var/silenced = null
-	var/compensated = null
 	var/list/components = list()
 	var/list/removable = list()
 	var/useCell = null
