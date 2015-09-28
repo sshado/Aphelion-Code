@@ -3022,3 +3022,27 @@
 		..()
 		reagents.add_reagent("nutriment", 10)
 		bitesize = 3
+
+//////Snacks and Food Expansion/////
+
+/obj/item/weapon/reagent_containers/food/snacks/scuttles
+	name = "Scuttles"
+	icon_state = "scuttles"
+	desc = "Taste the spectrum."
+	filling_color = "#FFE591"
+
+	New()
+		..()
+		reagents.add_reagent("sugar", 2)
+		bitesize = 4
+
+/obj/item/weapon/reagent_containers/food/snacks/farsbar
+	name = "Fars Bar"
+	icon_state = "farsbar"
+	desc = "Pleasure you can measure."
+	filling_color = "#FFE591"
+
+	New()
+		..()
+		reagents.add_reagent("sugar", 4)
+		bitesize = 2
