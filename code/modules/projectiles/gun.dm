@@ -106,14 +106,17 @@
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
 		
+	compilesprite = icon_state
+	
 	if(modAssembly)
 		mastertype = src
 		if(!modAssembly.compiled)
 			recompile()
 
 /obj/item/weapon/gun/proc/recompile()
-	var/assembly/A = new modAssembly(loc)
+	var/assembly/A = new modAssembly(src)
 	A.mastertype = mastertype
+	A.compilesprite = compilesprite
 	A.modChassis = modChassis
 	A.modChamber = modChamber
 	A.modDriver = modDriver
@@ -123,7 +126,7 @@
 		A.modStock = modStock
 	if(modScope)
 		A.modScope = modScope
-	A.compiled = null
+	A.compiled = 0
 	A.compile()
 
 //Checks whether a given mob can use the gun
@@ -181,6 +184,12 @@
 		Fire(A, user, pointblank=1)
 	else
 		return ..() //Pistolwhippin'
+
+/obj/item/weapon/gun/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype (I, /obj/item/weapon/screwdriver))
+		user << "<span class="notice">You begin taking apart the [src].</span>"
+		sleep(20)
+		recompile()
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	var/isenergy = null
