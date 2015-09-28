@@ -11,7 +11,7 @@
 	list/dispersion = list(0)
 
 obj/item/weapon/modular_firearms/assembly
-	name = "basic assembly"
+	name = "standard assembly"
 	desc = "The outer framework for a firearm of some kind. This one looks rather basic."
 	icon = 'icons/placeholder.dmi'
 	var/msg = null
@@ -23,7 +23,7 @@ obj/item/weapon/modular_firearms/assembly
 	var/modStock = null
 	var/modSight = null
 	var/modMisc = list()
-	var/framelevel = 2
+	w_class = 3
 	var/weight = 1
 	var/isEnergy = null
 	var/isKinetic = null
@@ -69,5 +69,7 @@ obj/item/weapon/modular_firearms/assembly
 		
 		add_part(I, user, part, prereq)
 
-
-
+obj/item/weapon/modular_firearms/assembly/heavy
+	name = "heavy assembly"
+	desc = "The outer framework for a firearm. You could probably make something over the top with this."
+	w_class = 4
