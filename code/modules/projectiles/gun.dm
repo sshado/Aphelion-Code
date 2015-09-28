@@ -61,6 +61,23 @@
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 
+//MFCS vars below
+
+	var/modChassis = null
+	var/modChamber = null
+	var/modDriver = null
+	var/modLoader = null
+	var/modBarrel = null
+	var/modStock = null
+	var/modSight = null
+	var/modMisc = list()
+	var/list/components = list()
+	var/list/removable = list()
+	var/stockmessage = null
+	var/compilesprite = null
+
+//End of MFCS vars
+
 	var/next_fire_time = 0
 
 	var/sel_mode = 1 //index of the currently selected mode
