@@ -63,6 +63,7 @@
 
 //MFCS vars below
 
+	var/modAssembly = null
 	var/modChassis = null
 	var/modChamber = null
 	var/modDriver = null
@@ -71,6 +72,7 @@
 	var/modStock = null
 	var/modSight = null
 	var/modMisc = list()
+	var/mastertype = src
 	var/list/components = list()
 	var/list/removable = list()
 	var/stockmessage = null
@@ -103,6 +105,25 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
+		
+	if(modAssembly)
+		if(!modAssembly.compiled)
+			recompile()
+
+/obj/item/weapon/gun/proc/recompile()
+	var/assembly/A = new modAssembly(loc)
+	A.mastertype = src
+	A.modChassis = modChassis
+	A.modChamber = modChamber
+	A.modDriver = modDriver
+	A.modLoader = modLoader
+	A.modBarrel = modBarrel
+	if(modStock)
+		A.modStock = modStock
+	if(modScope)
+		A.modScope = modScope
+	A.compiled = null
+	A.compile()
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
