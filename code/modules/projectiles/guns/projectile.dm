@@ -15,7 +15,7 @@
 	modChassis = /obj/item/weapon/modular_firearms/chassis/ballistic
 	modLoader = /obj/item/weapon/modular_firearms/loader/speedloader
 	modChamber = /obj/item/weapon/modular_firearms/chamber/a357
-	modBarrel = /obj/item/weapon/modular_firearms/barrel/snub
+	modBarrel = /obj/item/weapon/modular_firearms/barrel/standard
 	modDriver = /obj/item/weapon/modular_firearms/driver
 
 	var/caliber = "357"		//determines which casings will fit
