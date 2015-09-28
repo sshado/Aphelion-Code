@@ -17,7 +17,7 @@ obj/item/weapon/modular_firearms/loader/magazine
 	
 obj/item/weapon/modular_firearms/loader/speedloader
 	name = "speedloader"
-	load_method = SPEEDLOADER
+	load_method = SPEEDLOADER|SINGLE_CASING
 	handle_casings = EJECT_CASINGS
 	
 obj/item/weapon/modular_firearms/loader/shell
