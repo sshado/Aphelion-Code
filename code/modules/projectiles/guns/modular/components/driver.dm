@@ -44,3 +44,11 @@ obj/item/weapon/modular_firearms/driver/burst5
 		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1), dispersion = list(0.0, 0.6, 0.6)),
 		list(name="semiauto", burst=1, fire_delay=0)
 		)
+
+obj/item/weapon/modular_firearms/driver/z8
+	name = "Z8 driver"
+	firemodes = list(
+		list(name="semiauto", burst=1, fire_delay=0),
+		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1), dispersion = list(0.0, 0.6, 0.6)),
+		list(name="fire grenades", use_launcher=1)
+		)
