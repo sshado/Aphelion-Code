@@ -117,10 +117,14 @@
 	
 /obj/item/weapon/modular_firearms/assembly/proc/compile(mob/user as mob)
     	var/obj/item/weapon/gun/MFCS/P // Declares but does not instantiate a variable or create the object.
-	if(src.isKinetic)
-        	P = new obj/item/weapon/gun/MFCS/projectile(loc) // Previously declared variable refers to this object.
-    	else if(src.isEnergy)
-        	P = new obj/item/weapon/gun/MFCS/energy(loc) // As above, different path, shared parent type.
+    	src.compiled = 1
+    	if(src.mastertype)
+    		P = new mastertype(loc)
+    	else 
+    		if(src.isKinetic)
+        		P = new obj/item/weapon/gun/MFCS/projectile(loc) // Previously declared variable refers to this object.
+    		else if(src.isEnergy)
+        		P = new obj/item/weapon/gun/MFCS/energy(loc) // As above, different path, shared parent type.
     	P.modChassis = src.modChassis //etc. Credit to Zuhayr for the above.
 	P.modChamber = src.modChamber
 	if(src.caliber)
@@ -131,7 +135,8 @@
 	P.modLoader = src.modLoader
 	var/load = src.modLoader
 		if(!load.Eloader)
-			P.max_shells = load.max_shells
+			if(!P.max_shells)
+				P.max_shells = load.max_shells
 			P.load_method = load.load_method
 			P.handle_casings = load.handle_casings
 		else
@@ -159,7 +164,11 @@
 		if(I.weight) //will be used to calculate w_class
 			P.weight += I.weight
 		if(I.overlays) //critical component of the upcoming modular sprite system
-			P.overlays += I.overlays
+			if(!P.compilesprite)
+				P.overlays += I.overlays
+			else
+				I.overlays = list()
+				P.icon_state = P.compilesprite
 		if(I.recoil_mod)
 			P.recoil += I.recoil_mod
 			
