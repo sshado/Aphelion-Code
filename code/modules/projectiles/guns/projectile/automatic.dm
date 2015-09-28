@@ -11,11 +11,8 @@
 	ammo_type = /obj/item/ammo_casing/c9mm
 	multi_aim = 1
 	
-	firemodes = list(
-		list(name="semiauto", burst=1, fire_delay=0),
-		list(name="3-round bursts", burst=3, move_delay=4, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
-		list(name="short bursts", 	burst=5, move_delay=4, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
-		)
+	modChamber = /obj/item/weapon/modular_firearms/chamber/c9mm
+	modDriver = /obj/item/weapon/modular_firearms/driver/burst5
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "\improper Uzi"
@@ -27,6 +24,8 @@
 	caliber = ".45"
 	origin_tech = "combat=5;materials=2;syndicate=8"
 	ammo_type = /obj/item/ammo_casing/c45
+	
+	modBarrel = /obj/item/weapon/modular_firearms/barrel/short
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
@@ -43,6 +42,9 @@
 	magazine_type = /obj/item/ammo_magazine/a12mm
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
+	modChamber = obj/item/weapon/modular_firearms/chamber/a12mm
 
 /obj/item/weapon/gun/projectile/automatic/c20r/update_icon()
 	..()
@@ -65,11 +67,10 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
 	
-	firemodes = list(
-		list(name="semiauto", burst=1, fire_delay=0),
-		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 0.6)),
-		list(name="short bursts", 	burst=5, move_delay=6, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
-		)
+	modAssembly = /obj/item/weapon/modular_firearms/assembly/heavy
+	modDriver = /obj/item/weapon/modular_firearms/driver/burst5
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
+	modChamber = /obj/item/weapon/modular_firearms/chamber/a762
 
 /obj/item/weapon/gun/projectile/automatic/sts35/update_icon()
 	..()
@@ -89,6 +90,9 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
+	
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
+	modChamber = /obj/item/weapon/modular_firearms/chamber/c9mm
 
 /obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
 	..()
@@ -118,13 +122,13 @@
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 	
+	modAssembly = /obj/item/weapon/modular_firearms/assembly/heavy
+	modDriver = /obj/item/weapon/modular_firearms/driver/z8
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
+	modChamber = /obj/item/weapon/modular_firearms/chamber/a556
+	
 	burst_delay = 4
 	firemode_type = /datum/firemode/z8
-	firemodes = list(
-		list(name="semiauto", burst=1, fire_delay=0),
-		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1), dispersion = list(0.0, 0.6, 0.6)),
-		list(name="fire grenades", use_launcher=1)
-		)
 	
 	var/obj/item/weapon/gun/launcher/grenade/underslung/launcher
 
@@ -186,10 +190,10 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762
 	
-	firemodes = list(
-		list(name="short bursts",	burst=5, move_delay=6, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
-		list(name="long bursts",	burst=8, move_delay=8, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
-		)
+	modAssembly = /obj/item/weapon/modular_firearms/assembly/heavy
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
+	modDriver = /obj/item/weapon/modular_firearms/driver/longburst
+	modChamber = /obj/item/weapon/modular_firearms/chamber/a762
 	
 	var/cover_open = 0
 
