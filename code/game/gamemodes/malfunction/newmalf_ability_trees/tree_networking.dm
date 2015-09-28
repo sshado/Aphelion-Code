@@ -114,13 +114,13 @@
 /datum/game_mode/malfunction/verb/elite_encryption_hack()
 	set category = "Software"
 	set name = "Elite Encryption Hack"
-	set desc = "200 CPU - Allows you to hack station's ALERTCON system, changing alert level. Has high chance of failijng."
+	set desc = "200 CPU - Allows you to hack station's ALERTCON system, changing alert level. Has high chance of failing."
 	var/price = 200
 	var/mob/living/silicon/ai/user = usr
 	if(!ability_prechecks(user, price))
 		return
 
-	var/alert_target = input("Select new alert level:") in list("green", "blue", "red", "delta", "CANCEL")
+	var/alert_target = input("Select new alert level:") in list("green", "blue", "red", "black", "delta", "CANCEL")
 	if(!alert_target || !ability_pay(user, price) || alert_target == "CANCEL")
 		user << "Hack Aborted"
 		return
