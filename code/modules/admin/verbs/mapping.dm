@@ -130,7 +130,6 @@ var/list/debug_verbs = list (
         ,/client/proc/sec_camera_report
         ,/client/proc/intercom_view
         ,/client/proc/Cell
-        ,/client/proc/global_overlay_reset
         ,/client/proc/atmosscan
         ,/client/proc/powerdebug
         ,/client/proc/count_objects_on_z_level
