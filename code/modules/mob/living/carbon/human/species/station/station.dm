@@ -297,7 +297,7 @@
 	burn_mod = 1.3
 	darksight = 8
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS | HAS_SKIN_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_UNDERWEAR | HAS_LIPS 
 
 	blood_color = "#328332"
 	flesh_color = "#8C4600"
