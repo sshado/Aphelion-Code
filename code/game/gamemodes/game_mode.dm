@@ -92,7 +92,9 @@ var/global/list/additional_antag_types = list()
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_amnesia, 2, "Amnesia Implant", "AMI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_enslavement, 4, "Enslavement Implant", "ENI")
 			),
 		"Medical" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/box/sinpockets, 1, "Box of Sin-Pockets", "DP"),

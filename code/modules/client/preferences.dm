@@ -578,15 +578,15 @@ datum/preferences
 
 	HTML += "<a href=\"byond://?src=\ref[user];preference=records;task=med_record\">Medical Records</a><br>"
 
-	HTML += TextPreview(med_record,40)
+	HTML += TextPreview(med_record,80)
 
 	HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=gen_record\">Employment Records</a><br>"
 
-	HTML += TextPreview(gen_record,40)
+	HTML += TextPreview(gen_record,80)
 
 	HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=sec_record\">Security Records</a><br>"
 
-	HTML += TextPreview(sec_record,40)
+	HTML += TextPreview(sec_record,80)
 
 	HTML += "<br>"
 	HTML += "<a href=\"byond://?src=\ref[user];preference=records;records=-1\">\[Done\]</a>"
@@ -1281,7 +1281,7 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell" || species == "Kidan")
 						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
@@ -1361,7 +1361,7 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Unathi" || species == "Tajara" || species == "Skrell" || species == "Kidan")
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference", rgb(r_skin, g_skin, b_skin)) as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))
