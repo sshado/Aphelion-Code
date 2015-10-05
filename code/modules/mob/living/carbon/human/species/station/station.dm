@@ -250,8 +250,8 @@
 	rarity_value = 2
 
 	eyes = "blank_eyes"
-	brute_mod = 0.5
-	burn_mod = 1
+	brute_mod = 1.5
+	burn_mod = 1.5
 	show_ssd = "flashing a 'system offline' glyph on their monitor"
 	death_message = "seizes up and powers down, their monitor blank..."
 
