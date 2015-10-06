@@ -104,15 +104,6 @@ var/intercom_range_display_status = 0
 	usr << browse(output,"window=airreport;size=1000x500")
 	feedback_add_details("admin_verb","mCRP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/global_overlay_reset()
-	set category = "Mapping"
-	set name = "Reset all overlays"
-	
-	for(var/turf/T in world)
-		T.overlays = null
-	
-	feedback_add_details("admin_verb","RaO")
-
 /client/proc/intercom_view()
 	set category = "Mapping"
 	set name = "Intercom Range Display"
@@ -139,7 +130,6 @@ var/list/debug_verbs = list (
         ,/client/proc/sec_camera_report
         ,/client/proc/intercom_view
         ,/client/proc/Cell
-        ,/client/proc/global_overlay_reset
         ,/client/proc/atmosscan
         ,/client/proc/powerdebug
         ,/client/proc/count_objects_on_z_level
