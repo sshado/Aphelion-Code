@@ -21,7 +21,7 @@
 	ask_verb = "chirps and hums"
 	exclaim_verb = "chirps"
 	colour = "Chittin"
-	key = "l"
+	key = "z"
 	flags = RESTRICTED
 	syllables = list("zz", "zzz", "mm", "ti")
 
@@ -32,7 +32,7 @@
 	ask_verb = "beeps"
 	exclaim_verb = "pings"
 	colour = "machine"
-	key = "i"
+	key = "-"
 	flags = RESTRICTED
 	syllables = list("beep", "boop", "buzz","beepleep","*","!")
 
