@@ -8,10 +8,18 @@
 	w_class = 2.0
 	var/obj/item/weapon/implant/imp = null
 
+/obj/item/weapon/implanter/attack_self(var/mob/user)
+	if(!imp)
+		return ..()
+	imp.loc = get_turf(src)
+	user.put_in_hands(imp)
+	user << "<span class='notice'>You remove \the [imp] from \the [src].</span>"
+	name = "implanter"
+	imp = null
+	update()
+	return
+
 /obj/item/weapon/implanter/proc/update()
-
-
-/obj/item/weapon/implanter/update()
 	if (src.imp)
 		src.icon_state = "implanter1"
 	else
@@ -35,6 +43,7 @@
 				admin_attack_log(user, M, "Implanted using \the [src.name] ([src.imp.name])", "Implanted with \the [src.name] ([src.imp.name])", "used an implanter, [src.name] ([src.imp.name]), on")
 
 				user.show_message("\red You implanted the implant into [M].")
+				M.slaver = user
 				if(src.imp.implanted(M))
 					src.imp.loc = M
 					src.imp.imp_in = M
@@ -53,6 +62,23 @@
 	return
 
 
+/obj/item/weapon/implanter/enslavement
+	name = "implanter-enslavement"
+
+/obj/item/weapon/implanter/enslavement/New()
+	src.imp = new /obj/item/weapon/implant/enslavement( src )
+	..()
+	update()
+	return
+
+/obj/item/weapon/implanter/amnesia
+	name = "implanter-amnesia"
+
+/obj/item/weapon/implanter/amnesia/New()
+	src.imp = new /obj/item/weapon/implant/amnesia( src )
+	..()
+	update()
+	return
 
 /obj/item/weapon/implanter/loyalty
 	name = "implanter-loyalty"

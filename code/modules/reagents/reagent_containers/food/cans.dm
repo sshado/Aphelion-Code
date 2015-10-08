@@ -163,3 +163,59 @@
 	New()
 		..()
 		reagents.add_reagent("sodawater", 50)
+
+/////////////Cans Expansion//////////////
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/cherrycola
+	name = "Cherry Space Cola"
+	desc = "The only variation of space cola anyone likes."
+	icon_state = "cherrycola"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("cherrycola", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/vanillacola
+	name = "Vanilla Space Cola"
+	desc = "Tastes like vanilla ice cream filtered through a Space Cola factory workers socks"
+	icon_state = "vanillacola"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("vanillacola", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/nanopop
+	name = "Nanopop"
+	desc = "NanoTrasen's attempt to break through into the cola market."
+	icon_state = "nanopop"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("nanopop", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/mintwalker
+	name = "Mint Walker"
+	desc = "Walk the path of freshness."
+	icon_state = "mintwalker"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("mintwalker", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/noblelotus
+	name = "Noble Lotus"
+	desc = "You'd rate this a Tenno out of Ten."
+	icon_state = "noblelotus"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("noblelotus", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/holyslammer
+	name = "Holy Slammer"
+	desc = "Reverend Barkley invites you to slam."
+	icon_state = "holyslammer"
+	center_of_mass = list("x"=16, "y"=10)
+	New()
+		..()
+		reagents.add_reagent("holyslammer", 30)

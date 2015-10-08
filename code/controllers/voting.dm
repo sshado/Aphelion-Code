@@ -224,7 +224,7 @@ datum/controller/vote
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 					else
-						if (get_security_level() == "red" || get_security_level() == "delta")
+						if (get_security_level() == "red" || get_security_level() == "black" || get_security_level() == "delta")
 							initiator_key << "The current alert status is too high to call for a crew transfer!"
 							return 0
 						if(ticker.current_state <= 2)
