@@ -64,27 +64,27 @@
 
 //This set of uniforms looks fairly fancy and is generally used for high-ranking NT personnel from what I've seen, so lets give them appropriate ranks.
 /obj/item/clothing/under/rank/centcom
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\""
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Officer.\""
 	name = "\improper NanoTrasen Officer's Dress Uniform"
-	icon_state = "officer"
-	item_state = "lawyer_black"
-	worn_state = "officer"
+	icon_state = "uniform_three_item"
+	item_state = "uniform_three_item"
+	worn_state = "uniform_three"
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom_officer
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\""
-	name = "\improper NanoTrasen Officer's Dress Uniform"
-	icon_state = "officer"
-	item_state = "lawyer_black"
-	worn_state = "officer"
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Captain.\""
+	name = "\improper NanoTrasen Captain's Dress Uniform"
+	icon_state = "uniform_one_item"
+	item_state = "uniform_one_item"
+	worn_state = "uniform_one"
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom_captain
-	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral-Executive.\""
-	name = "\improper NanoTrasen Officer's Dress Uniform"
-	icon_state = "centcom"
-	item_state = "lawyer_black"
-	worn_state = "centcom"
+	desc = "Gold trim on space-black cloth, this uniform displays the rank of \"Admiral.\""
+	name = "\improper NanoTrasen Admiral's Dress Armour"
+	icon_state = "uniform_two_item"
+	item_state = "uniform_two_item"
+	worn_state = "uniform_two"
 	displays_id = 0
 
 /obj/item/clothing/under/ert
@@ -439,6 +439,13 @@
 	icon_state = "captain_formal"
 	item_state = "b_suit"
 	worn_state = "captain_formal"
+
+/obj/item/clothing/under/fcaptainformal
+	name = "female captain's formal uniform"
+	desc = "A captain's formal-wear, for special occasions. You never asked for this."
+	icon_state = "fcaptain_formal"
+	item_state = "fcaptain_formal"
+	worn_state = "fcaptain_formal"
 
 /obj/item/clothing/under/hosformalmale
 	name = "head of security's formal uniform"

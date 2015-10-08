@@ -92,7 +92,9 @@ var/global/list/additional_antag_types = list()
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_freedom, 3, "Freedom Implant", "FI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_compress, 4, "Compressed Matter Implant", "CI"),
 			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_explosive, 6, "Explosive Implant (DANGER!)", "EI"),
-			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI")
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_uplink, 10, "Uplink Implant (Contains 5 Telecrystals)", "UI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_amnesia, 2, "Amnesia Implant", "AMI"),
+			new/datum/uplink_item(/obj/item/weapon/storage/box/syndie_kit/imp_enslavement, 4, "Enslavement Implant", "ENI")
 			),
 		"Medical" = list(
 			new/datum/uplink_item(/obj/item/weapon/storage/box/sinpockets, 1, "Box of Sin-Pockets", "DP"),
@@ -185,6 +187,8 @@ var/global/list/additional_antag_types = list()
 			return
 		var/datum/antagonist/antag = all_antag_types[choice]
 		if(antag)
+			if(!islist(ticker.mode.antag_templates))
+				ticker.mode.antag_templates = list()
 			ticker.mode.antag_templates |= antag
 			message_admins("Admin [key_name_admin(usr)] added [antag.role_text] template to game mode.")
 
@@ -512,6 +516,8 @@ var/global/list/additional_antag_types = list()
 	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
 		for(var/mob/player in player_list)
 			if(!player.client)
+				continue
+			if(istype(player, /mob/new_player))
 				continue
 			if(!role || (player.client.prefs.be_special & role))
 				log_debug("[player.key] had [antag_id] enabled, so we are drafting them.")

@@ -30,6 +30,7 @@
 		new /obj/item/clothing/under/dress/dress_cap(src)
 		new /obj/item/clothing/head/helmet/formalcaptain(src)
 		new /obj/item/clothing/under/captainformal(src)
+		new /obj/item/clothing/under/fcaptainformal(src)
 		return
 
 
@@ -200,6 +201,7 @@
 		new /obj/item/ammo_magazine/c45m/rubber(src)
 		new /obj/item/weapon/gun/energy/taser(src)
 		new /obj/item/clothing/mask/hailer(src)
+		new /obj/item/clothing/gloves/black(src)
 		return
 
 

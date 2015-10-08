@@ -23,5 +23,6 @@
 		for(var/turf/T in location.zone.contents)
 			for(var/obj/fire/F in T.contents)
 				del(F)
+			T.overlays = null
 		for(var/obj/fire/FF in world)
 			del(FF)

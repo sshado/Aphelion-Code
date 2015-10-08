@@ -10,3 +10,6 @@ data/
 cfg/
 
 baystation12.int
+#Ignore .DS_Store
+.DS_Store
+maps/overmap/aphelion-1.dmm

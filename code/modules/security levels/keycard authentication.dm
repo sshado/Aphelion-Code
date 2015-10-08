@@ -65,6 +65,7 @@
 	if(screen == 1)
 		dat += "Select an event to trigger:<ul>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Red alert</A></li>"
+		dat += "<li><A href='?src=\ref[src];triggerevent=Code black'>Code black</A></li>"
 		if(!config.ert_admin_call_only)
 			dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
 
@@ -143,6 +144,9 @@
 		if("Red alert")
 			set_security_level(SEC_LEVEL_RED)
 			feedback_inc("alert_keycard_auth_red",1)
+		if("Code black")
+			set_security_level(SEC_LEVEL_BLACK)
+			feedback_inc("alert_keycard_auth_black",1)
 		if("Grant Emergency Maintenance Access")
 			make_maint_all_access()
 			feedback_inc("alert_keycard_auth_maintGrant",1)
