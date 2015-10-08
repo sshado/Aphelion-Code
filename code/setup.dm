@@ -443,7 +443,8 @@
 #define SEC_LEVEL_GREEN 0
 #define SEC_LEVEL_BLUE  1
 #define SEC_LEVEL_RED   2
-#define SEC_LEVEL_DELTA 3
+#define SEC_LEVEL_BLACK 3
+#define SEC_LEVEL_DELTA 4
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 
@@ -725,11 +726,13 @@ var/list/be_special_flags = list(
 #define PROJECTILE_FORCE_MISS -2 //if the projectile should treat the attack as a miss (suppresses attack and admin logs) - only applies to mobs.
 
 // Some on_mob_life() procs check for alien races.
-#define IS_DIONA  1
-#define IS_VOX    2
-#define IS_SKRELL 3
-#define IS_UNATHI 4
-#define IS_XENOS  5
+#define IS_DIONA    1
+#define IS_VOX      2
+#define IS_SKRELL   3
+#define IS_UNATHI   4
+#define IS_XENOS    5
+#define IS_KIDAN    6
+#define IS_MACHINE  7
 
 #define MAX_GEAR_COST 5 // Used in chargen for accessory loadout limit.
 
@@ -953,12 +956,14 @@ var/list/be_special_flags = list(
 // Languages
 #define LANGUAGE_SOL_COMMON "Sol Common"
 #define LANGUAGE_UNATHI "Sinta'unathi"
+#define LANGUAGE_KIDAN "Chittin"
 #define LANGUAGE_SIIK_MAAS "Siik'maas"
 #define LANGUAGE_SIIK_TAJR "Siik'tajr"
 #define LANGUAGE_SKRELLIAN "Skrellian"
 #define LANGUAGE_ROOTSPEAK "Rootspeak"
 #define LANGUAGE_TRADEBAND "Tradeband"
 #define LANGUAGE_GUTTER "Gutter"
+#define LANGUAGE_MACHINE "Encoded Audio Language"
 
 #define WALL_CAN_OPEN 1
 #define WALL_OPENING 2

@@ -6,6 +6,7 @@
 
 /datum/controller/process/machinery/doWork()
 	internal_sort()
+	internal_process_pipenets()
 	internal_process_machinery()
 	internal_process_power()
 	internal_process_power_drain()
@@ -56,6 +57,15 @@
 		if(!I.pwr_drain()) // 0 = Process Kill, remove from processing list.
 			processing_power_items.Remove(I)
 		scheck()
+		
+/datum/controller/process/machinery/proc/internal_process_pipenets()
+	for(var/datum/pipe_network/pipeNetwork in pipe_networks)
+		if(istype(pipeNetwork) && !pipeNetwork.disposed)
+			pipeNetwork.process()
+			scheck()
+			continue
+
+		pipe_networks.Remove(pipeNetwork)
 
 /datum/controller/process/machinery/getStatName()
 	return ..()+"([machines.len])"
