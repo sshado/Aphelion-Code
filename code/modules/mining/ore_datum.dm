@@ -140,3 +140,12 @@ var/global/list/ore_data = list()
 	smelts_to = "tritium"
 	compresses_to = "mhydrogen"
 	scan_icon = "mineral_rare"
+
+/ore/crystarium
+	name = "crystarium"
+	display_name = "Strange Crystal"
+	alloy = 1
+	result_amount = 3
+	spread_chance = 10
+	ore = /obj/item/weapon/ore/crystarium
+	scan_icon = "mineral_rare"
