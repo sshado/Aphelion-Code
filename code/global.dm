@@ -191,12 +191,12 @@ var/list/awaydestinations = list() // Away missions. A list of landmarks that th
 var/sqladdress = "localhost"
 var/sqlport    = "3306"
 var/sqldb      = "feedback"
-var/sqllogin   = "aphelion"
+var/sqllogin   = "root"
 var/sqlpass    = "shitinmymouth" // You can't have a [ in the password. It throws syntax errors.
 
 // Feedback gathering sql connection
 var/sqlfdbkdb    = "feedback"
-var/sqlfdbklogin = "aphelion"
+var/sqlfdbklogin = "root"
 var/sqlfdbkpass  = "shitinmymouth" // You can't have a [ in the password. It throws syntax errors.
 var/sqllogging   = 1 // Should we log deaths, population stats, etc.?
 
@@ -205,7 +205,7 @@ var/sqllogging   = 1 // Should we log deaths, population stats, etc.?
 var/forumsqladdress = "localhost"
 var/forumsqlport    = "3306"
 var/forumsqldb      = "tgstation"
-var/forumsqllogin   = "aphelion"
+var/forumsqllogin   = "root"
 var/forumsqlpass    = "shitinmymouth"
 var/forum_activated_group     = "2"
 var/forum_authenticated_group = "10"
