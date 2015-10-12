@@ -61,6 +61,25 @@
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 
+//MFCS vars below
+
+	var/modAssembly = null
+	var/modChassis = null
+	var/modChamber = null
+	var/modDriver = null
+	var/modLoader = null
+	var/modBarrel = null
+	var/modStock = null
+	var/modSight = null
+	var/modMisc = list()
+	var/mastertype = src
+	var/list/components = list()
+	var/list/removable = list()
+	var/stockmessage = null
+	var/compilesprite = null
+
+//End of MFCS vars
+
 	var/next_fire_time = 0
 
 	var/sel_mode = 1 //index of the currently selected mode
@@ -86,6 +105,29 @@
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
+		
+	compilesprite = icon_state
+	
+	if(modAssembly)
+		mastertype = src
+		if(!modAssembly.compiled)
+			recompile()
+
+/obj/item/weapon/gun/proc/recompile()
+	var/assembly/A = new modAssembly(src)
+	A.mastertype = mastertype
+	A.compilesprite = compilesprite
+	A.modChassis = modChassis
+	A.modChamber = modChamber
+	A.modDriver = modDriver
+	A.modLoader = modLoader
+	A.modBarrel = modBarrel
+	if(modStock)
+		A.modStock = modStock
+	if(modScope)
+		A.modScope = modScope
+	A.compiled = 0
+	A.compile()
 
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
@@ -143,13 +185,40 @@
 	else
 		return ..() //Pistolwhippin'
 
+/obj/item/weapon/gun/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype (I, /obj/item/weapon/screwdriver))
+		user << "<span class="notice">You begin taking apart the [src].</span>"
+		sleep(20)
+		recompile()
+
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
+	var/isenergy = null
 	if(!user || !target) return
 
 	add_fingerprint(user)
 
 	if(!special_check(user))
 		return
+		
+	if(istype (src, /obj/item/weapon/gun/energy))
+		isenergy = 1
+		if(src.vent_stack)
+			return
+		else if(src.heat_level = src.heat_cap)
+			user << "<span class='warning'>[src] feels hot in your hands!<span>"
+		else if((src.heat_level - src.heat_cap) = 1)
+			user << "<span class='warning'>[src] beeps in alarm, painfully hot!<span>"
+		else if((src.heat_level - src.heat_cap) = 2)
+			user << "<span class='warning'>[src] flashes a red warning light, searing hot! It can't take much more!<span>"
+		else if((src.heat_level - src.heat_cap) >= 3)
+			if(prob(80))
+				user << "<span class='warning'>[src] overheats, venting boiling-hot steam!"
+				src.vent_stack += 5
+				return
+			else
+				user << "<span class='danger'>[src] explodes violently in your hands!"
+				src.explode()
+				return
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
@@ -179,6 +248,9 @@
 		var/acc = firemode.accuracy[min(i, firemode.accuracy.len)]
 		var/disp = firemode.dispersion[min(i, firemode.dispersion.len)]
 		process_accuracy(projectile, user, target, acc, disp)
+		
+		if(isenergy)
+			src.heat_level += 1
 
 		if(pointblank)
 			process_point_blank(projectile, user, target)

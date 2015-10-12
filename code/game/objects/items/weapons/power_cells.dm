@@ -72,6 +72,14 @@
 	icon_state = "hcell"
 	maxcharge = 10000
 	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
+	
+/obj/item/weapon/cell/med
+	name = "WT-2000 power cell"
+	desc = "A middle-of-the-line power cell produced by Ward-Takahashi."
+	origin_tech = "powerstorage=1"
+	icon_state = "hcell"
+	maxcharge = 2000
+	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
 
 /obj/item/weapon/cell/high/empty/New()
 	..()

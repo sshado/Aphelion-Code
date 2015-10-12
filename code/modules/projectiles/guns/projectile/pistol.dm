@@ -7,6 +7,9 @@
 	origin_tech = "combat=2;materials=2"
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
+	
+	modChamber = /obj/item/weapon/modular_firearms/chamber/c45
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
 
 /obj/item/weapon/gun/projectile/colt/detective
 	desc = "A cheap Martian knock-off of a Colt M1911. Uses .45 rounds."
@@ -39,6 +42,9 @@
 	origin_tech = "combat=2;materials=2"
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
+	
+	modChamber = /obj/item/weapon/modular_firearms/chamber/c45
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
 
 /obj/item/weapon/gun/projectile/sec/flash
 	name = "\improper NT Mk58 signal pistol"
@@ -59,6 +65,9 @@
 	origin_tech = "combat=2;materials=2;syndicate=8"
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c45m
+	
+	modChamber = /obj/item/weapon/modular_firearms/chamber/c45
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
 
 /obj/item/weapon/gun/projectile/deagle
 	name = "desert eagle"
@@ -70,6 +79,9 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a50
 	auto_eject = 1
+	
+	modChamber = /obj/item/weapon/modular_firearms/chamber/a50
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
 
 /obj/item/weapon/gun/projectile/deagle/gold
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
@@ -98,6 +110,9 @@
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
 
+	modChamber = /obj/item/weapon/modular_firearms/chamber/a75
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
+
 /obj/item/weapon/gun/projectile/gyropistol/update_icon()
 	..()
 	if(ammo_magazine)
@@ -117,6 +132,9 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mm
+	
+	modChamber = /obj/item/weapon/modular_firearms/chamber/c9mm
+	modLoader = /obj/item/weapon/modular_firearms/loader/magazine
 
 /obj/item/weapon/gun/projectile/pistol/flash
 	name = "\improper Stechtkin signal pistol"
