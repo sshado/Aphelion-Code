@@ -362,12 +362,12 @@ var/list/name_to_material
 	icon_reinf = "reinf_over"
 	melting_point = 3700
 	stack_origin_tech = "materials=6"
-	cut_delay = 60	
+	cut_delay = 60
 	explosion_resistance = 30
 	integrity = 600
 	hardness = 90
 	weight = 25
-	
+
 /material/glass
 	name = "glass"
 	stack_type = /obj/item/stack/material/glass
@@ -494,7 +494,7 @@ var/list/name_to_material
 /material/glass/phoron/reinforced
 	name = "rphglass"
 	display_name = "reinforced phoron glass"
-	icon_colour = "#d60db4"	
+	icon_colour = "#d60db4"
 	stack_type = /obj/item/stack/material/glass/phoronrglass
 	stack_origin_tech = "materials=4;phorontech=2"
 	composite_material = list() //todo
@@ -554,7 +554,7 @@ var/list/name_to_material
 	stack_origin_tech = "materials=2"
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
-	
+
 /material/iron
 	name = "iron"
 	stack_type = /obj/item/stack/material/iron
@@ -564,6 +564,18 @@ var/list/name_to_material
 	stack_per_sheet = 3750
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
+
+/material/turbidium
+	name = "turbidium"
+	stack_type = /obj/item/stack/material/turbidium
+	icon_colour = "#00aaaa"
+	integrity = 3000
+	melting_point = 35000
+	weight = 20
+	hardness = 100
+	stack_per_sheet = 3500
+	sheet_singular_name = "sheet"
+	sheet_plural_name = "sheets"
 
 // Adminspawn only, do not let anyone get this.
 /material/voxalloy

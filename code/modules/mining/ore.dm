@@ -69,6 +69,12 @@
 	icon_state = "ore_hydrogen"
 	material = "mhydrogen"
 
+/obj/item/weapon/ore/crystarium
+	name = "Unrefined Crystal"
+	icon_state = "ore_crystarium"
+	material = "turbidium"
+	desc = "That's a raw crystal, and it was a PAIN to get."
+
 /obj/item/weapon/ore/slag
 	name = "Slag"
 	desc = "Someone screwed up..."

@@ -1,9 +1,13 @@
 <!-- Change Title to 'NSS Phoenix' If Kaedwulf rules over Station -->
 # Aphelion Project
-![Travis Build Status](https://travis-ci.org/sshado/Aphelion-Code.svg)
+![Travis Build Status](https://travis-ci.org/DJPantheris/Aphelion-Code.svg?branch=master)
 [![Join the chat at https://gitter.im/sshado/Aphelion-Code](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sshado/Aphelion-Code?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [Website](hhttp://aphelion-project.xyz/) - [Code](https://github.com/sshado/Aphelion-Code)
+
+---
+
+This is a branch of the Aphelion Project began by Sshado.
 
 ---
 
