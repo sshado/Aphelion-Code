@@ -13,6 +13,8 @@ var/list/admin_verbs_default = list(
 	/client/proc/cmd_mentor_check_new_players
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
+
+	/*
 var/list/admin_verbs_admin = list(
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,		/*allows our mob to go invisible/visible*/
@@ -160,6 +162,7 @@ var/list/admin_verbs_server = list(
 	/client/proc/check_customitem_activity,
 	/client/proc/nanomapgen_DumpImage
 	)
+	*/
 var/list/admin_verbs_debug = list(
         /client/proc/getruntimelog,                     /*allows us to access runtime logs to somebody*/
 	/client/proc/cmd_admin_list_open_jobs,
@@ -197,7 +200,7 @@ var/list/admin_verbs_paranoid_debug = list(
 	/client/proc/callproc,
 	/client/proc/debug_controller
 	)
-
+/*
 var/list/admin_verbs_possess = list(
 	/proc/possess,
 	/proc/release
@@ -320,6 +323,44 @@ var/list/admin_verbs_mentor = list(
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Jump
 )
+*/
+
+var/list/admin_verbs_gamemaster = list(
+
+)
+
+var/list/admin_verbs_headadmin = list(
+
+)
+
+var/list/admin_verbs_admin3 = list(
+
+)
+
+var/list/admin_verbs_admin2 = list(
+
+)
+
+var/list/admin_verbs_admin = list(
+
+)
+
+var/list/admin_verbs_mod3 = list(
+
+)
+
+var/list/admin_verbs_mod2 = list(
+
+)
+
+var/list/admin_verbs_mod = list(
+
+)
+
+var/list/admin_verbs_mentor = list(
+
+)
+
 
 /client/proc/add_admin_verbs()
 	if(holder)
