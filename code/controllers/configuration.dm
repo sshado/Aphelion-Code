@@ -107,7 +107,7 @@ var/list/gamemode_cache = list()
 	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
 	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
-	var/alert_desc_black_upto = "A medical emergency is present aboard the NES Aphelion. All crew are to cooperate with the Medical and Security staff. Mandatory quarantine procedures may be enacted and enforced."
+	var/alert_desc_black_upto = "A medical emergency is present aboard the NSS Prospector. All crew are to cooperate with the Medical and Security staff. Mandatory quarantine procedures may be enacted and enforced."
 	var/alert_desc_black_downto = "The medical emergency has passed. All crew are to resume normal operations."
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
 
