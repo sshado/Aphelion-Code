@@ -38,6 +38,7 @@
 
 #define ui_alien_head "4:12,1:5"	//aliens
 #define ui_alien_oclothing "5:14,1:5"	//aliens
+#define ui_pda "11:22,1:5"
 
 #define ui_inv1 "7,1:5"			//borgs
 #define ui_inv2 "8,1:5"			//borgs

@@ -190,6 +190,7 @@
 #define SLOT_TWOEARS    8192
 #define SLOT_TIE        16384
 #define SLOT_HOLSTER	32768 //16th bit
+#define SLOT_PDA 		65536
 
 // Flags bitmasks.
 #define STOPPRESSUREDAMAGE 1 // This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
@@ -266,6 +267,7 @@
 #define slot_r_ear       20
 #define slot_legs        21
 #define slot_tie         22
+#define slot_wear_pda 23
 
 // Inventory slot strings.
 // since numbers cannot be used as associative list keys.

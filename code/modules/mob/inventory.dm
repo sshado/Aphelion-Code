@@ -42,6 +42,7 @@
 var/list/slot_equipment_priority = list( \
 		slot_back,\
 		slot_wear_id,\
+		slot_wear_pda,\
 		slot_w_uniform,\
 		slot_wear_suit,\
 		slot_wear_mask,\
@@ -273,6 +274,7 @@ var/list/slot_equipment_priority = list( \
 	if(hasvar(src,"head")) if(src:head) items += src:head
 	if(hasvar(src,"shoes")) if(src:shoes) items += src:shoes
 	if(hasvar(src,"wear_id")) if(src:wear_id) items += src:wear_id
+	if(hasvar(src,"wear_pda")) if(src:wear_pda) items += src:wear_pda
 	if(hasvar(src,"wear_mask")) if(src:wear_mask) items += src:wear_mask
 	if(hasvar(src,"wear_suit")) if(src:wear_suit) items += src:wear_suit
 //	if(hasvar(src,"w_radio")) if(src:w_radio) items += src:w_radio  commenting this out since headsets go on your ears now PLEASE DON'T BE MAD KEELIN
