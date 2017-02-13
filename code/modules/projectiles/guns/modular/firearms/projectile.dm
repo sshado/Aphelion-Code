@@ -1,0 +1,21 @@
+/obj/item/weapon/gun/MFCS/projectile
+  name = "modular gun"
+  desc = "A gun, obviously."
+  modChassis = null
+	modChamber = null
+	modDriver = null
+	modLoader = null
+	modBarrel = null
+	modStock = null
+	modSight = null
+	modMisc = list()
+	recoil = 0
+	muzzle_flash = 0
+	accuracy = 0
+	fire_delay = 0
+	burst_delay = 0
+	list/firemodes = list()
+	caliber = null
+	max_shells = null
+	load_method = null
+	handle_casings = null

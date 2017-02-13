@@ -150,6 +150,25 @@
 
 	if(!special_check(user))
 		return
+		
+	if(istype (src, /obj/item/weapon/gun/energy))
+		if(src.vent_stack)
+			return
+		if(src.heat_level = src.heat_cap)
+			user << "<span class='warning'>[src] feels hot in your hands!<span>"
+		if((src.heat_level - src.heat_cap) = 1)
+			user << "<span class='warning'>[src] beeps in alarm, painfully hot!<span>"
+		if((src.heat_level - src.heat_cap) = 2)
+			user << "<span class='warning'>[src] flashes a red warning light, searing hot! It can't take much more!<span>"
+		if((src.heat_level - src.heat_cap) >= 3)
+			if(prob(80))
+				user << "<span class='warning'>[src] overheats, venting boiling-hot steam!"
+				src.vent_stack += 5
+				return
+			else
+				user << "<span class='danger'>[src] explodes violently in your hands!"
+				src.explode()
+				return
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
@@ -179,6 +198,9 @@
 		var/acc = firemode.accuracy[min(i, firemode.accuracy.len)]
 		var/disp = firemode.dispersion[min(i, firemode.dispersion.len)]
 		process_accuracy(projectile, user, target, acc, disp)
+		
+		if(istype (src, /obj/item/weapon/gun/energy))
+			src.heat_level += 1
 
 		if(pointblank)
 			process_point_blank(projectile, user, target)
