@@ -1512,3 +1512,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 		/obj/item/device/kit/paint/gygax/recitence
 		)
 	name = "Random Gygax exosuit modkit"
+
+/datum/supply_packs/proto
+	containertype = /obj/structure/largecrate/animal/proto
+	containername = "Protohuman subject crate"
+	group = "Science"
+	cost = 35
